@@ -1,0 +1,6 @@
+flake8
+pep257
+pylint
+yapf
+pre-commit
+pytest==4.2.0
