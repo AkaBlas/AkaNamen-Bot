@@ -9,7 +9,7 @@ from telegram.ext import Updater, PicklePersistence, Defaults
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
-                    filename='tmb.log')
+                    filename='akanamen.log')
 
 logger = logging.getLogger(__name__)
 
