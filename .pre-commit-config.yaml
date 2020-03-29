@@ -28,6 +28,6 @@
     rev: v0.761
     hooks:
     -   id: mypy
-        files: ^(main|(stwon|bot|tests)/.*)\.py$
+        files: ^(main|(akablas|bot|tests)/.*)\.py$
         language: python
         language_version: python3.7

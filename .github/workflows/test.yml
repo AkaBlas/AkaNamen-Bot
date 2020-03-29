@@ -1,0 +1,118 @@
+name: GitHub Actions
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches: 
+      - master
+
+jobs:
+  pytest:
+    name: pytest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8]
+        os: [ubuntu-latest]
+        include:
+          - os: ubuntu-latest
+            python-version: 3.7
+            test-build: True
+      fail-fast: False
+    steps:
+      - uses: actions/checkout@v1
+      - name: Initialize submodules
+        run:
+          git submodule update --init --recursive
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -W ignore -m pip install --upgrade pip
+          python -W ignore -m pip install -U codecov pytest-cov
+          python -W ignore -m pip install -r requirements.txt
+          python -W ignore -m pip install -r requirements-dev.txt
+      - name: Test with pytest
+        run: |
+          pytest -v -m nocoverage
+          nocov_exit=$?
+          pytest -v -m "not nocoverage" --cov
+          cov_exit=$?
+          global_exit=$(( nocov_exit > cov_exit ? nocov_exit : cov_exit ))
+          exit ${global_exit}
+        env:
+          TEST_PRE_COMMIT: ${{ matrix.test-pre-commit }}
+        shell: bash --noprofile --norc {0}
+      - name: Submit coverage
+        run: |
+          if [ "$CODECOV_TOKEN" != "" ]; then
+             codecov -F github -t $CODECOV_TOKEN --name "${{ matrix.os }}-${{ matrix.python-version }}"
+          fi
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        shell: bash
+
+  test_pre_commit:
+    name: pre-commit
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        python-version: [3.7]
+        os: [ubuntu-latest]
+      fail-fast: False
+    steps:
+      - uses: actions/checkout@v1
+      - name: Initialize submodules
+        run:
+          git submodule update --init --recursive
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -W ignore -m pip install --upgrade pip
+          python -W ignore -m pip install -r requirements.txt
+          python -W ignore -m pip install -r requirements-dev.txt
+      - name: Run pre-commit tests
+        run: pre-commit run --all-files
+  
+  typing_coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies and mypy
+      run: |
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+        pip install diff-cover lxml
+    - name: Verify mypy types
+      run: |
+        mypy --version
+    - name: Running mypy on changed files and save report
+      run: |
+        python -m mypy -p akablas -p bot --cobertura-xml-report . --html-report mypy-report || true
+      shell: bash
+    - name: Computing typing coverage
+      run: |
+        diff-cover --fail-under=100 cobertura.xml --html-report typing_coverage.html
+      shell: bash
+    - name: Uploading coverage report as html
+      uses: actions/upload-artifact@v1
+      if: always()
+      with:
+        name: typing_coverage
+        path: typing_coverage.html
+    - name: Uploading mypy report as html
+      uses: actions/upload-artifact@v1
+      if: always()
+      with:
+        name: mypy-report
+        path: mypy-report/

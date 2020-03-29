@@ -14,6 +14,9 @@ coverage.xml
 *,cover
 .coveralls.yml
 .mypy_cache
+mypy-report/
+cobertura.xml
+typing_coverage.html
 
 # Sphinx documentation
 docs/build/

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import datetime
 import re
+import os
 from collections import defaultdict
 from queue import Queue
 from threading import Thread, Event
@@ -11,6 +12,12 @@ import pytest
 from telegram import (Bot, Message, User, Chat, MessageEntity, Update)
 from telegram.ext import Dispatcher, JobQueue, Updater
 from tests.bots import get_bot
+
+GITHUB_ACTION = os.getenv('GITHUB_ACTION', False)
+
+# On Github Actions fold the output
+if GITHUB_ACTION:
+    pytest_plugins = ['tests.plugin_github_group']
 
 
 @pytest.fixture(scope='session')
@@ -96,10 +103,10 @@ DATE = datetime.datetime.now()
 
 def make_message(text, **kwargs):
     """
-    Testing utility factory to create a fake ``telegram.Message`` with
+    Testing utility factory to create a fake :class:`telegram.Message` with
     reasonable defaults for mimicking a real message.
     :param text: (str) message text
-    :return: a (fake) ``telegram.Message``
+    :return: a (fake) :class:`telegram.Message`
     """
     return Message(message_id=1,
                    from_user=kwargs.pop('user', User(id=1, first_name='', is_bot=False)),
@@ -115,11 +122,11 @@ def make_command_message(text, **kwargs):
     Testing utility factory to create a message containing a single telegram
     command.
     Mimics the Telegram API in that it identifies commands within the message
-    and tags the returned ``Message`` object with the appropriate ``MessageEntity``
+    and tags the returned ``Message`` object with the appropriate :class:`telegram.`MessageEntity`
     tag (but it does this only for commands).
 
     :param text: (str) message text containing (or not) the command
-    :return: a (fake) ``telegram.Message`` containing only the command
+    :return: a (fake) :class:`telegram.telegram.Message` containing only the command
     """
 
     match = re.search(CMD_PATTERN, text)
@@ -135,11 +142,11 @@ def make_message_update(message, message_factory=make_message, edited=False, **k
     """
     Testing utility factory to create an update from a message, as either a
     ``telegram.Message`` or a string. In the latter case ``message_factory``
-    is used to convert ``message`` to a ``telegram.Message``.
+    is used to convert ``message`` to a :class:`telegram.Message`.
     :param message: either a ``telegram.Message`` or a string with the message text
     :param message_factory: function to convert the message text into a ``telegram.Message``
     :param edited: whether the message should be stored as ``edited_message`` (vs. ``message``)
-    :return: ``telegram.Update`` with the given message
+    :return: :class:`telegram.Update` with the given message
     """
     if not isinstance(message, Message):
         message = message_factory(message, **kwargs)
