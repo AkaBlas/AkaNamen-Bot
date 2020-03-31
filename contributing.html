@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How To Contribute &mdash; AkaNamen Bot  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/AkaNamen-icon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Hosting this bot" href="hosting.html" />
+    <link rel="prev" title="AkaNamen Bot" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> AkaNamen Bot
+          
+
+          
+            
+            <img src="_static/AkaNamen-logo-no-background.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Developer Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How To Contribute</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-things-up">Setting things up</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#finding-something-to-do">Finding something to do</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instructions-for-making-a-code-change">Instructions for making a code change</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#style-commandments">Style commandments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#specific-commandments">Specific commandments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assert-comparison-order">Assert comparison order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#properly-calling-callables">Properly calling callables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#properly-defining-optional-arguments">Properly defining optional arguments</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AkaNamen Bot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>How To Contribute</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/HirschHeissIch/AkaNamen-Bot/blob/master/docs/source/contributing.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-contribute">
+<h1>How To Contribute<a class="headerlink" href="#how-to-contribute" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setting-things-up">
+<h2>Setting things up<a class="headerlink" href="#setting-things-up" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Fork the <code class="docutils literal notranslate"><span class="pre">AkaNamen-Bot</span></code> repository to your GitHub account.</p></li>
+<li><p>Clone your forked repository of <code class="docutils literal notranslate"><span class="pre">AkaNamen-Bot</span></code> to your computer:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/&lt;your username&gt;/AkaNamen-Bot --recursive
+$ <span class="nb">cd</span> AkaNamen-Bot
+</pre></div>
+</div>
+</li>
+<li><p>Add a track to the original repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/HirschHeissIch/AkaNamen-Bot
+</pre></div>
+</div>
+</li>
+<li><p>Install dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install -r requirements.txt -r requirements-dev.txt
+</pre></div>
+</div>
+</li>
+<li><p>Install pre-commit hooks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pre-commit install
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="section" id="finding-something-to-do">
+<h3>Finding something to do<a class="headerlink" href="#finding-something-to-do" title="Permalink to this headline">¶</a></h3>
+<p>If you already know what you’d like to work on, you can skip this section.</p>
+<p>If you have an idea for something to do, first check if it’s already been filed on the <a class="reference external" href="https://github.com/Bibo-Joshi/AkaNamen-Bot/issues">issue tracker</a>. If so, add a comment to the issue saying you’d like to work on it, and we’ll help you get started! Otherwise, please file a new issue and assign yourself to it.</p>
+</div>
+<div class="section" id="instructions-for-making-a-code-change">
+<h3>Instructions for making a code change<a class="headerlink" href="#instructions-for-making-a-code-change" title="Permalink to this headline">¶</a></h3>
+<p>The central development branch is <code class="docutils literal notranslate"><span class="pre">master</span></code>, which should be clean and ready for release at any time. In general, all changes should be done as feature branches based off of <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p>
+<p>Here’s how to make a one-off code change.</p>
+<ol class="arabic">
+<li><p><strong>Choose a descriptive branch name.</strong> It should be lowercase, hyphen-separated, and a noun describing the change (so, <code class="docutils literal notranslate"><span class="pre">fuzzy-rules</span></code>, but not <code class="docutils literal notranslate"><span class="pre">implement-fuzzy-rules</span></code>). Also, it shouldn’t start with <code class="docutils literal notranslate"><span class="pre">hotfix</span></code> or <code class="docutils literal notranslate"><span class="pre">release</span></code>.</p></li>
+<li><p><strong>Create a new branch with this name, starting from</strong> <code class="docutils literal notranslate"><span class="pre">master</span></code>. In other words, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git fetch upstream
+$ git checkout master
+$ git merge upstream/master
+$ git checkout -b your-branch-name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Make a commit to your feature branch</strong>. Each commit should be self-contained and have a descriptive commit message that helps other developers understand why the changes were made.</p>
+<ul>
+<li><p>You can refer to relevant issues in the commit message by writing, e.g., “#105”.</p></li>
+<li><p>Your code should adhere to the <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8 Style Guide</a>, with the exception that we have a maximum line length of 99.</p></li>
+<li><p>Provide static typing with signature annotations. The documentation of <a class="reference external" href="https://mypy.readthedocs.io/en/stable/index.html">MyPy</a> will be a good start, the cheat sheet is <a class="reference external" href="https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html">here</a>.</p></li>
+<li><p>Document your code. This project uses <a class="reference external" href="http://sphinx-doc.org">sphinx</a> to generate static HTML docs. To build them, first make sure you have the required dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install -r docs/requirements-docs.txt
+</pre></div>
+</div>
+<p>then run the following from the PTB root directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make -C docs html
+</pre></div>
+</div>
+<p>or, if you don’t have <code class="docutils literal notranslate"><span class="pre">make</span></code> available (e.g. on Windows):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sphinx-build docs/source docs/build/html
+</pre></div>
+</div>
+<p>Once the process terminates, you can view the built documentation by opening <code class="docutils literal notranslate"><span class="pre">docs/build/html/index.html</span></code> with a browser.</p>
+</li>
+<li><p>For consistency, please conform to <a class="reference external" href="http://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a> and <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google Python Style Docstrings</a>. In addition, code should be formatted consistently with other code around it.</p></li>
+<li><p>The following exceptions to the above (Google’s) style guides applies:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Documenting types of global variables and complex types of class members can be done using the Sphinx docstring convention.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Please ensure that the code you write is well-tested.</p></li>
+<li><p>Don’t break backward compatibility.</p></li>
+<li><p>Before making a commit ensure that all automated tests still pass:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make test
+</pre></div>
+</div>
+<p>If you don’t have <code class="docutils literal notranslate"><span class="pre">make</span></code>, do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pytest -v
+</pre></div>
+</div>
+</li>
+<li><p>To actually make the commit (this will trigger tests for yapf, lint, pep8 and mypy automatically):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git add your-file-changed.py
+</pre></div>
+</div>
+</li>
+<li><p>Finally, push it to your GitHub fork, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git push origin your-branch-name
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>When your feature is ready to merge, create a pull request.</strong></p>
+<ul class="simple">
+<li><p>Go to your fork on GitHub, select your branch from the dropdown menu, and click “New merge request”.</p></li>
+<li><p>Add a descriptive comment explaining the purpose of the branch. This will tell the reviewer what the purpose of the branch is.</p></li>
+<li><p>Click “Create merge request”</p></li>
+</ul>
+</li>
+<li><p><strong>Address review comments until all reviewers give LGTM (‘looks good to me’).</strong></p>
+<ul>
+<li><p>When your reviewer has reviewed the code, you’ll get an email. You’ll need to respond in two ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Make a new commit addressing the comments you agree with, and push it to the same branch. Ideally, the commit message would explain what the commit does (e.g. “Fix lint error”), but if there are lots of disparate review comments, it’s fine to refer to the original commit message and add something like “(address review comments)”.</p></li>
+<li><p>In addition, please reply to each comment. Each reply should be either “Done” or a response explaining why the corresponding suggestion wasn’t implemented. All comments must be resolved before LGTM can be given.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Resolve any merge conflicts that arise. To resolve conflicts between ‘your-branch-name’ (in your fork) and ‘master’ (in the <code class="docutils literal notranslate"><span class="pre">AkaNamen-Bot</span></code> repository), run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git checkout your-branch-name
+$ git fetch upstream
+$ git merge upstream/master
+$ ...<span class="o">[</span>fix the conflicts<span class="o">]</span>...
+$ ...<span class="o">[</span>make sure the tests pass before committing<span class="o">]</span>...
+$ git commit -a
+$ git push origin your-branch-name
+</pre></div>
+</div>
+</li>
+<li><p>At the end, the reviewer will merge the pull request.</p></li>
+</ul>
+</li>
+<li><p><strong>Tidy up!</strong> Delete the feature branch from both your local clone and the GitHub repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git branch -D your-branch-name
+$ git push origin --delete your-branch-name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Celebrate.</strong> Congratulations, you have contributed to <code class="docutils literal notranslate"><span class="pre">AkaNamen-Bot</span></code>!</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="style-commandments">
+<h2>Style commandments<a class="headerlink" href="#style-commandments" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="specific-commandments">
+<h3>Specific commandments<a class="headerlink" href="#specific-commandments" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Avoid using “double quotes” where you can reasonably use ‘single quotes’.</p></li>
+</ul>
+</div>
+<div class="section" id="assert-comparison-order">
+<h3>Assert comparison order<a class="headerlink" href="#assert-comparison-order" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>assert statements should compare in <strong>actual</strong> == <strong>expected</strong> order.</p></li>
+</ul>
+<p>For example (assuming <code class="docutils literal notranslate"><span class="pre">test_call</span></code> is the thing being tested):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># GOOD</span>
+<span class="k">assert</span> <span class="n">test_call</span><span class="p">()</span> <span class="o">==</span> <span class="mi">5</span>
+
+<span class="c1"># BAD</span>
+<span class="k">assert</span> <span class="mi">5</span> <span class="o">==</span> <span class="n">test_call</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="properly-calling-callables">
+<h3>Properly calling callables<a class="headerlink" href="#properly-calling-callables" title="Permalink to this headline">¶</a></h3>
+<p>Methods, functions and classes can specify optional parameters (with default
+values) using Python’s keyword arg syntax. When providing a value to such a
+callable we prefer that the call also uses keyword arg syntax. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># GOOD</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># BAD</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This gives us the flexibility to re-order arguments and more importantly
+to add new required arguments. It’s also more explicit and easier to read.</p>
+</div>
+<div class="section" id="properly-defining-optional-arguments">
+<h3>Properly defining optional arguments<a class="headerlink" href="#properly-defining-optional-arguments" title="Permalink to this headline">¶</a></h3>
+<p>It’s always good to not initialize optional arguments at class creation,
+instead use <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> to get them. It’s well known Telegram API can
+change without notice, in that case if a new argument is added it won’t
+break the API classes. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># GOOD</span>
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="n">last_name</span>
+
+<span class="c1"># BAD</span>
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+   <span class="bp">self</span><span class="o">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="n">last_name</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hosting.html" class="btn btn-neutral float-right" title="Hosting this bot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="AkaNamen Bot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Hinrich Mahler
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
