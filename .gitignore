@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Unit test / coverage reports (not currently used)
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache
+nosetests.xml
+coverage.xml
+*,cover
+.coveralls.yml
+.mypy_cache
+mypy-report/
+cobertura.xml
+typing_coverage.html
+
+# Sphinx documentation
+docs/build/
+
+# Pickle and log files
+akanamen*
+
+# VS Code
+.vscode/settings.json
+
+# process id
+pid
+
+# start script
+start.sh
+
+# virtual environment
+venv/
