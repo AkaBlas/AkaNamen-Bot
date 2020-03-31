@@ -6,4 +6,4 @@ You can find it at `@AkaNamenBot`_.
 
 .. _`@AkaNamenBot`: http://t.me/AkaNamenBot
 
-The docs are gonna be set up using github pages
+The docs are gonna be set up using GitHub Pages
