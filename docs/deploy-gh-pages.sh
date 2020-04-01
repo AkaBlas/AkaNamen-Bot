@@ -35,7 +35,7 @@ rm -r html/
 
 # Add everything, get ready for commit. 
 git add --all
-git commit -m "Publishing Updated Documentation"
+git commit -m "Publishing Updated Documentation" || true
 
 # We have to re-add the origin with the GH_TOKEN credentials. You
 # will need this SSH key in your environment variables.
@@ -44,4 +44,4 @@ git remote rm origin
 git remote add origin https://"$GH_NAME":"$GH_TOKEN"@github.com/"$GH_NAME"/AkaNamen-Bot.git
 
 # NOW we should be able to push it
-git push origin gh-pages
+git push origin gh-pages || true
