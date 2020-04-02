@@ -61,6 +61,10 @@ exclude_patterns = []
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
+#
+# Use custom theme at github.com/Bibo-Joshi/sphinx_trd_theme, akanamen branch
+html_theme_path = ['./_static/sphinx_rtd_theme/']
+
 html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -70,7 +74,7 @@ html_static_path = ['_static']
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = '../../logos/AkaNamen-logo-no-background.png'
+html_logo = '../../logos/AkaNamen-logo-no-background.svg'
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -82,7 +86,7 @@ html_favicon = '../../logos/AkaNamen-icon-black.ico'
 html_context = {
     "display_github": True,
     "github_host": "github.com",
-    "github_user": "HirschHeissIch",
+    "github_user": "Bibo-Joshi",
     "github_repo": 'AkaNamen-Bot',
     "github_version": "master",
     "conf_py_path": "/docs/source/",
