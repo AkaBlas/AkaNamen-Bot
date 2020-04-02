@@ -35,3 +35,6 @@ start.sh
 
 # virtual environment
 venv/
+
+# PyCharm
+/.idea/
