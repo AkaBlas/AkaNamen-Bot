@@ -9,6 +9,7 @@
    :hidden:
    :caption: Developer Reference
 
+   akablas
    contributing
    hosting
    changelog

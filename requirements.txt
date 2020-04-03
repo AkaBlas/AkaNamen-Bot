@@ -1,2 +1,4 @@
 python-telegram-bot==12.5.1
 emoji
+geopy==1.21.0
+vobject==0.9.6.1

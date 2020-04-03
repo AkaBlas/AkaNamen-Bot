@@ -2,6 +2,7 @@
 import datetime
 import re
 import os
+import sys
 from collections import defaultdict
 from queue import Queue
 from threading import Thread, Event
@@ -18,6 +19,11 @@ GITHUB_ACTION = os.getenv('GITHUB_ACTION', False)
 # On Github Actions fold the output
 if GITHUB_ACTION:
     pytest_plugins = ['tests.plugin_github_group']
+
+
+def pytest_configure(config):
+    if sys.version_info >= (3,):
+        config.addinivalue_line('filterwarnings', 'ignore::ResourceWarning')
 
 
 @pytest.fixture(scope='session')
