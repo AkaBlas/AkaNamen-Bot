@@ -1,4 +1,4 @@
-akablas.Instruments Module
+akablas.instruments Module
 ==========================
 
 .. automodule:: akablas.instruments

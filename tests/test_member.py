@@ -28,7 +28,7 @@ class TestMember:
     date_of_birth = dt.date(1996, 8, 10)
     picture_file_id = 'picture_file_id'
     allow_contact_sharing = True
-    instruments = [instruments.Tuba, instruments.Trumpet]
+    instruments = [instruments.Tuba(), instruments.Trumpet()]
     address = 'Universitätsplatz 2, 38106 Braunschweig'
     latitude = 52.2736706
     longitude = 10.5296817
@@ -54,7 +54,7 @@ class TestMember:
         assert member.date_of_birth == self.date_of_birth
         assert member.picture_file_id == self.picture_file_id
         assert member.allow_contact_sharing == self.allow_contact_sharing
-        assert member.instruments == set(self.instruments)
+        assert member.instruments == self.instruments
 
         assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
         assert pytest.approx(member.latitude, self.latitude)
@@ -68,7 +68,16 @@ class TestMember:
 
         member = Member(user_id=self.user_id, instruments=instruments.Bassoon())
         assert member.user_id == self.user_id
-        assert member.instruments == {instruments.Bassoon()}
+        assert member.instruments == [instruments.Bassoon()]
+
+    def test_instruments_property(self, member):
+        assert member.instruments == []
+        member.instruments = None
+        assert member.instruments == []
+        member.instruments = instruments.Oboe()
+        assert member.instruments == [instruments.Oboe()]
+        member.instruments = [instruments.Oboe(), instruments.Baritone]
+        assert member.instruments == [instruments.Oboe(), instruments.Baritone]
 
     def test_address_and_coordinates(self):
         with pytest.raises(ValueError, match='Only address'):
