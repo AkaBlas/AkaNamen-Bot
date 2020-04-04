@@ -2,7 +2,7 @@
     rev: v0.29.0
     hooks:
     -   id: yapf
-        files: ^(main|(akablas|bot|tests)/.*)\.py$
+        files: ^(main|(akablas|bot|unilts|tests)/.*)\.py$
         args:
         - --diff
 
@@ -17,7 +17,7 @@
     rev: v2.4.4
     hooks:
     -   id: pylint
-        files: ^(main|(akablas|bot|tests)/.*)\.py$
+        files: ^(main|(akablas|bot|unilts|tests)/.*)\.py$
         args:
         - --errors-only
         - --disable=import-error
@@ -28,6 +28,6 @@
     rev: v0.761
     hooks:
     -   id: mypy
-        files: ^(main|(akablas|bot|tests)/.*)\.py$
+        files: ^(main|(akablas|bot|unilts|tests)/.*)\.py$
         language: python
         language_version: python3.7

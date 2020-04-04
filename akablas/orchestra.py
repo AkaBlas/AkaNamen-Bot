@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 """This module contains the Orchestra class."""
 from akablas import Member, Instrument
+from utils import PicklableBase
 
 import datetime as dt
 
 from threading import Lock
-from typing import Set, Dict, Any, Union
+from typing import Set, Dict
 from collections import defaultdict
 from copy import copy
 
@@ -15,7 +16,7 @@ DateMemberDict = Dict[dt.date, Set[Member]]
 InstrMemberDict = Dict[dt.date, Set[Instrument]]
 
 
-class Orchestra:
+class Orchestra(PicklableBase):
     """
     An orchestra. Keeps tracks of its members.
     """
@@ -175,8 +176,7 @@ class Orchestra:
         for list_name, attr in self.lists_to_attrs.items():
             attribute = getattr(new_member, attr)
             if attribute is not None:
-                list_: Dict[Union[str, dt.date, Instrument],
-                            Set[Member]] = getattr(self, list_name)
+                list_ = getattr(self, list_name)
                 if isinstance(attribute, list):
                     for e in attribute:
                         list_[e].add(new_member)
@@ -201,7 +201,7 @@ class Orchestra:
 
         for list_name, attr in self.lists_to_attrs.items():
             attribute = getattr(old_member, attr)
-            list_: Dict[Union[str, dt.date, Instrument], Set[Member]] = getattr(self, list_name)
+            list_ = getattr(self, list_name)
             if isinstance(attribute, list):
                 for e in attribute:
                     list_[e].discard(old_member)
@@ -218,15 +218,3 @@ class Orchestra:
         """
         self.kick_member(member)
         self.register_member(member)
-
-    # Make sure that pickling works
-    def __getstate__(self) -> Dict[str, Any]:
-        state = self.__dict__.copy()
-        for key in [k for k in state if k.endswith('_lock')]:
-            state[key] = None
-        return state
-
-    def __setstate__(self, state: Dict[str, Any]):
-        for key in [k for k in state if k.endswith('_lock')]:
-            state[key] = Lock()
-        self.__dict__.update(state)

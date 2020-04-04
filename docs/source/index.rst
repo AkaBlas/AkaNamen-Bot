@@ -10,6 +10,7 @@
    :caption: Developer Reference
 
    akablas
+   utils
    contributing
    hosting
    changelog
