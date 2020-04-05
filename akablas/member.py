@@ -7,10 +7,12 @@ from game import UserScore
 import datetime as dt
 import vobject
 
-from telegram import Bot
-from geopy import Photon
+from geopy import Photon, distance
 from tempfile import TemporaryFile
 from typing import Optional, Union, List, Tuple, IO
+
+from fuzzywuzzy import fuzz
+from telegram import Bot
 
 
 class Member:
@@ -25,7 +27,7 @@ class Member:
         nickname (:obj:`str`): Optional. Nickname.
         gender (:obj:`str`): Optional. Gender.
         date_of_birth (:class:`datetime.date`): Optional. : Date of birth.
-        picture_file_id (:obj:`str`): Optional. Telegram file ID of the user picture
+        photo_file_id (:obj:`str`): Optional. Telegram file ID of the user photo
         allow_contact_sharing (:obj:`bool`): Whether sharing this members contact information with
             others is allowed.
         user_score (:class:`game.UserScore`): A highscore associated with this member.
@@ -44,7 +46,7 @@ class Member:
             be passed.
         longitude: Longitude of address. Only address `or`` latitude and longitude may
             be passed.
-        picture_file_id: Telegram file ID of the user picture
+        photo_file_id: Telegram file ID of the user photo
         allow_contact_sharing: Whether sharing this users contact information with others is
             allowed. Defaults to :obj:`False`.
     """
@@ -61,7 +63,7 @@ class Member:
                  address: Optional[str] = None,
                  latitude: Optional[float] = None,
                  longitude: Optional[float] = None,
-                 picture_file_id: Optional[str] = None,
+                 photo_file_id: Optional[str] = None,
                  allow_contact_sharing: Optional[bool] = False) -> None:
         if sum([x is not None for x in [longitude, latitude]]) == 1:
             raise ValueError('Either none of longitude and latitude or both must be passed!')
@@ -75,7 +77,7 @@ class Member:
         self.nickname = nickname
         self.gender = gender
         self.date_of_birth = date_of_birth
-        self.picture_file_id = picture_file_id
+        self.photo_file_id = photo_file_id
         self.allow_contact_sharing = allow_contact_sharing
         self.user_score = UserScore(self)
 
@@ -221,7 +223,7 @@ class Member:
         Gives a vCard of the member.
 
         Args:
-            bot: A Telegram bot to retrieve the members picture (if set). Must be the same bot that
+            bot: A Telegram bot to retrieve the members photo (if set). Must be the same bot that
                 retrieved the file ID.
 
         Returns:
@@ -233,7 +235,7 @@ class Member:
         if not self.allow_contact_sharing:
             raise ValueError('This member does not allow sharing it\'s contact information.')
 
-        with TemporaryFile() as picture_file:
+        with TemporaryFile() as photo_file:
             vcard = vobject.vCard()
             vcard.add('fn').value = self.full_name or ''
             vcard.add('n').value = vobject.vcard.Name(family=self.last_name or '',
@@ -253,16 +255,120 @@ class Member:
                         [self._raw_address['street'],
                          self._raw_address.get('housenumber', '')]))
 
-            if self.picture_file_id:
-                file = bot.get_file(self.picture_file_id)
-                file.download(out=picture_file)
-                picture_file.seek(0)
+            if self.photo_file_id:
+                file = bot.get_file(self.photo_file_id)
+                file.download(out=photo_file)
+                photo_file.seek(0)
                 photo = vcard.add('photo')
                 photo.encoding_param = 'B'
                 photo.type_param = 'JPG'
-                photo.value = picture_file.read()
+                photo.value = photo_file.read()
 
             vcard_file = TemporaryFile()
             vcard_file.write(vcard.serialize().encode('utf-8'))
             vcard_file.seek(0)
             return vcard_file
+
+    @staticmethod
+    def _compare(str1: str, str2: str) -> float:
+        str_1 = str1.lower()
+        str_2 = str2.lower()
+        return max(fuzz.ratio(str_1, str_2), fuzz.partial_ratio(str_1, str_2)) / 100
+
+    def compare_first_name_to(self, string: str) -> float:
+        """
+        Compares the members first name to the given string. The comparison is case insensitive.
+
+        Args:
+            string: The string to compare to.
+
+        Returns:
+            Similarity in percentage.
+
+        Raises:
+            ValueError: If the member has no first name.
+        """
+        if self.first_name is None:
+            raise ValueError('This member has no first name.')
+        return self._compare(self.first_name, string)
+
+    def compare_last_name_to(self, string: str) -> float:
+        """
+        Compares the members last name to the given string. The comparison is case insensitive.
+
+        Args:
+            string: The string to compare to.
+
+        Returns:
+            Similarity in percentage.
+
+        Raises:
+            ValueError: If the member has no last name.
+        """
+        if self.last_name is None:
+            raise ValueError('This member has no last name.')
+        return self._compare(self.last_name, string)
+
+    def compare_nickname_to(self, string: str) -> float:
+        """
+        Compares the members nickname to the given string. The comparison is case insensitive.
+
+        Args:
+            string: The string to compare to.
+
+        Returns:
+            Similarity in percentage.
+
+        Raises:
+            ValueError: If the member has no nickname.
+        """
+        if self.nickname is None:
+            raise ValueError('This member has no nickname.')
+        return self._compare(self.nickname, string)
+
+    def compare_address_to(self, string: str) -> float:
+        """
+        Compares the members address to the given string. The comparison is case insensitive.
+
+        Args:
+            string: The string to compare to.
+
+        Returns:
+            Similarity in percentage.
+
+        Raises:
+            ValueError: If the member has no address.
+        """
+        if self.address is None:
+            raise ValueError('This member has no address.')
+        return max(self._compare(self.address.lower(), string.lower()),
+                   fuzz.token_set_ratio(self.address.lower(), string.lower()) / 100)
+
+    def distance_of_address_to(self, coordinates: Tuple[float, float]) -> float:
+        """
+        Computes the distance between the members address and the given coordinates.
+
+        Args:
+            coordinates: A tuple of latitude and longitude to compare to.
+
+        Returns:
+            The distance in kilometers.
+
+        Raises:
+            ValueError: If the member has no address.
+        """
+        if self.address is None:
+            raise ValueError('This member has no address.')
+        return distance.distance((self.latitude, self.longitude), coordinates).kilometers
+
+    @property
+    def age(self) -> Optional[int]:
+        """
+        The age of the member at evaluation time. :obj:`None`, if :attr:`date_of_birth` is not set.
+        """
+        if not self.date_of_birth:
+            return None
+
+        today = dt.date.today()
+        born = self.date_of_birth
+        return today.year - born.year - ((today.month, today.day) < (born.month, born.day))

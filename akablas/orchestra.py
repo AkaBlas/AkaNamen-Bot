@@ -13,6 +13,7 @@ from collections import defaultdict
 from copy import copy
 
 StrMemberDict = Dict[str, Set[Member]]
+IntMemberDict = Dict[int, Set[Member]]
 DateMemberDict = Dict[dt.date, Set[Member]]
 InstrMemberDict = Dict[dt.date, Set[Instrument]]
 
@@ -32,6 +33,9 @@ class Orchestra(PicklableBase):
         self._instruments: InstrMemberDict = defaultdict(set)
         self._addresses: StrMemberDict = defaultdict(set)
 
+        self._ages_cache_date = None
+        self._ages: IntMemberDict = defaultdict(set)
+
         self._members_lock: Lock = Lock()
         self._first_names_lock: Lock = Lock()
         self._last_names_lock: Lock = Lock()
@@ -40,6 +44,7 @@ class Orchestra(PicklableBase):
         self._dates_of_birth_lock: Lock = Lock()
         self._instruments_lock: Lock = Lock()
         self._addresses_lock: Lock = Lock()
+        self._ages_lock: Lock = Lock()
 
         self.lists_to_attrs: Dict[str, str] = {
             'first_names': 'first_name',
@@ -48,7 +53,8 @@ class Orchestra(PicklableBase):
             'genders': 'gender',
             'dates_of_birth': 'date_of_birth',
             'instruments': 'instruments',
-            'addresses': 'address'
+            'addresses': 'address',
+            'ages': 'age',
         }
 
     @property
@@ -153,6 +159,26 @@ class Orchestra(PicklableBase):
 
     @addresses.setter
     def addresses(self, value: StrMemberDict) -> None:
+        raise ValueError('This attribute can\'t be overridden!')
+
+    @property
+    def ages(self) -> IntMemberDict:
+        """
+        A :class:`collections.defaultdict`. For each key, all members with the corresponding
+        age (on evaluation time) are the values.
+        """
+        with self._ages_lock:
+            today = dt.date.today()
+            # Compute age only once a day
+            if not self._ages_cache_date or (today - self._ages_cache_date).days > 0:
+                self._ages = defaultdict(set)
+                for m in self.members.values():
+                    if m.age:
+                        self._ages[m.age].add(m)
+            return self._ages
+
+    @ages.setter
+    def ages(self, value: InstrMemberDict) -> None:
         raise ValueError('This attribute can\'t be overridden!')
 
     def register_member(self, member: Member) -> None:

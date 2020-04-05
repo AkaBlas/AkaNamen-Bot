@@ -12,11 +12,20 @@ def member():
 
 
 @pytest.fixture(scope='module')
-def picture_file_id(bot, chat_id):
-    with open('tests/data/vcard_picture.png', 'rb') as file:
+def photo_file_id(bot, chat_id):
+    with open('tests/data/vcard_photo.png', 'rb') as file:
         message = bot.send_photo(chat_id=chat_id, photo=file)
         min_file = min(message.photo, key=lambda x: x.file_size)
         return min_file.file_id
+
+
+@pytest.fixture(scope='class',
+                params=[
+                    'foo', 'bar', 'a very long long long string', 'AN ALL UPPERCASE STRING',
+                    '          ', 'a-b-c-d', '123456789'
+                ])
+def test_string(request):
+    return request.param
 
 
 class TestMember:
@@ -27,7 +36,7 @@ class TestMember:
     nickname = 'nickname'
     gender = Gender.DIVERSE
     date_of_birth = dt.date(1996, 8, 10)
-    picture_file_id = 'picture_file_id'
+    photo_file_id = 'photo_file_id'
     allow_contact_sharing = True
     instruments = [instruments.Tuba(), instruments.Trumpet()]
     address = 'Universitätsplatz 2, 38106 Braunschweig'
@@ -42,7 +51,7 @@ class TestMember:
                         nickname=self.nickname,
                         gender=self.gender,
                         date_of_birth=self.date_of_birth,
-                        picture_file_id=self.picture_file_id,
+                        photo_file_id=self.photo_file_id,
                         allow_contact_sharing=self.allow_contact_sharing,
                         instruments=self.instruments,
                         address=self.address)
@@ -53,7 +62,7 @@ class TestMember:
         assert member.nickname == self.nickname
         assert member.gender == self.gender
         assert member.date_of_birth == self.date_of_birth
-        assert member.picture_file_id == self.picture_file_id
+        assert member.photo_file_id == self.photo_file_id
         assert member.allow_contact_sharing == self.allow_contact_sharing
         assert member.instruments == self.instruments
         assert isinstance(member.user_score, UserScore)
@@ -169,7 +178,7 @@ class TestMember:
         member.last_name = self.last_name
         assert member.vcard_filename == f'{self.first_name}_{self.last_name}.vcf'
 
-    def test_vcard(self, member, bot, picture_file_id):
+    def test_vcard(self, member, bot, photo_file_id):
         with pytest.raises(ValueError):
             member.vcard(bot)
 
@@ -190,10 +199,57 @@ class TestMember:
             vcard_string = vcard.read().decode('utf-8')
             assert 'Universitätsplatz 2' in vcard_string
 
-        member.picture_file_id = picture_file_id
+        member.photo_file_id = photo_file_id
         with member.vcard(bot) as vcard:
             vcard_string = vcard.read().decode('utf-8')
             assert 'PHOTO;ENCODING=B;' in vcard_string
+
+    def test_age(self, member):
+        assert member.age is None
+        member.date_of_birth = dt.date(1999, 12, 31)
+        assert member.age == dt.date.today().year - 2000
+
+    def test_distance_of_address_to(self, member):
+        with pytest.raises(ValueError, match='This member has no'):
+            member.distance_of_address_to((52.273549, 10.529447))
+
+        member.set_address(coordinates=(52.273549, 10.529447))
+        assert member.distance_of_address_to((52.273549, 10.529447)) == pytest.approx(0, abs=0.02)
+
+        assert member.distance_of_address_to((52.280073, 10.544101)) == pytest.approx(1.245,
+                                                                                      abs=0.01)
+
+    def test_compare_address_to(self, member, test_string):
+        with pytest.raises(ValueError, match='This member has no'):
+            member.compare_address_to(test_string)
+
+        member.set_address('Universitätsplatz 2, 38106 Braunschweig')
+        assert 0 <= member.compare_address_to(test_string) <= 1
+        assert member.compare_address_to(member.address) == pytest.approx(1)
+
+    def test_compare_nickname_to(self, member, test_string):
+        with pytest.raises(ValueError, match='This member has no'):
+            member.compare_nickname_to(test_string)
+
+        member.nickname = 'Jochen'
+        assert 0 <= member.compare_nickname_to(test_string) <= 1
+        assert member.compare_nickname_to(member.nickname) == pytest.approx(1)
+
+    def test_compare_first_name_to(self, member, test_string):
+        with pytest.raises(ValueError, match='This member has no'):
+            member.compare_first_name_to(test_string)
+
+        member.first_name = 'Jochen'
+        assert 0 <= member.compare_first_name_to(test_string) <= 1
+        assert member.compare_first_name_to(member.first_name) == pytest.approx(1)
+
+    def test_compare_last_name_to(self, member, test_string):
+        with pytest.raises(ValueError, match='This member has no'):
+            member.compare_last_name_to(test_string)
+
+        member.last_name = 'Jochen'
+        assert 0 <= member.compare_last_name_to(test_string) <= 1
+        assert member.compare_last_name_to(member.last_name) == pytest.approx(1)
 
     def test_equality(self, member):
         a = member
