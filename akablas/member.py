@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """This module contains the Member class."""
 from akablas import Instrument
+from game import UserScore
 
 import datetime as dt
 import vobject
@@ -27,6 +28,7 @@ class Member:
         picture_file_id (:obj:`str`): Optional. Telegram file ID of the user picture
         allow_contact_sharing (:obj:`bool`): Whether sharing this members contact information with
             others is allowed.
+        user_score (:class:`game.UserScore`): A highscore associated with this member.
 
     Args:
         user_id: The Telegram user_id.
@@ -75,6 +77,7 @@ class Member:
         self.date_of_birth = date_of_birth
         self.picture_file_id = picture_file_id
         self.allow_contact_sharing = allow_contact_sharing
+        self.user_score = UserScore(self)
 
         # See https://github.com/python/mypy/issues/3004
         self.instruments = instruments  # type: ignore

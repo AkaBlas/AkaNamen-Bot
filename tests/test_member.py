@@ -3,6 +3,7 @@ import pytest
 import datetime as dt
 from geopy import Photon
 from akablas import Gender, Member, instruments
+from game import UserScore
 
 
 @pytest.fixture(scope='function')
@@ -55,6 +56,8 @@ class TestMember:
         assert member.picture_file_id == self.picture_file_id
         assert member.allow_contact_sharing == self.allow_contact_sharing
         assert member.instruments == self.instruments
+        assert isinstance(member.user_score, UserScore)
+        assert member.user_score.member == member
 
         assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
         assert pytest.approx(member.latitude, self.latitude)

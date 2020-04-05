@@ -10,6 +10,7 @@
    :caption: Developer Reference
 
    akablas
+   game
    utils
    contributing
    hosting

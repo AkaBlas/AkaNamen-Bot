@@ -3,11 +3,12 @@
 """This module contains the Orchestra class."""
 from akablas import Member, Instrument
 from utils import PicklableBase
+from game import Score
 
 import datetime as dt
 
 from threading import Lock
-from typing import Set, Dict
+from typing import Set, Dict, List, Optional
 from collections import defaultdict
 from copy import copy
 
@@ -218,3 +219,152 @@ class Orchestra(PicklableBase):
         """
         self.kick_member(member)
         self.register_member(member)
+
+    def _score(self, attr: str) -> List[Score]:
+        if attr == 'overall':
+            attr = f'overall_score'
+        else:
+            attr = f'{attr}s_score'
+
+        return sorted([getattr(m.user_score, attr) for m in self.members.values()], reverse=True)
+
+    def _score_text(self,
+                    attr: str,
+                    length: Optional[int] = None,
+                    html: Optional[bool] = False) -> str:
+        sorted_scores = self._score(attr)
+
+        text = ''
+        lines = length or len(sorted_scores)
+        left_offset = len(str(min(lines, length or lines))) + 2
+
+        for i, score in enumerate(sorted_scores):
+            if length is None or i < length:
+                if score.member and score.member.full_name:
+                    name = score.member.full_name
+                else:
+                    name = 'Anonym'
+
+                if html:
+                    name_line = (f'{i + 1:{left_offset - 2}}. <b>{name}:</b> '
+                                 f'{score.correct} / {score.answers}')
+                else:
+                    name_line = (f'{i + 1:{left_offset - 2}}. {name}: '
+                                 f'{score.correct} / {score.answers}')
+
+                full_bars = int(score.ratio // 10)
+                empty_bars = 10 - full_bars
+                ratio_line = left_offset * ' ' + full_bars * '▬' + empty_bars * '▭'
+                ratio_line += f'  {score.ratio:5.2f} %'
+
+                if i > 0:
+                    text += '\n'
+
+                text += f'{name_line}\n{ratio_line}'
+
+        return text
+
+    @property
+    def todays_score(self) -> List[Score]:
+        """
+        Gives a list of each members score of today sorted descending by :attr:`game.Score.ratio` .
+        """
+        return self._score('today')
+
+    def todays_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+        """
+        String representation of :attr:`todays_score`.
+
+        Args:
+            length: Maximum number of members to display. If not passed, will write down all
+                members.
+            html: If :obj:`True`, will embed HTML tags in the string. Use this to send the string
+                with a Telegram bot using :attr:`telegram.ParseMode.HTML`.
+
+        """
+        return self._score_text('today', length=length, html=html)
+
+    @property
+    def weeks_score(self) -> List[Score]:
+        """
+        Gives a list of each members score of the current week sorted descending by
+        :attr:`game.Score.ratio` .
+        """
+        return self._score('week')
+
+    def weeks_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+        """
+        String representation of :attr:`weeks_score`.
+
+        Args:
+            length: Maximum number of members to display. If not passed, will write down all
+                members.
+            html: If :obj:`True`, will embed HTML tags in the string. Use this to send the string
+                with a Telegram bot using :attr:`telegram.ParseMode.HTML`.
+
+        """
+        return self._score_text('week', length=length, html=html)
+
+    @property
+    def months_score(self) -> List[Score]:
+        """
+        Gives a list of each members score of the current month sorted descending by
+        :attr:`game.Score.ratio` .
+        """
+        return self._score('month')
+
+    def months_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+        """
+        String representation of :attr:`months_score`.
+
+        Args:
+            length: Maximum number of members to display. If not passed, will write down all
+                members.
+            html: If :obj:`True`, will embed HTML tags in the string. Use this to send the string
+                with a Telegram bot using :attr:`telegram.ParseMode.HTML`.
+
+        """
+        return self._score_text('month', length=length, html=html)
+
+    @property
+    def years_score(self) -> List[Score]:
+        """
+        Gives a list of each members score of the current year sorted descending by
+        :attr:`game.Score.ratio` .
+        """
+        return self._score('year')
+
+    def years_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+        """
+        String representation of :attr:`years_score`.
+
+        Args:
+            length: Maximum number of members to display. If not passed, will write down all
+                members.
+            html: If :obj:`True`, will embed HTML tags in the string. Use this to send the string
+                with a Telegram bot using :attr:`telegram.ParseMode.HTML`.
+
+        """
+        return self._score_text('year', length=length, html=html)
+
+    @property
+    def overall_score(self) -> List[Score]:
+        """
+        Gives a list of each members overall score sorted descending by :attr:`game.Score.ratio` .
+        """
+        return self._score('overall')
+
+    def overall_score_text(self,
+                           length: Optional[int] = None,
+                           html: Optional[bool] = False) -> str:
+        """
+        String representation of :attr:`overall_score`.
+
+        Args:
+            length: Maximum number of members to display. If not passed, will write down all
+                members.
+            html: If :obj:`True`, will embed HTML tags in the string. Use this to send the string
+                with a Telegram bot using :attr:`telegram.ParseMode.HTML`.
+
+        """
+        return self._score_text('overall', length=length, html=html)
