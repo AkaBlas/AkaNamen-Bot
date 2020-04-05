@@ -1,6 +1,6 @@
-game.UserHighScore
+game.UserScore
 ==================
 
-.. autoclass:: game.UserHighScore
+.. autoclass:: game.UserScore
     :members:
     :show-inheritance:
