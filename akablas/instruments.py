@@ -15,6 +15,15 @@ class Instrument:
         Flugelhorn() <= Trumpet() # False
         BrassInstrument() == BrassInstrument() # True
         AltoSaxophone() == Saxophone() # False
+
+    Moreover, strings can be tested for equality with instruments. The comparison is case
+    insensitive. The string will be compared to the string representation of the instrument.
+
+    .. code-block:: python
+
+        Trumpet() == 'Trompete' # True
+        Trumpet() == 'trompete' # True
+        Trupmet() == 'Saxophon' # False
     """
     name: str = ''
 
@@ -27,6 +36,8 @@ class Instrument:
         return int.from_bytes(self.name.encode(), byteorder=sys.byteorder)
 
     def __eq__(self, other: object) -> bool:
+        if isinstance(other, str):
+            return str(self).lower() == other.lower()
         return type(self) is type(other)
 
     def __lt__(self, other: object) -> bool:
