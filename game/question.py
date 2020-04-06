@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Question class."""
-from fuzzywuzzy import fuzz
+from utils import MessageType, UpdateType
 
 from telegram import Poll, Update
 
+from fuzzywuzzy import fuzz
 from typing import TYPE_CHECKING, Optional
 if TYPE_CHECKING:
     from akablas import Member  # noqa: F401
@@ -61,6 +62,28 @@ class Question:
         self.multiple_choice = multiple_choice
         self.poll = poll
 
+    def check_update(self, update: Update) -> bool:
+        """
+        Checks, if th given update is a valid response to this question and can be handled by
+        :meth:`check_answer`.
+
+        Args:
+            update: The :class:`telegram.Update` to be tested.
+        """
+        if self.multiple_choice:
+            return (UpdateType.relevant_type(update) == UpdateType.POLL_ANSWER
+                    and update.poll_answer.poll_id == self.poll.id)  # type: ignore
+        else:
+            if self.attribute in [
+                self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.BIRTHDAY, self.AGE,
+                self.INSTRUMENT
+            ]:
+                return MessageType.relevant_type(update) == MessageType.TEXT
+            # self.attribute == self.ADDRESS:
+            else:
+                return MessageType.relevant_type(update) in [MessageType.TEXT,
+                                                             MessageType.LOCATION]
+
     def check_answer(self, update: Update) -> bool:
         """
         Checks, if the given answer is correct.
@@ -89,7 +112,8 @@ class Question:
                 return answer == str(self.member.age)
             elif self.attribute == self.INSTRUMENT:
                 return answer in self.member.instruments
-            else:  # self.attribute == self.ADDRESS:
+            # self.attribute == self.ADDRESS:
+            else:
                 if answer:
                     return self.member.compare_address_to(answer) >= 0.85
                 else:
