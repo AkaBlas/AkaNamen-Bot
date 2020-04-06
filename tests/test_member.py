@@ -204,10 +204,10 @@ class TestMember:
             vcard_string = vcard.read().decode('utf-8')
             assert 'PHOTO;ENCODING=B;' in vcard_string
 
-    def test_age(self, member):
+    def test_age(self, member, today):
         assert member.age is None
         member.date_of_birth = dt.date(1999, 12, 31)
-        assert member.age == dt.date.today().year - 2000
+        assert member.age == today.year - 2000
 
     def test_distance_of_address_to(self, member):
         with pytest.raises(ValueError, match='This member has no'):

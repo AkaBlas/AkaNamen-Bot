@@ -26,9 +26,15 @@ class MessageType:
         Extracts the type of the message, if it is relevant for the AkaNamen Bot in terms of
         :attr:`All_TYPES`. If it's not relevant, the output will be :obj:`None`.
 
+        Note:
+            In contrast to :meth:`telegram.utils.helpers.effective_message_type` , only updates
+            with ``update.message`` are considered.
+
         Args:
             entity: A :class:`telegram.Update` or :class:`telegram.Message`
         """
+        if isinstance(entity, Update) and not entity.message:
+            return None
         type_ = effective_message_type(entity)
         if type_ in cls.ALL_TYPES:
             return type_

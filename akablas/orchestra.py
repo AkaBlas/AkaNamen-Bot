@@ -33,7 +33,7 @@ class Orchestra(PicklableBase):
         self._instruments: InstrMemberDict = defaultdict(set)
         self._addresses: StrMemberDict = defaultdict(set)
 
-        self._ages_cache_date = None
+        self._ages_cache_date: Optional[dt.date] = None
         self._ages: IntMemberDict = defaultdict(set)
 
         self._members_lock: Lock = Lock()
@@ -175,6 +175,7 @@ class Orchestra(PicklableBase):
                 for m in self.members.values():
                     if m.age:
                         self._ages[m.age].add(m)
+                self._ages_cache_date = today
             return self._ages
 
     @ages.setter

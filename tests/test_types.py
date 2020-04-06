@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from utils import MessageType, UpdateType
-from telegram import Update, Message
+from telegram import Update, Message, CallbackQuery
 
 
 class TestMessageType:
@@ -31,6 +31,18 @@ class TestMessageType:
         message = Message(1, None, None, None, dice=True)
         update = Update(1, message=message)
         assert MessageType.relevant_type(message) is None
+        assert MessageType.relevant_type(update) is None
+
+        update = Update(1,
+                        callback_query=CallbackQuery(2,
+                                                     None,
+                                                     None,
+                                                     message=Message(1,
+                                                                     None,
+                                                                     None,
+                                                                     None,
+                                                                     text='test')))
+        assert update.effective_message is not None
         assert MessageType.relevant_type(update) is None
 
 

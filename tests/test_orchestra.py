@@ -53,12 +53,12 @@ class TestOrchestra:
             with pytest.raises(ValueError, match='overridden'):
                 setattr(orchestra, list_, 1)
 
-    def test_register_and_update_member(self, orchestra, member):
+    def test_register_and_update_member(self, orchestra, member, today):
         member.first_name = 'first_name'
         member.last_name = 'last_name'
         member.nickname = 'nickname'
         member.gender = Gender.DIVERSE
-        member.date_of_birth = dt.date(1996, 8, 10)
+        member.date_of_birth = dt.date(1999, 12, 31)
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
         member.set_address(address='Universitätsplatz 2, 38106 Braunschweig')
 
@@ -72,8 +72,9 @@ class TestOrchestra:
             instruments.Tuba(): {member},
             instruments.Trumpet(): {member}
         }
-        assert orchestra.dates_of_birth == {dt.date(1996, 8, 10): {member}}
+        assert orchestra.dates_of_birth == {dt.date(1999, 12, 31): {member}}
         assert orchestra.addresses == {'Universitätsplatz 2, 38106 Braunschweig': {member}}
+        assert orchestra.ages == {today.year - 2000: {member}}
 
         with pytest.raises(ValueError, match='already'):
             orchestra.register_member(member)
@@ -82,7 +83,7 @@ class TestOrchestra:
         member.last_name = 'Last_name'
         member.nickname = 'Nickname'
         member.gender = Gender.MALE
-        member.date_of_birth = dt.date(1996, 8, 11)
+        member.date_of_birth = dt.date(2000, 12, 31)
         member.instruments = instruments.Oboe()
         member.set_address(address='Universitätsplatz 1, 38106 Braunschweig')
 
@@ -98,13 +99,48 @@ class TestOrchestra:
             instruments.Oboe(): {member}
         }
         assert orchestra.dates_of_birth == {
-            dt.date(1996, 8, 10): set(),
-            dt.date(1996, 8, 11): {member}
+            dt.date(1999, 12, 31): set(),
+            dt.date(2000, 12, 31): {member}
         }
         assert orchestra.addresses == {
             'Universitätsplatz 2, 38106 Braunschweig': set(),
             'Universitätsplatz 1, 38106 Braunschweig': {member}
         }
+        assert orchestra.ages == {today.year - 2000: set(), today.year - 2001: {member}}
+
+    def test_ages_caching(self, member, today):
+
+        class AgesOrchestra(Orchestra):
+
+            def __init__(self, *args, **kwargs):
+                self.test_flag = 0
+                self.__ages = defaultdict(set)
+                super().__init__(*args, **kwargs)
+
+            @property  # type: ignore
+            def _ages(self):
+                return self.__ages
+
+            @_ages.setter
+            def _ages(self, value):
+                self.__ages = value
+                self.test_flag += 1
+
+        orchestra = AgesOrchestra()
+        assert orchestra.test_flag == 1
+        member.date_of_birth = dt.date(1999, 12, 31)
+        orchestra.register_member(member)
+        assert orchestra.ages == {today.year - 2000: {member}}
+        assert orchestra.test_flag == 2
+
+        # Make sure ages isn't recomputed
+        assert orchestra.ages == {today.year - 2000: {member}}
+        assert orchestra.test_flag == 2
+
+        # Make sure ages is recomputed
+        orchestra._ages_cache_date = orchestra._ages_cache_date - dt.timedelta(days=1)
+        assert orchestra.ages == {today.year - 2000: {member}}
+        assert orchestra.test_flag == 3
 
     def test_kick_member(self, orchestra, member):
         member.first_name = 'first_name'
@@ -136,8 +172,7 @@ class TestOrchestra:
             assert o.first_names['John'] == {member}
             assert o.last_names['Doe'] == {member}
 
-    def test_scores(self):
-        today = dt.date.today()
+    def test_scores(self, today):
         todays_score = score_orchestra(today).todays_score
         weeks_score = score_orchestra(today - dt.timedelta(days=today.weekday())).weeks_score
         months_score = score_orchestra(today - dt.timedelta(days=today.day - 1)).months_score
@@ -163,8 +198,7 @@ class TestOrchestra:
         assert overall_score[3].member == Member(1)
         assert overall_score[3] == Score(18, 14)
 
-    def test_score_texts(self):
-        today = dt.date.today()
+    def test_score_texts(self, today):
         todays_score_text = score_orchestra(today).todays_score_text()
         weeks_score_text = score_orchestra(today - dt.timedelta(
             days=today.weekday())).weeks_score_text()
@@ -188,8 +222,7 @@ class TestOrchestra:
 
         assert expected_overall == overall_score_text
 
-    def test_score_texts_length(self):
-        today = dt.date.today()
+    def test_score_texts_length(self, today):
         todays_score_text = score_orchestra(today).todays_score_text(length=2)
         weeks_score_text = score_orchestra(today
                                            - dt.timedelta(days=today.weekday())).weeks_score_text(
@@ -211,8 +244,7 @@ class TestOrchestra:
 
         assert expected_overall == overall_score_text
 
-    def test_score_texts_html(self):
-        today = dt.date.today()
+    def test_score_texts_html(self, today):
         todays_score_text = score_orchestra(today).todays_score_text(html=True)
         weeks_score_text = score_orchestra(today
                                            - dt.timedelta(days=today.weekday())).weeks_score_text(
@@ -239,8 +271,8 @@ class TestOrchestra:
 
         assert expected_overall == overall_score_text
 
-    def test_score_text_large_number(self):
-        o = score_orchestra(dt.date.today())
+    def test_score_text_large_number(self, today):
+        o = score_orchestra(today)
 
         for i in range(5, 101):
             o.register_member(Member(i))

@@ -10,11 +10,6 @@ def us():
     return UserScore(Member(123))
 
 
-@pytest.fixture(scope='class')
-def today():
-    return dt.date.today()
-
-
 class TestUserScore:
 
     def test_init(self, us):
