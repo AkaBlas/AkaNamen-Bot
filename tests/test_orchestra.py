@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import pytest
+import os
 import datetime as dt
 import pickle
 
@@ -158,6 +159,8 @@ class TestOrchestra:
         with pytest.raises(ValueError, match='not'):
             orchestra.kick_member(member)
 
+    @pytest.mark.skipif(os.name == 'nt',
+                        reason="Not worth the struggle stetting this up for windows.")
     def test_pickle(self, orchestra, member):
         member.first_name = 'John'
         member.last_name = 'Doe'

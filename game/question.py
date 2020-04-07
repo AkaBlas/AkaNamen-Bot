@@ -23,7 +23,7 @@ class Question:
         poll (:class:`telegram.Poll`): The poll sent to the user/chat.
 
     Args:
-        member: The member, whos attribute is the correct answer.
+        member: The member, whose attribute is the correct answer.
         attribute: The attribute that is asked for. Must be one of :attr:`SUPPORTED_ATTRIBUTES`.
         multiple_choice: If :obj:`False`, the question is to be answered with "free text" instead
             of choosing an option from a poll. Defaults to :obj:`True`.
@@ -36,14 +36,14 @@ class Question:
                  attribute: str,
                  multiple_choice: bool = True,
                  poll: Optional[Poll] = None) -> None:
+        if attribute not in self.SUPPORTED_ATTRIBUTES:
+            raise ValueError('Attribute not supported.')
+
         if multiple_choice ^ bool(poll):
             raise ValueError('Pass a poll if and only if multiple_choice is True.')
         elif multiple_choice:
             if poll is None or poll.correct_option_id is None:
                 raise ValueError('The poll must be a quiz poll with an correct_option_id.')
-
-        if attribute not in self.SUPPORTED_ATTRIBUTES:
-            raise ValueError('Attribute not supported.')
 
         raise_error = False
         if attribute in [self.FIRST_NAME, self.LAST_NAME, self.NICKNAME]:
@@ -51,7 +51,7 @@ class Question:
         elif attribute in [self.BIRTHDAY, self.AGE]:
             raise_error = member.date_of_birth is None
         elif attribute == self.INSTRUMENT:
-            raise_error = member.instruments is []
+            raise_error = member.instruments == []
         elif attribute == self.ADDRESS:
             raise_error = member.address is None
         if raise_error:
@@ -105,9 +105,10 @@ class Question:
                 accuracy = getattr(self.member, f'compare_{self.attribute}_to')(answer)
                 return accuracy >= 0.85
             elif self.attribute == self.BIRTHDAY:
-                bd_string = self.member.date_of_birth.strftime('%d.%m.')  # type: ignore
-                return max(fuzz.ratio(bd_string, answer),
-                           fuzz.partial_ratio(bd_string, answer)) >= 85
+                bd_string = self.member.date_of_birth.strftime('%d%m').strip('0')  # type: ignore
+                answer = answer.replace('.', '').replace(',', '').replace(';', '')
+                answer = answer.replace('0', '').replace(' ', '')
+                return answer == bd_string
             elif self.attribute == self.AGE:
                 return answer == str(self.member.age)
             elif self.attribute == self.INSTRUMENT:
