@@ -65,6 +65,7 @@ class TestOrchestra:
 
         orchestra.register_member(member)
         assert orchestra.members == {123456: member}
+        assert orchestra.members[123456] is not member
         assert orchestra.first_names == {'first_name': {member}}
         assert orchestra.last_names == {'last_name': {member}}
         assert orchestra.nicknames == {'nickname': {member}}
@@ -90,6 +91,7 @@ class TestOrchestra:
 
         orchestra.update_member(member)
         assert orchestra.members == {123456: member}
+        assert orchestra.members[123456] is not member
         assert orchestra.first_names == {'first_name': set(), 'First_name': {member}}
         assert orchestra.last_names == {'last_name': set(), 'Last_name': {member}}
         assert orchestra.nicknames == {'nickname': set(), 'Nickname': {member}}
@@ -108,6 +110,22 @@ class TestOrchestra:
             'Universitätsplatz 1, 38106 Braunschweig': {member}
         }
         assert orchestra.ages == {today.year - 2000: set(), today.year - 2001: {member}}
+
+    def test_gender_first_names(self, member, orchestra):
+        member.first_name = 'first'
+        member.gender = Gender.MALE
+        orchestra.register_member(member)
+        member.user_id = 2
+        member.gender = Gender.FEMALE
+        orchestra.register_member(member)
+        member.user_id = 3
+        member.gender = Gender.DIVERSE
+        orchestra.register_member(member)
+
+        print(orchestra.male_first_names)
+        assert orchestra.male_first_names == {'first': {Member(123456)}}
+        assert orchestra.female_first_names == {'first': {Member(2)}}
+        assert orchestra.diverse_first_names == {'first': {Member(3)}}
 
     def test_ages_caching(self, member, today):
 

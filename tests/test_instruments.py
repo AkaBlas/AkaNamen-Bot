@@ -17,7 +17,7 @@ class TestInstruments:
         instrument = cls()
         assert isinstance(instrument.name, str)
         assert isinstance(str(instrument), str)
-    
+
     @pytest.mark.parametrize('cls',
                              [i for i in instruments.__dict__.values() if isinstance(i, type)])
     def test_global(self, cls):
@@ -43,7 +43,7 @@ class TestInstruments:
     def test_classes(self, cls):
         instrument = cls()
         assert isinstance(instrument, Instrument)
-    
+
     @pytest.mark.parametrize('cls', [HighBrassInstrument, LowBrassInstrument])
     def test_brass(self, cls):
         instrument = cls()
@@ -55,7 +55,7 @@ class TestInstruments:
         assert not instrument > BrassInstrument()
         assert hash(instrument) != hash(BrassInstrument())
         assert instrument == cls()
-    
+
     @pytest.mark.parametrize('cls', [Trumpet, Flugelhorn, Horn])
     def test_high_brass(self, cls):
         instrument = cls()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Orchestra class."""
-from akablas import Member, Instrument
+from akablas import Member, Instrument, Gender
 from utils import PicklableBase
 from game import Score
 
@@ -73,8 +73,7 @@ class Orchestra(PicklableBase):
     @property
     def first_names(self) -> StrMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members with the corresponding first
-        name are the values.
+        A :obj:`dict`. For each key, all members with the corresponding first name are the values.
         """
         with self._first_names_lock:
             return self._first_names
@@ -84,10 +83,40 @@ class Orchestra(PicklableBase):
         raise ValueError('This attribute can\'t be overridden!')
 
     @property
+    def male_first_names(self) -> StrMemberDict:
+        """
+        A :obj:`dict`. For each key, all male members with the corresponding last names are the
+        values.
+        """
+        return {
+            k: set(m for m in v if m.gender == Gender.MALE) for k, v in self.first_names.items()
+        }
+
+    @property
+    def female_first_names(self) -> StrMemberDict:
+        """
+        A :obj:`dict`. For each key, all female members with the corresponding last names are the
+        values.
+        """
+        return {
+            k: set(m for m in v if m.gender == Gender.FEMALE) for k, v in self.first_names.items()
+        }
+
+    @property
+    def diverse_first_names(self) -> StrMemberDict:
+        """
+        A :obj:`dict`. For each key, all diverse members with the corresponding last names are the
+        values.
+        """
+        return {
+            k: set(m for m in v if m.gender == Gender.DIVERSE)
+            for k, v in self.first_names.items()
+        }
+
+    @property
     def last_names(self) -> StrMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members with the corresponding last
-        name are the values.
+        A :obj:`dict`. For each key, all members with the corresponding last name are the values.
         """
         with self._last_names_lock:
             return self._last_names
@@ -99,8 +128,7 @@ class Orchestra(PicklableBase):
     @property
     def nicknames(self) -> StrMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members with the corresponding
-        nickname are the values.
+        A :obj:`dict`. For each key, all members with the corresponding nickname are the values.
         """
         with self._nicknames_lock:
             return self._nicknames
@@ -112,8 +140,7 @@ class Orchestra(PicklableBase):
     @property
     def genders(self) -> StrMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members with the corresponding
-        gender are the values.
+        A :obj:`dict`. For each key, all members with the corresponding gender are the values.
         """
         with self._genders_lock:
             return self._genders
@@ -125,8 +152,8 @@ class Orchestra(PicklableBase):
     @property
     def dates_of_birth(self) -> DateMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members with the corresponding
-        date of birth are the values. The keys are :class:`datetime.date` objects.
+        A :obj:`dict`. For each key, all members with the corresponding date of birth are the
+        values. The keys are :class:`datetime.date` objects.
         """
         with self._dates_of_birth_lock:
             return self._dates_of_birth
@@ -138,8 +165,8 @@ class Orchestra(PicklableBase):
     @property
     def instruments(self) -> InstrMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members that play the corresponding
-        instrument the values. The keys are :class:`akablas.Instrument` objects.
+        A :obj:`dict`. For each key, all members that play the corresponding instrument the values.
+        The keys are :class:`akablas.Instrument` objects.
         """
         with self._instruments_lock:
             return self._instruments
@@ -151,8 +178,7 @@ class Orchestra(PicklableBase):
     @property
     def addresses(self) -> StrMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members with the corresponding
-        address are the values.
+        A :obj:`dict`. For each key, all members with the corresponding address are the values.
         """
         with self._addresses_lock:
             return self._addresses
@@ -164,8 +190,8 @@ class Orchestra(PicklableBase):
     @property
     def ages(self) -> IntMemberDict:
         """
-        A :class:`collections.defaultdict`. For each key, all members with the corresponding
-        age (on evaluation time) are the values.
+        A :obj:`dict`. For each key, all members with the corresponding age (on evaluation time)
+        are the values.
         """
         with self._ages_lock:
             today = dt.date.today()

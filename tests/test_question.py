@@ -124,7 +124,7 @@ class TestQuestion:
         assert q.check_answer(update) is result
 
     @pytest.mark.parametrize('answer, result', [('31.12.', True), ('31 12', True), ('3112', True),
-                                                ('  31 12 ', True),  ('31:12:', False),
+                                                ('  31 12 ', True), ('31:12:', False),
                                                 ('31 11', False), ('30.12.', False),
                                                 ('01.14.', False),
                                                 ('some very wrong answer', False)])
@@ -150,7 +150,6 @@ class TestQuestion:
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
 
-
     @pytest.mark.parametrize('answer, result', [('Universitätsplatz, Braunschweig', True),
                                                 ('Univeritätsplatz 2, Braunschweig', True),
                                                 ('Universitätpltz 3, BRAUNSCHWEIG', True),
@@ -163,13 +162,13 @@ class TestQuestion:
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
 
-
     @pytest.mark.parametrize('answer, result', [((52.273450, 10.529699), True),
                                                 ((52.273450, 10.529699), True),
                                                 ((52.274507, 10.528648), True),
                                                 ((52.277041, 10.528380), False),
                                                 ((52.280024, 10.544396), False)])
-    def test_check_answer_free_text_location_text(self, answer, result):
+    def test_check_answer_free_text_location_coords(self, answer, result):
         q = Question(self.member, Question.ADDRESS, multiple_choice=False)
-        update = Update(1, message=Message(1, None, None, None, location=Location(*reversed(answer))))
+        update = Update(1,
+                        message=Message(1, None, None, None, location=Location(*reversed(answer))))
         assert q.check_answer(update) is result

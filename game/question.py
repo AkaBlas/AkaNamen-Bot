@@ -5,7 +5,6 @@ from utils import MessageType, UpdateType
 
 from telegram import Poll, Update
 
-from fuzzywuzzy import fuzz
 from typing import TYPE_CHECKING, Optional
 if TYPE_CHECKING:
     from akablas import Member  # noqa: F401
