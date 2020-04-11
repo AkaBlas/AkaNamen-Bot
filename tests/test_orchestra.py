@@ -44,13 +44,13 @@ class TestOrchestra:
 
     def test_init(self, orchestra):
         assert isinstance(orchestra.members, dict)
-        for list_ in orchestra.lists_to_attrs:
+        for list_ in orchestra.LISTS_TO_ATTRS:
             assert isinstance(getattr(orchestra, list_), defaultdict)
 
     def test_properties_immutable(self, orchestra):
         with pytest.raises(ValueError, match='overridden'):
             orchestra.members = 1
-        for list_ in orchestra.lists_to_attrs:
+        for list_ in orchestra.LISTS_TO_ATTRS:
             with pytest.raises(ValueError, match='overridden'):
                 setattr(orchestra, list_, 1)
 
@@ -77,6 +77,7 @@ class TestOrchestra:
         assert orchestra.dates_of_birth == {dt.date(1999, 12, 31): {member}}
         assert orchestra.addresses == {'Universitätsplatz 2, 38106 Braunschweig': {member}}
         assert orchestra.ages == {today.year - 2000: {member}}
+        assert orchestra.birthdays == {'31.12.': {member}}
 
         with pytest.raises(ValueError, match='already'):
             orchestra.register_member(member)
@@ -110,6 +111,7 @@ class TestOrchestra:
             'Universitätsplatz 1, 38106 Braunschweig': {member}
         }
         assert orchestra.ages == {today.year - 2000: set(), today.year - 2001: {member}}
+        assert orchestra.birthdays == {'31.12.': {member}}
 
     def test_gender_first_names(self, member, orchestra):
         member.first_name = 'first'
@@ -170,7 +172,7 @@ class TestOrchestra:
         orchestra.kick_member(member)
 
         assert orchestra.members == dict()
-        for list_name in orchestra.lists_to_attrs:
+        for list_name in orchestra.LISTS_TO_ATTRS:
             list_ = getattr(orchestra, list_name)
             assert list_ == dict() or all(list_[key] == set() for key in list_)
 

@@ -209,6 +209,11 @@ class TestMember:
         member.date_of_birth = dt.date(1999, 12, 31)
         assert member.age == today.year - 2000
 
+    def test_birthday(self, member, today):
+        assert member.birthday is None
+        member.date_of_birth = dt.date(1999, 12, 31)
+        assert member.birthday == '31.12.'
+
     def test_distance_of_address_to(self, member):
         with pytest.raises(ValueError, match='This member has no'):
             member.distance_of_address_to((52.273549, 10.529447))

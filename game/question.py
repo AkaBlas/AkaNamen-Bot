@@ -44,16 +44,7 @@ class Question:
             if poll is None or poll.correct_option_id is None:
                 raise ValueError('The poll must be a quiz poll with an correct_option_id.')
 
-        raise_error = False
-        if attribute in [self.FIRST_NAME, self.LAST_NAME, self.NICKNAME]:
-            raise_error = getattr(member, attribute) is None
-        elif attribute in [self.BIRTHDAY, self.AGE]:
-            raise_error = member.date_of_birth is None
-        elif attribute == self.INSTRUMENT:
-            raise_error = member.instruments == []
-        elif attribute == self.ADDRESS:
-            raise_error = member.address is None
-        if raise_error:
+        if bool(getattr(member, self.MAP_ATTRIBUTES[attribute])) is False:
             raise ValueError('The member doesn\'t have the required attribute.')
 
         self.member = member
@@ -75,13 +66,21 @@ class Question:
         else:
             if self.attribute in [
                 self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.BIRTHDAY, self.AGE,
-                self.INSTRUMENT
+                self.INSTRUMENT, self.FULL_NAME
             ]:
                 return MessageType.relevant_type(update) == MessageType.TEXT
             # self.attribute == self.ADDRESS:
             else:
                 return MessageType.relevant_type(update) in [MessageType.TEXT,
                                                              MessageType.LOCATION]
+
+    @property
+    def correct_answer(self) -> str:
+        """The correct answer for this question."""
+        if self.multiple_choice and self.poll:
+            return self.poll.options[self.poll.correct_option_id]
+        else:
+            return str(getattr(self.member, self.MAP_ATTRIBUTES[self.attribute]))
 
     def check_answer(self, update: Update) -> bool:
         """
@@ -100,11 +99,11 @@ class Question:
             else:
                 answer = None
 
-            if self.attribute in [self.FIRST_NAME, self.LAST_NAME, self.NICKNAME]:
+            if self.attribute in [self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.FULL_NAME]:
                 accuracy = getattr(self.member, f'compare_{self.attribute}_to')(answer)
                 return accuracy >= 0.85
             elif self.attribute == self.BIRTHDAY:
-                bd_string = self.member.date_of_birth.strftime('%d%m').strip('0')  # type: ignore
+                bd_string = self.member.birthday.strip('0').replace('.', '')  # type: ignore
                 answer = answer.replace('.', '').replace(',', '').replace(';', '')
                 answer = answer.replace('0', '').replace(' ', '')
                 return answer == bd_string
@@ -127,6 +126,8 @@ class Question:
     """:obj:`str`: Last name of an AkaBlas member"""
     NICKNAME: str = 'nickname'
     """:obj:`str`: Nickname of an AkaBlas member"""
+    FULL_NAME: str = 'full_name'
+    """:obj:`str`: Full name of an AkaBlas member"""
     BIRTHDAY: str = 'birthday'
     """:obj:`str`: Birthday of an AkaBlas member"""
     AGE: str = 'age'
@@ -135,5 +136,19 @@ class Question:
     """:obj:`str`: Instrument of an AkaBlas member"""
     ADDRESS: str = 'address'
     """:obj:`str`: Instrument of an AkaBlas member"""
-    SUPPORTED_ATTRIBUTES = [FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS]
+    SUPPORTED_ATTRIBUTES = [FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS,
+                            FULL_NAME]
     """List[:obj:`str`]: Attributes usable for questions"""
+    MAP_ATTRIBUTES = {
+        FIRST_NAME: 'first_name',
+        LAST_NAME: 'last_name',
+        NICKNAME: 'nickname',
+        FULL_NAME: 'full_name',
+        BIRTHDAY: 'birthday',
+        AGE: 'age',
+        INSTRUMENT: 'instruments',
+        ADDRESS: 'address',
+    }
+    """Dict[:obj:`str`, :obj:`str`]: For each attribute in :attr:`SUPPORTED_TYPES`, the
+    corresponding value is the name of the :class:`akablas.Member` attribute, the member
+    associated with this question must have."""

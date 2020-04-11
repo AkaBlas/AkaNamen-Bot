@@ -326,6 +326,25 @@ class Member:
             raise ValueError('This member has no nickname.')
         return self._compare(self.nickname, string)
 
+    def compare_full_name_to(self, string: str) -> float:
+        """
+        Compares the members full name to the given string. The comparison is case insensitive.
+
+        Args:
+            string: The string to compare to.
+
+        Returns:
+            Similarity in percentage.
+
+        Raises:
+            ValueError: If the member has no full name.
+        """
+        if self.full_name is None:
+            raise ValueError('This member has no full name.')
+        str_1 = self.full_name.lower()
+        str_2 = string.lower()
+        return (fuzz.ratio(str_1, str_2) + fuzz.token_set_ratio(str_1, str_2)) / 200
+
     def compare_address_to(self, string: str) -> float:
         """
         Compares the members address to the given string. The comparison is case insensitive.
@@ -372,3 +391,14 @@ class Member:
         today = dt.date.today()
         born = self.date_of_birth
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+    @property
+    def birthday(self) -> Optional[str]:
+        """
+        The birthday of the member int he format ``DD.MM.``. :obj:`None`, if :attr:`date_of_birth`
+        is not set.
+        """
+        if not self.date_of_birth:
+            return None
+
+        return self.date_of_birth.strftime('%d.%m.')

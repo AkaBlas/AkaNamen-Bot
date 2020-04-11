@@ -27,9 +27,11 @@ class Orchestra(PicklableBase):
         self._members: Dict[int, Member] = dict()
         self._first_names: StrMemberDict = defaultdict(set)
         self._last_names: StrMemberDict = defaultdict(set)
+        self._full_names: StrMemberDict = defaultdict(set)
         self._nicknames: StrMemberDict = defaultdict(set)
         self._genders: StrMemberDict = defaultdict(set)
         self._dates_of_birth: DateMemberDict = defaultdict(set)
+        self._birthdays: StrMemberDict = defaultdict(set)
         self._instruments: InstrMemberDict = defaultdict(set)
         self._addresses: StrMemberDict = defaultdict(set)
 
@@ -39,23 +41,14 @@ class Orchestra(PicklableBase):
         self._members_lock: Lock = Lock()
         self._first_names_lock: Lock = Lock()
         self._last_names_lock: Lock = Lock()
+        self._full_names_lock: Lock = Lock()
         self._nicknames_lock: Lock = Lock()
         self._genders_lock: Lock = Lock()
         self._dates_of_birth_lock: Lock = Lock()
+        self._birthdays_lock: Lock = Lock()
         self._instruments_lock: Lock = Lock()
         self._addresses_lock: Lock = Lock()
         self._ages_lock: Lock = Lock()
-
-        self.lists_to_attrs: Dict[str, str] = {
-            'first_names': 'first_name',
-            'last_names': 'last_name',
-            'nicknames': 'nickname',
-            'genders': 'gender',
-            'dates_of_birth': 'date_of_birth',
-            'instruments': 'instruments',
-            'addresses': 'address',
-            'ages': 'age',
-        }
 
     @property
     def members(self) -> Dict[int, Member]:
@@ -126,6 +119,18 @@ class Orchestra(PicklableBase):
         raise ValueError('This attribute can\'t be overridden!')
 
     @property
+    def full_names(self) -> StrMemberDict:
+        """
+        A :obj:`dict`. For each key, all members with the corresponding full name are the values.
+        """
+        with self._full_names_lock:
+            return self._full_names
+
+    @full_names.setter
+    def full_names(self, value: StrMemberDict) -> None:
+        raise ValueError('This attribute can\'t be overridden!')
+
+    @property
     def nicknames(self) -> StrMemberDict:
         """
         A :obj:`dict`. For each key, all members with the corresponding nickname are the values.
@@ -160,6 +165,19 @@ class Orchestra(PicklableBase):
 
     @dates_of_birth.setter
     def dates_of_birth(self, value: DateMemberDict) -> None:
+        raise ValueError('This attribute can\'t be overridden!')
+
+    @property
+    def birthdays(self) -> StrMemberDict:
+        """
+        A :obj:`dict`. For each key, all members with the corresponding birthdays are the
+        values. The keys are the dates in ``DD.MM.`` format.
+        """
+        with self._birthdays_lock:
+            return self._birthdays
+
+    @birthdays.setter
+    def birthdays(self, value: StrMemberDict) -> None:
         raise ValueError('This attribute can\'t be overridden!')
 
     @property
@@ -227,7 +245,7 @@ class Orchestra(PicklableBase):
 
         new_member = copy(member)
         self.members[new_member.user_id] = new_member
-        for list_name, attr in self.lists_to_attrs.items():
+        for list_name, attr in self.LISTS_TO_ATTRS.items():
             attribute = getattr(new_member, attr)
             if attribute is not None:
                 list_ = getattr(self, list_name)
@@ -253,7 +271,7 @@ class Orchestra(PicklableBase):
         old_member = self.members[member.user_id]
         del self.members[member.user_id]
 
-        for list_name, attr in self.lists_to_attrs.items():
+        for list_name, attr in self.LISTS_TO_ATTRS.items():
             attribute = getattr(old_member, attr)
             list_ = getattr(self, list_name)
             if isinstance(attribute, list):
@@ -421,3 +439,20 @@ class Orchestra(PicklableBase):
 
         """
         return self._score_text('overall', length=length, html=html)
+
+    LISTS_TO_ATTRS: Dict[str, str] = {
+        'first_names': 'first_name',
+        'last_names': 'last_name',
+        'full_names': 'last_name',
+        'nicknames': 'nickname',
+        'genders': 'gender',
+        'dates_of_birth': 'date_of_birth',
+        'instruments': 'instruments',
+        'addresses': 'address',
+        'ages': 'age',
+        'birthdays': 'birthday',
+    }
+    """Dict[:obj:`str`, :obj:`str`]: A map from the names of the different properties of this
+    class to the :class:`akablas.Member` attributes encoded in those properties."""
+    ATTRS_TO_LISTS: Dict[str, str] = {v: k for k, v in LISTS_TO_ATTRS.items()}
+    """Dict[:obj:`str`, :obj:`str`]: Inverse of :attr:`lists_to_attr`."""

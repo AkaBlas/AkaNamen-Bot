@@ -94,6 +94,7 @@ class TestQuestion:
             q = Question(self.member, attr, poll=self.poll)
             assert q.check_answer(correct_update)
             assert not q.check_answer(false_update)
+            assert q.correct_answer == 'Opt2'
 
     @pytest.mark.parametrize('answer, result', [('first', True), ('FiRsT', True), ('FIRST', True),
                                                 (' first', True), ('first name', True),
@@ -103,6 +104,7 @@ class TestQuestion:
         q = Question(self.member, Question.FIRST_NAME, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
+        assert q.correct_answer == self.member.first_name
 
     @pytest.mark.parametrize('answer, result', [('last', True), ('LaSt', True), ('LAST', True),
                                                 (' last', True), ('last name', True),
@@ -112,6 +114,7 @@ class TestQuestion:
         q = Question(self.member, Question.LAST_NAME, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
+        assert q.correct_answer == self.member.last_name
 
     @pytest.mark.parametrize('answer, result', [('nickname', True), ('NiCKnAMe', True),
                                                 ('NICKNAME', True), (' nickname', True),
@@ -122,6 +125,23 @@ class TestQuestion:
         q = Question(self.member, Question.NICKNAME, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
+        assert q.correct_answer == self.member.nickname
+
+    @pytest.mark.parametrize('answer, result', [('first nick last', True),
+                                                ('FiRSt niCKnaMe LaSt', True),
+                                                ('FIRST NICKNAME LAST', True),
+                                                ('  FIRST   NICK   LAST  ', True),
+                                                ('first last', True), ('first nick', True),
+                                                ('nick last', True), ('nick', False),
+                                                ('last', False), ('fisrt nik lst', True),
+                                                ('first', False), ('none', False),
+                                                ('some very wrong answer', False)])
+    def test_check_answer_free_text_full_name(self, answer, result):
+        self.member.nickname = 'nick'
+        q = Question(self.member, Question.FULL_NAME, multiple_choice=False)
+        update = Update(1, message=Message(1, None, None, None, text=answer))
+        assert q.check_answer(update) is result
+        assert q.correct_answer == self.member.full_name
 
     @pytest.mark.parametrize('answer, result', [('31.12.', True), ('31 12', True), ('3112', True),
                                                 ('  31 12 ', True), ('31:12:', False),
@@ -132,6 +152,7 @@ class TestQuestion:
         q = Question(self.member, Question.BIRTHDAY, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
+        assert q.correct_answer == str(self.member.birthday)
 
     @pytest.mark.parametrize('answer, result', [('20', True), ('  20', True), ('21', False),
                                                 ('20  ', True), ('19', False), (' 30', False),
@@ -140,6 +161,7 @@ class TestQuestion:
         q = Question(self.member, Question.AGE, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
+        assert q.correct_answer == str(self.member.age)
 
     @pytest.mark.parametrize('answer, result', [(str(instruments.AltoSaxophone()), True),
                                                 (f' {instruments.AltoSaxophone()} ', True),
@@ -149,6 +171,7 @@ class TestQuestion:
         q = Question(self.member, Question.INSTRUMENT, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
+        assert q.correct_answer == str(self.member.instruments)
 
     @pytest.mark.parametrize('answer, result', [('Universitätsplatz, Braunschweig', True),
                                                 ('Univeritätsplatz 2, Braunschweig', True),
@@ -161,6 +184,7 @@ class TestQuestion:
         q = Question(self.member, Question.ADDRESS, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
+        assert q.correct_answer == self.member.address
 
     @pytest.mark.parametrize('answer, result', [((52.273450, 10.529699), True),
                                                 ((52.273450, 10.529699), True),
@@ -172,3 +196,4 @@ class TestQuestion:
         update = Update(1,
                         message=Message(1, None, None, None, location=Location(*reversed(answer))))
         assert q.check_answer(update) is result
+        assert q.correct_answer == self.member.address
