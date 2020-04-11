@@ -2,8 +2,7 @@
 import pytest
 import datetime as dt
 
-from akablas import Member, Gender, instruments
-from game import Question
+from components import Member, Gender, instruments, Question
 
 from telegram import Poll, PollAnswer, Update, Message, Location
 

@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Orchestra class."""
-from akablas import Member, Instrument, Gender
-from utils import PicklableBase
-from game import Score
+from components import Member, Instrument, Gender, PicklableBase, Score
 
 import datetime as dt
 
@@ -53,7 +51,7 @@ class Orchestra(PicklableBase):
     @property
     def members(self) -> Dict[int, Member]:
         """
-        All the members of the orchestra. The keys are the :attr:`akablas.Member.user_id` s, the
+        All the members of the orchestra. The keys are the :attr:`components.Member.user_id` s, the
         values are the actual members.
         """
         with self._members_lock:
@@ -184,7 +182,7 @@ class Orchestra(PicklableBase):
     def instruments(self) -> InstrMemberDict:
         """
         A :obj:`dict`. For each key, all members that play the corresponding instrument the values.
-        The keys are :class:`akablas.Instrument` objects.
+        The keys are :class:`components.Instrument` objects.
         """
         with self._instruments_lock:
             return self._instruments
@@ -338,7 +336,8 @@ class Orchestra(PicklableBase):
     @property
     def todays_score(self) -> List[Score]:
         """
-        Gives a list of each members score of today sorted descending by :attr:`game.Score.ratio` .
+        Gives a list of each members score of today sorted descending by
+        :attr:`components.Score.ratio` .
         """
         return self._score('today')
 
@@ -359,7 +358,7 @@ class Orchestra(PicklableBase):
     def weeks_score(self) -> List[Score]:
         """
         Gives a list of each members score of the current week sorted descending by
-        :attr:`game.Score.ratio` .
+        :attr:`components.Score.ratio` .
         """
         return self._score('week')
 
@@ -380,7 +379,7 @@ class Orchestra(PicklableBase):
     def months_score(self) -> List[Score]:
         """
         Gives a list of each members score of the current month sorted descending by
-        :attr:`game.Score.ratio` .
+        :attr:`components.Score.ratio` .
         """
         return self._score('month')
 
@@ -401,7 +400,7 @@ class Orchestra(PicklableBase):
     def years_score(self) -> List[Score]:
         """
         Gives a list of each members score of the current year sorted descending by
-        :attr:`game.Score.ratio` .
+        :attr:`components.Score.ratio` .
         """
         return self._score('year')
 
@@ -421,7 +420,8 @@ class Orchestra(PicklableBase):
     @property
     def overall_score(self) -> List[Score]:
         """
-        Gives a list of each members overall score sorted descending by :attr:`game.Score.ratio` .
+        Gives a list of each members overall score sorted descending by
+        :attr:`components.Score.ratio` .
         """
         return self._score('overall')
 
@@ -453,6 +453,6 @@ class Orchestra(PicklableBase):
         'birthdays': 'birthday',
     }
     """Dict[:obj:`str`, :obj:`str`]: A map from the names of the different properties of this
-    class to the :class:`akablas.Member` attributes encoded in those properties."""
+    class to the :class:`components.Member` attributes encoded in those properties."""
     ATTRS_TO_LISTS: Dict[str, str] = {v: k for k, v in LISTS_TO_ATTRS.items()}
     """Dict[:obj:`str`, :obj:`str`]: Inverse of :attr:`lists_to_attr`."""

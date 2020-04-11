@@ -1,6 +1,6 @@
-utils.types Module
+components.Member
 ==================
 
-.. automodule:: utils.types
+.. autoclass:: components.Member
     :members:
     :show-inheritance:

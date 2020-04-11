@@ -1,9 +1,9 @@
-akablas package
-===============
+AkaBlas components
+==================
 
 .. toctree::
 
-    akablas.gender
-    akablas.instruments
-    akablas.member
-    akablas.orchestra
+    components.gender
+    components.instruments
+    components.member
+    components.orchestra

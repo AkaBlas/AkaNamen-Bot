@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the UserScore class."""
-from utils import PicklableBase
-from game import Score
+from components import PicklableBase
+from components import Score
 
 import datetime as dt
 
@@ -12,18 +12,18 @@ from collections import defaultdict
 
 # We don't like circular imports
 if TYPE_CHECKING:
-    from akablas import Member
+    from components import Member
 
 
 class UserScore(PicklableBase):
     """
-    The high score of a single user. Keeps track of their game stats. :class:`game.UserScore`
-    instances are subscriptable: For each date ``day``, ``score[day]`` is a :class:`game.Score`
-    instance with the number of answers and correct answers given by the user on that day. To add
-    values, :meth:`add_to_score` should be the preferred method.
+    The high score of a single user. Keeps track of their game stats. :class:`components.UserScore`
+    instances are subscriptable: For each date ``day``, ``score[day]`` is a
+    :class:`components.Score` instance with the number of answers and correct answers given by the
+    user on that day. To add values, :meth:`add_to_score` should be the preferred method.
 
     Attributes:
-        member (:class:`akablas.Member`): The member, this high score is associated with.
+        member (:class:`components.Member`): The member, this high score is associated with.
 
     Args:
         member: The member, this high score is associated with.

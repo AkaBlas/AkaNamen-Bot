@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from akablas import Gender
+from components import Gender
 
 
 class TestGender:

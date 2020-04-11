@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 import pytest
 import datetime as dt
-from game import Score, UserScore
-from akablas import Member
+from components import Score, UserScore, Member
 
 
 @pytest.fixture(scope='function')

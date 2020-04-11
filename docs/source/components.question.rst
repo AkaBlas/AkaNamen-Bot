@@ -1,6 +1,6 @@
-utils.PicklableBase
+components.Question
 ===================
 
-.. autoclass:: utils.PicklableBase
+.. autoclass:: components.Question
     :members:
     :show-inheritance:

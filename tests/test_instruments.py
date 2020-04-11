@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 import pytest
-from akablas import instruments
-from akablas.instruments import (Instrument, WoodwindInstrument, BrassInstrument,
-                                 HighBrassInstrument, LowBrassInstrument, PercussionInstrument,
-                                 Flute, Clarinet, Oboe, Bassoon, Saxophone, SopranoSaxophone,
-                                 AltoSaxophone, TenorSaxophone, BaritoneSaxophone, Euphonium,
-                                 BaritoneHorn, Baritone, Trombone, Tuba, Trumpet, Flugelhorn, Horn,
-                                 Drums)
+from components import instruments
+from components import (Instrument, WoodwindInstrument, BrassInstrument, HighBrassInstrument,
+                        LowBrassInstrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
+                        Saxophone, SopranoSaxophone, AltoSaxophone, TenorSaxophone,
+                        BaritoneSaxophone, Euphonium, BaritoneHorn, Baritone, Trombone, Tuba,
+                        Trumpet, Flugelhorn, Horn, Drums)
 
 
 class TestInstruments:

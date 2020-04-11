@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from utils import MessageType, UpdateType
+from components import MessageType, UpdateType
 from telegram import Update, Message, CallbackQuery
 
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import pytest
-from akablas import Member
-from game import Score
+from components import Member, Score
 
 
 class TestScore:

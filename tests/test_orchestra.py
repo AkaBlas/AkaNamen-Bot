@@ -4,8 +4,7 @@ import os
 import datetime as dt
 import pickle
 
-from akablas import Gender, Member, instruments, Orchestra
-from game import Score
+from components import Gender, Member, instruments, Orchestra, Score
 from collections import defaultdict
 from tempfile import NamedTemporaryFile
 

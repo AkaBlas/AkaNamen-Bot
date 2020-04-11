@@ -3,7 +3,7 @@
 """This module contains the Score class."""
 from typing import TYPE_CHECKING, Optional
 if TYPE_CHECKING:
-    from akablas import Member  # noqa: F401
+    from components import Member  # noqa: F401
 
 
 class Score:
@@ -20,7 +20,9 @@ class Score:
         member: The member this score is associated with.
     """
 
-    def __init__(self, answers: int = 0, correct: int = 0,
+    def __init__(self,
+                 answers: int = 0,
+                 correct: int = 0,
                  member: Optional['Member'] = None) -> None:
         self._answers = 0
         self._correct = 0

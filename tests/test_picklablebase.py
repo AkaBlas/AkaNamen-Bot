@@ -4,7 +4,7 @@ import pytest
 import os
 
 from threading import Lock
-from utils import PicklableBase
+from components import PicklableBase
 from tempfile import NamedTemporaryFile
 
 

@@ -2,8 +2,7 @@
 import pytest
 import datetime as dt
 from geopy import Photon
-from akablas import Gender, Member, instruments
-from game import UserScore
+from components import Gender, Member, instruments, UserScore
 
 
 @pytest.fixture(scope='function')

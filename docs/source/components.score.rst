@@ -1,6 +1,6 @@
-game.GameHandler
+components.Score
 ================
 
-.. autoclass:: game.GameHandler
+.. autoclass:: components.Score
     :members:
     :show-inheritance:

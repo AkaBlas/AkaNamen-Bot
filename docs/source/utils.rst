@@ -1,7 +1,8 @@
-utils package
-=============
+Utility components
+==================
 
 .. toctree::
 
-    utils.picklablebase
-    utils.types
+    components.constants
+    components.picklablebase
+    components.types

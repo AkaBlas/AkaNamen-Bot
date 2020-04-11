@@ -1,9 +1,11 @@
-game package
-============
+Game related components
+=======================
 
 .. toctree::
 
-    game.gamehandler
-    game.question
-    game.score
-    game.userscore
+    components.gameconfigurationupdate
+    components.gamehandler
+    components.question
+    components.score
+    components.texts
+    components.userscore

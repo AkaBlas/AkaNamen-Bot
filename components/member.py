@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Member class."""
-from akablas import Instrument
-from game import UserScore
+from components import Instrument
+from .userscore import UserScore
 
 import datetime as dt
 import vobject
@@ -30,7 +30,7 @@ class Member:
         photo_file_id (:obj:`str`): Optional. Telegram file ID of the user photo
         allow_contact_sharing (:obj:`bool`): Whether sharing this members contact information with
             others is allowed.
-        user_score (:class:`game.UserScore`): A highscore associated with this member.
+        user_score (:class:`components.UserScore`): A highscore associated with this member.
 
     Args:
         user_id: The Telegram user_id.

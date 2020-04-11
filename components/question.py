@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Question class."""
-from utils import MessageType, UpdateType
+from components import MessageType, UpdateType
 
 from telegram import Poll, Update
 
 from typing import TYPE_CHECKING, Optional
 if TYPE_CHECKING:
-    from akablas import Member  # noqa: F401
+    from components import Member  # noqa: F401
 
 
 class Question:
     """
-    Representation of a single question asked in an AkaNamen Bot game.
+    Representation of a single question asked in an AkaNamen Bot components.
 
     Attributes:
-        member (:class:`akablas.Member`): The member, whos attribute is the correct answer.
+        member (:class:`components.Member`): The member, whos attribute is the correct answer.
         attribute (:obj:`str`): The attribute that is asked for.
         multiple_choice (:obj:`bool`): If :obj:`False`, the question is to be answered with
             "free text" instead of choosing an option from a poll.
@@ -65,14 +65,15 @@ class Question:
                     and update.poll_answer.poll_id == self.poll.id)  # type: ignore
         else:
             if self.attribute in [
-                self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.BIRTHDAY, self.AGE,
-                self.INSTRUMENT, self.FULL_NAME
+                    self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.BIRTHDAY, self.AGE,
+                    self.INSTRUMENT, self.FULL_NAME
             ]:
                 return MessageType.relevant_type(update) == MessageType.TEXT
             # self.attribute == self.ADDRESS:
             else:
-                return MessageType.relevant_type(update) in [MessageType.TEXT,
-                                                             MessageType.LOCATION]
+                return MessageType.relevant_type(update) in [
+                    MessageType.TEXT, MessageType.LOCATION
+                ]
 
     @property
     def correct_answer(self) -> str:
@@ -117,8 +118,8 @@ class Question:
                     return self.member.compare_address_to(answer) >= 0.85
                 else:
                     location = update.message.location
-                    return self.member.distance_of_address_to((location.latitude,
-                                                               location.longitude)) <= 0.2
+                    return self.member.distance_of_address_to(
+                        (location.latitude, location.longitude)) <= 0.2
 
     FIRST_NAME: str = 'first_name'
     """:obj:`str`: First name of an AkaBlas member"""
@@ -136,8 +137,9 @@ class Question:
     """:obj:`str`: Instrument of an AkaBlas member"""
     ADDRESS: str = 'address'
     """:obj:`str`: Instrument of an AkaBlas member"""
-    SUPPORTED_ATTRIBUTES = [FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS,
-                            FULL_NAME]
+    SUPPORTED_ATTRIBUTES = [
+        FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS, FULL_NAME
+    ]
     """List[:obj:`str`]: Attributes usable for questions"""
     MAP_ATTRIBUTES = {
         FIRST_NAME: 'first_name',
@@ -150,5 +152,5 @@ class Question:
         ADDRESS: 'address',
     }
     """Dict[:obj:`str`, :obj:`str`]: For each attribute in :attr:`SUPPORTED_TYPES`, the
-    corresponding value is the name of the :class:`akablas.Member` attribute, the member
+    corresponding value is the name of the :class:`components.Member` attribute, the member
     associated with this question must have."""
