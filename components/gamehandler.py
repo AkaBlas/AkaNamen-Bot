@@ -2,16 +2,17 @@
 # -*- coding: utf-8 -*-
 """This module contains the GameHandler class."""
 from components import Question, GameConfigurationUpdate, question_text
-from components.constants import ORCHESTRA_KEY
+from components.constants import ORCHESTRA_KEY, GAME_IN_PROGRESS_KEY
 
 import random
 
+from _collections import defaultdict
 from abc import ABC, abstractmethod
 from threading import Lock
 
 from telegram.ext import (ConversationHandler, CallbackContext, TypeHandler, CommandHandler,
-                          Handler, Dispatcher, Job)
-from telegram import Update, Bot, Poll
+                          Handler, Job, Dispatcher)
+from telegram import Update, Poll
 
 from typing import Dict, List, Optional, TYPE_CHECKING, Callable, Union, Tuple
 if TYPE_CHECKING:
@@ -36,16 +37,19 @@ class AnswerHandler(Handler):
         super().__init__(callback)
         self.game_handler = game_handler
 
-    def check_update(self, update: Update) -> Optional[Tuple[int, bool]]:
-        for chat_id, is_active in self.game_handler.game_in_progress.items():
+    def check_update(self, update: Update) -> Optional[Tuple[int, Question]]:
+        games_in_progress = self.game_handler.games_in_progress
+        for chat_id, is_active in games_in_progress.items():
             if is_active and self.game_handler.current_question[chat_id].check_update(update):
-                result = self.game_handler.current_question[chat_id].check_answer(update)
-                return chat_id, result
+                return chat_id, self.game_handler.current_question[chat_id]
+        return None
 
     def collect_additional_context(self, context: CallbackContext, update: Update,
-                                   dispatcher: Dispatcher, check_result: Tuple[int, bool]) -> None:
-        context.matches = check_result[0]
-        context.answer_is_correct = check_result[1]
+                                   dispatcher: Dispatcher, check_result: Tuple[int,
+                                                                               Question]) -> None:
+        context.games_chat_id = check_result[0]
+        context.question = check_result[1]
+        context.answer_is_correct = context.question.check_answer(update)
 
 
 class GameHandler(ABC, ConversationHandler):
@@ -76,8 +80,6 @@ class GameHandler(ABC, ConversationHandler):
       To end the game, return :attr:`telegram.ext.ConversationHandler.END` from either of the
       mentioned methods.
       Alternatively, you may return :attr:`RECONFIGURING`, to enter the corresponding state.
-    * The :attr:`RECONFIGURING` state works exactly like the :attr:`CONFIGURING` state. Use this
-      state e.g. if you want to allow the user to change the configuration.
     * Any game can be interrupted at any point by the command set as :attr:`exit_command`. For
       multiple choice games, the last poll will be closed in that case.
 
@@ -89,7 +91,6 @@ class GameHandler(ABC, ConversationHandler):
         start_command: The command to be used to start the components.
         exit_command: The command to be used to interrupt the components.
         config_handlers: Handlers for the :attr:`CONFIGURING` state.
-        reconfig_handlers: Handlers for the :attr:`RECONFIGURING` state.
         question_timeout: Close questions after :attr:`question_timeout` seconds. Defaults to ``0``
             , i.e. no timeout.
     """
@@ -98,12 +99,12 @@ class GameHandler(ABC, ConversationHandler):
                  start_command: str,
                  exit_command: str,
                  config_handlers: List[Handler],
-                 reconfig_handlers: Optional[List[Handler]] = None,
                  question_timeout: Optional[int] = None) -> None:
+        self.games_in_progress: Dict[int, bool] = {}
+
         self._start_command = start_command.strip('/').strip(' ')
         self._exit_command = exit_command.strip('/').strip(' ')
         self._config_handlers = config_handlers
-        self._reconfig_handlers = reconfig_handlers or []
 
         if question_timeout is None:
             self._question_timeout = 0
@@ -131,9 +132,6 @@ class GameHandler(ABC, ConversationHandler):
         self._number_of_sent_questions: Dict[int, int] = {}
         self._number_of_sent_questions_lock = Lock()
 
-        self._game_in_progress: Dict[int, bool] = {}
-        self._game_in_progress_lock = Lock()
-
         self._question_timeout_jobs: Dict[int, Job] = {}
         self._question_timeout_jobs_lock = Lock()
 
@@ -145,11 +143,9 @@ class GameHandler(ABC, ConversationHandler):
                     self.config_handlers
                     + [TypeHandler(GameConfigurationUpdate, self._handle_configuration_update)],
                 self.GUESSING: [
-                    AnswerHandler(self, self._handle_answer),
                     TypeHandler(TriggerFirstQuestionUpdate, self._send_first_question),
-                ],
-                self.RECONFIGURING:
-                    self.reconfig_handlers,
+                    AnswerHandler(self, self._handle_answer)
+                ],  # noqa: E122
             },
             fallbacks=[CommandHandler(self._exit_command, self._exit_callback)],
             per_user=False,
@@ -169,11 +165,6 @@ class GameHandler(ABC, ConversationHandler):
     def config_handlers(self) -> List[Handler]:
         """Handlers for the :attr:`CONFIGURING` state."""
         return self._config_handlers
-
-    @property
-    def reconfig_handlers(self) -> List[Handler]:
-        """Handlers for the :attr:`RECONFIGURING` state. May be an empty list."""
-        return self._reconfig_handlers
 
     @property
     def question_timeout(self) -> int:
@@ -244,15 +235,6 @@ class GameHandler(ABC, ConversationHandler):
         with self._number_of_sent_questions_lock:
             return self._number_of_sent_questions
 
-    @property
-    def game_in_progress(self) -> Dict[int, bool]:
-        """
-        For each chat ID ``chat_id``, ``game_in_progress[chat_id]`` indicates, whether a game is
-        currently being played in that chat.
-        """
-        with self._game_in_progress_lock:
-            return self._game_in_progress
-
     @abstractmethod
     def entry_callback(self, update: Update, context: CallbackContext) -> None:
         """
@@ -266,7 +248,7 @@ class GameHandler(ABC, ConversationHandler):
             context: The :class:`telegram.ext.CallbackContext`.
         """
 
-    def handle_answer(self, update: Update, context: CallbackContext, correct: bool):
+    def handle_answer(self, update: Update, context: CallbackContext):
         """
         Will by called, when a user gives an answer to a question. Override to e.g. update the
         users score.
@@ -274,82 +256,106 @@ class GameHandler(ABC, ConversationHandler):
         Args:
             update: The :class:`telegram.Update`.
             context: The :class:`telegram.ext.CallbackContext`.
-            correct: Whether the answer given by ``update`` was correct or not.
         """
         pass
 
-    def end_callback(self):
+    def end_callback(self, update: Update, context: CallbackContext):
         """
         Will by called, after handling the last answer of the components. Override to e.g. show the
         users score.
+
+        Args:
+            update: The :class:`telegram.Update`.
+            context: The :class:`telegram.ext.CallbackContext`.
         """
         pass
 
-    def exit_callback(self):
+    def exit_callback(self, update: Update, context: CallbackContext):
         """
         Will by called, if the game is interrupted by the user.
+
+        Args:
+            update: The :class:`telegram.Update`.
+            context: The :class:`telegram.ext.CallbackContext`.
         """
         pass
 
     def _entry_callback(self, update: Update, context: CallbackContext) -> str:
+        if GAME_IN_PROGRESS_KEY in context.bot_data:
+            self.games_in_progress = context.bot_data[GAME_IN_PROGRESS_KEY]
+            games_in_progress = self.games_in_progress
+        else:
+            games_in_progress = defaultdict(lambda: False)
+            context.bot_data[GAME_IN_PROGRESS_KEY] = games_in_progress
+            self.games_in_progress = games_in_progress
+
         chat_id = update.effective_chat.id
-        if self.game_in_progress[chat_id]:
+        if games_in_progress.get(chat_id, False):
             update.message.reply_text('Es kann leider immer nur ein Spiel laufen.')
             return self.END
         else:
-            self.game_in_progress[chat_id] = True
+            games_in_progress[chat_id] = True
+            self.number_of_sent_questions[chat_id] = 0
             self.entry_callback(update, context)
             return self.CONFIGURING
 
     def _exit_callback(self, update: Update, context: CallbackContext) -> int:
-        chat_id = update.effective_chat.id
+        chat_id = context.games_chat_id
+        if chat_id is None:
+            raise ValueError('I need a chat_id in GameHandler._exit_callback!')
         if self.multiple_choice[chat_id]:
             context.bot.stop_poll(chat_id=chat_id,
                                   message_id=self.current_question_message_id[chat_id])
-        self.exit_callback()
+        context.games_in_progress[chat_id] = False
+        self.exit_callback(update, context)
         return self.END
 
     def _handle_configuration_update(self, update: GameConfigurationUpdate,
                                      context: CallbackContext) -> str:
+        print('IM HERE YOU BICH')
         chat_id = update.chat_id
         attrs = [a for a in dir(update) if a != 'chat_id']
         for attr in attrs:
             if hasattr(self, f'_{attr}'):
-                self_attr = getattr(self, f'_{attr}')
                 # get the lock
                 with getattr(self, f'_{attr}_lock'):
                     # Set the attribute for the correct chat_id
+                    self_attr = getattr(self, f'_{attr}')
                     self_attr[chat_id] = getattr(update, attr)
-        context.job_queue.run_once(TriggerFirstQuestionUpdate.trigger_first_question,
-                                   0.1,
-                                   context=chat_id)
+        job = context.job_queue.run_once(TriggerFirstQuestionUpdate.trigger_first_question,
+                                         0.1,
+                                         context=chat_id)
+        with self._question_timeout_jobs_lock:
+            self._question_timeout_jobs[chat_id] = job
         return self.GUESSING
 
-    def trigger_question_timeout(self, context: CallbackContext):
-        chat_id = 1
-        kwargs = {}
+    def _send_or_end(self, chat_id: int, update: Update, context: CallbackContext) -> str:
         if self.number_of_sent_questions[chat_id] == self.number_of_questions[chat_id]:
-            self.end_callback()
+            self.end_callback(update, context)
             return self.END
         else:
             if self.multiple_choice[chat_id]:
                 context.bot.stop_poll(chat_id=chat_id,
                                       message_id=self.current_question_message_id[chat_id])
-            self.send_next_question(**kwargs)
+            self._send_next_question(chat_id, update, context)
+            return self.GUESSING
 
-    def send_next_question(self, chat_id: int, orchestra: 'Orchestra', bot: Bot,
-                           **kwargs) -> Question:
-        """
-        Generates a question for the game played in the specified chat and sends it.
+    def _trigger_question_timeout(self, context: CallbackContext):
+        update = context.job.context[0]
+        callback_context = context.job.context[1]
 
-        Args:
-            chat_id: ID of the chat the question is constructed for.
-            orchestra: The orchestra to build the question from.
-            bot: The bot to send the message with.
+        if isinstance(update, TriggerFirstQuestionUpdate):
+            chat_id = update.chat_id
+        else:
+            chat_id = callback_context.games_chat_id
 
-        Returns:
-            The generated question.
-        """
+        self._send_or_end(chat_id, update, callback_context)
+
+    def _send_next_question(self, chat_id: int, update: Union[Update, TriggerFirstQuestionUpdate],
+                            context: CallbackContext) -> Question:
+        bot = context.bot
+        orchestra = context.bot_data[ORCHESTRA_KEY]
+
         question_attribute = random.choice(self.question_attributes[chat_id])
 
         if question_attribute == Question.ADDRESS:
@@ -373,7 +379,7 @@ class GameHandler(ABC, ConversationHandler):
 
         # Generate the question text
         multiple_choice = self.multiple_choice[chat_id]
-        question = question_text(member, question_attribute, hint_attribute, multiple_choice)
+        question_txt = question_text(member, question_attribute, hint_attribute, multiple_choice)
 
         if multiple_choice:
             potential_answer_members = [
@@ -389,12 +395,12 @@ class GameHandler(ABC, ConversationHandler):
             answer_members = random.sample(potential_answer_members, 3)
 
             all_members = answer_members + [member]
-            shuffled = random.shuffle(all_members)
-            correct_option_id = shuffled.index(member)
-            options = [getattr(m, hint_attribute) for m in shuffled]
+            random.shuffle(all_members)
+            correct_option_id = all_members.index(member)
+            options = [getattr(m, hint_attribute) for m in all_members]
 
             message = bot.send_poll(chat_id=chat_id,
-                                    question=question,
+                                    question=question_txt,
                                     options=options,
                                     is_anonymous=False,
                                     type=Poll.QUIZ,
@@ -402,7 +408,7 @@ class GameHandler(ABC, ConversationHandler):
 
             question = Question(member=member, attribute=question_attribute, poll=message.poll)
         else:
-            message = bot.send_message(chat_id=chat_id, text=question)
+            message = bot.send_message(chat_id=chat_id, text=question_txt)
             question = Question(member=member, attribute=question_attribute, multiple_choice=False)
 
         self.number_of_sent_questions[chat_id] += 1
@@ -410,50 +416,32 @@ class GameHandler(ABC, ConversationHandler):
         self.current_question_message_id[chat_id] = message.message_id
 
         with self._question_timeout_jobs_lock:
-            if self.question_timeout[chat_id] > 0:
+            if self.question_timeout > 0:
                 self._question_timeout_jobs[chat_id] = context.job_queue.run_once(
                     self._trigger_question_timeout,
-                    self.question_timeout[chat_id],
-                    context=chat_id)
+                    self.question_timeout,
+                    context=(update, context))
         return question
 
-    @staticmethod
-    def _collect_kwargs(update: Union[Update, TriggerFirstQuestionUpdate],
-                        context: CallbackContext) -> Dict[str, Union[int, 'Orchestra', Bot, bool]]:
-        if isinstance(update, Update):
-            chat_id = context.matches
-            correct = context.answer_is_correct
-        else:
-            chat_id = update.chat_id
-            correct = False
-
-        orchestra = context.bot_data[ORCHESTRA_KEY]
-        bot = context.bot
-        return {'chat_id': chat_id, 'orchestra': orchestra, 'bot': bot, 'correct': correct}
-
-    def _send_first_question(self, update: Update, context: CallbackContext):
-        self.send_next_question(**self._collect_kwargs(update, context))
+    def _send_first_question(self, update: TriggerFirstQuestionUpdate, context: CallbackContext):
+        self._send_next_question(update.chat_id, update, context)
 
     def _handle_answer(self, update: Update, context: CallbackContext) -> str:
-        kwargs = self._collect_kwargs(update, context)
-        chat_id = kwargs['chat_id']
+        chat_id = context.games_chat_id
 
-        self.handle_answer(update, context, kwargs['correct'])
+        if chat_id is None:
+            raise ValueError('I need a chat_id in GameHandler._handle_answer!')
 
-        if self.number_of_sent_questions[chat_id] == self.number_of_questions[chat_id]:
-            self.end_callback()
-            return self.END
-        else:
-            if self.multiple_choice[chat_id]:
-                context.bot.stop_poll(chat_id=chat_id,
-                                      message_id=self.current_question_message_id[chat_id])
-            self.send_next_question(**kwargs)
+        with self._question_timeout_jobs_lock:
+            timeout_job = self._question_timeout_jobs.pop(chat_id, None)
+            if timeout_job is not None:
+                timeout_job.schedule_removal()
+
+        self.handle_answer(update, context)
+        return self._send_or_end(chat_id, update, context)
 
     # States
     CONFIGURING = 'configuring'
     """:obj:`str`: Configuration state of the components."""
     GUESSING = 'guessing'
     """:obj:`str`: Guessing state of the game, i.e. the state where the questions are answered."""
-    RECONFIGURING = 'reconfiguring'
-    """:obj:`str`: Reconfiguration state of the components. Use this state, if you need to collect user
-    input between questions."""

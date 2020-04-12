@@ -50,7 +50,7 @@ class GameConfigurationUpdate(SimpleNamespace):
             raise ValueError('Asking for addresses as free text is only supported for full name '
                              'hints.')
 
-        self.chat_id = chat_id
+        self.chat_id: int = chat_id
         self.multiple_choice = multiple_choice
         self.question_attributes = question_attributes or Question.SUPPORTED_ATTRIBUTES
         self.hint_attributes = hint_attributes or Question.SUPPORTED_ATTRIBUTES

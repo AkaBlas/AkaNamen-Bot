@@ -15,7 +15,6 @@ from .member import Member
 from .gender import Gender
 from .orchestra import Orchestra
 from .question import Question
-from .gamecontext import GameContext
 from .texts import question_text
 from .gameconfigurationupdate import GameConfigurationUpdate
 from .gamehandler import GameHandler
@@ -52,7 +51,6 @@ __all__ = [
     # Game related
     'UserScore',
     'Score',
-    'GameContext',
     'GameHandler',
     'Question',
     'GameConfigurationUpdate',
