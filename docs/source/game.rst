@@ -3,6 +3,7 @@ Game related components
 
 .. toctree::
 
+    components.gamecontext
     components.gameconfigurationupdate
     components.gamehandler
     components.question
