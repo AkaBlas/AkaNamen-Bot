@@ -16,8 +16,6 @@ from .gender import Gender
 from .orchestra import Orchestra
 from .question import Question
 from .texts import question_text
-from .gameconfigurationupdate import GameConfigurationUpdate
-from .gamehandler import GameHandler
 
 __all__ = [
     # AkaBlas related
@@ -51,9 +49,7 @@ __all__ = [
     # Game related
     'UserScore',
     'Score',
-    'GameHandler',
     'Question',
-    'GameConfigurationUpdate',
     'question_text',
     # Utils related
     'PicklableBase',

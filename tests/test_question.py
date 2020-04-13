@@ -12,6 +12,7 @@ class TestQuestion:
                     first_name='first',
                     last_name='last',
                     nickname='nickname',
+                    photo_file_id='file_id',
                     gender=Gender.DIVERSE,
                     date_of_birth=dt.date(dt.date.today().year - 21, 12, 31),
                     instruments=instruments.AltoSaxophone(),
@@ -20,10 +21,11 @@ class TestQuestion:
 
     def test_init(self):
         for attr in Question.SUPPORTED_ATTRIBUTES:
-            q = Question(self.member, attr, multiple_choice=False)
-            assert q.member == self.member
-            assert q.attribute == attr
-            assert q.multiple_choice is False
+            if attr != Question.PHOTO:
+                q = Question(self.member, attr, multiple_choice=False)
+                assert q.member == self.member
+                assert q.attribute == attr
+                assert q.multiple_choice is False
 
             q = Question(self.member, attr, poll=self.poll)
             assert q.member == self.member
@@ -46,9 +48,13 @@ class TestQuestion:
         with pytest.raises(ValueError, match='Attribute not supported'):
             Question(member, 'attribute')
 
+        with pytest.raises(ValueError, match='Photos are'):
+            Question(member, Question.PHOTO, multiple_choice=False)
+
         for attr in Question.SUPPORTED_ATTRIBUTES:
-            with pytest.raises(ValueError, match='the required attribute'):
-                Question(member, attr, multiple_choice=False)
+            if attr != Question.PHOTO:
+                with pytest.raises(ValueError, match='the required attribute'):
+                    Question(member, attr, multiple_choice=False)
 
     def test_class_attributes(self):
         assert isinstance(Question.SUPPORTED_ATTRIBUTES, list)
@@ -68,7 +74,7 @@ class TestQuestion:
         valid_update = Update(1, message=Message(1, None, None, None, text='text'))
         invalid_update = Update(1, poll_answer=PollAnswer(123, None, [1]))
 
-        for attr in Question.SUPPORTED_ATTRIBUTES:
+        for attr in [a for a in Question.SUPPORTED_ATTRIBUTES if a != Question.PHOTO]:
             q = Question(self.member, attr, multiple_choice=False)
             assert q.check_update(valid_update)
             assert not q.check_update(invalid_update)

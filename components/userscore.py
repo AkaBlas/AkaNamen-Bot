@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the UserScore class."""
+from __future__ import annotations
+
 from components import PicklableBase
 from components import Score
 
@@ -35,7 +37,7 @@ class UserScore(PicklableBase):
         self._high_score_lock = Lock()
         self._high_score: Dict[dt.date, Score] = defaultdict(self._default_factory)
 
-    def _default_factory(self):
+    def _default_factory(self: UserScore) -> Score:
         return Score(member=self.member)
 
     def __getitem__(self, date: dt.date) -> Score:

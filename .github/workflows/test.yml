@@ -98,12 +98,13 @@ jobs:
         mypy --version
     - name: Running mypy on changed files and save report
       run: |
-        python -m mypy -p akablas -p bot --cobertura-xml-report . --html-report mypy-report || true
+        python -m mypy -p components -p bot --cobertura-xml-report . --html-report mypy-report || true
       shell: bash
     - name: Computing typing coverage
       run: |
         diff-cover --fail-under=100 cobertura.xml --html-report typing_coverage.html
       shell: bash
+      continue-on-error: True
     - name: Uploading coverage report as html
       uses: actions/upload-artifact@v1
       if: always()

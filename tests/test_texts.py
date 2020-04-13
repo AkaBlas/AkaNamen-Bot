@@ -4,7 +4,7 @@ import datetime as dt
 from components import Member, Gender, instruments, Question, question_text
 
 
-class TestTexsts:
+class TestTexts:
     member = Member(1,
                     first_name='first',
                     last_name='last',
@@ -14,8 +14,8 @@ class TestTexsts:
                     instruments=instruments.AltoSaxophone(),
                     address='Universitätsplatz 2, 38106 Braunschweig')
 
-    def test_all(self):
-        for q in Question.SUPPORTED_ATTRIBUTES:
+    def test_all_but_photo(self):
+        for q in [a for a in Question.SUPPORTED_ATTRIBUTES if a != Question.PHOTO]:
             for h in Question.SUPPORTED_ATTRIBUTES:
                 if h != q:
                     for m in [True, False]:
@@ -24,6 +24,17 @@ class TestTexsts:
                         assert text != ''
                         assert '{' not in text
                         assert '}' not in text
+
+    def test_photo(self):
+        q = Question.PHOTO
+        for h in [a for a in Question.SUPPORTED_ATTRIBUTES if a != q]:
+            with pytest.raises(ValueError, match='Photos are'):
+                text = question_text(self.member, q, h, False)
+
+            text = question_text(self.member, q, h, True)
+            assert text != ''
+            assert '{' not in text
+            assert '}' not in text
 
     def test_errors(self):
         with pytest.raises(ValueError, match='Unsupported'):

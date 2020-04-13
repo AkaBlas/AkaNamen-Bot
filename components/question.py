@@ -44,6 +44,9 @@ class Question:
             if poll is None or poll.correct_option_id is None:
                 raise ValueError('The poll must be a quiz poll with an correct_option_id.')
 
+        if attribute == self.PHOTO and not multiple_choice:
+            raise ValueError('Photos are supported only as multiple choice.')
+
         if bool(getattr(member, self.MAP_ATTRIBUTES[attribute])) is False:
             raise ValueError('The member doesn\'t have the required attribute.')
 
@@ -137,8 +140,10 @@ class Question:
     """:obj:`str`: Instrument of an AkaBlas member"""
     ADDRESS: str = 'address'
     """:obj:`str`: Instrument of an AkaBlas member"""
+    PHOTO: str = 'photo'
+    """:obj:`str`: Photo of an AkaBlas member"""
     SUPPORTED_ATTRIBUTES = [
-        FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS, FULL_NAME
+        FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS, FULL_NAME, PHOTO
     ]
     """List[:obj:`str`]: Attributes usable for questions"""
     MAP_ATTRIBUTES = {
@@ -150,6 +155,7 @@ class Question:
         AGE: 'age',
         INSTRUMENT: 'instruments',
         ADDRESS: 'address',
+        PHOTO: 'photo_file_id',
     }
     """Dict[:obj:`str`, :obj:`str`]: For each attribute in :attr:`SUPPORTED_TYPES`, the
     corresponding value is the name of the :class:`components.Member` attribute, the member
