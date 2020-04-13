@@ -19,6 +19,28 @@ class TestInstruments:
 
     @pytest.mark.parametrize('cls',
                              [i for i in instruments.__dict__.values() if isinstance(i, type)])
+    def test_from_string_by_name(self, cls):
+        assert Instrument.from_string(cls.name) == cls()
+
+    @pytest.mark.parametrize('abbr, expected', [('flö', Flute()), ('kla', Clarinet()),
+                                                ('obe', Oboe()), ('hlz', WoodwindInstrument()),
+                                                ('sax', Saxophone()), ('asx', AltoSaxophone()),
+                                                ('tsx', TenorSaxophone()), ('fag', Bassoon()),
+                                                ('trp', Trumpet()), ('flü', Flugelhorn()),
+                                                ('teh', BaritoneHorn()), ('hrn', Horn()),
+                                                ('pos', Trombone()), ('tub', Tuba()),
+                                                ('tpd', PercussionInstrument()), ('git', Guitar()),
+                                                ('bss', BassGuitar())])
+    def test_from_string_by_abbreviation(self, abbr, expected):
+        assert Instrument.from_string(abbr) == expected
+
+    @pytest.mark.parametrize('string', ['unknown', 'Geige', 'Violin', 'Brennholz'])
+    def test_from_string_unknown(self, string):
+        with pytest.raises(ValueError, match='Unknown'):
+            Instrument.from_string(string)
+
+    @pytest.mark.parametrize('cls',
+                             [i for i in instruments.__dict__.values() if isinstance(i, type)])
     def test_global(self, cls):
         instrument = cls()
         assert isinstance(instrument, Instrument)

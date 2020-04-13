@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the instrument classes."""
+from __future__ import annotations
 import sys
+import inspect
 
 
 class Instrument:
@@ -26,6 +28,61 @@ class Instrument:
         Trupmet() == 'Saxophon' # False
     """
     name: str = ''
+
+    @staticmethod
+    def from_string(string: str) -> Instrument:
+        """
+        Given a string representation or an AkaBlas-style abbreviation of an instrument, this will
+        return a corresponding :class:`components.Instrument` instance.
+
+        Args:
+            string: The string.
+
+        Raises:
+            ValueError: If the abbreviation is not known.
+        """
+        string = string.lower().strip(' ')
+
+        if string == 'flö':
+            return Flute()
+        elif string == 'kla':
+            return Clarinet()
+        elif string == 'obe':
+            return Oboe()
+        elif string == 'hlz':
+            return WoodwindInstrument()
+        elif string == 'sax':
+            return Saxophone()
+        elif string == 'asx':
+            return AltoSaxophone()
+        elif string == 'tsx':
+            return TenorSaxophone()
+        elif string == 'fag':
+            return Bassoon()
+        elif string == 'trp':
+            return Trumpet()
+        elif string in ['flü', Flugelhorn.name.lower()]:
+            return Flugelhorn()
+        elif string == 'teh':
+            return BaritoneHorn()
+        elif string == 'hrn':
+            return Horn()
+        elif string == 'pos':
+            return Trombone()
+        elif string == 'tub':
+            return Tuba()
+        elif string == 'tpd':
+            return PercussionInstrument()
+        elif string == 'git':
+            return Guitar()
+        elif string == 'bss':
+            return BassGuitar()
+        else:
+            cls_members = inspect.getmembers(sys.modules[__name__], inspect.isclass)
+            for cls in cls_members:
+                if string == cls[1].name.lower():
+                    return cls[1]()
+            raise ValueError('Unknown instrument description.')
 
     def __str__(self) -> str:
         return self.name
