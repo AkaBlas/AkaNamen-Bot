@@ -5,7 +5,7 @@ from components import (Instrument, WoodwindInstrument, BrassInstrument, HighBra
                         LowBrassInstrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
                         Saxophone, SopranoSaxophone, AltoSaxophone, TenorSaxophone,
                         BaritoneSaxophone, Euphonium, BaritoneHorn, Baritone, Trombone, Tuba,
-                        Trumpet, Flugelhorn, Horn, Drums)
+                        Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar)
 
 
 class TestInstruments:
@@ -117,3 +117,14 @@ class TestInstruments:
         assert not instrument > PercussionInstrument()
         assert hash(instrument) != hash(PercussionInstrument())
         assert instrument == Drums()
+
+    def test_guitar(self):
+        instrument = BassGuitar()
+        assert isinstance(instrument, Guitar)
+        assert instrument <= Guitar()
+        assert Guitar() >= instrument
+        assert instrument < Guitar()
+        assert Guitar() > instrument
+        assert not instrument > Guitar()
+        assert hash(instrument) != hash(Guitar())
+        assert instrument == BassGuitar()

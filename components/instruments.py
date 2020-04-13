@@ -221,3 +221,17 @@ class Drums(PercussionInstrument):
     The drums.
     """
     name = 'Schlagzeug'
+
+
+class Guitar(Instrument):
+    """
+    A guitar.
+    """
+    name = 'Gitarre'
+
+
+class BassGuitar(Guitar):
+    """
+    A bass guitar.
+    """
+    name = 'Bass-Gitarre'
