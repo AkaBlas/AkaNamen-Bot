@@ -1,19 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Member class."""
+from __future__ import annotations
+
 from components import Instrument
 from components.helpers import setlocale
 from .userscore import UserScore
 
 import datetime as dt
+import numpy as np
+import pandas as pd
 import vobject
+import requests
+import shutil
+import re
 
 from geopy import Photon, distance
-from tempfile import TemporaryFile
-from typing import Optional, Union, List, Tuple, IO
+from tempfile import TemporaryFile, NamedTemporaryFile
+from configparser import ConfigParser
+from collections import defaultdict
+from camelot import read_pdf
+from typing import Optional, Union, List, Tuple, IO, Dict
 
 from fuzzywuzzy import fuzz
-from telegram import Bot
+from telegram import Bot, User
 
 
 class Member:
@@ -129,7 +139,6 @@ class Member:
         """
         if bool(address and coordinates) or not bool(address or coordinates):
             raise ValueError('Exactly one of the parameters must be passed!')
-
         if address:
             location = self._geo_locator.geocode(address)
         else:
@@ -255,7 +264,7 @@ class Member:
             if self.full_name:
                 vcard.add('fn').value = self.full_name.replace('"', '')
             else:
-                vcard.add('fn').value
+                vcard.add('fn').value = ''
             vcard.add('n').value = vobject.vcard.Name(family=self.last_name or '',
                                                       given=self.first_name or '')
             vcard.add('nickname').value = self.nickname or ''
@@ -421,3 +430,153 @@ class Member:
             return None
 
         return self.date_of_birth.strftime('%d.%m.')
+
+    @staticmethod
+    def _get_akadressen():
+
+        # A bunch of helpers to parse the downloaded data
+        leading_whitespace_pattern = re.compile(r'\b(?=\w)(\w) (\w)')
+        trailing_whitespace_pattern = re.compile(r'(\w) ([^0-9])\b(?<=\w)')
+
+        def string_to_date(string: Union[str, np.nan]) -> Optional[dt.date]:
+            if string is np.nan:
+                return None
+            with setlocale('de_DE.UTF-8'):
+                try:
+                    out = dt.datetime.strptime(string, '%d. %b. %y').date()
+                except ValueError:
+                    out = dt.datetime.strptime(string, '%d. %b. %Y').date()
+            return out
+
+        def string_to_instrument(string: str) -> Optional[Instrument]:
+            try:
+                return Instrument.from_string(string)
+            except ValueError:
+                return None
+
+        def remove_whitespaces(string: str) -> str:
+            string = re.sub(leading_whitespace_pattern, r'\g<1>\g<2>', string)
+            return re.sub(trailing_whitespace_pattern, r'\g<1>\g<2>', string)
+
+        def extract_nickname(string: str) -> Optional[str]:
+            if '(' in string:
+                return string.split('(')[0].strip(' ')
+            else:
+                return None
+
+        def remove_nickname(string: str) -> str:
+            if '(' in string:
+                parts = string.split('(')
+                string = ' '.join(parts[1:]).replace(')', '')
+            return string
+
+        def expand_brunswick(address: str) -> str:
+            address = remove_whitespaces(address)
+            return address.replace('BS', 'Braunschweig')
+
+        def first_name(string: str) -> str:
+            names = string.split(' ')
+            if len(names) > 2:
+                return ' '.join(names[:-1])
+            else:
+                return names[0]
+
+        def last_name(string: str) -> str:
+            return string.split(' ')[-1]
+
+        # Actually get the file
+        config = ConfigParser()
+        config.read('bot.ini')
+        url = config['akadressen']['url']
+        username = config['akadressen']['username']
+        password = config['akadressen']['password']
+
+        with NamedTemporaryFile(suffix='.pdf') as akadressen:
+            response = requests.get(url, auth=(username, password))
+            if response.status_code:
+                response.raw.decode_content = True
+                shutil.copyfileobj(response.raw, akadressen)
+
+                # Read tables from PDF
+                tables = read_pdf(akadressen.name, flavor='stream', pages='all')
+                # Convert to pandas DataFrame
+                df = pd.concat([t.df for t in tables])
+                # Rename columns
+                df = df.rename(columns={
+                    0: 'name',
+                    1: 'address',
+                    2: 'phone',
+                    3: 'date_of_birth',
+                    4: 'instrument'
+                })
+                # Drop empty lines
+                df = df.replace(r'^\s*$', np.nan, regex=True)
+                df = df.dropna(thresh=4)
+
+                # Parse all the data
+                df['date_of_birth'] = df['date_of_birth'].apply(string_to_date)
+                df['instrument'] = df['instrument'].apply(string_to_instrument)
+                df['address'] = df['address'].apply(expand_brunswick)
+                df['name'] = df['name'].apply(remove_whitespaces)
+                df['nickname'] = df['name'].apply(extract_nickname)
+                df['name'] = df['name'].apply(remove_nickname)
+                df['first_name'] = df['name'].apply(first_name)
+                df['last_name'] = df['name'].apply(last_name)
+
+                return df
+            else:
+                raise Exception('Could not retrieve AkaDressen.')
+
+    _AKADRESSEN: Optional[pd.DataFrame] = None
+    _AKADRESSEN_CACHE_TIME: Optional[dt.date] = None
+
+    @classmethod
+    def guess_member(cls, user: User) -> Optional[List[Member]]:
+        """
+        Tries to guess a :class:`components.Member` from the AkaDressen based on the Telegram
+        users attributes. May return no or several hits.
+
+        Args:
+            user: A Telegram user.
+        """
+
+        def generous_ration(str1: Optional[str], str2: Optional[str]) -> float:
+            if str1 is None or str2 is None:
+                return 0.0
+            str1 = str1.lower().strip(' ')
+            str2 = str2.lower().strip(' ')
+            return max(fuzz.ratio(str1, str2), fuzz.partial_ratio(str1, str2),
+                       fuzz.token_set_ratio(str1, str2))
+
+        # Refresh AkaDressen
+        if (cls._AKADRESSEN_CACHE_TIME is None or dt.date.today() > cls._AKADRESSEN_CACHE_TIME
+                or cls._AKADRESSEN is None):
+            cls._AKADRESSEN = cls._get_akadressen()
+
+        ranking: Dict[int, float] = defaultdict(lambda: 0.0)
+        count = 0
+        for row in cls._AKADRESSEN.itertuples(index=True):
+            ranking[count] = 0
+            for attr_1 in [user.first_name, user.last_name, user.username]:
+                for attr_2 in [row.first_name, row.last_name, row.nickname]:
+                    ranking[count] += generous_ration(attr_1, attr_2)
+
+            count += 1
+
+        max_ranking = max(ranking.values())
+        if max_ranking == 0:
+            return None
+
+        list_df = list(cls._AKADRESSEN.itertuples(index=False))
+        all_max_rankings = [list_df[idx] for idx in ranking if ranking[idx] == max_ranking]
+        members = []
+        for row in all_max_rankings:
+            members.append(
+                Member(user_id=user.id,
+                       first_name=row.first_name,
+                       last_name=row.last_name,
+                       nickname=row.nickname,
+                       address=row.address,
+                       instruments=row.instrument,
+                       date_of_birth=row.date_of_birth))
+        return members
