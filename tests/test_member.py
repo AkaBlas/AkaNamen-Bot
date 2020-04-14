@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 import pytest
 import datetime as dt
+import responses
+import pandas as pd
+from configparser import ConfigParser
 from geopy import Photon
 from components import Gender, Member, instruments, UserScore
+from telegram import User
 
 
 @pytest.fixture(scope='function')
@@ -167,10 +171,11 @@ class TestMember:
         assert member.full_name == ' '.join([self.first_name, self.last_name])
 
         member.nickname = self.nickname
-        assert member.full_name == ' '.join([self.first_name, self.nickname, self.last_name])
+        assert member.full_name == ' '.join(
+            [self.first_name, f'"{self.nickname}"', self.last_name])
 
         member.first_name = None
-        assert member.full_name == ' '.join([self.nickname, self.last_name])
+        assert member.full_name == ' '.join([f'"{self.nickname}"', self.last_name])
 
     def test_vcard_filename(self, member):
         member.first_name = self.first_name
@@ -182,6 +187,7 @@ class TestMember:
             member.vcard(bot)
 
         member.allow_contact_sharing = True
+        member.nickname = 'test'
         with member.vcard(bot) as vcard:
             vcard_string = vcard.read().decode('utf-8')
             assert 'ADR' not in vcard_string
@@ -254,6 +260,94 @@ class TestMember:
         member.last_name = 'Jochen'
         assert 0 <= member.compare_last_name_to(test_string) <= 1
         assert member.compare_last_name_to(member.last_name) == pytest.approx(1)
+
+    def test_to_string(self, member):
+        assert member.to_str() == ('Name: -\nGeburtstag: -\nInstrument/e: -\nAdresse: -\n'
+                                   'Mobil: -\nPhoto: -')
+        member.first_name = self.first_name
+        member.nickname = self.nickname
+        member.last_name = self.last_name
+        member.set_address(self.address)
+        member.date_of_birth = self.date_of_birth
+        member.photo_file_id = self.photo_file_id
+        member.phone_number = self.phone_number
+        member.instruments = [instruments.Tuba(), instruments.Trumpet()]
+        assert member.to_str() == ('Name: first_name "nickname" last_name\n'
+                                   'Geburtstag: 10. August 1996\n'
+                                   'Instrument/e: Tuba, Trompete\n'
+                                   'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
+                                   'Mobil: phone_number\n'
+                                   'Photo: 🖼')
+
+    @responses.activate
+    def test_guess_member(self, monkeypatch):
+        config = ConfigParser()
+        config.read('bot.ini')
+        url = config['akadressen']['url']
+        with open('tests/data/akadressen.pdf', 'rb') as akadressen:
+            responses.add(responses.GET,
+                          url,
+                          body=akadressen.read(),
+                          stream=True,
+                          status=200,
+                          adding_headers={'Transfer-Encoding': 'chunked'})
+
+            assert Member._AKADRESSEN_CACHE_TIME is None
+            assert Member._AKADRESSEN is None
+            user_1 = User(1, is_bot=False, first_name='John', last_name='Doe')
+            members = Member.guess_member(user_1)
+            assert Member._AKADRESSEN_CACHE_TIME == dt.date.today()
+            assert isinstance(Member._AKADRESSEN, pd.DataFrame)
+            assert len(members) == 1
+            member = members[0]
+            assert member.user_id == 1
+            assert member.last_name == 'Doe'
+            assert member.first_name == 'John'
+            assert member.nickname == 'Jonny'
+            assert member.date_of_birth == dt.date(2000, 1, 1)
+            assert member.instruments == [instruments.Trumpet()]
+            assert member.address == 'Münzstraße 5, 38100 Braunschweig'
+
+            Member._AKADRESSEN = None
+            user_2 = User(2, is_bot=False, first_name='Marcel', last_name='Marcel')
+            members = Member.guess_member(user_2)
+            assert Member._AKADRESSEN_CACHE_TIME == dt.date.today()
+            assert isinstance(Member._AKADRESSEN, pd.DataFrame)
+            assert len(members) == 1
+            member = members[0]
+            assert member.user_id == 2
+            assert member.last_name == 'Marcel'
+            assert member.first_name == 'Marcel'
+            assert member.nickname is None
+            assert member.date_of_birth == dt.date(2000, 5, 1)
+            assert member.instruments == []
+            assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
+
+            test_flag = False
+
+            def _get_akadressen(*args, **kwargs):
+                nonlocal test_flag
+                test_flag = True
+
+            monkeypatch.setattr(Member, '_get_akadressen', _get_akadressen)
+
+            user_3 = User(3, is_bot=False, first_name='Test', username='Das Brot')
+            members = Member.guess_member(user_3)
+            assert Member._AKADRESSEN_CACHE_TIME == dt.date.today()
+            assert isinstance(Member._AKADRESSEN, pd.DataFrame)
+            assert not test_flag
+            assert len(members) == 1
+            member = members[0]
+            assert member.user_id == 3
+            assert member.last_name == 'Zufall'
+            assert member.first_name == 'Rainer'
+            assert member.nickname == 'Das Brot'
+            assert member.date_of_birth == dt.date(2007, 7, 5)
+            assert member.instruments == [instruments.Flute()]
+            assert member.address == 'Bültenweg 74-75, 38106 Braunschweig'
+
+            user_4 = User(1, is_bot=False, first_name=None)
+            assert Member.guess_member(user_4) is None
 
     def test_equality(self, member):
         a = member

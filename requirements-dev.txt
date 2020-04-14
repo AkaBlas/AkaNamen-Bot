@@ -6,3 +6,4 @@ mypy==0.761
 pre-commit
 pytest==4.2.0
 attrs==19.1.0
+responses
