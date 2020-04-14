@@ -167,10 +167,11 @@ class TestMember:
         assert member.full_name == ' '.join([self.first_name, self.last_name])
 
         member.nickname = self.nickname
-        assert member.full_name == ' '.join([self.first_name, self.nickname, self.last_name])
+        assert member.full_name == ' '.join(
+            [self.first_name, f'"{self.nickname}"', self.last_name])
 
         member.first_name = None
-        assert member.full_name == ' '.join([self.nickname, self.last_name])
+        assert member.full_name == ' '.join([f'"{self.nickname}"', self.last_name])
 
     def test_vcard_filename(self, member):
         member.first_name = self.first_name
@@ -182,6 +183,7 @@ class TestMember:
             member.vcard(bot)
 
         member.allow_contact_sharing = True
+        member.nickname = 'test'
         with member.vcard(bot) as vcard:
             vcard_string = vcard.read().decode('utf-8')
             assert 'ADR' not in vcard_string
@@ -254,6 +256,24 @@ class TestMember:
         member.last_name = 'Jochen'
         assert 0 <= member.compare_last_name_to(test_string) <= 1
         assert member.compare_last_name_to(member.last_name) == pytest.approx(1)
+
+    def test_to_string(self, member):
+        assert member.to_str() == ('Name: -\nGeburtstag: -\nInstrument/e: -\nAdresse: -\n'
+                                   'Mobil: -\nPhoto: -')
+        member.first_name = self.first_name
+        member.nickname = self.nickname
+        member.last_name = self.last_name
+        member.set_address(self.address)
+        member.date_of_birth = self.date_of_birth
+        member.photo_file_id = self.photo_file_id
+        member.phone_number = self.phone_number
+        member.instruments = [instruments.Tuba(), instruments.Trumpet()]
+        assert member.to_str() == ('Name: first_name "nickname" last_name\n'
+                                   'Geburtstag: 10. August 1996\n'
+                                   'Instrument/e: Tuba, Trompete\n'
+                                   'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
+                                   'Mobil: phone_number\n'
+                                   'Photo: 🖼')
 
     def test_equality(self, member):
         a = member
