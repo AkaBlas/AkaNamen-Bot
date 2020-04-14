@@ -492,11 +492,12 @@ class Member:
         username = config['akadressen']['username']
         password = config['akadressen']['password']
 
-        with NamedTemporaryFile(suffix='.pdf') as akadressen:
+        with NamedTemporaryFile(suffix='.pdf', delete=False) as akadressen:
             response = requests.get(url, auth=(username, password), stream=True)
             if response.status_code == 200:
                 response.raw.decode_content = True
                 shutil.copyfileobj(response.raw, akadressen)
+                akadressen.close()
 
                 # Read tables from PDF
                 tables = read_pdf(akadressen.name, flavor='stream', pages='all')
