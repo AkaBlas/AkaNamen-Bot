@@ -294,9 +294,9 @@ class TestMember:
             assert Member._AKADRESSEN_CACHE_TIME is None
             assert Member._AKADRESSEN is None
             user_1 = User(1, is_bot=False, first_name='John', last_name='Doe')
+            members = Member.guess_member(user_1)
             assert Member._AKADRESSEN_CACHE_TIME == dt.date.today()
             assert isinstance(Member._AKADRESSEN, pd.DataFrame)
-            members = Member.guess_member(user_1)
             assert len(members) == 1
             member = members[0]
             assert member.user_id == 1
@@ -309,9 +309,9 @@ class TestMember:
 
             Member._AKADRESSEN = None
             user_2 = User(2, is_bot=False, first_name='Marcel', last_name='Marcel')
+            members = Member.guess_member(user_2)
             assert Member._AKADRESSEN_CACHE_TIME == dt.date.today()
             assert isinstance(Member._AKADRESSEN, pd.DataFrame)
-            members = Member.guess_member(user_2)
             assert len(members) == 1
             member = members[0]
             assert member.user_id == 2
@@ -331,9 +331,9 @@ class TestMember:
             monkeypatch.setattr(Member, '_get_akadressen', _get_akadressen)
 
             user_3 = User(3, is_bot=False, first_name='Test', username='DasBrot')
+            members = Member.guess_member(user_3)
             assert Member._AKADRESSEN_CACHE_TIME == dt.date.today()
             assert isinstance(Member._AKADRESSEN, pd.DataFrame)
-            members = Member.guess_member(user_3)
             assert not test_flag
             assert len(members) == 1
             member = members[0]
