@@ -552,6 +552,8 @@ class Member:
         if (cls._AKADRESSEN_CACHE_TIME is None or dt.date.today() > cls._AKADRESSEN_CACHE_TIME
                 or cls._AKADRESSEN is None):
             cls._AKADRESSEN = cls._get_akadressen()
+            if cls._AKADRESSEN is not None:
+                cls._AKADRESSEN_CACHE_TIME = dt.date.today()
 
         ranking: Dict[int, float] = defaultdict(lambda: 0.0)
         count = 0

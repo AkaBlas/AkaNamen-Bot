@@ -77,6 +77,11 @@ jobs:
           python -W ignore -m pip install --upgrade pip
           python -W ignore -m pip install -r requirements.txt
           python -W ignore -m pip install -r requirements-dev.txt
+      - name: Add Locales
+        run: |
+          export LC_ALL="en_US.UTF-8"
+          export LC_CTYPE="en_US.UTF-8"
+          dpkg-reconfigure locales
       - name: Run pre-commit tests
         run: pre-commit run --all-files
   
