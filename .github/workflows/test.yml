@@ -21,7 +21,7 @@ jobs:
             test-build: True
       fail-fast: False
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Initialize submodules
         run:
           git submodule update --init --recursive
@@ -35,6 +35,11 @@ jobs:
           python -W ignore -m pip install -U codecov pytest-cov
           python -W ignore -m pip install -r requirements.txt
           python -W ignore -m pip install -r requirements-dev.txt
+      - name: Add Locales
+        run: |
+          export LC_ALL="en_US.UTF-8"
+          export LC_CTYPE="en_US.UTF-8"
+          sudo dpkg-reconfigure locales
       - name: Test with pytest
         run: |
           pytest -v -m nocoverage
@@ -64,7 +69,7 @@ jobs:
         os: [ubuntu-latest]
       fail-fast: False
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Initialize submodules
         run:
           git submodule update --init --recursive
@@ -77,18 +82,13 @@ jobs:
           python -W ignore -m pip install --upgrade pip
           python -W ignore -m pip install -r requirements.txt
           python -W ignore -m pip install -r requirements-dev.txt
-      - name: Add Locales
-        run: |
-          export LC_ALL="en_US.UTF-8"
-          export LC_CTYPE="en_US.UTF-8"
-          dpkg-reconfigure locales
       - name: Run pre-commit tests
         run: pre-commit run --all-files
   
   typing_coverage:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Set up Python 3.7
       uses: actions/setup-python@v1
       with:
