@@ -30,6 +30,10 @@ class Member:
     """
     A member of AkaBlas.
 
+    Note:
+        Orchestra instance support subscription for all properties and attributes listed in
+        :attr:`SUBSCRIPTABLE`.
+
     Attributes:
         user_id (:obj:`int`): The Telegram user_id.
         phone_number (:obj:`str`): Optional. Phone number.
@@ -112,6 +116,12 @@ class Member:
 
     def __hash__(self) -> int:
         return self.user_id
+
+    def __getitem__(self, item: str) -> Union[str, dt.date, int, List[Instrument], None, float]:
+        if item not in self.SUBSCRIPTABLE:
+            raise KeyError('Member either does not have such an attribute or does not support '
+                           'subscription for it.')
+        return getattr(self, item)
 
     def to_str(self) -> str:
         with setlocale('de_DE.UTF-8'):
@@ -585,3 +595,9 @@ class Member:
                        instruments=row.instrument,
                        date_of_birth=row.date_of_birth))
         return members
+
+    SUBSCRIPTABLE = sorted([
+        'birthday', 'age', 'first_name', 'last_name', 'nickname', 'address', 'latitude',
+        'longitude', 'instruments', 'gender', 'phone_number', 'date_of_birth', 'full_name',
+        'photo_file_id'
+    ])

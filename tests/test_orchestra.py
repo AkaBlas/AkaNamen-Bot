@@ -41,10 +41,14 @@ def score_orchestra(date):
 
 class TestOrchestra:
 
-    def test_init(self, orchestra):
+    def test_init_and_subscriptable(self, orchestra):
         assert isinstance(orchestra.members, dict)
         for dict_ in orchestra.DICTS_TO_ATTRS:
-            assert isinstance(getattr(orchestra, dict_), dict)
+            assert isinstance(orchestra[dict_], dict)
+
+    def test_subscriptable_error(self, orchestra):
+        with pytest.raises(KeyError, match='Orchestra either'):
+            orchestra['foo']
 
     def test_properties_immutable(self, orchestra):
         with pytest.raises(ValueError, match='overridden'):
@@ -180,7 +184,7 @@ class TestOrchestra:
 
         assert orchestra.members == dict()
         for list_name in orchestra.DICTS_TO_ATTRS:
-            list_ = getattr(orchestra, list_name)
+            list_ = orchestra[list_name]
             assert list_ == dict() or all(list_[key] == set() for key in list_)
 
         with pytest.raises(ValueError, match='not'):

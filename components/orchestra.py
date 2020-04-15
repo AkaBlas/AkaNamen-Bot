@@ -14,12 +14,16 @@ from copy import copy
 StrMemberDict = Dict[str, Set[Member]]
 IntMemberDict = Dict[int, Set[Member]]
 DateMemberDict = Dict[dt.date, Set[Member]]
-InstrMemberDict = Dict[dt.date, Set[Instrument]]
+InstrMemberDict = Dict[Instrument, Set[Member]]
 
 
 class Orchestra(PicklableBase):
     """
     An orchestra. Keeps tracks of its members.
+
+    Note:
+        Orchestra instance support subscription for all properties listed as keys of
+        :attr:`DICTS_TO_ATTRS`.
     """
 
     def __init__(self) -> None:
@@ -48,6 +52,12 @@ class Orchestra(PicklableBase):
         self._instruments_lock: Lock = Lock()
         self._addresses_lock: Lock = Lock()
         self._ages_lock: Lock = Lock()
+
+    def __getitem__(self, item: str):
+        if item not in self.DICTS_TO_ATTRS:
+            raise KeyError('Orchestra either does not have such an attribute or does not support '
+                           'subscription for it.')
+        return getattr(self, item)
 
     @property
     def members(self) -> Dict[int, Member]:
@@ -246,14 +256,14 @@ class Orchestra(PicklableBase):
         new_member = copy(member)
         self.members[new_member.user_id] = new_member
         for list_name, attr in self.DICTS_TO_ATTRS.items():
-            attribute = getattr(new_member, attr)
+            attribute = new_member[attr]
             if attribute is not None:
-                list_ = getattr(self, list_name)
+                dict_ = self[list_name]
                 if isinstance(attribute, list):
                     for e in attribute:
-                        list_[e].add(new_member)
+                        dict_[e].add(new_member)
                 else:
-                    list_[attribute].add(new_member)
+                    dict_[attribute].add(new_member)
 
     def kick_member(self, member: Member) -> None:
         """
@@ -272,13 +282,13 @@ class Orchestra(PicklableBase):
         del self.members[member.user_id]
 
         for list_name, attr in self.DICTS_TO_ATTRS.items():
-            attribute = getattr(old_member, attr)
-            list_ = getattr(self, list_name)
+            attribute = old_member[attr]
+            dict_ = self[list_name]
             if isinstance(attribute, list):
                 for e in attribute:
-                    list_[e].discard(old_member)
+                    dict_[e].discard(old_member)
             else:
-                list_[attribute].discard(old_member)
+                dict_[attribute].discard(old_member)
 
     def update_member(self, member: Member) -> None:
         """
@@ -453,8 +463,7 @@ class Orchestra(PicklableBase):
             Keys of :attr:`DICTS_TO_ATTRS`. May be empty.
         """
         return [
-            attr for attr in self.DICTS_TO_ATTRS
-            if sum([1 for v in getattr(self, attr).values() if v]) >= 4
+            attr for attr in self.DICTS_TO_ATTRS if sum([1 for v in self[attr].values() if v]) >= 4
         ]
 
     def draw_members(self, member: Member, attribute: str) -> Tuple[int, Tuple[Member, ...]]:
@@ -475,10 +484,10 @@ class Orchestra(PicklableBase):
         orig_attribute = attribute
 
         if attribute in self.DICTS_TO_ATTRS:
-            dict_ = getattr(self, attribute)
+            dict_ = self[attribute]
             attribute = self.DICTS_TO_ATTRS[attribute]
         elif attribute in self.ATTRS_TO_DICTS:
-            dict_ = getattr(self, self.ATTRS_TO_DICTS[attribute])
+            dict_ = self[self.ATTRS_TO_DICTS[attribute]]
         else:
             raise ValueError('Attribute not supported.')
 
@@ -487,7 +496,7 @@ class Orchestra(PicklableBase):
 
         result = [member]
         # we need to copy here b/c we want to update later on
-        set_ = copy(dict_[getattr(member, attribute)])
+        set_ = copy(dict_[member[attribute]])
         for i in range(3):
             if orig_attribute == 'male_first_names':
                 next_member = random.choice([
@@ -501,7 +510,7 @@ class Orchestra(PicklableBase):
             else:
                 next_member = random.choice([m for m in self.members.values() if m not in set_])
 
-            set_.update(dict_[getattr(next_member, attribute)])
+            set_.update(dict_[next_member[attribute]])
             result.append(next_member)
 
         random.shuffle(result)

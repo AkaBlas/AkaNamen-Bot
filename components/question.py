@@ -47,7 +47,7 @@ class Question:
         if attribute == self.PHOTO and not multiple_choice:
             raise ValueError('Photos are supported only as multiple choice.')
 
-        if bool(getattr(member, self.MAP_ATTRIBUTES[attribute])) is False:
+        if bool(member[self.MAP_ATTRIBUTES[attribute]]) is False:
             raise ValueError('The member doesn\'t have the required attribute.')
 
         self.member = member
@@ -84,7 +84,7 @@ class Question:
         if self.multiple_choice and self.poll:
             return self.poll.options[self.poll.correct_option_id]
         else:
-            return str(getattr(self.member, self.MAP_ATTRIBUTES[self.attribute]))
+            return str(self.member[self.MAP_ATTRIBUTES[self.attribute]])
 
     def check_answer(self, update: Update) -> bool:
         """

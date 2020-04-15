@@ -60,19 +60,30 @@ class TestMember:
                         address=self.address)
         assert member.user_id == self.user_id
         assert member.phone_number == self.phone_number
+        assert member['phone_number'] == self.phone_number
         assert member.first_name == self.first_name
+        assert member['first_name'] == self.first_name
         assert member.last_name == self.last_name
+        assert member['last_name'] == member.last_name
         assert member.nickname == self.nickname
+        assert member['nickname'] == self.nickname
         assert member.gender == self.gender
+        assert member['gender'] == self.gender
         assert member.date_of_birth == self.date_of_birth
+        assert member['date_of_birth'] == self.date_of_birth
         assert member.photo_file_id == self.photo_file_id
+        assert member['photo_file_id'] == self.photo_file_id
         assert member.allow_contact_sharing == self.allow_contact_sharing
         assert member.instruments == self.instruments
+        assert member['instruments'] == self.instruments
         assert isinstance(member.user_score, UserScore)
         assert member.user_score.member == member
 
         assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
+        assert member['address'] == 'Universitätsplatz 2, 38106 Braunschweig'
         assert pytest.approx(member.latitude, self.latitude)
+        assert pytest.approx(member['latitude'], self.latitude)
+        assert pytest.approx(member['longitude'], self.longitude)
         assert pytest.approx(member.longitude, self.longitude)
 
         member = Member(user_id=self.user_id, latitude=self.latitude, longitude=self.longitude)
@@ -84,6 +95,10 @@ class TestMember:
         member = Member(user_id=self.user_id, instruments=instruments.Bassoon())
         assert member.user_id == self.user_id
         assert member.instruments == [instruments.Bassoon()]
+
+    def test_subscriptable_error(self, member):
+        with pytest.raises(KeyError, match='Member either'):
+            member['foo']
 
     def test_instruments_property(self, member):
         assert member.instruments == []
@@ -166,16 +181,21 @@ class TestMember:
 
         member.first_name = self.first_name
         assert member.full_name == self.first_name
+        assert member['full_name'] == self.first_name
 
         member.last_name = self.last_name
         assert member.full_name == ' '.join([self.first_name, self.last_name])
+        assert member['full_name'] == ' '.join([self.first_name, self.last_name])
 
         member.nickname = self.nickname
         assert member.full_name == ' '.join(
             [self.first_name, f'"{self.nickname}"', self.last_name])
+        assert member['full_name'] == ' '.join(
+            [self.first_name, f'"{self.nickname}"', self.last_name])
 
         member.first_name = None
         assert member.full_name == ' '.join([f'"{self.nickname}"', self.last_name])
+        assert member['full_name'] == ' '.join([f'"{self.nickname}"', self.last_name])
 
     def test_vcard_filename(self, member):
         member.first_name = self.first_name
@@ -213,11 +233,13 @@ class TestMember:
         assert member.age is None
         member.date_of_birth = dt.date(1999, 12, 31)
         assert member.age == today.year - 2000
+        assert member['age'] == today.year - 2000
 
     def test_birthday(self, member, today):
         assert member.birthday is None
         member.date_of_birth = dt.date(1999, 12, 31)
         assert member.birthday == '31.12.'
+        assert member['birthday'] == '31.12.'
 
     def test_distance_of_address_to(self, member):
         with pytest.raises(ValueError, match='This member has no'):

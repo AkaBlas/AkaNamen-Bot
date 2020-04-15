@@ -250,7 +250,7 @@ def question_text(member: 'Member',
     if question_attribute == Question.PHOTO and not multiple_choice:
         raise ValueError('Photos are only supported as multiple choice questions.')
 
-    hint = getattr(member, Question.MAP_ATTRIBUTES[hint_attribute])
+    hint = member[Question.MAP_ATTRIBUTES[hint_attribute]]
 
     if multiple_choice:
         q = MULTIPLE_CHOICE_QUESTIONS[hint_attribute][question_attribute]
