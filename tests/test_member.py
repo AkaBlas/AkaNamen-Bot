@@ -288,6 +288,7 @@ class TestMember:
             responses.add(responses.GET,
                           url,
                           body=akadressen.read(),
+                          stream=True,
                           status=200,
                           adding_headers={'Transfer-Encoding': 'chunked'})
 
@@ -304,7 +305,7 @@ class TestMember:
             assert member.first_name == 'John'
             assert member.nickname == 'Jonny'
             assert member.date_of_birth == dt.date(2000, 1, 1)
-            assert member.instruments == set([instruments.Trumpet()])
+            assert member.instruments == [instruments.Trumpet()]
             assert member.address == 'Münzstraße 5, 38100 Braunschweig'
 
             Member._AKADRESSEN = None
@@ -319,7 +320,7 @@ class TestMember:
             assert member.first_name == 'Marcel'
             assert member.nickname is None
             assert member.date_of_birth == dt.date(2000, 5, 1)
-            assert member.instruments == set()
+            assert member.instruments == []
             assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
 
             test_flag = False
@@ -330,7 +331,7 @@ class TestMember:
 
             monkeypatch.setattr(Member, '_get_akadressen', _get_akadressen)
 
-            user_3 = User(3, is_bot=False, first_name='Test', username='DasBrot')
+            user_3 = User(3, is_bot=False, first_name='Test', username='Das Brot')
             members = Member.guess_member(user_3)
             assert Member._AKADRESSEN_CACHE_TIME == dt.date.today()
             assert isinstance(Member._AKADRESSEN, pd.DataFrame)
@@ -342,10 +343,10 @@ class TestMember:
             assert member.first_name == 'Rainer'
             assert member.nickname == 'Das Brot'
             assert member.date_of_birth == dt.date(2007, 7, 5)
-            assert member.instruments == set([instruments.Flute()])
-            assert member.address == 'Bültenwegs 74, 38106 Braunschweig'
+            assert member.instruments == [instruments.Flute()]
+            assert member.address == 'Bültenweg 74-75, 38106 Braunschweig'
 
-            user_4 = User(1, is_bot=False, first_name='Some very wrong shit')
+            user_4 = User(1, is_bot=False, first_name=None)
             assert Member.guess_member(user_4) is None
 
     def test_equality(self, member):

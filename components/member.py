@@ -441,6 +441,7 @@ class Member:
         def string_to_date(string: Union[str, np.nan]) -> Optional[dt.date]:
             if string is np.nan:
                 return None
+            string = string.replace('Mrz', 'Mär')
             with setlocale('de_DE.UTF-8'):
                 try:
                     out = dt.datetime.strptime(string, '%d. %b. %y').date()
@@ -491,11 +492,12 @@ class Member:
         username = config['akadressen']['username']
         password = config['akadressen']['password']
 
-        with NamedTemporaryFile(suffix='.pdf') as akadressen:
-            response = requests.get(url, auth=(username, password))
-            if response.status_code:
+        with NamedTemporaryFile(suffix='.pdf', delete=False) as akadressen:
+            response = requests.get(url, auth=(username, password), stream=True)
+            if response.status_code == 200:
                 response.raw.decode_content = True
                 shutil.copyfileobj(response.raw, akadressen)
+                akadressen.close()
 
                 # Read tables from PDF
                 tables = read_pdf(akadressen.name, flavor='stream', pages='all')
@@ -540,7 +542,7 @@ class Member:
             user: A Telegram user.
         """
 
-        def generous_ration(str1: Optional[str], str2: Optional[str]) -> float:
+        def generous_ratio(str1: Optional[str], str2: Optional[str]) -> float:
             if str1 is None or str2 is None:
                 return 0.0
             str1 = str1.lower().strip(' ')
@@ -559,9 +561,10 @@ class Member:
         count = 0
         for row in cls._AKADRESSEN.itertuples(index=True):
             ranking[count] = 0
-            for attr_1 in [user.first_name, user.last_name, user.username]:
-                for attr_2 in [row.first_name, row.last_name, row.nickname]:
-                    ranking[count] += generous_ration(attr_1, attr_2)
+            for attr in ['first_name', 'last_name']:
+                ranking[count] += generous_ratio(getattr(user, attr), getattr(row, attr))
+            for attr in ['first_name', 'last_name', 'nickname']:
+                ranking[count] += generous_ratio(user.username, getattr(row, attr))
 
             count += 1
 
