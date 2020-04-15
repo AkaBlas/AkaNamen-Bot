@@ -37,7 +37,7 @@ class TestMember:
     first_name = 'first_name'
     last_name = 'last_name'
     nickname = 'nickname'
-    gender = Gender.DIVERSE
+    gender = Gender.MALE
     date_of_birth = dt.date(1996, 8, 10)
     photo_file_id = 'photo_file_id'
     allow_contact_sharing = True

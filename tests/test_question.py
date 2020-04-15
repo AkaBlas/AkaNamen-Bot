@@ -13,7 +13,7 @@ class TestQuestion:
                     last_name='last',
                     nickname='nickname',
                     photo_file_id='file_id',
-                    gender=Gender.DIVERSE,
+                    gender=Gender.MALE,
                     date_of_birth=dt.date(dt.date.today().year - 21, 12, 31),
                     instruments=instruments.AltoSaxophone(),
                     address='Universitätsplatz 2, 38106 Braunschweig')

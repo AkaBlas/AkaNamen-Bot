@@ -43,21 +43,21 @@ class TestOrchestra:
 
     def test_init(self, orchestra):
         assert isinstance(orchestra.members, dict)
-        for list_ in orchestra.LISTS_TO_ATTRS:
-            assert isinstance(getattr(orchestra, list_), defaultdict)
+        for dict_ in orchestra.DICTS_TO_ATTRS:
+            assert isinstance(getattr(orchestra, dict_), dict)
 
     def test_properties_immutable(self, orchestra):
         with pytest.raises(ValueError, match='overridden'):
             orchestra.members = 1
-        for list_ in orchestra.LISTS_TO_ATTRS:
+        for dict_ in orchestra.DICTS_TO_ATTRS:
             with pytest.raises(ValueError, match='overridden'):
-                setattr(orchestra, list_, 1)
+                setattr(orchestra, dict_, 1)
 
     def test_register_and_update_member(self, orchestra, member, today):
         member.first_name = 'first_name'
         member.last_name = 'last_name'
         member.nickname = 'nickname'
-        member.gender = Gender.DIVERSE
+        member.gender = Gender.MALE
         member.date_of_birth = dt.date(1999, 12, 31)
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
         member.set_address(address='Universitätsplatz 2, 38106 Braunschweig')
@@ -68,7 +68,7 @@ class TestOrchestra:
         assert orchestra.first_names == {'first_name': {member}}
         assert orchestra.last_names == {'last_name': {member}}
         assert orchestra.nicknames == {'nickname': {member}}
-        assert orchestra.genders == {Gender.DIVERSE: {member}}
+        assert orchestra.genders == {Gender.MALE: {member}}
         assert orchestra.instruments == {
             instruments.Tuba(): {member},
             instruments.Trumpet(): {member}
@@ -84,7 +84,7 @@ class TestOrchestra:
         member.first_name = 'First_name'
         member.last_name = 'Last_name'
         member.nickname = 'Nickname'
-        member.gender = Gender.MALE
+        member.gender = Gender.FEMALE
         member.date_of_birth = dt.date(2000, 12, 31)
         member.instruments = instruments.Oboe()
         member.set_address(address='Universitätsplatz 1, 38106 Braunschweig')
@@ -95,7 +95,7 @@ class TestOrchestra:
         assert orchestra.first_names == {'first_name': set(), 'First_name': {member}}
         assert orchestra.last_names == {'last_name': set(), 'Last_name': {member}}
         assert orchestra.nicknames == {'nickname': set(), 'Nickname': {member}}
-        assert orchestra.genders == {Gender.DIVERSE: set(), Gender.MALE: {member}}
+        assert orchestra.genders == {Gender.MALE: set(), Gender.FEMALE: {member}}
         assert orchestra.instruments == {
             instruments.Tuba(): set(),
             instruments.Trumpet(): set(),
@@ -112,21 +112,29 @@ class TestOrchestra:
         assert orchestra.ages == {today.year - 2000: set(), today.year - 2001: {member}}
         assert orchestra.birthdays == {'31.12.': {member}}
 
-    def test_gender_first_names(self, member, orchestra):
-        member.first_name = 'first'
-        member.gender = Gender.MALE
-        orchestra.register_member(member)
-        member.user_id = 2
-        member.gender = Gender.FEMALE
-        orchestra.register_member(member)
-        member.user_id = 3
-        member.gender = Gender.DIVERSE
-        orchestra.register_member(member)
+    def test_gender_first_names(self, orchestra):
+        assert orchestra.questionable == []
+        orchestra.register_member(Member(4, first_name='John', gender=Gender.MALE))
+        orchestra.register_member(Member(5, first_name='Mike', gender=Gender.MALE))
+        orchestra.register_member(Member(6, first_name='Tina', gender=Gender.FEMALE))
+        orchestra.register_member(Member(7, first_name='Rita', gender=Gender.FEMALE))
+        orchestra.register_member(Member(8, first_name='Linda', gender=Gender.FEMALE))
+        orchestra.register_member(Member(9, first_name='Sandra', gender=Gender.FEMALE))
+        orchestra.register_member(Member(10, first_name='Brad', gender=Gender.MALE))
+        orchestra.register_member(Member(11, first_name='Marc', gender=Gender.MALE))
 
-        print(orchestra.male_first_names)
-        assert orchestra.male_first_names == {'first': {Member(123456)}}
-        assert orchestra.female_first_names == {'first': {Member(2)}}
-        assert orchestra.diverse_first_names == {'first': {Member(3)}}
+        assert orchestra.male_first_names == {
+            'John': {Member(4)},
+            'Mike': {Member(5)},
+            'Brad': {Member(10)},
+            'Marc': {Member(11)}
+        }
+        assert orchestra.female_first_names == {
+            'Tina': {Member(6)},
+            'Rita': {Member(7)},
+            'Linda': {Member(8)},
+            'Sandra': {Member(9)}
+        }
 
     def test_ages_caching(self, member, today):
 
@@ -171,7 +179,7 @@ class TestOrchestra:
         orchestra.kick_member(member)
 
         assert orchestra.members == dict()
-        for list_name in orchestra.LISTS_TO_ATTRS:
+        for list_name in orchestra.DICTS_TO_ATTRS:
             list_ = getattr(orchestra, list_name)
             assert list_ == dict() or all(list_[key] == set() for key in list_)
 
@@ -313,3 +321,82 @@ class TestOrchestra:
         assert 'Anonym' in o.months_score_text()
         assert 'Anonym' in o.years_score_text()
         assert 'Anonym' in o.overall_score_text()
+
+    def test_questionable(self, orchestra):
+        assert orchestra.questionable == []
+        orchestra.register_member(Member(1, first_name='John'))
+        orchestra.register_member(Member(2, first_name='John'))
+        orchestra.register_member(Member(3, first_name='John'))
+        orchestra.register_member(Member(4, first_name='John'))
+        assert orchestra.questionable == []
+        orchestra.register_member(Member(5, first_name='Mike'))
+        orchestra.register_member(Member(6, first_name='Brad'))
+        orchestra.register_member(Member(7, first_name='Marc'))
+        assert orchestra.questionable == ['first_names']
+
+    def test_questionable_with_gender(self, orchestra):
+        assert orchestra.questionable == []
+        orchestra.register_member(Member(4, first_name='John', gender=Gender.MALE))
+        orchestra.register_member(Member(5, first_name='Mike', gender=Gender.MALE))
+        orchestra.register_member(Member(6, first_name='Brad', gender=Gender.FEMALE))
+        orchestra.register_member(Member(7, first_name='Marc', gender=Gender.FEMALE))
+        assert orchestra.questionable == ['first_names']
+        orchestra.register_member(Member(8, first_name='John', gender=Gender.FEMALE))
+        orchestra.register_member(Member(9, first_name='Mike', gender=Gender.FEMALE))
+        orchestra.register_member(Member(10, first_name='Brad', gender=Gender.MALE))
+        orchestra.register_member(Member(11, first_name='Marc', gender=Gender.MALE))
+        assert sorted(orchestra.questionable) == sorted(
+            ['first_names', 'female_first_names', 'male_first_names'])
+
+    def test_draw_members_errors(self, orchestra, member):
+        with pytest.raises(ValueError, match='Attribute not supported.'):
+            orchestra.draw_members(member, 'some attribute')
+
+        with pytest.raises(ValueError, match='Not enough members'):
+            orchestra.draw_members(member, 'first_name')
+
+    def test_draw_members(self, orchestra):
+        member = Member(1, last_name='John')
+        orchestra.register_member(member)
+        orchestra.register_member(Member(2, last_name='John'))
+        orchestra.register_member(Member(3, last_name='Brad'))
+        orchestra.register_member(Member(4, last_name='Brad'))
+        orchestra.register_member(Member(5, last_name='Mike'))
+        orchestra.register_member(Member(6, last_name='Mike'))
+        orchestra.register_member(Member(7, last_name='Marc'))
+        orchestra.register_member(Member(8, last_name='Marc'))
+
+        index, members = orchestra.draw_members(member, 'last_name')
+        assert members[index] is member
+        assert len(set([m.user_id for m in members])) == 4
+        assert len(set([m.last_name for m in members])) == 4
+
+        index, members = orchestra.draw_members(member, 'last_names')
+        assert members[index] is member
+        assert len(set([m.user_id for m in members])) == 4
+        assert len(set([m.last_name for m in members])) == 4
+
+    def test_draw_members_gendered(self, orchestra):
+        assert orchestra.questionable == []
+        member_1 = Member(4, first_name='John', gender=Gender.MALE)
+        member_2 = Member(8, first_name='Linda', gender=Gender.FEMALE)
+        orchestra.register_member(member_1)
+        orchestra.register_member(Member(5, first_name='Mike', gender=Gender.MALE))
+        orchestra.register_member(Member(6, first_name='Tina', gender=Gender.FEMALE))
+        orchestra.register_member(Member(7, first_name='Rita', gender=Gender.FEMALE))
+        orchestra.register_member(member_2)
+        orchestra.register_member(Member(9, first_name='Sandra', gender=Gender.FEMALE))
+        orchestra.register_member(Member(10, first_name='Brad', gender=Gender.MALE))
+        orchestra.register_member(Member(11, first_name='Marc', gender=Gender.MALE))
+
+        index, members = orchestra.draw_members(member_1, 'male_first_names')
+        assert members[index] is member_1
+        assert len(set([m.user_id for m in members])) == 4
+        assert len(set([m.first_name for m in members])) == 4
+        assert all([m.gender == Gender.MALE for m in members])
+
+        index, members = orchestra.draw_members(member_2, 'female_first_names')
+        assert members[index] is member_2
+        assert len(set([m.user_id for m in members])) == 4
+        assert len(set([m.first_name for m in members])) == 4
+        assert all([m.gender == Gender.FEMALE for m in members])

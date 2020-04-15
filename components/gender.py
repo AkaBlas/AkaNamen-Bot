@@ -14,5 +14,3 @@ class Gender:
     """:obj:`str`: Female"""
     MALE: str = emojize(':man:', use_aliases=True)
     """:obj:`str`: Male"""
-    DIVERSE: str = emojize(':rainbow:', use_aliases=True)
-    """:obj:`str`: Diverse"""

@@ -4,9 +4,10 @@
 from components import Member, Instrument, Gender, PicklableBase, Score
 
 import datetime as dt
+import random
 
 from threading import Lock
-from typing import Set, Dict, List, Optional
+from typing import Set, Dict, List, Optional, Tuple
 from collections import defaultdict
 from copy import copy
 
@@ -73,15 +74,25 @@ class Orchestra(PicklableBase):
     def first_names(self, value: StrMemberDict) -> None:
         raise ValueError('This attribute can\'t be overridden!')
 
+    def _gender_first_names(self, gender: str) -> StrMemberDict:
+        dict_: Dict[str, Set[Member]] = defaultdict(set)
+        for k, v in self.first_names.items():
+            set_ = set(m for m in v if m.gender == gender)
+            if set_:
+                dict_[k] = set_
+        return dict_
+
     @property
     def male_first_names(self) -> StrMemberDict:
         """
         A :obj:`dict`. For each key, all male members with the corresponding last names are the
         values.
         """
-        return {
-            k: set(m for m in v if m.gender == Gender.MALE) for k, v in self.first_names.items()
-        }
+        return self._gender_first_names(Gender.MALE)
+
+    @male_first_names.setter
+    def male_first_names(self, value: StrMemberDict) -> None:
+        raise ValueError('This attribute can\'t be overridden!')
 
     @property
     def female_first_names(self) -> StrMemberDict:
@@ -89,20 +100,11 @@ class Orchestra(PicklableBase):
         A :obj:`dict`. For each key, all female members with the corresponding last names are the
         values.
         """
-        return {
-            k: set(m for m in v if m.gender == Gender.FEMALE) for k, v in self.first_names.items()
-        }
+        return self._gender_first_names(Gender.FEMALE)
 
-    @property
-    def diverse_first_names(self) -> StrMemberDict:
-        """
-        A :obj:`dict`. For each key, all diverse members with the corresponding last names are the
-        values.
-        """
-        return {
-            k: set(m for m in v if m.gender == Gender.DIVERSE)
-            for k, v in self.first_names.items()
-        }
+    @female_first_names.setter
+    def female_first_names(self, value: StrMemberDict) -> None:
+        raise ValueError('This attribute can\'t be overridden!')
 
     @property
     def last_names(self) -> StrMemberDict:
@@ -243,7 +245,7 @@ class Orchestra(PicklableBase):
 
         new_member = copy(member)
         self.members[new_member.user_id] = new_member
-        for list_name, attr in self.LISTS_TO_ATTRS.items():
+        for list_name, attr in self.DICTS_TO_ATTRS.items():
             attribute = getattr(new_member, attr)
             if attribute is not None:
                 list_ = getattr(self, list_name)
@@ -269,7 +271,7 @@ class Orchestra(PicklableBase):
         old_member = self.members[member.user_id]
         del self.members[member.user_id]
 
-        for list_name, attr in self.LISTS_TO_ATTRS.items():
+        for list_name, attr in self.DICTS_TO_ATTRS.items():
             attribute = getattr(old_member, attr)
             list_ = getattr(self, list_name)
             if isinstance(attribute, list):
@@ -440,8 +442,75 @@ class Orchestra(PicklableBase):
         """
         return self._score_text('overall', length=length, html=html)
 
-    LISTS_TO_ATTRS: Dict[str, str] = {
+    @property
+    def questionable(self) -> List[str]:
+        """
+        Gives the list of attributes which have enough different values for the orchestras members
+        to generate questions from it. For example, to generate a question asking for the age of
+        a member, at least four members of different age are needed.
+
+        Returns:
+            Keys of :attr:`DICTS_TO_ATTRS`. May be empty.
+        """
+        return [
+            attr for attr in self.DICTS_TO_ATTRS
+            if sum([1 for v in getattr(self, attr).values() if v]) >= 4
+        ]
+
+    def draw_members(self, member: Member, attribute: str) -> Tuple[int, Tuple[Member, ...]]:
+        """
+        Given a orchestra member and an attribute, select three other members who also have the
+        attribute, but with a different value. Shuffles the four members and returns bot the index
+        of the correct member (the argument to this function) and a tuple of all four members.
+
+        Args:
+            member: The member to ask the question about.
+            attribute: The attribute to be subject of the question. Must be present in
+                :attr:`LIST_TO_ATTRS` as either key or value.
+
+        Raises:
+            ValueError: If the attribute is not supported either in general or for this orchestra
+                (see :attr:`questionable`).
+        """
+        orig_attribute = attribute
+
+        if attribute in self.DICTS_TO_ATTRS:
+            dict_ = getattr(self, attribute)
+            attribute = self.DICTS_TO_ATTRS[attribute]
+        elif attribute in self.ATTRS_TO_DICTS:
+            dict_ = getattr(self, self.ATTRS_TO_DICTS[attribute])
+        else:
+            raise ValueError('Attribute not supported.')
+
+        if self.ATTRS_TO_DICTS[attribute] not in self.questionable:
+            raise ValueError('Not enough members with different values for this attribute.')
+
+        result = [member]
+        # we need to copy here b/c we want to update later on
+        set_ = copy(dict_[getattr(member, attribute)])
+        for i in range(3):
+            if orig_attribute == 'male_first_names':
+                next_member = random.choice([
+                    m for m in self.members.values() if (m.gender == Gender.MALE and m not in set_)
+                ])
+            elif orig_attribute == 'female_first_names':
+                next_member = random.choice([
+                    m for m in self.members.values()
+                    if (m.gender == Gender.FEMALE and m not in set_)
+                ])
+            else:
+                next_member = random.choice([m for m in self.members.values() if m not in set_])
+
+            set_.update(dict_[getattr(next_member, attribute)])
+            result.append(next_member)
+
+        random.shuffle(result)
+        return result.index(member), tuple(result)
+
+    DICTS_TO_ATTRS: Dict[str, str] = {
         'first_names': 'first_name',
+        'male_first_names': 'first_name',
+        'female_first_names': 'first_name',
         'last_names': 'last_name',
         'full_names': 'last_name',
         'nicknames': 'nickname',
@@ -454,5 +523,9 @@ class Orchestra(PicklableBase):
     }
     """Dict[:obj:`str`, :obj:`str`]: A map from the names of the different properties of this
     class to the :class:`components.Member` attributes encoded in those properties."""
-    ATTRS_TO_LISTS: Dict[str, str] = {v: k for k, v in LISTS_TO_ATTRS.items()}
-    """Dict[:obj:`str`, :obj:`str`]: Inverse of :attr:`lists_to_attr`."""
+    ATTRS_TO_DICTS: Dict[str, str] = {
+        v: k
+        for k, v in DICTS_TO_ATTRS.items()
+        if k not in ['male_first_names', 'female_first_names']
+    }
+    """Dict[:obj:`str`, :obj:`str`]: Essentially the inverse of :attr:`lists_to_attr`."""
