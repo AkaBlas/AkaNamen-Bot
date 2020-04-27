@@ -14,7 +14,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 
-def main():
+def main() -> None:
     """Start the bot."""
     # Read configuration values from bot.ini
     config = ConfigParser()

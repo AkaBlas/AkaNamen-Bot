@@ -442,7 +442,7 @@ class Member:
         return self.date_of_birth.strftime('%d.%m.')
 
     @staticmethod
-    def _get_akadressen():
+    def _get_akadressen() -> pd.DataFrame:
 
         # A bunch of helpers to parse the downloaded data
         leading_whitespace_pattern = re.compile(r'\b(?=\w)(\w) (\w)')

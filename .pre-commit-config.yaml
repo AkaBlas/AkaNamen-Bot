@@ -24,4 +24,4 @@
     rev: v0.761
     hooks:
     -   id: mypy
-        files: ^(main|(components|bot|tests)/.*)\.py$
+        files: ^(main|(components|bot)/.*)\.py$

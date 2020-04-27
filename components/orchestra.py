@@ -7,7 +7,7 @@ import datetime as dt
 import random
 
 from threading import Lock
-from typing import Set, Dict, List, Optional, Tuple
+from typing import Set, Dict, List, Optional, Tuple, Any
 from collections import defaultdict
 from copy import copy
 
@@ -53,7 +53,7 @@ class Orchestra(PicklableBase):
         self._addresses_lock: Lock = Lock()
         self._ages_lock: Lock = Lock()
 
-    def __getitem__(self, item: str):
+    def __getitem__(self, item: str) -> Any:
         if item not in self.DICTS_TO_ATTRS:
             raise KeyError('Orchestra either does not have such an attribute or does not support '
                            'subscription for it.')

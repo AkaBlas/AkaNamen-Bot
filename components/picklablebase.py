@@ -23,7 +23,7 @@ class PicklableBase:
             state[key] = None
         return state
 
-    def __setstate__(self, state: Dict[str, Any]):
+    def __setstate__(self, state: Dict[str, Any]) -> None:
         """
         Get's called, when object is being un-pickled. Sets all variables ending on ``_lock`` to
         a new :class:`threading.Lock` instance.
