@@ -61,6 +61,7 @@ class TestOrchestra:
         member.first_name = 'first_name'
         member.last_name = 'last_name'
         member.nickname = 'nickname'
+        member.photo_file_id ='photo_file_id'
         member.gender = Gender.MALE
         member.date_of_birth = dt.date(1999, 12, 31)
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
@@ -81,6 +82,7 @@ class TestOrchestra:
         assert orchestra.addresses == {'Universitätsplatz 2, 38106 Braunschweig': {member}}
         assert orchestra.ages == {today.year - 2000: {member}}
         assert orchestra.birthdays == {'31.12.': {member}}
+        assert orchestra.photo_file_ids == {'photo_file_id': {member}}
 
         with pytest.raises(ValueError, match='already'):
             orchestra.register_member(member)
@@ -88,6 +90,7 @@ class TestOrchestra:
         member.first_name = 'First_name'
         member.last_name = 'Last_name'
         member.nickname = 'Nickname'
+        member.photo_file_id = 'Photo_File_ID'
         member.gender = Gender.FEMALE
         member.date_of_birth = dt.date(2000, 12, 31)
         member.instruments = instruments.Oboe()
@@ -115,6 +118,7 @@ class TestOrchestra:
         }
         assert orchestra.ages == {today.year - 2000: set(), today.year - 2001: {member}}
         assert orchestra.birthdays == {'31.12.': {member}}
+        assert orchestra.photo_file_ids == {'Photo_File_ID': {member}}
 
     def test_gender_first_names(self, orchestra):
         assert orchestra.questionable == []
@@ -173,6 +177,15 @@ class TestOrchestra:
         orchestra._ages_cache_date = orchestra._ages_cache_date - dt.timedelta(days=1)
         assert orchestra.ages == {today.year - 2000: {member}}
         assert orchestra.test_flag == 3
+
+    def test_photo_file_ids(self, orchestra):
+        member_1 = Member(1, photo_file_id='file_id_1')
+        member_2 = Member(2, photo_file_id='file_id_2')
+        member_3 = Member(3)
+        orchestra.register_member(member_1)
+        orchestra.register_member(member_2)
+        orchestra.register_member(member_3)
+        assert orchestra.photo_file_ids == {'file_id_1': {member_1}, 'file_id_2': {member_2}}
 
     def test_kick_member(self, orchestra, member):
         member.first_name = 'first_name'
@@ -351,6 +364,14 @@ class TestOrchestra:
         orchestra.register_member(Member(11, first_name='Marc', gender=Gender.MALE))
         assert sorted(orchestra.questionable) == sorted(
             ['first_names', 'female_first_names', 'male_first_names'])
+
+    def test_questionable_error(self, orchestra):
+        with pytest.raises(ValueError, match='overridden'):
+            orchestra.questionable = 7
+
+    # TODO: Implement Test
+    def test_questionable(self, orchestra):
+        pass
 
     def test_draw_members_errors(self, orchestra, member):
         with pytest.raises(ValueError, match='Attribute not supported.'):
