@@ -50,9 +50,9 @@ class Question:
         if bool(member[self.MAP_ATTRIBUTES[attribute]]) is False:
             raise ValueError('The member doesn\'t have the required attribute.')
 
-        self.member = member
-        self.attribute = attribute
-        self.multiple_choice = multiple_choice
+        self.member: 'Member' = member
+        self.attribute: str = attribute
+        self.multiple_choice: bool = multiple_choice
         self.poll = poll
 
     def check_update(self, update: Update) -> bool:
@@ -160,3 +160,5 @@ class Question:
     """Dict[:obj:`str`, :obj:`str`]: For each attribute in :attr:`SUPPORTED_TYPES`, the
     corresponding value is the name of the :class:`components.Member` attribute, the member
     associated with this question must have."""
+    PAM_ATTRIBUTES = {v: k for k, v in MAP_ATTRIBUTES.items()}
+    """Dict[:obj:`str`, :obj:`str`]: Inverse of :attr:`MAP_ATTRIBUTES`."""

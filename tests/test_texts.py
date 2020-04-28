@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pytest
 import datetime as dt
-from components import Member, Gender, instruments, Question, question_text
+from components import Member, Gender, instruments, Question, question_text, Orchestra
 
 
 class TestTexts:
@@ -25,11 +25,40 @@ class TestTexts:
                         assert '{' not in text
                         assert '}' not in text
 
+        for q in [
+                k for k, v in Orchestra.DICTS_TO_ATTRS.items()
+                if k != 'photo_file_ids' and v in Question.SUPPORTED_ATTRIBUTES
+        ]:
+            for h in [
+                    k for k, v in Orchestra.DICTS_TO_ATTRS.items()
+                    if v in Question.SUPPORTED_ATTRIBUTES
+            ]:
+                if h not in q and q not in h:
+                    for m in [True, False]:
+                        text = question_text(self.member, q, h, m)
+                        assert isinstance(text, str)
+                        assert text != ''
+                        assert '{' not in text
+                        assert '}' not in text
+
     def test_photo(self):
         q = Question.PHOTO
         for h in [a for a in Question.SUPPORTED_ATTRIBUTES if a != q]:
             with pytest.raises(ValueError, match='Photos are'):
-                text = question_text(self.member, q, h, False)
+                question_text(self.member, q, h, False)
+
+            text = question_text(self.member, q, h, True)
+            assert text != ''
+            assert '{' not in text
+            assert '}' not in text
+
+        q = 'photo_file_ids'
+        for h in [
+                k for k, v in Orchestra.DICTS_TO_ATTRS.items()
+                if k != q and v in Question.SUPPORTED_ATTRIBUTES
+        ]:
+            with pytest.raises(ValueError, match='Photos are'):
+                question_text(self.member, q, h, False)
 
             text = question_text(self.member, q, h, True)
             assert text != ''

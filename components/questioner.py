@@ -16,11 +16,11 @@ class Questioner:
     Attributes:
         member (:class:`components.Member`): The member, this instance is associated with.
         orchestra (:class:`components.Orchestra`): The orchestra, this instance is associated with.
-        hint_attributes (List[:obj:`str`]): Subset of
-            :attr:`components.Question.SUPPORTED_ATTRIBUTES`. These will be given as hints for the
+        hint_attributes (List[:obj:`str`]): Subset of the keys of
+            :attr:`components.Orchestra.DICTS_TO_ATTRS`. These will be given as hints for the
             questions.
-        question_attributes (List[:obj:`str`]): Subset of
-            :attr:`components.Question.SUPPORTED_ATTRIBUTES`. These will be asked for in the
+        question_attributes (List[:obj:`str`]): Subset of the keys of
+            :attr:`components.Orchestra.DICTS_TO_ATTRS`. These will be asked for in the
             questions.
         number_of_questions (:obj:`int`): Number of questions to ask the user.
         number_of_questions_asked (:obj:`int`): Number of questions already asked.
@@ -38,10 +38,14 @@ class Questioner:
     Args:
         user_id: The ID of the user this instance is associated with.
         orchestra: The orchestra, this instance is associated with.
-        hint_attributes: Subset of :attr:`components.Question.SUPPORTED_ATTRIBUTES`. These will be
-            given as hints for the questions. May be empty, in which case all are allowed.
-        question_attributes: Subset of :attr:`components.Question.SUPPORTED_ATTRIBUTES`. These will
-            be asked for in the questions. May be empty, in which case all are allowed.
+        hint_attributes: List of strings, appearing either in
+            :attr:`components.Question.SUPPORTED_ATTRIBUTES` or as keys in
+            :attr:`components.Orchestra.DICTS_TO_ATTRS`. These will be given as hints for the
+            questions. May be empty, in which case all available attributes are allowed.
+        question_attributes: List of strings, appearing either in
+            :attr:`components.Question.SUPPORTED_ATTRIBUTES` or as keys in
+            :attr:`components.Orchestra.DICTS_TO_ATTRS`. These will be asked for in the
+            questions. May be empty, in which case all available attributes are allowed.
         number_of_questions: Number of questions to ask the user.
         bot: The bot to use for asking questions.
         multiple_choice: Whether the question to be asked are multiple choice or free text.
@@ -76,43 +80,57 @@ class Questioner:
             self.number_of_questions = number_of_questions
         self.number_of_question_asked = 0
 
-        if (len(hint_attributes) == len(question_attributes)
+        # Filter stupid input
+        if (len(hint_attributes) == 1 and len(question_attributes) == 1
                 and hint_attributes == question_attributes):
             raise ValueError('Allowing the same single attribute for both hints and questions '
                              'wont be very interesting.')
 
+        # Filter generally unsupported input
+        for index, ha in enumerate(hint_attributes):
+            if ha in Question.SUPPORTED_ATTRIBUTES:
+                hint_attributes[index] = Orchestra.ATTRS_TO_DICTS[Question.MAP_ATTRIBUTES[ha]]
+            elif ha not in Orchestra.DICTS_TO_ATTRS:
+                raise ValueError(f'Unsupported hint attribute {ha}.')
+        for index, qa in enumerate(question_attributes):
+            if qa in Question.SUPPORTED_ATTRIBUTES:
+                hint_attributes[index] = Orchestra.ATTRS_TO_DICTS[Question.MAP_ATTRIBUTES[qa]]
+            elif qa not in Orchestra.DICTS_TO_ATTRS:
+                raise ValueError(f'Unsupported question attribute {qa}.')
+
+        # Filter input unsupported for the orchestras state
+        available_hints = [q[0] for q in self.orchestra.questionable]
+        available_questions = [q[1] for q in self.orchestra.questionable]
+        for ha in hint_attributes:
+            if ha not in available_hints:
+                raise ValueError(f'Attribute {ha} not available as hint for this orchestra.')
+        for qa in question_attributes:
+            if qa not in available_questions:
+                raise ValueError(f'Attribute {qa} not available as question for this orchestra.')
+
         if not hint_attributes:
-            hint_attributes = orchestra.questionable
+            hint_attributes = list(set(q[0] for q in self.orchestra.questionable))
         if not question_attributes:
-            question_attributes = question_attributes
+            _question_attributes = set(q[1] for q in self.orchestra.questionable)
+            _question_attributes.discard('male_first_names')
+            _question_attributes.discard('female_first_names')
+            question_attributes = list(_question_attributes)
 
         if not hint_attributes or not question_attributes:
             raise ValueError('hint_attributes and question_attributes must not be empty.')
 
-        questionable = [orchestra.DICTS_TO_ATTRS[q] for q in orchestra.questionable]
-
-        for ha in hint_attributes:
-            if ha not in questionable:
-                raise ValueError(f'{ha} is not a questionable attribute for this orchestra.')
-
-        for qa in question_attributes:
-            if ((('female_first_names' not in orchestra.questionable
-                  or 'male_first_names' not in orchestra.questionable)
-                 and qa == Question.FIRST_NAME) or qa not in questionable):
-                raise ValueError(f'{qa} is not a questionable attribute for this orchestra.')
-
         self.hint_attributes = hint_attributes
         self.question_attributes = question_attributes
 
-    def _clear_used_members(self):
+    def _clear_used_members(self) -> None:
         self.used_members = defaultdict(set)
 
-    def available_members(self, hint_attribute) -> Dict[str, Set[Member]]:
+    def available_members(self, hint_attribute: str) -> Dict[str, Set[Member]]:
         """
         For an attribute ``k`` in :attr:`question_attribute`, the corresponding value is the set
         of all members of :attr:`orchestra`, which have both the :attr:`hint_attribute` passed to
-        this function an the attribute ``k`` acting as key for this very set *and* and not listed
-        in the corresponding set of :attr:`used_members`.
+        this function and the attribute ``k`` acting as key for this very set *and* and are
+        not listed in the corresponding set of :attr:`used_members`.
 
         Note:
             * If ``hint_attribute`` is in :attr:`question_attributes`, it will not be present as
@@ -120,14 +138,29 @@ class Questioner:
             * Attributes, whose corresponding sets have fewer than four members, are discarded.
             * If the resulting dictionary would only have entries with fewer than four members,
               :attr:`used_members` will automatically be emptied and the result is re-computed.
+
+        Args:
+            hint_attribute: Must be present in either :attr:`components.Orchestra.DICTS_TO_ATTRS`
+                as key or in :attr:`components.Question.SUPPORTED_ATTRIBUTES`.
+
+        Raises:
+            ValueError: If :attr:`hint_attribute` is invalid.
         """
-        out = defaultdict(set)
+        out: Dict[str, Set[Member]] = defaultdict(set)
         question_attributes = [qh for qh in self.question_attributes if qh != hint_attribute]
+        if hint_attribute in Question.SUPPORTED_ATTRIBUTES:
+            hint_attribute = Orchestra.ATTRS_TO_DICTS[Question.MAP_ATTRIBUTES[hint_attribute]]
+
+        if hint_attribute not in Orchestra.DICTS_TO_ATTRS.keys():
+            raise ValueError(f'Unsupported value {hint_attribute} for hint_attribute.')
+
+        members_attribute = Orchestra.DICTS_TO_ATTRS[hint_attribute]
         for m in self.orchestra.members.values():
-            if m[hint_attribute] is not None:
+            if m[members_attribute] is not None:
                 for attr in question_attributes:
-                    if m[attr] is not None:
+                    if m[Orchestra.DICTS_TO_ATTRS[attr]] is not None:
                         out[attr].add(m)
+
         out = {k: v for k, v in out.items() if len(v) >= 4}
         if not out and self._available_members_recurse:
             self._clear_used_members()
@@ -170,7 +203,8 @@ class Questioner:
         self.score.correct += int(is_correct)
 
         if is_correct:
-            self.used_members[question.attribute].add(question.member)
+            key = Orchestra.ATTRS_TO_DICTS[Question.MAP_ATTRIBUTES[question.attribute]]
+            self.used_members[key].add(question.member)
 
         if not question.multiple_choice:
             if is_correct:
@@ -180,17 +214,24 @@ class Questioner:
                         f'Die richtige Antwort lautet »{question.correct_answer}«')
             update.message.reply_text(text)
 
-    def ask_question(self):
+    def ask_question(self) -> None:
         """
         Asks the next question.
         """
         hint_attribute = random.choice(self.hint_attributes)
-        multiple_choice = True if hint_attribute == Question.PHOTO else self.multiple_choice
+        if Orchestra.DICTS_TO_ATTRS[hint_attribute] == Question.PHOTO:
+            multiple_choice = True
+            photo_question = True
+        else:
+            multiple_choice = self.multiple_choice
+            photo_question = False
 
         available_members = self.available_members(hint_attribute)
-        question_attribute = random.choice(available_members.keys())
+        question_attribute: str = random.choice(list(available_members.keys()))
+        supported_question_attribute = Question.PAM_ATTRIBUTES[
+            Orchestra.DICTS_TO_ATTRS[question_attribute]]
 
-        member = random.choice(available_members[question_attribute])
+        member: Member = random.choice(list(available_members[question_attribute]))
         question = question_text(member, question_attribute, hint_attribute, multiple_choice)
 
         if multiple_choice:
@@ -198,14 +239,14 @@ class Questioner:
             poll = self.bot.send_poll(
                 chat_id=self.member.user_id,
                 question=question,
-                options=(PHOTO_OPTIONS if question_attribute == Question.PHOTO else
-                         [m[question_attribute] for m in members]),
+                options=(PHOTO_OPTIONS if photo_question else
+                         [str(m[Orchestra.DICTS_TO_ATTRS[question_attribute]]) for m in members]),
                 is_anonymous=False,
                 type=Poll.QUIZ,
                 correct_option_id=index)
-            self.current_question = Question(member, question_attribute, poll=poll)
+            self.current_question = Question(member, supported_question_attribute, poll=poll)
         else:
             self.bot.send_message(chat_id=self.member.user_id, text=question)
             self.current_question = Question(member,
-                                             question_attribute,
+                                             supported_question_attribute,
                                              multiple_choice=multiple_choice)
