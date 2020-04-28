@@ -601,3 +601,4 @@ class Member:
         'longitude', 'instruments', 'gender', 'phone_number', 'date_of_birth', 'full_name',
         'photo_file_id'
     ])
+    """List[:obj:`str`]: Attributes supported by subscription."""

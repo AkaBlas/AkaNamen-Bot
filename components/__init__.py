@@ -15,7 +15,8 @@ from .member import Member
 from .gender import Gender
 from .orchestra import Orchestra
 from .question import Question
-from .texts import question_text
+from .texts import question_text, PHOTO_OPTIONS
+from .questioner import Questioner
 
 __all__ = [
     # Instruments
@@ -53,7 +54,9 @@ __all__ = [
     'UserScore',
     'Score',
     'Question',
+    'Questioner',
     'question_text',
+    'PHOTO_OPTIONS',
     # Utils related
     'PicklableBase',
     'MessageType',

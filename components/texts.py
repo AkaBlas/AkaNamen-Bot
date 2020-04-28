@@ -216,7 +216,9 @@ FREE_TEXT_QUESTIONS = {
     },
     Question.PHOTO: {
         Question.ADDRESS: 'Wo wohnt dieses AkaBlas-Mitglied?',
-        Question.BIRTHDAY: 'An welchem Tag hat dieses AkaBlas-Mitglied Geburtstag?',
+        Question.BIRTHDAY:
+            ('An welchem Tag hat dieses AkaBlas-Mitglied Geburtstag?  Bitte gib das '
+             'Datum im Format "TT.MM." ein.'),
         Question.AGE: 'Wie alt ist dieses AkaBlas-Mitglied?',
         Question.INSTRUMENT: ('Welches dieser Instrumente spielt dieses AkaBlas-Mitglied '
                               '(ggf. unter anderem)?'),
@@ -258,3 +260,10 @@ def question_text(member: 'Member',
         q = FREE_TEXT_QUESTIONS[hint_attribute][question_attribute]
 
     return q.format(hint=hint)
+
+
+PHOTO_OPTIONS = ['Oben links', 'Oben rechts', 'Unten links', 'Unten rechts']
+"""
+List[:obj:`str`]: Poll options to present when the question attribute is
+:attr:`components.Question.PHOTO`.
+"""
