@@ -12,6 +12,7 @@ from telegram import Bot
 from telegram.ext import Dispatcher, JobQueue, Updater
 
 from tests.bots import get_bot
+from tests.orchestra import orchestra
 
 GITHUB_ACTION = os.getenv('GITHUB_ACTION', False)
 
@@ -33,6 +34,10 @@ def today():
 @pytest.fixture(scope='session')
 def bot_info():
     return get_bot()
+
+
+def make_bot(bot_info, **kwargs):
+    return Bot(bot_info['token'], **kwargs)
 
 
 @pytest.fixture(scope='session')
@@ -103,5 +108,9 @@ def updater(bot):
         up.stop()
 
 
-def make_bot(bot_info, **kwargs):
-    return Bot(bot_info['token'], **kwargs)
+@pytest.fixture(scope='class')
+def populated_orchestra(request):
+    param = request.param if hasattr(request, 'param') else {}
+    members = param.get('members', 100)
+    skip = param.get('skip', [])
+    return orchestra(members, skip)

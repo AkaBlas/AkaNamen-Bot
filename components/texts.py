@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains functions for generating often needed texts."""
-from components import Question
+from components import Question, Orchestra
 from typing import Optional, TYPE_CHECKING
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
@@ -240,10 +240,16 @@ def question_text(member: 'Member',
     Args:
         member: The orchestra member with the correct answer.
         question_attribute: The attribute that is asked for. One of
-            :attr:`components.Question.SUPPORTED_ATTRIBUTES`.
+            :attr:`components.Question.SUPPORTED_ATTRIBUTES` or a key of
+            :attr:`components.Orchestra.DICTS_TO_ATTRS`.
         hint_attribute: The attribute to give as a hint.
         multiple_choice: Whether this is a multiple choice question. Defaults to :obj:`True`.
     """
+    if question_attribute in Orchestra.DICTS_TO_ATTRS.keys():
+        question_attribute = Question.PAM_ATTRIBUTES[Orchestra.DICTS_TO_ATTRS[question_attribute]]
+    if hint_attribute in Orchestra.DICTS_TO_ATTRS.keys():
+        hint_attribute = Question.PAM_ATTRIBUTES[Orchestra.DICTS_TO_ATTRS[hint_attribute]]
+
     if question_attribute not in Question.SUPPORTED_ATTRIBUTES:
         raise ValueError('Unsupported question_attribute!')
     if hint_attribute not in Question.SUPPORTED_ATTRIBUTES:
