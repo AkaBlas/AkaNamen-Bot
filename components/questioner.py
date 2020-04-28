@@ -168,7 +168,7 @@ class Questioner:
         self.member.user_score.add_to_score(1, int(is_correct))
         self.score.answers += 1
         self.score.correct += int(is_correct)
-        
+
         if is_correct:
             self.used_members[question.attribute].add(question.member)
 
