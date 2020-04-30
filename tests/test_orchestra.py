@@ -3,10 +3,13 @@ import pytest
 import os
 import datetime as dt
 import pickle
+from geopy import Photon
 
 from components import Gender, Member, instruments, Orchestra, Score
 from collections import defaultdict
 from tempfile import NamedTemporaryFile
+
+from tests.addresses import get_address_from_cache
 
 
 @pytest.fixture(scope='function')
@@ -57,7 +60,9 @@ class TestOrchestra:
             with pytest.raises(ValueError, match='overridden'):
                 setattr(orchestra, dict_, 1)
 
-    def test_register_and_update_member(self, orchestra, member, today):
+    def test_register_and_update_member(self, orchestra, member, today, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
+
         member.first_name = 'first_name'
         member.last_name = 'last_name'
         member.nickname = 'nickname'

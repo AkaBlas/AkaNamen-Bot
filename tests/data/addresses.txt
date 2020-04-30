@@ -1,0 +1,3707 @@
+{
+    "777 Brockton Avenue, Abington MA 2351": {
+        "address": "Walmart, 777, Brockton Avenue, 02351, Brockton Avenue, Abington, Massachusetts, United States of America",
+        "point": {
+            "longitude": -70.9685309348312,
+            "latitude": 42.09617755,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -70.9685309348312,
+                    42.09617755
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 196033306,
+                "osm_type": "W",
+                "extent": [
+                    -70.9694556,
+                    42.0968228,
+                    -70.967681,
+                    42.095747
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "777",
+                "city": "Abington",
+                "street": "Brockton Avenue",
+                "osm_value": "supermarket",
+                "postcode": "02351",
+                "name": "Walmart",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "30 Memorial Drive, Avon MA 2322": {
+        "address": "Walmart Supercenter, 30, Memorial Drive, 02322, Memorial Drive, Avon, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.0301638701927,
+            "latitude": 42.121301599999995,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.0301638701927,
+                    42.121301599999995
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 196505139,
+                "osm_type": "W",
+                "extent": [
+                    -71.0308603,
+                    42.121837,
+                    -71.0293716,
+                    42.1203859
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "30",
+                "city": "Avon",
+                "street": "Memorial Drive",
+                "osm_value": "supermarket",
+                "postcode": "02322",
+                "name": "Walmart Supercenter",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "250 Hartford Avenue, Bellingham MA 2019": {
+        "address": "250, Hartford Avenue, 02019, Hartford Avenue, Bellingham, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.464704,
+            "latitude": 42.116063,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.464704,
+                    42.116063
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 2384705246,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "250",
+                "city": "Bellingham",
+                "street": "Hartford Avenue",
+                "osm_value": "post_box",
+                "postcode": "02019",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "700 Oak Street, Brockton MA 2301": {
+        "address": "Walmart, 700, Oak Street, 02301, Oak Street, Brockton, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.0567556528004,
+            "latitude": 42.0981178,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.0567556528004,
+                    42.0981178
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 212261270,
+                "osm_type": "W",
+                "extent": [
+                    -71.0575494,
+                    42.0987913,
+                    -71.0559619,
+                    42.0976228
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "700",
+                "city": "Brockton",
+                "street": "Oak Street",
+                "osm_value": "department_store",
+                "postcode": "02301",
+                "name": "Walmart",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "591 Memorial Dr, Chicopee MA 1020": {
+        "address": "591, Memorial Drive, 01020, Memorial Drive, Chicopee, Massachusetts, United States of America",
+        "point": {
+            "longitude": -72.5742474,
+            "latitude": 42.1718265,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.5742474,
+                    42.1718265
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5981239219,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "591",
+                "city": "Chicopee",
+                "street": "Memorial Drive",
+                "osm_value": "loading_dock",
+                "postcode": "01020",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "42 Fairhaven Commons Way, Fairhaven MA 2719": {
+        "address": "Walmart, 42, Fairhaven Commons Way, 02719, Fairhaven Commons Way, Fairhaven, Massachusetts, United States of America",
+        "point": {
+            "longitude": -70.88809189255878,
+            "latitude": 41.644822149999996,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -70.88809189255878,
+                    41.644822149999996
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 630388812,
+                "osm_type": "W",
+                "extent": [
+                    -70.8888908,
+                    41.6454489,
+                    -70.8874151,
+                    41.6442587
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "42",
+                "city": "Fairhaven",
+                "street": "Fairhaven Commons Way",
+                "osm_value": "supermarket",
+                "postcode": "02719",
+                "name": "Walmart",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "337 Russell St, Hadley MA 1035": {
+        "address": "337, Russell Street, 01035, Russell Street, Hadley, Massachusetts, United States of America",
+        "point": {
+            "longitude": -72.5520429,
+            "latitude": 42.35403,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.5520429,
+                    42.35403
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5981362665,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "337",
+                "city": "Hadley",
+                "street": "Russell Street",
+                "osm_value": "loading_dock",
+                "postcode": "01035",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "295 Plymouth Street, Halifax MA 2338": {
+        "address": "Walmart Supercenter, 295, Plymouth Street, 02338, Plymouth Street, Halifax, Massachusetts, United States of America",
+        "point": {
+            "longitude": -70.84646337748082,
+            "latitude": 41.9973365,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -70.84646337748082,
+                    41.9973365
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 213394361,
+                "osm_type": "W",
+                "extent": [
+                    -70.8473357,
+                    41.9977635,
+                    -70.8457933,
+                    41.9968515
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "295",
+                "city": "Halifax",
+                "street": "Plymouth Street",
+                "osm_value": "supermarket",
+                "postcode": "02338",
+                "name": "Walmart Supercenter",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "1775 Washington St, Hanover MA 2339": {
+        "address": "Patriot Cinemas, 1775, Washington Street, 02061, Washington Street, Hanover, Massachusetts, United States of America",
+        "point": {
+            "longitude": -70.8381274190912,
+            "latitude": 42.1448544,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -70.8381274190912,
+                    42.1448544
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 213404116,
+                "osm_type": "W",
+                "extent": [
+                    -70.8384203,
+                    42.1451833,
+                    -70.837835,
+                    42.1445383
+                ],
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "1775",
+                "city": "Hanover",
+                "street": "Washington Street",
+                "osm_value": "cinema",
+                "postcode": "02061",
+                "name": "Patriot Cinemas",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "280 Washington Street, Hudson MA 1749": {
+        "address": "280, Washington Street, 01749, Washington Street, Hudson, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.5581737,
+            "latitude": 42.3726017,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.5581737,
+                    42.3726017
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5981492288,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "280",
+                "city": "Hudson",
+                "street": "Washington Street",
+                "osm_value": "loading_dock",
+                "postcode": "01749",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "20 Soojian Dr, Leicester MA 1524": {
+        "address": "20, Soojians Drive, 01652, Soojians Drive, Leicester, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.9351325,
+            "latitude": 42.2521419,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.9351325,
+                    42.2521419
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5981531492,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "20",
+                "city": "Leicester",
+                "street": "Soojians Drive",
+                "osm_value": "loading_dock",
+                "postcode": "01652",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "11 Jungle Road, Leominster MA 1453": {
+        "address": "11, Jungle Road, 01453, Jungle Road, Leominster, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.73066,
+            "latitude": 42.4919449,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.73066,
+                    42.4919449
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315598961,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "11",
+                "city": "Leominster",
+                "street": "Jungle Road",
+                "osm_value": "loading_dock",
+                "postcode": "01453",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "301 Massachusetts Ave, Lunenburg MA 1462": {
+        "address": "Massachusetts Avenue, 01462-1432, Lunenburg, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.7572912,
+            "latitude": 42.5931361,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.7572912,
+                    42.5931361
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 426675204,
+                "osm_type": "W",
+                "extent": [
+                    -71.7580954,
+                    42.5932497,
+                    -71.757139,
+                    42.5925653
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Lunenburg",
+                "osm_value": "primary",
+                "postcode": "01462-1432",
+                "name": "Massachusetts Avenue",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "780 Lynnway, Lynn MA 1905": {
+        "address": "780, Lynnway, 01903, Lynnway, Lynn, Massachusetts, United States of America",
+        "point": {
+            "longitude": -70.9601028,
+            "latitude": 42.4490207,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -70.9601028,
+                    42.4490207
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315599611,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "780",
+                "city": "Lynn",
+                "street": "Lynnway",
+                "osm_value": "loading_dock",
+                "postcode": "01903",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "70 Pleasant Valley Street, Methuen MA 1844": {
+        "address": "70, Pleasant Valley Street, 01844, Pleasant Valley Street, Methuen, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.1646639,
+            "latitude": 42.7435695,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.1646639,
+                    42.7435695
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315598282,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "70",
+                "city": "Methuen",
+                "street": "Pleasant Valley Street",
+                "osm_value": "loading_dock",
+                "postcode": "01844",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "1470 S Washington St, North Attleboro MA 2760": {
+        "address": "Walmart Supercenter, 1470, South Washington Street, 02760, South Washington Street, North Attleborough, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.35019111628843,
+            "latitude": 41.93347275,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.35019111628843,
+                    41.93347275
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 217261496,
+                "osm_type": "W",
+                "extent": [
+                    -71.3512589,
+                    41.9343871,
+                    -71.3491451,
+                    41.9325668
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1470",
+                "city": "North Attleborough",
+                "street": "South Washington Street",
+                "osm_value": "supermarket",
+                "postcode": "02760",
+                "name": "Walmart Supercenter",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "72 Main St, North Reading MA 1864": {
+        "address": "WASA Main Stores North, Global Avenue Extension, 1868 723-0401, Global Avenue Extension, El Socorro, San Juan-Laventille, Trinidad and Tobago",
+        "point": {
+            "longitude": -61.4387869,
+            "latitude": 10.6299685,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -61.4387869,
+                    10.6299685
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 4335345989,
+                "osm_type": "N",
+                "country": "Trinidad and Tobago",
+                "osm_key": "office",
+                "city": "El Socorro",
+                "street": "Global Avenue Extension",
+                "osm_value": "government",
+                "postcode": "1868 723-0401",
+                "name": "WASA Main Stores North",
+                "state": "San Juan-Laventille"
+            }
+        }
+    },
+    "200 Otis Street, Northborough MA 1532": {
+        "address": "200, Otis Street, 01581, Otis Street, Northborough, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.6570218,
+            "latitude": 42.2855649,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.6570218,
+                    42.2855649
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5981597068,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "200",
+                "city": "Northborough",
+                "street": "Otis Street",
+                "osm_value": "loading_dock",
+                "postcode": "01581",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "180 North King Street, Northhampton MA 1060": {
+        "address": "North King Street, 1060, Northampton, Massachusetts, United States of America",
+        "point": {
+            "longitude": -72.6385969,
+            "latitude": 42.3398818,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.6385969,
+                    42.3398818
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 391563119,
+                "osm_type": "W",
+                "extent": [
+                    -72.640144,
+                    42.340975,
+                    -72.6378941,
+                    42.3390234
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Northampton",
+                "osm_value": "secondary",
+                "postcode": "1060",
+                "name": "North King Street",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "555 East Main St, Orange MA 1364": {
+        "address": "555, East Main Street, 01364, East Main Street, Orange, Massachusetts, United States of America",
+        "point": {
+            "longitude": -72.2835852,
+            "latitude": 42.5888092,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.2835852,
+                    42.5888092
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 2243812426,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "555",
+                "city": "Orange",
+                "street": "East Main Street",
+                "osm_value": "loading_dock",
+                "postcode": "01364",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "300 Colony Place, Plymouth MA 2360": {
+        "address": "Walmart Supercenter, 300, Colony Place, 02360, Colony Place, Plymouth, Massachusetts, United States of America",
+        "point": {
+            "longitude": -70.71800909279051,
+            "latitude": 41.9555081,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -70.71800909279051,
+                    41.9555081
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 83368213,
+                "osm_type": "W",
+                "extent": [
+                    -70.7194455,
+                    41.9563919,
+                    -70.7169537,
+                    41.9546555
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "300",
+                "city": "Plymouth",
+                "street": "Colony Place",
+                "osm_value": "supermarket",
+                "postcode": "02360",
+                "name": "Walmart Supercenter",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "36 Paramount Drive, Raynham MA 2767": {
+        "address": "Walmart Supercenter, 36, Paramount Drive, 02767, Paramount Drive, Raynham, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.03241573589602,
+            "latitude": 41.9042441,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.03241573589602,
+                    41.9042441
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 215779285,
+                "osm_type": "W",
+                "extent": [
+                    -71.0332617,
+                    41.9052071,
+                    -71.031541,
+                    41.9034206
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "36",
+                "city": "Raynham",
+                "street": "Paramount Drive",
+                "osm_value": "supermarket",
+                "postcode": "02767",
+                "name": "Walmart Supercenter",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "450 Highland Ave, Salem MA 1970": {
+        "address": "450, Highland Avenue, 01970, Highland Avenue, Salem, Massachusetts, United States of America",
+        "point": {
+            "longitude": -70.9361726,
+            "latitude": 42.4948682,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -70.9361726,
+                    42.4948682
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315599472,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "450",
+                "city": "Salem",
+                "street": "Highland Avenue",
+                "osm_value": "loading_dock",
+                "postcode": "01970",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "1180 Fall River Avenue, Seekonk MA 2771": {
+        "address": "Chick-fil-A, 1100, Fall River Avenue, 02771, Fall River Avenue, Seekonk, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.32902255344672,
+            "latitude": 41.7955871,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.32902255344672,
+                    41.7955871
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 633149468,
+                "osm_type": "W",
+                "extent": [
+                    -71.3291438,
+                    41.7957524,
+                    -71.3288771,
+                    41.7954217
+                ],
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "1100",
+                "city": "Seekonk",
+                "street": "Fall River Avenue",
+                "osm_value": "fast_food",
+                "postcode": "02771",
+                "name": "Chick-fil-A",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "1105 Boston Road, Springfield MA 1119": {
+        "address": "1105, Boston Road, 01151, Boston Road, Springfield, Massachusetts, United States of America",
+        "point": {
+            "longitude": -72.5061702,
+            "latitude": 42.135721,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.5061702,
+                    42.135721
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315600754,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "1105",
+                "city": "Springfield",
+                "street": "Boston Road",
+                "osm_value": "loading_dock",
+                "postcode": "01151",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "100 Charlton Road, Sturbridge MA 1566": {
+        "address": "Walmart, 100, Charlton Road, 01566, Charlton Road, Sturbridge, Massachusetts, United States of America",
+        "point": {
+            "longitude": -72.05998938095078,
+            "latitude": 42.128142100000005,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.05998938095078,
+                    42.128142100000005
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 216278835,
+                "osm_type": "W",
+                "extent": [
+                    -72.0608472,
+                    42.128634,
+                    -72.0591593,
+                    42.1276176
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "100",
+                "city": "Sturbridge",
+                "street": "Charlton Road",
+                "osm_value": "department_store",
+                "postcode": "01566",
+                "name": "Walmart",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "262 Swansea Mall Dr, Swansea MA 2777": {
+        "address": "Swansea Mall, 262, Swansea Mall Drive, 02777, Swansea Mall Drive, Swansea, Massachusetts, United States of America",
+        "point": {
+            "longitude": -71.21799801479693,
+            "latitude": 41.7554206,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -71.21799801479693,
+                    41.7554206
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7669166,
+                "osm_type": "R",
+                "extent": [
+                    -71.2207268,
+                    41.7576812,
+                    -71.2164602,
+                    41.7530513
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "262",
+                "city": "Swansea",
+                "street": "Swansea Mall Drive",
+                "osm_value": "mall",
+                "postcode": "02777",
+                "name": "Swansea Mall",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "333 Main Street, Tewksbury MA 1876": {
+        "address": "McDonald's, 330, Main Street, 18360, Main Street, Stroudsburg, Pennsylvania, United States of America",
+        "point": {
+            "longitude": -75.18952718925789,
+            "latitude": 40.9885497,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -75.18952718925789,
+                    40.9885497
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 612115045,
+                "osm_type": "W",
+                "extent": [
+                    -75.1897112,
+                    40.9886641,
+                    -75.1892121,
+                    40.9883828
+                ],
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "330",
+                "city": "Stroudsburg",
+                "street": "Main Street",
+                "osm_value": "fast_food",
+                "postcode": "18360",
+                "name": "McDonald's",
+                "state": "Pennsylvania"
+            }
+        }
+    },
+    "352 Palmer Road, Ware MA 1082": {
+        "address": "352, Palmer Road, 01082, Palmer Road, Ware, Massachusetts, United States of America",
+        "point": {
+            "longitude": -72.2793684,
+            "latitude": 42.2371433,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.2793684,
+                    42.2371433
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5981258810,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "352",
+                "city": "Ware",
+                "street": "Palmer Road",
+                "osm_value": "loading_dock",
+                "postcode": "01082",
+                "state": "Massachusetts"
+            }
+        }
+    },
+    "297 Grant Avenue, Auburn NY 13021": {
+        "address": "Walmart Supercenter, 297, Grant Avenue, 13021, Grant Avenue, Auburn, New York, United States of America",
+        "point": {
+            "longitude": -76.54816956605944,
+            "latitude": 42.9540404,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -76.54816956605944,
+                    42.9540404
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 303017937,
+                "osm_type": "W",
+                "extent": [
+                    -76.5490149,
+                    42.9550088,
+                    -76.5474914,
+                    42.9531058
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "297",
+                "city": "Auburn",
+                "street": "Grant Avenue",
+                "osm_value": "supermarket",
+                "postcode": "13021",
+                "name": "Walmart Supercenter",
+                "state": "New York"
+            }
+        }
+    },
+    "4133 Veterans Memorial Drive, Batavia NY 14020": {
+        "address": "4133, Veterans Memorial Drive, 14020, Veterans Memorial Drive, Batavia, New York, United States of America",
+        "point": {
+            "longitude": -78.2076771,
+            "latitude": 43.0142758,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -78.2076771,
+                    43.0142758
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5984221387,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "4133",
+                "city": "Batavia",
+                "street": "Veterans Memorial Drive",
+                "osm_value": "loading_dock",
+                "postcode": "14020",
+                "state": "New York"
+            }
+        }
+    },
+    "5399 W Genesse St, Camillus NY 13031": {
+        "address": "Walmart Supercenter, 5399, West Genesee Street, 13031, West Genesee Street, Town of Camillus, New York, United States of America",
+        "point": {
+            "longitude": -76.27230862769055,
+            "latitude": 43.03788715,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -76.27230862769055,
+                    43.03788715
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 157476128,
+                "osm_type": "W",
+                "extent": [
+                    -76.2734647,
+                    43.0384809,
+                    -76.2710618,
+                    43.037247
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "5399",
+                "city": "Town of Camillus",
+                "street": "West Genesee Street",
+                "osm_value": "supermarket",
+                "postcode": "13031",
+                "name": "Walmart Supercenter",
+                "state": "New York"
+            }
+        }
+    },
+    "30 Catskill, Catskill NY 12414": {
+        "address": "30, Catskill Commons, 12414, Catskill Commons, Catskill, New York, United States of America",
+        "point": {
+            "longitude": -73.8837897,
+            "latitude": 42.2123216,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -73.8837897,
+                    42.2123216
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5981329493,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "30",
+                "city": "Catskill",
+                "street": "Catskill Commons",
+                "osm_value": "loading_dock",
+                "postcode": "12414",
+                "state": "New York"
+            }
+        }
+    },
+    "3018 East Ave, Central Square NY 13036": {
+        "address": "3018, East Avenue, 13036, East Avenue, Central Square, New York, United States of America",
+        "point": {
+            "longitude": -76.1267087,
+            "latitude": 43.2917302,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -76.1267087,
+                    43.2917302
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5983427632,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "3018",
+                "city": "Central Square",
+                "street": "East Avenue",
+                "osm_value": "loading_dock",
+                "postcode": "13036",
+                "state": "New York"
+            }
+        }
+    },
+    "139 Merchant Place, Cobleskill NY 12043": {
+        "address": "139, Merchant Place, 12043, Merchant Place, Mineral Springs, New York, United States of America",
+        "point": {
+            "longitude": -74.4558664,
+            "latitude": 42.6828,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -74.4558664,
+                    42.6828
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5982755002,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "139",
+                "city": "Mineral Springs",
+                "street": "Merchant Place",
+                "osm_value": "loading_dock",
+                "postcode": "12043",
+                "state": "New York"
+            }
+        }
+    },
+    "2465 Hempstead Turnpike, East Meadow NY 11554": {
+        "address": "Walmart, 2465, Hempstead Turnpike, 11554, Hempstead Turnpike, East Meadow, New York, United States of America",
+        "point": {
+            "longitude": -73.54372898643432,
+            "latitude": 40.7268389,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -73.54372898643432,
+                    40.7268389
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 49578399,
+                "osm_type": "W",
+                "extent": [
+                    -73.5444862,
+                    40.7274813,
+                    -73.542846,
+                    40.726342
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "2465",
+                "city": "East Meadow",
+                "street": "Hempstead Turnpike",
+                "osm_value": "supermarket",
+                "postcode": "11554",
+                "name": "Walmart",
+                "state": "New York"
+            }
+        }
+    },
+    "6438 Basile Rowe, East Syracuse NY 13057": {
+        "address": "Walmart Supercenter, 6438, Basile Rowe, 13057, Basile Rowe, Town of DeWitt, New York, United States of America",
+        "point": {
+            "longitude": -76.06010886401305,
+            "latitude": 43.06087945,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -76.06010886401305,
+                    43.06087945
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 160286388,
+                "osm_type": "W",
+                "extent": [
+                    -76.061339,
+                    43.0613685,
+                    -76.0590811,
+                    43.0603854
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "6438",
+                "city": "Town of DeWitt",
+                "street": "Basile Rowe",
+                "osm_value": "supermarket",
+                "postcode": "13057",
+                "name": "Walmart Supercenter",
+                "state": "New York"
+            }
+        }
+    },
+    "10401 Bennett Road, Fredonia NY 14063": {
+        "address": "Walmart Supercenter, 10401, Bennett Road, 14063, Bennett Road, Fredonia, New York, United States of America",
+        "point": {
+            "longitude": -79.31335824807752,
+            "latitude": 42.4538871,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -79.31335824807752,
+                    42.4538871
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 634131070,
+                "osm_type": "W",
+                "extent": [
+                    -79.3142287,
+                    42.4547089,
+                    -79.31233,
+                    42.4527568
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "10401",
+                "city": "Fredonia",
+                "street": "Bennett Road",
+                "osm_value": "supermarket",
+                "postcode": "14063",
+                "name": "Walmart Supercenter",
+                "state": "New York"
+            }
+        }
+    },
+    "100 Elm Ridge Center Dr, Greece NY 14626": {
+        "address": "100, Elm Ridge Center Drive, 14626, Elm Ridge Center Drive, South Greece, New York, United States of America",
+        "point": {
+            "longitude": -77.7236634,
+            "latitude": 43.2151263,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -77.7236634,
+                    43.2151263
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5984197681,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "100",
+                "city": "South Greece",
+                "street": "Elm Ridge Center Drive",
+                "osm_value": "loading_dock",
+                "postcode": "14626",
+                "state": "New York"
+            }
+        }
+    },
+    "103 North Caroline St, Herkimer NY 13350": {
+        "address": "103, North Caroline Street, 13350, North Caroline Street, Herkimer, New York, United States of America",
+        "point": {
+            "longitude": -74.9990123,
+            "latitude": 43.02175,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -74.9990123,
+                    43.02175
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5983062468,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "103",
+                "city": "Herkimer",
+                "street": "North Caroline Street",
+                "osm_value": "loading_dock",
+                "postcode": "13350",
+                "state": "New York"
+            }
+        }
+    },
+    "2 Gannett Dr, Johnson City NY 13790": {
+        "address": "2, Gannett Drive, 13790:13905, Gannett Drive, Johnson City, New York, United States of America",
+        "point": {
+            "longitude": -75.946266,
+            "latitude": 42.1152197,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -75.946266,
+                    42.1152197
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5982998036,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "2",
+                "city": "Johnson City",
+                "street": "Gannett Drive",
+                "osm_value": "loading_dock",
+                "postcode": "13790:13905",
+                "state": "New York"
+            }
+        }
+    },
+    "350 E Fairmount Ave, Lakewood NY 14750": {
+        "address": "350, East Fairmount Avenue, 14750, East Fairmount Avenue, Lakewood, New York, United States of America",
+        "point": {
+            "longitude": -79.2996513,
+            "latitude": 42.0964705,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -79.2996513,
+                    42.0964705
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315600753,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "350",
+                "city": "Lakewood",
+                "street": "East Fairmount Avenue",
+                "osm_value": "loading_dock",
+                "postcode": "14750",
+                "state": "New York"
+            }
+        }
+    },
+    "579 Troy-Schenectady Road, Latham NY 12110": {
+        "address": "Joe's Crab Shack, 579, Troy Schenectady Road, 12110, Troy Schenectady Road, Town of Colonie, New York, United States of America",
+        "point": {
+            "longitude": -73.76564944761455,
+            "latitude": 42.7518653,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -73.76564944761455,
+                    42.7518653
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 59764916,
+                "osm_type": "W",
+                "extent": [
+                    -73.7659078,
+                    42.7520286,
+                    -73.7653911,
+                    42.7517082
+                ],
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "579",
+                "city": "Town of Colonie",
+                "street": "Troy Schenectady Road",
+                "osm_value": "restaurant",
+                "postcode": "12110",
+                "name": "Joe's Crab Shack",
+                "state": "New York"
+            }
+        }
+    },
+    "43 Stephenville St, Massena NY 13662": {
+        "address": "Walmart Supercenter, 43, Stephenville Street, 13662, Stephenville Street, Massena, New York, United States of America",
+        "point": {
+            "longitude": -74.87783466096491,
+            "latitude": 44.9221694,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -74.87783466096491,
+                    44.9221694
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 506141912,
+                "osm_type": "W",
+                "extent": [
+                    -74.8791925,
+                    44.923043,
+                    -74.8765433,
+                    44.9213331
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "43",
+                "city": "Massena",
+                "street": "Stephenville Street",
+                "osm_value": "supermarket",
+                "postcode": "13662",
+                "name": "Walmart Supercenter",
+                "state": "New York"
+            }
+        }
+    },
+    "750 Middle Country Road, Middle Island NY 11953": {
+        "address": "750, Middle Country Road, 11953, Middle Country Road, Middle Island, New York, United States of America",
+        "point": {
+            "longitude": -72.9477787,
+            "latitude": 40.8796672,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -72.9477787,
+                    40.8796672
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315599605,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "750",
+                "city": "Middle Island",
+                "street": "Middle Country Road",
+                "osm_value": "loading_dock",
+                "postcode": "11953",
+                "state": "New York"
+            }
+        }
+    },
+    "4765 Commercial Drive, New Hartford NY 13413": {
+        "address": "4765, Commercial Drive, 13417, Commercial Drive, New Hartford, New York, United States of America",
+        "point": {
+            "longitude": -75.3135217,
+            "latitude": 43.0953148,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -75.3135217,
+                    43.0953148
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5983154533,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "4765",
+                "city": "New Hartford",
+                "street": "Commercial Drive",
+                "osm_value": "loading_dock",
+                "postcode": "13417",
+                "state": "New York"
+            }
+        }
+    },
+    "2473 Hackworth Road, Adamsville AL 35005": {
+        "address": "Walmart Supercenter, 2473, Hackworth Road, 35214, Hackworth Road, Adamsville, Alabama, United States of America",
+        "point": {
+            "longitude": -86.9243089,
+            "latitude": 33.579201,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.9243089,
+                    33.579201
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315602241,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "2473",
+                "city": "Adamsville",
+                "street": "Hackworth Road",
+                "osm_value": "supermarket",
+                "postcode": "35214",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "630 Coonial Promenade Pkwy, Alabaster AL 35007": {
+        "address": "Walmart Supercenter, 630, Colonial Promenade Parkway, 35007, Colonial Promenade Parkway, Alabaster, Alabama, United States of America",
+        "point": {
+            "longitude": -86.8012102,
+            "latitude": 33.2354886,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.8012102,
+                    33.2354886
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 459390711,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "630",
+                "city": "Alabaster",
+                "street": "Colonial Promenade Parkway",
+                "osm_value": "supermarket",
+                "postcode": "35007",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "540 West Bypass, Andalusia AL 36420": {
+        "address": "Western Bypass, 36420, Andalusia, Alabama, United States of America",
+        "point": {
+            "longitude": -86.506231,
+            "latitude": 31.277992,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.506231,
+                    31.277992
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7472786,
+                "osm_type": "W",
+                "extent": [
+                    -86.506231,
+                    31.278255,
+                    -86.506166,
+                    31.277992
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Andalusia",
+                "osm_value": "trunk",
+                "postcode": "36420",
+                "name": "Western Bypass",
+                "state": "Alabama"
+            }
+        }
+    },
+    "5560 Mcclellan Blvd, Anniston AL 36206": {
+        "address": "Wal-Mart Supercenter, 5560, McClellan Boulevard, 36206, McClellan Boulevard, Anniston, Alabama, United States of America",
+        "point": {
+            "longitude": -85.82013466318661,
+            "latitude": 33.719949150000005,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.82013466318661,
+                    33.719949150000005
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 116077801,
+                "osm_type": "W",
+                "extent": [
+                    -85.8208828,
+                    33.7210843,
+                    -85.8192755,
+                    33.7190569
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "5560",
+                "city": "Anniston",
+                "street": "McClellan Boulevard",
+                "osm_value": "mall",
+                "postcode": "36206",
+                "name": "Wal-Mart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1011 US Hwy 72 East, Athens AL 35611": {
+        "address": "Diva Nails, 1001, US Highway 72 East, 35611, US Highway 72 East, Athens, Alabama, United States of America",
+        "point": {
+            "longitude": -86.96060829796507,
+            "latitude": 34.78859385,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.96060829796507,
+                    34.78859385
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 445544192,
+                "osm_type": "W",
+                "extent": [
+                    -86.9606596,
+                    34.7887172,
+                    -86.960555,
+                    34.7884738
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1001",
+                "city": "Athens",
+                "street": "US Highway 72 East",
+                "osm_value": "beauty",
+                "postcode": "35611",
+                "name": "Diva Nails",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1717 South College Street, Auburn AL 36830": {
+        "address": "South College Street, 36831, Auburn, Alabama, United States of America",
+        "point": {
+            "longitude": -85.4999178,
+            "latitude": 32.5713973,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.4999178,
+                    32.5713973
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7786594,
+                "osm_type": "W",
+                "extent": [
+                    -85.500479,
+                    32.5729754,
+                    -85.499401,
+                    32.569432
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Auburn",
+                "osm_value": "primary",
+                "postcode": "36831",
+                "name": "South College Street",
+                "state": "Alabama"
+            }
+        }
+    },
+    "701 Mcmeans Ave, Bay Minette AL 36507": {
+        "address": "Auntie Anne's, 701, Dobson Avenue, 36507, Dobson Avenue, Bay Minette, Alabama, United States of America",
+        "point": {
+            "longitude": -87.7902667,
+            "latitude": 30.8856276,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.7902667,
+                    30.8856276
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 6938671613,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "701",
+                "city": "Bay Minette",
+                "street": "Dobson Avenue",
+                "osm_value": "fast_food",
+                "postcode": "36507",
+                "name": "Auntie Anne's",
+                "state": "Alabama"
+            }
+        }
+    },
+    "750 Academy Drive, Bessemer AL 35022": {
+        "address": "Walmart Supercenter, 750, Academy Drive, 35022, Academy Drive, Bessemer, Alabama, United States of America",
+        "point": {
+            "longitude": -87.001921,
+            "latitude": 33.361719,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.001921,
+                    33.361719
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315596427,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "750",
+                "city": "Bessemer",
+                "street": "Academy Drive",
+                "osm_value": "supermarket",
+                "postcode": "35022",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1600 Montclair Rd, Birmingham AL 35210": {
+        "address": "SW Corner of Montclair Rd & Oporto Way, Montclair Road, 35213, Montclair Road, Birmingham, Alabama, United States of America",
+        "point": {
+            "longitude": -86.7225245,
+            "latitude": 33.5251423,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.7225245,
+                    33.5251423
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 2534264730,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Birmingham",
+                "street": "Montclair Road",
+                "osm_value": "bus_stop",
+                "postcode": "35213",
+                "name": "SW Corner of Montclair Rd & Oporto Way",
+                "state": "Alabama"
+            }
+        }
+    },
+    "5919 Trussville Crossings Pkwy, Birmingham AL 35235": {
+        "address": "Walmart Supercenter, 5919, Trussville Crossings Pkwy, 35235, Trussville Crossings Pkwy, Trussville, Alabama, United States of America",
+        "point": {
+            "longitude": -86.629165,
+            "latitude": 33.638953,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.629165,
+                    33.638953
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 2089481959,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "5919",
+                "city": "Trussville",
+                "street": "Trussville Crossings Pkwy",
+                "osm_value": "supermarket",
+                "postcode": "35235",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "9248 Parkway East, Birmingham AL 35206": {
+        "address": "Walmart Supercenter, 9248, Parkway East, 35206, Parkway East, Birmingham, Alabama, United States of America",
+        "point": {
+            "longitude": -86.70022,
+            "latitude": 33.590204,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.70022,
+                    33.590204
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315596428,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "9248",
+                "city": "Birmingham",
+                "street": "Parkway East",
+                "osm_value": "supermarket",
+                "postcode": "35206",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "2041 Douglas Avenue, Brewton AL 36426": {
+        "address": "Douglas Avenue, 36426, Brewton, Alabama, United States of America",
+        "point": {
+            "longitude": -87.0687,
+            "latitude": 31.134498,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.0687,
+                    31.134498
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7661912,
+                "osm_type": "W",
+                "extent": [
+                    -87.068838,
+                    31.161022,
+                    -87.061753,
+                    31.107708
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Brewton",
+                "osm_value": "primary",
+                "postcode": "36426",
+                "name": "Douglas Avenue",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1916 Center Point Rd, Center Point AL 35215": {
+        "address": "3rd Street, 35215, Center Point, Alabama, United States of America",
+        "point": {
+            "longitude": -86.678076,
+            "latitude": 33.662105,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.678076,
+                    33.662105
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7745527,
+                "osm_type": "W",
+                "extent": [
+                    -86.678076,
+                    33.662106,
+                    -86.677619,
+                    33.662105
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Center Point",
+                "osm_value": "residential",
+                "postcode": "35215",
+                "name": "3rd Street",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1950 W Main St, Centre AL 35960": {
+        "address": "Walmart Supercenter, 1950, West Main Street, 35960, West Main Street, Centre, Alabama, United States of America",
+        "point": {
+            "longitude": -85.712618,
+            "latitude": 34.162885,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.712618,
+                    34.162885
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315597797,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1950",
+                "city": "Centre",
+                "street": "West Main Street",
+                "osm_value": "supermarket",
+                "postcode": "35960",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1415 7Th Street South, Clanton AL 35045": {
+        "address": "Walmart Supercenter, 1415, 7th Street South, 35045, 7th Street South, Clanton, Alabama, United States of America",
+        "point": {
+            "longitude": -86.609419,
+            "latitude": 32.816741,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.609419,
+                    32.816741
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315598087,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1415",
+                "city": "Clanton",
+                "street": "7th Street South",
+                "osm_value": "supermarket",
+                "postcode": "35045",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "626 Olive Street Sw, Cullman AL 35055": {
+        "address": "Walmart Supercenter, 626, Olive Street Southwest, 35055, Olive Street Southwest, Cullman, Alabama, United States of America",
+        "point": {
+            "longitude": -86.84205933757156,
+            "latitude": 34.149168,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.84205933757156,
+                    34.149168
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 511599556,
+                "osm_type": "W",
+                "extent": [
+                    -86.843308,
+                    34.1497233,
+                    -86.8410913,
+                    34.1484616
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "626",
+                "city": "Cullman",
+                "street": "Olive Street Southwest",
+                "osm_value": "supermarket",
+                "postcode": "35055",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "3300 South Oates Street, Dothan AL 36301": {
+        "address": "Walmart Supercenter, 3300, South Oates Street, 36301, South Oates Street, Dothan, Alabama, United States of America",
+        "point": {
+            "longitude": -85.404472,
+            "latitude": 31.178814,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.404472,
+                    31.178814
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315599495,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "3300",
+                "city": "Dothan",
+                "street": "South Oates Street",
+                "osm_value": "supermarket",
+                "postcode": "36301",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "4310 Montgomery Hwy, Dothan AL 36303": {
+        "address": "Walmart Supercenter, 4310, Montgomery Highway, 36303, Montgomery Highway, Dothan, Alabama, United States of America",
+        "point": {
+            "longitude": -85.441109,
+            "latitude": 31.268054,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.441109,
+                    31.268054
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315596628,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "4310",
+                "city": "Dothan",
+                "street": "Montgomery Highway",
+                "osm_value": "supermarket",
+                "postcode": "36303",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "600 Boll Weevil Circle, Enterprise AL 36330": {
+        "address": "Walmart Supercenter, 600, Boll Weevil Circle, 36330, Boll Weevil Circle, Enterprise, Alabama, United States of America",
+        "point": {
+            "longitude": -85.8265113,
+            "latitude": 31.3157087,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.8265113,
+                    31.3157087
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 4234468503,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "600",
+                "city": "Enterprise",
+                "street": "Boll Weevil Circle",
+                "osm_value": "supermarket",
+                "postcode": "36330",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "3176 South Eufaula Avenue, Eufaula AL 36027": {
+        "address": "Walmart Supercenter, 3176, South Eufaula Avenue, 36027, South Eufaula Avenue, Columbus, Alabama, United States of America",
+        "point": {
+            "longitude": -85.1709912432456,
+            "latitude": 31.8434475,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.1709912432456,
+                    31.8434475
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 422322460,
+                "osm_type": "W",
+                "extent": [
+                    -85.1716127,
+                    31.8442169,
+                    -85.1704692,
+                    31.8428184
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "3176",
+                "city": "Columbus",
+                "street": "South Eufaula Avenue",
+                "osm_value": "supermarket",
+                "postcode": "36027",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "7100 Aaron Aronov Drive, Fairfield AL 35064": {
+        "address": "Aaron Aronov Drive, 35064, Fairfield, Alabama, United States of America",
+        "point": {
+            "longitude": -86.9180793,
+            "latitude": 33.4682931,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.9180793,
+                    33.4682931
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 187232047,
+                "osm_type": "W",
+                "extent": [
+                    -86.9202902,
+                    33.4703222,
+                    -86.9151497,
+                    33.4659731
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Fairfield",
+                "osm_value": "tertiary",
+                "postcode": "35064",
+                "name": "Aaron Aronov Drive",
+                "state": "Alabama"
+            }
+        }
+    },
+    "10040 County Road 48, Fairhope AL 36533": {
+        "address": "Walmart Supercenter, 10040, County Road 48, 36532, County Road 48, Fairhope, Alabama, United States of America",
+        "point": {
+            "longitude": -87.848815,
+            "latitude": 30.522315,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.848815,
+                    30.522315
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315598069,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "10040",
+                "city": "Fairhope",
+                "street": "County Road 48",
+                "osm_value": "supermarket",
+                "postcode": "36532",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "3100 Hough Rd, Florence AL 35630": {
+        "address": "Burger King, 3100, Hough Road, 35630, Hough Road, Florence, Alabama, United States of America",
+        "point": {
+            "longitude": -87.6257788,
+            "latitude": 34.8346804,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.6257788,
+                    34.8346804
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 4548687719,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "3100",
+                "city": "Florence",
+                "street": "Hough Road",
+                "osm_value": "fast_food",
+                "postcode": "35630",
+                "name": "Burger King",
+                "state": "Alabama"
+            }
+        }
+    },
+    "2200 South Mckenzie St, Foley AL 36535": {
+        "address": "Walmart Supercenter, 2200, South Pine Street, 36535, South Pine Street, Foley, Alabama, United States of America",
+        "point": {
+            "longitude": -87.68642004778394,
+            "latitude": 30.382475550000002,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.68642004778394,
+                    30.382475550000002
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 366848199,
+                "osm_type": "W",
+                "extent": [
+                    -87.6869866,
+                    30.3834188,
+                    -87.6858363,
+                    30.3815841
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "2200",
+                "city": "Foley",
+                "street": "South Pine Street",
+                "osm_value": "supermarket",
+                "postcode": "36535",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "340 East Meighan Blvd, Gadsden AL 35903": {
+        "address": "East Meighan Blvd, 35901, Gadsden, Alabama, United States of America",
+        "point": {
+            "longitude": -85.9926776,
+            "latitude": 34.0115639,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.9926776,
+                    34.0115639
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 205596590,
+                "osm_type": "W",
+                "extent": [
+                    -85.9926776,
+                    34.0115639,
+                    -85.9920308,
+                    34.0112331
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Gadsden",
+                "osm_value": "trunk",
+                "postcode": "35901",
+                "name": "East Meighan Blvd",
+                "state": "Alabama"
+            }
+        }
+    },
+    "890 Odum Road, Gardendale AL 35071": {
+        "address": "Walmart Bakery, 890, Odum Road, 35071, Odum Road, Gardendale, Alabama, United States of America",
+        "point": {
+            "longitude": -86.822991,
+            "latitude": 33.6474697,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.822991,
+                    33.6474697
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7006652031,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "890",
+                "city": "Gardendale",
+                "street": "Odum Road",
+                "osm_value": "bakery",
+                "postcode": "35071",
+                "name": "Walmart Bakery",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1608 W Magnolia Ave, Geneva AL 36340": {
+        "address": "Walmart, 1608, West Magnolia Avenue, 36340, West Magnolia Avenue, Geneva, Alabama, United States of America",
+        "point": {
+            "longitude": -85.899404,
+            "latitude": 31.051472,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.899404,
+                    31.051472
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315602290,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1608",
+                "city": "Geneva",
+                "street": "West Magnolia Avenue",
+                "osm_value": "supermarket",
+                "postcode": "36340",
+                "name": "Walmart",
+                "state": "Alabama"
+            }
+        }
+    },
+    "501 Willow Lane, Greenville AL 36037": {
+        "address": "Walmart Supercenter, 501, Willow Lane, 36037, Willow Lane, Greenville, Alabama, United States of America",
+        "point": {
+            "longitude": -86.647223,
+            "latitude": 31.849507,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.647223,
+                    31.849507
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315601723,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "501",
+                "city": "Greenville",
+                "street": "Willow Lane",
+                "osm_value": "supermarket",
+                "postcode": "36037",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "170 Fort Morgan Road, Gulf Shores AL 36542": {
+        "address": "Walmart Supercenter, 170, East Fort Morgan Road, 35642;36542, East Fort Morgan Road, Gulf Shores, Alabama, United States of America",
+        "point": {
+            "longitude": -87.68616791351502,
+            "latitude": 30.2673251,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.68616791351502,
+                    30.2673251
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 486653956,
+                "osm_type": "W",
+                "extent": [
+                    -87.6870275,
+                    30.2679707,
+                    -87.6853079,
+                    30.2668334
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "170",
+                "city": "Gulf Shores",
+                "street": "East Fort Morgan Road",
+                "osm_value": "supermarket",
+                "postcode": "35642;36542",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1706 Military Street South, Hamilton AL 35570": {
+        "address": "Walmart Supercenter, 1706, Military Street South, 35570, Military Street South, Hamilton, Alabama, United States of America",
+        "point": {
+            "longitude": -87.9923238,
+            "latitude": 34.1196525,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.9923238,
+                    34.1196525
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315602273,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1706",
+                "city": "Hamilton",
+                "street": "Military Street South",
+                "osm_value": "supermarket",
+                "postcode": "35570",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "209 Lakeshore Parkway, Homewood AL 35209": {
+        "address": "Walmart Supercenter, 209, Lakeshore Parkway, 35209, Lakeshore Parkway, Homewood, Alabama, United States of America",
+        "point": {
+            "longitude": -86.821,
+            "latitude": 33.4471,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.821,
+                    33.4471
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315601417,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "209",
+                "city": "Homewood",
+                "street": "Lakeshore Parkway",
+                "osm_value": "supermarket",
+                "postcode": "35209",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "2780 John Hawkins Pkwy, Hoover AL 35244": {
+        "address": "Walmart Supercenter, 2780, John Hawkins Parkway, 35244, John Hawkins Parkway, Hoover, Alabama, United States of America",
+        "point": {
+            "longitude": -86.82465947582486,
+            "latitude": 33.3618017,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.82465947582486,
+                    33.3618017
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 40183520,
+                "osm_type": "W",
+                "extent": [
+                    -86.8257175,
+                    33.3627303,
+                    -86.8235426,
+                    33.3609169
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "2780",
+                "city": "Hoover",
+                "street": "John Hawkins Parkway",
+                "osm_value": "supermarket",
+                "postcode": "35244",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "11610 Memorial Pkwy South, Huntsville AL 35803": {
+        "address": "Walmart Supercenter, 11610, Memorial Parkway Southwest, 35803, Memorial Parkway Southwest, Huntsville, Alabama, United States of America",
+        "point": {
+            "longitude": -86.570681,
+            "latitude": 34.61586,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.570681,
+                    34.61586
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 814241274,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "11610",
+                "city": "Huntsville",
+                "street": "Memorial Parkway Southwest",
+                "osm_value": "supermarket",
+                "postcode": "35803",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "2200 Sparkman Drive, Huntsville AL 35810": {
+        "address": "Walmart Supercenter, 2200, Sparkman Drive Northwest, 35810, Sparkman Drive Northwest, Huntsville, Alabama, United States of America",
+        "point": {
+            "longitude": -86.5924412,
+            "latitude": 34.7652145,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.5924412,
+                    34.7652145
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 1004966887,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "2200",
+                "city": "Huntsville",
+                "street": "Sparkman Drive Northwest",
+                "osm_value": "supermarket",
+                "postcode": "35810",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "6140A Univ Drive, Huntsville AL 35806": {
+        "address": "Heart of Huntsville Drive Southwest, 35804, Huntsville, Alabama, United States of America",
+        "point": {
+            "longitude": -86.5904479,
+            "latitude": 34.7235937,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.5904479,
+                    34.7235937
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 441632988,
+                "osm_type": "W",
+                "extent": [
+                    -86.590672,
+                    34.7237172,
+                    -86.5903889,
+                    34.7235475
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Huntsville",
+                "osm_value": "tertiary",
+                "postcode": "35804",
+                "name": "Heart of Huntsville Drive Southwest",
+                "state": "Alabama"
+            }
+        }
+    },
+    "4206 N College Ave, Jackson AL 36545": {
+        "address": "Number 1 China, College Avenue, 36545, College Avenue, Jackson, Alabama, United States of America",
+        "point": {
+            "longitude": -87.8901258,
+            "latitude": 31.5351495,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.8901258,
+                    31.5351495
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 2443447696,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "city": "Jackson",
+                "street": "College Avenue",
+                "osm_value": "restaurant",
+                "postcode": "36545",
+                "name": "Number 1 China",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1625 Pelham South, Jacksonville AL 36265": {
+        "address": "Walmart Supercenter, 1625, Pelham Road South, 36265, Pelham Road South, Jacksonville, Alabama, United States of America",
+        "point": {
+            "longitude": -85.76499490348549,
+            "latitude": 33.788258400000004,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.76499490348549,
+                    33.788258400000004
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 109361420,
+                "osm_type": "W",
+                "extent": [
+                    -85.7658113,
+                    33.7890854,
+                    -85.7643629,
+                    33.7874804
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1625",
+                "city": "Jacksonville",
+                "street": "Pelham Road South",
+                "osm_value": "supermarket",
+                "postcode": "36265",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "8551 Whitfield Ave, Leeds AL 35094": {
+        "address": "Walmart Supercenter, 8551, Whitfield Avenue, 35094, Whitfield Avenue, Leeds, Alabama, United States of America",
+        "point": {
+            "longitude": -86.518619,
+            "latitude": 33.562105,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.518619,
+                    33.562105
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315597550,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "8551",
+                "city": "Leeds",
+                "street": "Whitfield Avenue",
+                "osm_value": "supermarket",
+                "postcode": "35094",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "8650 Madison Blvd, Madison AL 35758": {
+        "address": "Bledsoe Road, 35750, Hazel Green, Alabama, United States of America",
+        "point": {
+            "longitude": -86.570339,
+            "latitude": 34.925309,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.570339,
+                    34.925309
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7819433,
+                "osm_type": "W",
+                "extent": [
+                    -86.57185,
+                    34.925404,
+                    -86.570235,
+                    34.925271
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Hazel Green",
+                "osm_value": "residential",
+                "postcode": "35750",
+                "name": "Bledsoe Road",
+                "state": "Alabama"
+            }
+        }
+    },
+    "6350 Cottage Hill Road, Mobile AL 36609": {
+        "address": "Walmart Neighborhood Market, 6350, Cottage Hill Road, 36609, Cottage Hill Road, Mobile, Alabama, United States of America",
+        "point": {
+            "longitude": -88.18928693821069,
+            "latitude": 30.64152,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -88.18928693821069,
+                    30.64152
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 333487519,
+                "osm_type": "W",
+                "extent": [
+                    -88.1896488,
+                    30.6418255,
+                    -88.1888541,
+                    30.6412393
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "6350",
+                "city": "Mobile",
+                "street": "Cottage Hill Road",
+                "osm_value": "supermarket",
+                "postcode": "36609",
+                "name": "Walmart Neighborhood Market",
+                "state": "Alabama"
+            }
+        }
+    },
+    "2500 Dawes Road, Mobile AL 36695": {
+        "address": "Walmart Supercenter, 2500, Dawes Road, 36695, Dawes Road, Dawes, Alabama, United States of America",
+        "point": {
+            "longitude": -88.24635322106246,
+            "latitude": 30.639265700000003,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -88.24635322106246,
+                    30.639265700000003
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 407737669,
+                "osm_type": "W",
+                "extent": [
+                    -88.2469344,
+                    30.6396899,
+                    -88.2458809,
+                    30.6384949
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "2500",
+                "city": "Dawes",
+                "street": "Dawes Road",
+                "osm_value": "supermarket",
+                "postcode": "36695",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "685 Schillinger Rd, Mobile AL 36695": {
+        "address": "Walmart Supercenter, 685, Schillinger Road South, 36695, Schillinger Road South, Country Squire Estates, Alabama, United States of America",
+        "point": {
+            "longitude": -88.22261559118122,
+            "latitude": 30.6781098,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -88.22261559118122,
+                    30.6781098
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 284309883,
+                "osm_type": "W",
+                "extent": [
+                    -88.2232287,
+                    30.679112,
+                    -88.2219042,
+                    30.6774127
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "685",
+                "city": "Country Squire Estates",
+                "street": "Schillinger Road South",
+                "osm_value": "supermarket",
+                "postcode": "36695",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "3371 S Alabama Ave, Monroeville AL 36460": {
+        "address": "Coastal Alabama Community College., 2800, Alabama Avenue, 36460, Alabama Avenue, Monroeville, Alabama, United States of America",
+        "point": {
+            "longitude": -87.324707,
+            "latitude": 31.4890523,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.324707,
+                    31.4890523
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 358923247,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "2800",
+                "city": "Monroeville",
+                "street": "Alabama Avenue",
+                "osm_value": "college",
+                "postcode": "36460",
+                "name": "Coastal Alabama Community College.",
+                "state": "Alabama"
+            }
+        }
+    },
+    "10710 Chantilly Pkwy, Montgomery AL 36117": {
+        "address": "Walmart Supercenter, 10710, Chantilly Parkway, 36117, Chantilly Parkway, Ranchette Estates, Alabama, United States of America",
+        "point": {
+            "longitude": -86.1349364813428,
+            "latitude": 32.35480525,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.1349364813428,
+                    32.35480525
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 223678519,
+                "osm_type": "W",
+                "extent": [
+                    -86.1361086,
+                    32.3557658,
+                    -86.1338793,
+                    32.3538558
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "10710",
+                "city": "Ranchette Estates",
+                "street": "Chantilly Parkway",
+                "osm_value": "supermarket",
+                "postcode": "36117",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "3801 Eastern Blvd, Montgomery AL 36116": {
+        "address": "Extended Stay America - Montgomery - Eastern Blvd., Eastern Boulevard, 36116, Eastern Boulevard, Montgomery, Alabama, United States of America",
+        "point": {
+            "longitude": -86.2207266,
+            "latitude": 32.3485427,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.2207266,
+                    32.3485427
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 4086583179,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "tourism",
+                "city": "Montgomery",
+                "street": "Eastern Boulevard",
+                "osm_value": "motel",
+                "postcode": "36116",
+                "name": "Extended Stay America - Montgomery - Eastern Blvd.",
+                "state": "Alabama"
+            }
+        }
+    },
+    "6495 Atlanta Hwy, Montgomery AL 36117": {
+        "address": "Walmart Supercenter, 6495, Atlanta Highway, 36117, Atlanta Highway, Montgomery, Alabama, United States of America",
+        "point": {
+            "longitude": -86.184915,
+            "latitude": 32.385046,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.184915,
+                    32.385046
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315594654,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "6495",
+                "city": "Montgomery",
+                "street": "Atlanta Highway",
+                "osm_value": "supermarket",
+                "postcode": "36117",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "851 Ann St, Montgomery AL 36107": {
+        "address": "Walmart Supercenter, 851, Ann Street, 36107, Ann Street, Montgomery, Alabama, United States of America",
+        "point": {
+            "longitude": -86.2682804,
+            "latitude": 32.3707826,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.2682804,
+                    32.3707826
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 892040227,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "851",
+                "city": "Montgomery",
+                "street": "Ann Street",
+                "osm_value": "supermarket",
+                "postcode": "36107",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "517 West Avalon Ave, Muscle Shoals AL 35661": {
+        "address": "West Avalon Avenue, 35661, Muscle Shoals, Alabama, United States of America",
+        "point": {
+            "longitude": -87.6724713,
+            "latitude": 34.7449031,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.6724713,
+                    34.7449031
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 6638651,
+                "osm_type": "W",
+                "extent": [
+                    -87.6792766,
+                    34.7449976,
+                    -87.6654748,
+                    34.7447705
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Muscle Shoals",
+                "osm_value": "secondary",
+                "postcode": "35661",
+                "name": "West Avalon Avenue",
+                "state": "Alabama"
+            }
+        }
+    },
+    "5710 Mcfarland Blvd, Northport AL 35476": {
+        "address": "5710, McFarland Boulevard, 35476, McFarland Boulevard, Northport, Alabama, United States of America",
+        "point": {
+            "longitude": -87.6157943,
+            "latitude": 33.2363167,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.6157943,
+                    33.2363167
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 6187559278,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "5710",
+                "city": "Northport",
+                "street": "McFarland Boulevard",
+                "osm_value": "loading_dock",
+                "postcode": "35476",
+                "state": "Alabama"
+            }
+        }
+    },
+    "2900 Pepperrell Pkwy, Opelika AL 36801": {
+        "address": "Redbox, 2900, Pepperell Parkway, 36801:36804, Pepperell Parkway, Opelika, Alabama, United States of America",
+        "point": {
+            "longitude": -85.4219353,
+            "latitude": 32.6373821,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.4219353,
+                    32.6373821
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 6983117613,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "2900",
+                "city": "Opelika",
+                "street": "Pepperell Parkway",
+                "osm_value": "vending_machine",
+                "postcode": "36801:36804",
+                "name": "Redbox",
+                "state": "Alabama"
+            }
+        }
+    },
+    "92 Plaza Lane, Oxford AL 36203": {
+        "address": "92, Plaza Lane, 36203, Plaza Lane, Oxford, Alabama, United States of America",
+        "point": {
+            "longitude": -85.8330347,
+            "latitude": 33.5991916,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.8330347,
+                    33.5991916
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 300327851,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "92",
+                "city": "Oxford",
+                "street": "Plaza Lane",
+                "osm_value": "atm",
+                "postcode": "36203",
+                "state": "Alabama"
+            }
+        }
+    },
+    "2181 Pelham Pkwy, Pelham AL 35124": {
+        "address": "Walmart Supercenter, 2181, Pelham Parkway, 35124, Pelham Parkway, Pelham, Alabama, United States of America",
+        "point": {
+            "longitude": -86.791181,
+            "latitude": 33.340851,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.791181,
+                    33.340851
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315597744,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "2181",
+                "city": "Pelham",
+                "street": "Pelham Parkway",
+                "osm_value": "supermarket",
+                "postcode": "35124",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "165 Vaughan Ln, Pell City AL 35125": {
+        "address": "Arby's, 160, Vaughan Lane, 35125, Vaughan Lane, Pell City, Alabama, United States of America",
+        "point": {
+            "longitude": -86.28048528385489,
+            "latitude": 33.609829149999996,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.28048528385489,
+                    33.609829149999996
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 289598810,
+                "osm_type": "W",
+                "extent": [
+                    -86.2806511,
+                    33.6098954,
+                    -86.2803309,
+                    33.6097612
+                ],
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "housenumber": "160",
+                "city": "Pell City",
+                "street": "Vaughan Lane",
+                "osm_value": "fast_food",
+                "postcode": "35125",
+                "name": "Arby's",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1903 Cobbs Ford Rd, Prattville AL 36066": {
+        "address": "Walmart Supercenter, 1903, Cobbs Ford Road, 36066, Cobbs Ford Road, Prattville, Alabama, United States of America",
+        "point": {
+            "longitude": -86.416339,
+            "latitude": 32.463123,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.416339,
+                    32.463123
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315597940,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1903",
+                "city": "Prattville",
+                "street": "Cobbs Ford Road",
+                "osm_value": "supermarket",
+                "postcode": "36066",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1095 Industrial Pkwy, Saraland AL 36571": {
+        "address": "Walmart Supercenter, 1095, Industrial Parkway, 36571, Industrial Parkway, Saraland, Alabama, United States of America",
+        "point": {
+            "longitude": -88.096979,
+            "latitude": 30.799419,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -88.096979,
+                    30.799419
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315601813,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1095",
+                "city": "Saraland",
+                "street": "Industrial Parkway",
+                "osm_value": "supermarket",
+                "postcode": "36571",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "214 Haynes Street, Talladega AL 35160": {
+        "address": "Walmart Supercenter, 214, Haynes Street, 35160, Haynes Street, Talladega, Alabama, United States of America",
+        "point": {
+            "longitude": -86.080265,
+            "latitude": 33.438556,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.080265,
+                    33.438556
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315598072,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "214",
+                "city": "Talladega",
+                "street": "Haynes Street",
+                "osm_value": "supermarket",
+                "postcode": "35160",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1300 Gilmer Ave, Tallassee AL 36078": {
+        "address": "Gilmer Avenue, 36078, Tallassee, Alabama, United States of America",
+        "point": {
+            "longitude": -85.921144,
+            "latitude": 32.552365,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.921144,
+                    32.552365
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 7649334,
+                "osm_type": "W",
+                "extent": [
+                    -85.939652,
+                    32.572724,
+                    -85.8990338,
+                    32.537343
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Tallassee",
+                "osm_value": "secondary",
+                "postcode": "36078",
+                "name": "Gilmer Avenue",
+                "state": "Alabama"
+            }
+        }
+    },
+    "34301 Hwy 43, Thomasville AL 36784": {
+        "address": "Old Hwy 43, 36784, Thomasville, Alabama, United States of America",
+        "point": {
+            "longitude": -87.740812,
+            "latitude": 31.942958,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.740812,
+                    31.942958
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 6281768,
+                "osm_type": "W",
+                "extent": [
+                    -87.743776,
+                    31.946261,
+                    -87.73852,
+                    31.939627
+                ],
+                "country": "United States of America",
+                "osm_key": "highway",
+                "city": "Thomasville",
+                "osm_value": "residential",
+                "postcode": "36784",
+                "name": "Old Hwy 43",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1501 Skyland Blvd E, Tuscaloosa AL 35405": {
+        "address": "Walmart Supercenter, 1501, Skyland Boulevard East, 35405, Skyland Boulevard East, Tuscaloosa, Alabama, United States of America",
+        "point": {
+            "longitude": -87.51872544143319,
+            "latitude": 33.1653311,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -87.51872544143319,
+                    33.1653311
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 124669222,
+                "osm_type": "W",
+                "extent": [
+                    -87.5196206,
+                    33.165835,
+                    -87.5175862,
+                    33.1646581
+                ],
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "1501",
+                "city": "Tuscaloosa",
+                "street": "Skyland Boulevard East",
+                "osm_value": "supermarket",
+                "postcode": "35405",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "3501 20th Av, Valley AL 36854": {
+        "address": "Walmart Supercenter, 3501, 20th Avenue, 36854, 20th Avenue, Valley, Alabama, United States of America",
+        "point": {
+            "longitude": -85.178726,
+            "latitude": 32.835031,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -85.178726,
+                    32.835031
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 5315596456,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "shop",
+                "housenumber": "3501",
+                "city": "Valley",
+                "street": "20th Avenue",
+                "osm_value": "supermarket",
+                "postcode": "36854",
+                "name": "Walmart Supercenter",
+                "state": "Alabama"
+            }
+        }
+    },
+    "1300 Montgomery Highway, Vestavia Hills AL 35216": {
+        "address": "Vestavia Hills City Hall, Montgomery Highway, 35216, Montgomery Highway, Alabama, United States of America",
+        "point": {
+            "longitude": -86.7880446,
+            "latitude": 33.4501072,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    -86.7880446,
+                    33.4501072
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 367931788,
+                "osm_type": "N",
+                "country": "United States of America",
+                "osm_key": "amenity",
+                "street": "Montgomery Highway",
+                "osm_value": "townhall",
+                "postcode": "35216",
+                "name": "Vestavia Hills City Hall",
+                "state": "Alabama"
+            }
+        }
+    },
+    "Universit\u00e4tsplatz 2, 38106 Braunschweig": {
+        "address": "2, Universit\u00e4tsplatz, 38106, Universit\u00e4tsplatz, Brunswick, Lower Saxony, Germany",
+        "point": {
+            "longitude": 10.5296817,
+            "latitude": 52.2736706,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    10.5296817,
+                    52.2736706
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 4612096563,
+                "osm_type": "N",
+                "country": "Germany",
+                "osm_key": "amenity",
+                "housenumber": "2",
+                "city": "Brunswick",
+                "street": "Universit\u00e4tsplatz",
+                "osm_value": "toilets",
+                "postcode": "38106",
+                "state": "Lower Saxony"
+            }
+        }
+    },
+    "Universit\u00e4tsplatz 1, 38106 Braunschweig": {
+        "address": "1, Universit\u00e4tsplatz, 38106, Universit\u00e4tsplatz, Brunswick, Lower Saxony, Germany",
+        "point": {
+            "longitude": 10.5296817,
+            "latitude": 52.2736706,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    10.5296817,
+                    52.2736706
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 4612096563,
+                "osm_type": "N",
+                "country": "Germany",
+                "osm_key": "amenity",
+                "housenumber": "1",
+                "city": "Brunswick",
+                "street": "Universit\u00e4tsplatz",
+                "osm_value": "toilets",
+                "postcode": "38106",
+                "state": "Lower Saxony"
+            }
+        }
+    },
+    "Hammervej 20, 7160 T\u00f8rring, D\u00e4nemark": {
+        "address": "20, Hammervej, 7160, Hammervej, Hammer, Central Denmark Region, Denmark",
+        "point": {
+            "longitude": 9.427998,
+            "latitude": 55.896432,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    9.427998,
+                    55.896432
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 964898817,
+                "osm_type": "N",
+                "country": "Denmark",
+                "osm_key": "place",
+                "housenumber": "20",
+                "city": "Hammer",
+                "street": "Hammervej",
+                "osm_value": "house",
+                "postcode": "7160",
+                "state": "Central Denmark Region"
+            }
+        }
+    },
+    "M\u00fcnzstra\u00dfe 5, 38100 Braunschweig": {
+        "address": "5, M\u00fcnzstra\u00dfe, 38100, M\u00fcnzstra\u00dfe, Brunswick, Lower Saxony, Germany",
+        "point": {
+            "longitude": 10.523934852564775,
+            "latitude": 52.262606649999995,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    10.523934852564775,
+                    52.262606649999995
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 116132615,
+                "osm_type": "W",
+                "extent": [
+                    10.5238081,
+                    52.2626767,
+                    10.5240508,
+                    52.2625152
+                ],
+                "country": "Germany",
+                "osm_key": "building",
+                "housenumber": "5",
+                "city": "Brunswick",
+                "street": "M\u00fcnzstra\u00dfe",
+                "osm_value": "apartments",
+                "postcode": "38100",
+                "state": "Lower Saxony"
+            }
+        }
+    },
+    "B\u00fcltenweg 74, 38106 Braunschweig": {
+        "address": "International Office - TU Braunschweig, 74-75, B\u00fcltenweg, 38106, B\u00fcltenweg, Brunswick, Lower Saxony, Germany",
+        "point": {
+            "longitude": 10.534524319165644,
+            "latitude": 52.2760762,
+            "altitude": 0.0
+        },
+        "raw": {
+            "geometry": {
+                "coordinates": [
+                    10.534524319165644,
+                    52.2760762
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "osm_id": 27130464,
+                "osm_type": "W",
+                "extent": [
+                    10.5340746,
+                    52.2761988,
+                    10.5349706,
+                    52.2759662
+                ],
+                "country": "Germany",
+                "osm_key": "building",
+                "housenumber": "74-75",
+                "city": "Brunswick",
+                "street": "B\u00fcltenweg",
+                "osm_value": "university",
+                "postcode": "38106",
+                "name": "International Office - TU Braunschweig",
+                "state": "Lower Saxony"
+            }
+        }
+    }
+}
