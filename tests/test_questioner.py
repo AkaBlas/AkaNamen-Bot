@@ -22,7 +22,6 @@ class TestQuestioner:
     def test_init(self, bot, populated_orchestra, empty_member):
         orchestra = populated_orchestra
         orchestra.register_member(empty_member)
-        print(orchestra.members)
         questioner = Questioner(user_id=empty_member.user_id,
                                 orchestra=orchestra,
                                 hint_attributes=[],

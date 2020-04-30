@@ -561,8 +561,6 @@ class Orchestra(PicklableBase):
             raise ValueError('The member must have the attribute specified.')
 
         if self.ATTRS_TO_DICTS[attribute] not in [q[1] for q in self.questionable]:
-            print(self.ATTRS_TO_DICTS[attribute])
-            print(self.questionable)
             raise ValueError('Not enough members with different values for this attribute.')
         if (orig_attribute in ['male_first_names', 'female_first_names']
                 and orig_attribute not in [q[1] for q in self.questionable]):

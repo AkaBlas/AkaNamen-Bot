@@ -8,9 +8,11 @@ from geopy import Photon
 from components import Gender, Member, instruments, UserScore
 from telegram import User
 
+from tests.addresses import get_address_from_cache
+
 
 @pytest.fixture(scope='function')
-def member():
+def member(monkeypatch):
     return Member(user_id=123456)
 
 
@@ -46,7 +48,9 @@ class TestMember:
     latitude = 52.2736706
     longitude = 10.5296817
 
-    def test_all_args(self):
+    def test_all_args(self, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
+
         member = Member(user_id=self.user_id,
                         phone_number=self.phone_number,
                         first_name=self.first_name,
@@ -86,6 +90,11 @@ class TestMember:
         assert pytest.approx(member['longitude'], self.longitude)
         assert pytest.approx(member.longitude, self.longitude)
 
+        def reverse(*args):
+            return get_address_from_cache('Universitätsplatz 2, 38106 Braunschweig')
+
+        monkeypatch.setattr(Photon, 'reverse', reverse)
+
         member = Member(user_id=self.user_id, latitude=self.latitude, longitude=self.longitude)
         assert member.user_id == self.user_id
         assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
@@ -123,11 +132,17 @@ class TestMember:
         with pytest.raises(ValueError, match=attr):
             setattr(member, attr, 'test')
 
-    def test_set_address(self, member):
+    def test_set_address(self, member, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
         member.set_address(address=self.address)
         assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
         assert pytest.approx(member.latitude, self.latitude)
         assert pytest.approx(member.longitude, self.longitude)
+
+        def reverse(*args):
+            return get_address_from_cache('Universitätsplatz 2, 38106 Braunschweig')
+
+        monkeypatch.setattr(Photon, 'reverse', reverse)
 
         member.set_address(coordinates=(self.latitude, self.longitude))
         assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
@@ -140,41 +155,50 @@ class TestMember:
         with pytest.raises(ValueError):
             member.set_address()
 
-    def test_set_address_bad_response(self, member, monkeypatch):
+    def test_set_address_international(self, member, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
+        assert 'Denmark' in member.set_address(address='Hammervej 20, 7160 Tørring, Dänemark')
+
+    def test_set_address_bad_response_1(self, monkeypatch):
+        member = Member(1)
 
         def geocode_1(*args, **kwargs):
             return None
 
-        monkeypatch.setattr(member._geo_locator, 'geocode', geocode_1)
+        monkeypatch.setattr(Photon, 'geocode', geocode_1)
         assert member.set_address(address=self.address) is None
         assert member.latitude is None
         assert member.longitude is None
         assert member._raw_address is None
 
+    def test_set_address_bad_response_2(self, monkeypatch):
+        member = Member(1)
+
         def geocode_2(*args, **kwargs):
-            location = Photon().geocode(*args, **kwargs)
+            location = get_address_from_cache(args[1])
             location.raw.clear()
             return location
 
-        monkeypatch.setattr(member._geo_locator, 'geocode', geocode_2)
+        monkeypatch.setattr(Photon, 'geocode', geocode_2)
         assert 'Universitätsplatz' in member.set_address(address=self.address)
         assert member.latitude is not None
         assert member.longitude is not None
         assert member._raw_address is None
+
+    def test_set_address_bad_response_3(self, monkeypatch):
+        member = Member(1)
 
         def geocode_3(*args, **kwargs):
-            location = Photon().geocode(*args, **kwargs)
-            location.raw['properties'].clear()
+            location = get_address_from_cache(args[1])
+            if 'properties' in location.raw:
+                location.raw['properties'].clear()
             return location
 
-        monkeypatch.setattr(member._geo_locator, 'geocode', geocode_3)
+        monkeypatch.setattr(Photon, 'geocode', geocode_3)
         assert 'Universitätsplatz' in member.set_address(address=self.address)
         assert member.latitude is not None
         assert member.longitude is not None
         assert member._raw_address is None
-
-    def test_set_address_international(self, member):
-        assert 'Denmark' in member.set_address(address='Hammervej 20, 7160 Tørring, Dänemark')
 
     def test_full_name(self, member):
         assert member.full_name is None
@@ -202,7 +226,9 @@ class TestMember:
         member.last_name = self.last_name
         assert member.vcard_filename == f'{self.first_name}_{self.last_name}.vcf'
 
-    def test_vcard(self, member, bot, photo_file_id):
+    def test_vcard(self, member, bot, photo_file_id, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
+
         with pytest.raises(ValueError):
             member.vcard(bot)
 
@@ -241,20 +267,29 @@ class TestMember:
         assert member.birthday == '31.12.'
         assert member['birthday'] == '31.12.'
 
-    def test_distance_of_address_to(self, member):
+    def test_distance_of_address_to(self, member, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
+
         with pytest.raises(ValueError, match='This member has no'):
             member.distance_of_address_to((52.273549, 10.529447))
 
-        member.set_address(coordinates=(52.273549, 10.529447))
-        assert member.distance_of_address_to((52.273549, 10.529447)) == pytest.approx(0, abs=0.02)
+        def reverse(*args):
+            return get_address_from_cache('Universitätsplatz 2, 38106 Braunschweig')
 
-        assert member.distance_of_address_to((52.280073, 10.544101)) == pytest.approx(1.245,
+        monkeypatch.setattr(Photon, 'reverse', reverse)
+
+        member.set_address(coordinates=(52.2736706, 10.5296817))
+        assert member.distance_of_address_to((52.2736706, 10.5296817)) == pytest.approx(0,
+                                                                                        abs=0.02)
+
+        assert member.distance_of_address_to((52.280073, 10.544101)) == pytest.approx(1.215,
                                                                                       abs=0.01)
 
-    def test_compare_address_to(self, member, test_string):
+    def test_compare_address_to(self, member, test_string, monkeypatch):
         with pytest.raises(ValueError, match='This member has no'):
             member.compare_address_to(test_string)
 
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
         member.set_address('Universitätsplatz 2, 38106 Braunschweig')
         assert 0 <= member.compare_address_to(test_string) <= 1
         assert member.compare_address_to(member.address) == pytest.approx(1)
@@ -283,7 +318,9 @@ class TestMember:
         assert 0 <= member.compare_last_name_to(test_string) <= 1
         assert member.compare_last_name_to(member.last_name) == pytest.approx(1)
 
-    def test_to_string(self, member):
+    def test_to_string(self, member, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
+
         assert member.to_str() == ('Name: -\nGeburtstag: -\nInstrument/e: -\nAdresse: -\n'
                                    'Mobil: -\nPhoto: -')
         member.first_name = self.first_name
@@ -303,6 +340,8 @@ class TestMember:
 
     @responses.activate
     def test_guess_member(self, monkeypatch):
+        monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
+
         config = ConfigParser()
         config.read('bot.ini')
         url = config['akadressen']['url']

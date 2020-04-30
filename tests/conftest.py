@@ -1,24 +1,43 @@
 #!/usr/bin/env python
+import pytest
 import datetime as dt
 import os
 import sys
+
 from collections import defaultdict
 from queue import Queue
 from threading import Thread, Event
 from time import sleep
 
-import pytest
 from telegram import Bot
 from telegram.ext import Dispatcher, JobQueue, Updater
+from geopy import Photon
 
 from tests.bots import get_bot
 from tests.orchestra import orchestra
+from tests.addresses import get_address_from_cache
 
 GITHUB_ACTION = os.getenv('GITHUB_ACTION', False)
 
 # On Github Actions fold the output
 if GITHUB_ACTION:
     pytest_plugins = ['tests.plugin_github_group']
+
+# Make sure that we don't actually geocode data in the tests
+orig_geocode = Photon.geocode
+orig_reverse = Photon.reverse
+
+
+def new_geocode(*args, **kwargs):
+    pytest.fail('Make sure to mock Photon.geocode with tests.addresses.get_address_from_cache')
+
+
+def new_reverse(*args, **kwargs):
+    pytest.fail('Make sure to mock Photon.reverse with tests.addresses.get_address_from_cache')
+
+
+Photon.geocode = new_geocode
+Photon.reverse = new_reverse
 
 
 def pytest_configure(config):
@@ -108,8 +127,9 @@ def updater(bot):
         up.stop()
 
 
-@pytest.fixture(scope='class')
-def populated_orchestra(request):
+@pytest.fixture(scope='function')
+def populated_orchestra(request, monkeypatch):
+    monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
     param = request.param if hasattr(request, 'param') else {}
     members = param.get('members', 100)
     skip = param.get('skip', [])
