@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the instrument classes."""
-from __future__ import annotations
 import sys
 import inspect
 
@@ -30,7 +29,7 @@ class Instrument:
     name: str = ''
 
     @staticmethod
-    def from_string(string: str) -> Instrument:
+    def from_string(string: str) -> 'Instrument':
         """
         Given a string representation or an AkaBlas-style abbreviation of an instrument, this will
         return a corresponding :class:`components.Instrument` instance.

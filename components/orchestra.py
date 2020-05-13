@@ -388,10 +388,7 @@ class Orchestra(PicklableBase):
 
         return sorted([getattr(m.user_score, attr) for m in self.members.values()], reverse=True)
 
-    def _score_text(self,
-                    attr: str,
-                    length: Optional[int] = None,
-                    html: Optional[bool] = False) -> str:
+    def _score_text(self, attr: str, length: int = None, html: Optional[bool] = False) -> str:
         sorted_scores = self._score(attr)
 
         text = ''
@@ -432,7 +429,7 @@ class Orchestra(PicklableBase):
         """
         return self._score('today')
 
-    def todays_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+    def todays_score_text(self, length: int = None, html: Optional[bool] = False) -> str:
         """
         String representation of :attr:`todays_score`.
 
@@ -453,7 +450,7 @@ class Orchestra(PicklableBase):
         """
         return self._score('week')
 
-    def weeks_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+    def weeks_score_text(self, length: int = None, html: Optional[bool] = False) -> str:
         """
         String representation of :attr:`weeks_score`.
 
@@ -474,7 +471,7 @@ class Orchestra(PicklableBase):
         """
         return self._score('month')
 
-    def months_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+    def months_score_text(self, length: int = None, html: Optional[bool] = False) -> str:
         """
         String representation of :attr:`months_score`.
 
@@ -495,7 +492,7 @@ class Orchestra(PicklableBase):
         """
         return self._score('year')
 
-    def years_score_text(self, length: Optional[int] = None, html: Optional[bool] = False) -> str:
+    def years_score_text(self, length: int = None, html: Optional[bool] = False) -> str:
         """
         String representation of :attr:`years_score`.
 
@@ -516,9 +513,7 @@ class Orchestra(PicklableBase):
         """
         return self._score('overall')
 
-    def overall_score_text(self,
-                           length: Optional[int] = None,
-                           html: Optional[bool] = False) -> str:
+    def overall_score_text(self, length: int = None, html: Optional[bool] = False) -> str:
         """
         String representation of :attr:`overall_score`.
 

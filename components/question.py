@@ -5,7 +5,7 @@ from components import MessageType, UpdateType
 
 from telegram import Poll, Update
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
 
@@ -34,7 +34,7 @@ class Question:
                  member: 'Member',
                  attribute: str,
                  multiple_choice: bool = True,
-                 poll: Optional[Poll] = None) -> None:
+                 poll: Poll = None) -> None:
         if attribute not in self.SUPPORTED_ATTRIBUTES:
             raise ValueError('Attribute not supported.')
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Score class."""
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
 
@@ -20,10 +20,7 @@ class Score:
         member: The member this score is associated with.
     """
 
-    def __init__(self,
-                 answers: int = 0,
-                 correct: int = 0,
-                 member: Optional['Member'] = None) -> None:
+    def __init__(self, answers: int = 0, correct: int = 0, member: 'Member' = None) -> None:
         self._answers = 0
         self._correct = 0
         self.answers = answers
