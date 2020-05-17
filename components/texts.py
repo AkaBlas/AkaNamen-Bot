@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains functions for generating often needed texts."""
+import random
 from components import Question, Orchestra
 from typing import Optional, TYPE_CHECKING
 if TYPE_CHECKING:
@@ -259,6 +260,8 @@ def question_text(member: 'Member',
         raise ValueError('Photos are only supported as multiple choice questions.')
 
     hint = member[Question.MAP_ATTRIBUTES[hint_attribute]]
+    if isinstance(hint, list):
+        hint = str(random.choice(hint))
 
     if multiple_choice:
         q = MULTIPLE_CHOICE_QUESTIONS[hint_attribute][question_attribute]

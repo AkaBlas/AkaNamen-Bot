@@ -362,17 +362,14 @@ class TestOrchestra:
         orchestra.register_member(Member(5, first_name='Mike', gender=Gender.MALE))
         orchestra.register_member(Member(6, first_name='Brad', gender=Gender.FEMALE))
         orchestra.register_member(Member(7, first_name='Marc', gender=Gender.FEMALE))
-        assert orchestra.questionable == [('first_names', 'full_names'), ('genders', 'full_names')]
+        assert orchestra.questionable == [('first_names', 'full_names')]
 
         orchestra.register_member(Member(8, first_name='John', gender=Gender.FEMALE))
         orchestra.register_member(Member(9, first_name='Mike', gender=Gender.FEMALE))
         assert sorted(orchestra.questionable) == sorted([('first_names', 'female_first_names'),
                                                          ('first_names', 'full_names'),
                                                          ('full_names', 'female_first_names'),
-                                                         ('full_names', 'first_names'),
-                                                         ('genders', 'female_first_names'),
-                                                         ('genders', 'first_names'),
-                                                         ('genders', 'full_names')])
+                                                         ('full_names', 'first_names')])
 
         orchestra.register_member(Member(10, first_name='Brad', gender=Gender.MALE))
         orchestra.register_member(Member(11, first_name='Marc', gender=Gender.MALE))
@@ -381,11 +378,26 @@ class TestOrchestra:
                                                          ('first_names', 'male_first_names'),
                                                          ('full_names', 'female_first_names'),
                                                          ('full_names', 'first_names'),
-                                                         ('full_names', 'male_first_names'),
-                                                         ('genders', 'female_first_names'),
-                                                         ('genders', 'first_names'),
-                                                         ('genders', 'full_names'),
-                                                         ('genders', 'male_first_names')])
+                                                         ('full_names', 'male_first_names')])
+
+    def test_questionable_instruments(self, orchestra):
+        assert orchestra.questionable == []
+        orchestra.register_member(
+            Member(1, first_name='1', instruments=[instruments.Tuba(),
+                                                   instruments.Trumpet()]))
+        orchestra.register_member(Member(2, first_name='2', instruments=instruments.Tuba()))
+        assert orchestra.questionable == []
+        orchestra.register_member(
+            Member(4, first_name='4', instruments=[instruments.Trombone(),
+                                                   instruments.Flute()]))
+        assert orchestra.questionable == [('first_names', 'instruments'),
+                                          ('full_names', 'instruments')]
+        orchestra.register_member(
+            Member(5, first_name='5', instruments=instruments.WoodwindInstrument()))
+        assert orchestra.questionable == [('first_names', 'full_names'),
+                                          ('first_names', 'instruments'),
+                                          ('full_names', 'instruments'),
+                                          ('instruments', 'full_names')]
 
     def test_questionable_error(self, orchestra):
         with pytest.raises(ValueError, match='overridden'):
@@ -457,3 +469,31 @@ class TestOrchestra:
         assert len(set([m.user_id for m in members])) == 4
         assert len(set([m.first_name for m in members])) == 4
         assert all([m.gender == Gender.MALE for m in members])
+
+    def test_draw_members_instruments(self, orchestra):
+        member = Member(1,
+                        first_name='Doe',
+                        instruments=[instruments.Trombone(),
+                                     instruments.Trumpet()])
+        orchestra.register_member(member)
+        orchestra.register_member(Member(2, instruments=instruments.BrassInstrument()))
+        orchestra.register_member(Member(3, instruments=instruments.Trombone()))
+        orchestra.register_member(Member(4, instruments=instruments.Trumpet()))
+        orchestra.register_member(
+            Member(5, instruments=[instruments.Clarinet(),
+                                   instruments.Flute()]))
+        orchestra.register_member(
+            Member(6, instruments=[instruments.PercussionInstrument(),
+                                   instruments.Drums()]))
+        orchestra.register_member(Member(7, instruments=instruments.Conductor()))
+        orchestra.register_member(
+            Member(8, instruments=[instruments.AltoSaxophone(),
+                                   instruments.TenorSaxophone()]))
+
+        for i in range(9, 15):
+            orchestra.register_member(Member(i))
+
+        index, members = orchestra.draw_members(member, 'instruments')
+        assert members[index] is member
+        assert len(set([m.user_id for m in members])) == 4
+        assert len(set([tuple(m.instruments) for m in members])) == 4

@@ -66,8 +66,8 @@ def date_of_birth():
 
 def instrument():
     number = random.randint(1, 3)
-    instruments_ = random.sample([i for i in instruments.__dict__.values() if isinstance(i, type)],
-                                 number)
+    instruments_ = random.sample(
+        [i() for i in instruments.__dict__.values() if isinstance(i, type)], number)
     return value_or_none(instruments_)
 
 

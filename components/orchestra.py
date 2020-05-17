@@ -273,8 +273,9 @@ class Orchestra(PicklableBase):
               :attr:`components.Member.age`
 
         Note:
-            ``first_names`` will be listed as questionable attribute, if at least one of
-            ``male_first_names`` *or* ``female_first_names`` is.
+            * ``first_names`` will be listed as questionable attribute, if at least one of
+              ``male_first_names`` *or* ``female_first_names`` is.
+            * ``gender`` will never be listed
 
         Returns:
             Tuples of keys of :attr:`DICTS_TO_ATTRS`. May be empty.
@@ -283,7 +284,7 @@ class Orchestra(PicklableBase):
         with self._questionable_lock:
             for hint_list_name in [
                     hln for hln in self.DICTS_TO_ATTRS.keys()
-                    if hln not in ['male_first_names', 'female_first_names']
+                    if hln not in ['male_first_names', 'female_first_names', 'genders']
             ]:
                 for question_list_name in [
                         qln for qln in self.DICTS_TO_ATTRS.keys() if qln != hint_list_name
@@ -568,7 +569,15 @@ class Orchestra(PicklableBase):
 
         result = [member]
         # we need to copy here b/c we want to update later on
-        set_ = copy(dict_[member[attribute]])
+        attr = member[attribute]
+        if isinstance(attr, list):
+            # Special case, currently only for instruments
+            set_: Set[Member] = set()
+            for entry in attr:
+                set_ |= dict_[entry]
+        else:
+            set_ = copy(dict_[attr])
+
         for i in range(3):
             if orig_attribute == 'male_first_names':
                 next_member = random.choice([
@@ -584,7 +593,13 @@ class Orchestra(PicklableBase):
                 next_member = random.choice(
                     [m for m in self.members.values() if m[attribute] and m not in set_])
 
-            set_.update(dict_[next_member[attribute]])
+            attr = next_member[attribute]
+            if isinstance(attr, list):
+                # Special case, currently only for instruments
+                for entry in attr:
+                    set_ |= dict_[entry]
+            else:
+                set_.update(dict_[attr])
             result.append(next_member)
 
         random.shuffle(result)

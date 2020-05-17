@@ -94,7 +94,7 @@ class Questioner:
                 raise ValueError(f'Unsupported hint attribute {ha}.')
         for index, qa in enumerate(question_attributes):
             if qa in Question.SUPPORTED_ATTRIBUTES:
-                hint_attributes[index] = Orchestra.ATTRS_TO_DICTS[Question.MAP_ATTRIBUTES[qa]]
+                question_attributes[index] = Orchestra.ATTRS_TO_DICTS[Question.MAP_ATTRIBUTES[qa]]
             elif qa not in Orchestra.DICTS_TO_ATTRS:
                 raise ValueError(f'Unsupported question attribute {qa}.')
 
@@ -109,11 +109,14 @@ class Questioner:
                 raise ValueError(f'Attribute {qa} not available as question for this orchestra.')
 
         if not hint_attributes:
-            hint_attributes = list(set(q[0] for q in self.orchestra.questionable))
+            _hint_attributes = set(q[0] for q in self.orchestra.questionable)
+            _hint_attributes.discard('dates_of_birth')
+            hint_attributes = list(_hint_attributes)
         if not question_attributes:
             _question_attributes = set(q[1] for q in self.orchestra.questionable)
             _question_attributes.discard('male_first_names')
             _question_attributes.discard('female_first_names')
+            _question_attributes.discard('dates_of_birth')
             question_attributes = list(_question_attributes)
 
         if not hint_attributes or not question_attributes:
@@ -156,9 +159,9 @@ class Questioner:
 
         members_attribute = Orchestra.DICTS_TO_ATTRS[hint_attribute]
         for m in self.orchestra.members.values():
-            if m[members_attribute] is not None:
+            if m[members_attribute]:
                 for attr in question_attributes:
-                    if m[Orchestra.DICTS_TO_ATTRS[attr]] is not None:
+                    if m[Orchestra.DICTS_TO_ATTRS[attr]]:
                         out[attr].add(m)
 
         out = {k: v for k, v in out.items() if len(v) >= 4}
@@ -179,6 +182,8 @@ class Questioner:
         Args:
             update: The :class:`telegram.Update` to be tested.
         """
+        if not update.effective_user:
+            return False
         if update.effective_user.id != self.member.user_id:
             return False
         if not self.current_question:
@@ -208,7 +213,7 @@ class Questioner:
 
         if not question.multiple_choice:
             if is_correct:
-                text = 'Das wir richtig! 👍'
+                text = 'Das war richtig! 👍'
             else:
                 text = (f'Das war leider nicht korrekt. 😕'
                         f'Die richtige Antwort lautet »{question.correct_answer}«')
@@ -219,32 +224,47 @@ class Questioner:
         Asks the next question.
         """
         hint_attribute = random.choice(self.hint_attributes)
-        if Orchestra.DICTS_TO_ATTRS[hint_attribute] == Question.PHOTO:
-            multiple_choice = True
-            photo_question = True
-        else:
-            multiple_choice = self.multiple_choice
-            photo_question = False
 
         available_members = self.available_members(hint_attribute)
         question_attribute: str = random.choice(list(available_members.keys()))
         supported_question_attribute = Question.PAM_ATTRIBUTES[
             Orchestra.DICTS_TO_ATTRS[question_attribute]]
 
+        if Orchestra.DICTS_TO_ATTRS[question_attribute] == Question.PHOTO:
+            multiple_choice = True
+            photo_question = True
+        else:
+            multiple_choice = self.multiple_choice
+            photo_question = False
+
         member: Member = random.choice(list(available_members[question_attribute]))
         question = question_text(member, question_attribute, hint_attribute, multiple_choice)
 
         if multiple_choice:
             index, members = self.orchestra.draw_members(member, question_attribute)
-            poll = self.bot.send_poll(
-                chat_id=self.member.user_id,
-                question=question,
-                options=(PHOTO_OPTIONS if photo_question else
-                         [str(m[Orchestra.DICTS_TO_ATTRS[question_attribute]]) for m in members]),
-                is_anonymous=False,
-                type=Poll.QUIZ,
-                correct_option_id=index)
-            self.current_question = Question(member, supported_question_attribute, poll=poll)
+
+            if isinstance(member[Orchestra.DICTS_TO_ATTRS[question_attribute]], list):
+                options = [
+                    str(random.choice(
+                        m[Orchestra.DICTS_TO_ATTRS[question_attribute]]))  # type: ignore
+                    for m in members
+                ]
+            else:
+                options = [str(m[Orchestra.DICTS_TO_ATTRS[question_attribute]]) for m in members]
+
+            # TODO
+            if photo_question:
+                pass  # send photos!
+            poll = self.bot.send_poll(chat_id=self.member.user_id,
+                                      question=question,
+                                      options=(PHOTO_OPTIONS if photo_question else options),
+                                      is_anonymous=False,
+                                      type=Poll.QUIZ,
+                                      correct_option_id=index).poll
+            self.current_question = Question(member,
+                                             supported_question_attribute,
+                                             poll=poll,
+                                             multiple_choice=multiple_choice)
         else:
             self.bot.send_message(chat_id=self.member.user_id, text=question)
             self.current_question = Question(member,
