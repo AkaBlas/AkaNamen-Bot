@@ -68,17 +68,17 @@ class Member:
 
     def __init__(self,
                  user_id: Union[str, int],
-                 phone_number: Optional[str] = None,
-                 first_name: Optional[str] = None,
-                 last_name: Optional[str] = None,
-                 nickname: Optional[str] = None,
-                 gender: Optional[str] = None,
-                 date_of_birth: Optional[dt.date] = None,
-                 instruments: Optional[Union[List[Instrument], Instrument]] = None,
-                 address: Optional[str] = None,
-                 latitude: Optional[float] = None,
-                 longitude: Optional[float] = None,
-                 photo_file_id: Optional[str] = None,
+                 phone_number: str = None,
+                 first_name: str = None,
+                 last_name: str = None,
+                 nickname: str = None,
+                 gender: str = None,
+                 date_of_birth: dt.date = None,
+                 instruments: Union[List[Instrument], Instrument] = None,
+                 address: str = None,
+                 latitude: float = None,
+                 longitude: float = None,
+                 photo_file_id: str = None,
                  allow_contact_sharing: Optional[bool] = False) -> None:
         if sum([x is not None for x in [longitude, latitude]]) == 1:
             raise ValueError('Either none of longitude and latitude or both must be passed!')
@@ -134,8 +134,8 @@ class Member:
                     f'Photo: {"🖼" if self.photo_file_id else "-"}')
 
     def set_address(self,
-                    address: Optional[str] = None,
-                    coordinates: Optional[Tuple[float, float]] = None) -> Optional[str]:
+                    address: str = None,
+                    coordinates: Tuple[float, float] = None) -> Optional[str]:
         """
         Tries to get the missing data from the Open Street Map API. Exactly one of the optional
         parameters must be passed.
