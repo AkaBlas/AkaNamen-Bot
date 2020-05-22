@@ -215,9 +215,9 @@ class Questioner:
             if is_correct:
                 text = 'Das war richtig! 👍'
             else:
-                text = (f'Das war leider nicht korrekt. 😕'
+                text = (f'Das war leider nicht korrekt. 😕 '
                         f'Die richtige Antwort lautet »{question.correct_answer}«')
-            update.message.reply_text(text)
+            update.message.reply_text(text=text)
 
     def ask_question(self) -> None:
         """

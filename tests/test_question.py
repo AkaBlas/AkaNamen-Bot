@@ -183,7 +183,7 @@ class TestQuestion:
         q = Question(member, Question.INSTRUMENT, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
-        assert q.correct_answer == str(member.instruments)
+        assert q.correct_answer == [str(i) for i in member.instruments]
 
     @pytest.mark.parametrize('answer, result', [('Universitätsplatz, Braunschweig', True),
                                                 ('Univeritätsplatz 2, Braunschweig', True),
