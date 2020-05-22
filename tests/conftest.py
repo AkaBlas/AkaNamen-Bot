@@ -128,9 +128,9 @@ def updater(bot):
 
 
 @pytest.fixture(scope='function')
-def populated_orchestra(request, monkeypatch):
+def populated_orchestra(request, monkeypatch, bot, chat_id):
     monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
     param = request.param if hasattr(request, 'param') else {}
     members = param.get('members', 100)
     skip = param.get('skip', [])
-    return orchestra(members, skip)
+    return orchestra(members, bot, chat_id, skip=skip)

@@ -26,7 +26,7 @@ class Instrument:
         Trumpet() == 'trompete' # True
         Trupmet() == 'Saxophon' # False
     """
-    name: str = ''
+    name: str = 'Instrument'
 
     @staticmethod
     def from_string(string: str) -> 'Instrument':
@@ -81,7 +81,7 @@ class Instrument:
             for cls in cls_members:
                 if string == cls[1].name.lower():
                     return cls[1]()
-            raise ValueError('Unknown instrument description.')
+        raise ValueError('Unknown instrument description.')
 
     def __str__(self) -> str:
         return self.name

@@ -4,7 +4,7 @@
 from components import Member, Question, Orchestra, question_text, PHOTO_OPTIONS, Score
 
 import random
-from telegram import Update, Bot, Poll
+from telegram import Update, Bot, Poll, InputMediaPhoto
 from collections import defaultdict
 from typing import List, Dict, Set, Optional
 
@@ -252,9 +252,27 @@ class Questioner:
             else:
                 options = [str(m[Orchestra.DICTS_TO_ATTRS[question_attribute]]) for m in members]
 
-            # TODO
+            # Truncate options
+            for idx, o in enumerate(options):
+                if len(o) > 100:
+                    options[idx] = o[:96] + ' ...'
+
+            # Send photos if needed
             if photo_question:
-                pass  # send photos!
+                self.bot.send_media_group(chat_id=self.member.user_id,
+                                          media=[
+                                              InputMediaPhoto(members[0].photo_file_id),
+                                              InputMediaPhoto(members[1].photo_file_id)
+                                          ])
+                self.bot.send_media_group(chat_id=self.member.user_id,
+                                          media=[
+                                              InputMediaPhoto(members[2].photo_file_id),
+                                              InputMediaPhoto(members[3].photo_file_id)
+                                          ])
+            if Orchestra.DICTS_TO_ATTRS[hint_attribute] == Question.PHOTO:
+                self.bot.send_photo(chat_id=self.member.user_id, photo=member.photo_file_id)
+
+            # Send the question
             poll = self.bot.send_poll(chat_id=self.member.user_id,
                                       question=question,
                                       options=(PHOTO_OPTIONS if photo_question else options),
@@ -266,7 +284,12 @@ class Questioner:
                                              poll=poll,
                                              multiple_choice=multiple_choice)
         else:
-            self.bot.send_message(chat_id=self.member.user_id, text=question)
+            if Orchestra.DICTS_TO_ATTRS[hint_attribute] == Question.PHOTO:
+                self.bot.send_photo(chat_id=self.member.user_id,
+                                    photo=member.photo_file_id,
+                                    caption=question)
+            else:
+                self.bot.send_message(chat_id=self.member.user_id, text=question)
             self.current_question = Question(member,
                                              supported_question_attribute,
                                              multiple_choice=multiple_choice)

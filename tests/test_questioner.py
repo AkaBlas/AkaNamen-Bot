@@ -1,8 +1,9 @@
 #!/usr/bin/env python
+import random
 import pytest
 
-from telegram import Update, PollAnswer, User
-from components import Member, Orchestra, Questioner
+from telegram import Update, PollAnswer, User, Message, Chat
+from components import Member, Orchestra, Questioner, Question
 
 
 @pytest.fixture(scope='function')
@@ -101,9 +102,13 @@ class TestQuestioner:
                        number_of_questions=42,
                        bot=bot)
 
+    @pytest.mark.parametrize('runs', range(30))
     @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
-    def test_ask_question(self, bot, chat_id, populated_orchestra, empty_member, monkeypatch):
+    def test_ask_question_multiple_choice(self, bot, chat_id, populated_orchestra, empty_member,
+                                          monkeypatch, runs):
         orig_send_poll = bot.send_poll
+        orig_send_photo = bot.send_photo
+        orig_send_media_group = bot.send_media_group
 
         poll_message = None
 
@@ -113,17 +118,27 @@ class TestQuestioner:
             poll_message = orig_send_poll(*args, **kwargs)
             return poll_message
 
+        def send_photo(*args, **kwargs):
+            kwargs['chat_id'] = chat_id
+            return orig_send_photo(*args, **kwargs)
+
+        def send_media_group(*args, **kwargs):
+            kwargs['chat_id'] = chat_id
+            return orig_send_media_group(*args, **kwargs)
+
         orchestra = populated_orchestra
         orchestra.register_member(empty_member)
         questioner = Questioner(user_id=empty_member.user_id,
                                 orchestra=orchestra,
-                                hint_attributes=['instruments'],
-                                question_attributes=['first_names'],
+                                hint_attributes=[],
+                                question_attributes=[],
                                 number_of_questions=42,
                                 bot=bot,
                                 multiple_choice=True)
 
         monkeypatch.setattr(questioner.bot, 'send_poll', send_poll)
+        monkeypatch.setattr(questioner.bot, 'send_photo', send_photo)
+        monkeypatch.setattr(questioner.bot, 'send_media_group', send_media_group)
         questioner.ask_question()
 
         assert questioner.current_question
@@ -143,6 +158,106 @@ class TestQuestioner:
 
         assert questioner.check_update(update)
         questioner.handle_update(update)
+        assert questioner.score.answers == 1
+        assert questioner.score.correct == 1
+        assert len(questioner.used_members) == 1
+        assert len(questioner.used_members[list(questioner.used_members.keys())[0]]) == 1
+
+    @pytest.mark.parametrize('runs', range(30))
+    @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
+    def test_ask_question_free_text(self, bot, chat_id, populated_orchestra, empty_member,
+                                    monkeypatch, runs):
+        orig_send_poll = bot.send_poll
+        orig_send_photo = bot.send_photo
+        orig_send_media_group = bot.send_media_group
+        orig_send_message = bot.send_message
+
+        poll_message = None
+
+        def send_poll(*args, **kwargs):
+            kwargs['chat_id'] = chat_id
+            nonlocal poll_message
+            poll_message = orig_send_poll(*args, **kwargs)
+            return poll_message
+
+        def send_photo(*args, **kwargs):
+            kwargs['chat_id'] = chat_id
+            return orig_send_photo(*args, **kwargs)
+
+        def send_media_group(*args, **kwargs):
+            kwargs['chat_id'] = chat_id
+            return orig_send_media_group(*args, **kwargs)
+
+        def send_message(*args, **kwargs):
+            kwargs['chat_id'] = chat_id
+            if len(args) == 1:
+                args = ()
+            else:
+                args = args[1:]
+            return orig_send_message(*args, **kwargs)
+
+        orchestra = populated_orchestra
+        orchestra.register_member(empty_member)
+        questioner = Questioner(user_id=empty_member.user_id,
+                                orchestra=orchestra,
+                                hint_attributes=[],
+                                question_attributes=[],
+                                number_of_questions=42,
+                                bot=bot,
+                                multiple_choice=False)
+
+        monkeypatch.setattr(questioner.bot, 'send_poll', send_poll)
+        monkeypatch.setattr(questioner.bot, 'send_photo', send_photo)
+        monkeypatch.setattr(questioner.bot, 'send_media_group', send_media_group)
+        monkeypatch.setattr(questioner.bot, 'send_message', send_message)
+        questioner.ask_question()
+
+        assert questioner.current_question
+        if questioner.current_question.multiple_choice:
+            assert questioner.current_question.attribute == Question.PHOTO
+            assert questioner.current_question.poll is poll_message.poll
+        else:
+            assert not questioner.current_question.poll
+        assert not questioner.used_members
+
+        if questioner.current_question.multiple_choice:
+            update = Update(123,
+                            poll_answer=PollAnswer(poll_message.poll.id, User(
+                                chat_id, 'foo',
+                                False), [(poll_message.poll.correct_option_id + 1) % 4]))
+        else:
+            update = Update(123,
+                            message=Message(123,
+                                            User(chat_id, 'foo', False),
+                                            None,
+                                            Chat(chat_id, Chat.PRIVATE),
+                                            text='some very false',
+                                            bot=bot))
+
+        assert not questioner.check_update(update)
+
+        if questioner.current_question.multiple_choice:
+            update = Update(123,
+                            poll_answer=PollAnswer(poll_message.poll.id,
+                                                   User(empty_member.user_id, 'foo', False),
+                                                   [poll_message.poll.correct_option_id]))
+        else:
+            if isinstance(questioner.current_question.correct_answer, list):
+                text = str(random.choice(questioner.current_question.correct_answer))
+            else:
+                text = questioner.current_question.correct_answer
+            print(text)
+            update = Update(123,
+                            message=Message(123,
+                                            User(empty_member.user_id, 'foo', False),
+                                            None,
+                                            Chat(empty_member.user_id, Chat.PRIVATE),
+                                            text=text,
+                                            bot=bot))
+
+        assert questioner.check_update(update)
+        questioner.handle_update(update)
+        print(update.to_dict())
         assert questioner.score.answers == 1
         assert questioner.score.correct == 1
         assert len(questioner.used_members) == 1

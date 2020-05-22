@@ -24,7 +24,7 @@ def main() -> None:
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    defaults = Defaults(parse_mode=ParseMode.HTML)
+    defaults = Defaults(parse_mode=ParseMode.HTML, disable_notification=True)
     persistence = PicklePersistence('akanamen_db', single_file=False)
     updater = Updater(token, use_context=True, persistence=persistence, defaults=defaults)
 

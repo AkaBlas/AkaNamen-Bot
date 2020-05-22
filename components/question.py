@@ -5,7 +5,8 @@ from components import MessageType, UpdateType
 
 from telegram import Poll, Update
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union, List
+
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
 
@@ -79,12 +80,15 @@ class Question:
                 ]
 
     @property
-    def correct_answer(self) -> str:
+    def correct_answer(self) -> Union[str, List[str]]:
         """The correct answer for this question."""
         if self.multiple_choice and self.poll:
             return self.poll.options[self.poll.correct_option_id]
         else:
-            return str(self.member[self.MAP_ATTRIBUTES[self.attribute]])
+            attribute = self.member[self.MAP_ATTRIBUTES[self.attribute]]
+            if isinstance(attribute, list):
+                return [str(a) for a in attribute]
+            return str(attribute)
 
     def check_answer(self, update: Update) -> bool:
         """
@@ -107,7 +111,7 @@ class Question:
                 accuracy = getattr(self.member, f'compare_{self.attribute}_to')(answer)
                 return accuracy >= 0.85
             elif self.attribute == self.BIRTHDAY:
-                bd_string = self.member.birthday.strip('0').replace('.', '')  # type: ignore
+                bd_string = self.member.birthday.replace('0', '').replace('.', '')  # type: ignore
                 answer = answer.replace('.', '').replace(',', '').replace(';', '')
                 answer = answer.replace('0', '').replace(' ', '')
                 return answer == bd_string

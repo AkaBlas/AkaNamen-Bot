@@ -2,7 +2,6 @@
 """Provide an orchestra to tests"""
 import random
 import datetime as dt
-import uuid
 from components import Gender, instruments, Member, Orchestra
 
 
@@ -190,11 +189,21 @@ def address():
     return value_or_none(address_)
 
 
-def photo_file_id():
-    return str(uuid.uuid4())
+class PhotoFileID:
+    PHOTO_FILE_IDS = []
+
+    @classmethod
+    def photo_file_id(cls, bot, chat_id):
+        if not cls.PHOTO_FILE_IDS:
+            for _ in range(10):
+                with open('tests/data/vcard_photo.png', 'rb') as file:
+                    message = bot.send_photo(chat_id=chat_id, photo=file)
+                    min_file = min(message.photo, key=lambda x: x.file_size)
+                    cls.PHOTO_FILE_IDS.append(min_file.file_id)
+        return random.choice(cls.PHOTO_FILE_IDS)
 
 
-def orchestra(members, skip=None):
+def orchestra(members, bot, chat_id, skip=None):
     if skip is None:
         skip = []
     orchestra_ = Orchestra()
@@ -208,7 +217,8 @@ def orchestra(members, skip=None):
         date_of_birth_ = date_of_birth() if 'date_of_birth' not in skip else None
         instruments_ = instrument() if 'instruments' not in skip else None
         address_ = address() if 'address' not in skip else None
-        photo_file_id_ = photo_file_id() if 'photo_file_id' not in skip else None
+        photo_file_id_ = (PhotoFileID.photo_file_id(bot, chat_id)
+                          if 'photo_file_id' not in skip else None)
         orchestra_.register_member(
             Member(
                 user_id=i,
