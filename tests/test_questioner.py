@@ -163,8 +163,8 @@ class TestQuestioner:
         assert questioner.score.answers == 2
         assert questioner.score.correct == 1
         um = questioner.used_members
-        assert len([1 for key in questioner.used_members if len(um[key]) > 0]) == 1
-        assert len([1 for key in questioner.used_members if len(um[key]) == 1]) == 1
+        assert len([1 for key in um if len(um[key]) > 0]) == 1
+        assert len([1 for key in um if len(um[key]) == 1]) == 1
 
     @pytest.mark.parametrize('runs', range(20))
     @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
@@ -270,8 +270,8 @@ class TestQuestioner:
         assert questioner.score.answers == 2
         assert questioner.score.correct == 1
         um = questioner.used_members
-        assert len([1 for key in questioner.used_members if len(um[key]) > 0]) == 1
-        assert len([1 for key in questioner.used_members if len(um[key]) == 1]) == 1
+        assert len([1 for key in um if len(um[key]) > 0]) == 1
+        assert len([1 for key in um if len(um[key]) == 1]) == 1
         if not questioner.current_question.multiple_choice:
             assert 'richtig!' in answer_message.text
 
@@ -303,7 +303,8 @@ class TestQuestioner:
 
         assert questioner.current_question
         assert not questioner.current_question.poll
-        assert not questioner.used_members
+        um = questioner.used_members
+        assert all([um[key] == set() for key in um])
 
         update = Update(123,
                         message=Message(123,
@@ -327,7 +328,8 @@ class TestQuestioner:
         questioner.handle_update(update)
         assert questioner.score.answers == 1
         assert questioner.score.correct == 0
-        assert len(questioner.used_members) == 0
+        um = questioner.used_members
+        assert all([um[key] == set() for key in um])
         if not questioner.current_question.multiple_choice:
             assert 'nicht korrekt' in answer_message.text
 
@@ -345,8 +347,9 @@ class TestQuestioner:
         questioner.handle_update(update)
         assert questioner.score.answers == 2
         assert questioner.score.correct == 1
-        assert len(questioner.used_members) == 1
-        assert len(questioner.used_members[list(questioner.used_members.keys())[0]]) == 1
+        um = questioner.used_members
+        assert len([1 for key in um if len(um[key]) > 0]) == 1
+        assert len([1 for key in um if len(um[key]) == 1]) == 1
         if not questioner.current_question.multiple_choice:
             assert 'richtig!' in answer_message.text
 
