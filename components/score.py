@@ -82,7 +82,9 @@ class Score:
         return False
 
     def __gt__(self, other: object) -> bool:
-        return other < self
+        if isinstance(other, Score):
+            return other < self
+        return False
 
     def __le__(self, other: object) -> bool:
         if isinstance(other, Score):
@@ -90,4 +92,6 @@ class Score:
         return False
 
     def __ge__(self, other: object) -> bool:
-        return other <= self
+        if isinstance(other, Score):
+            return other <= self
+        return False

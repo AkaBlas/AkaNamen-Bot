@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import json
+from tests.check_file_path import check_file_path
 from copy import deepcopy
 from geopy import Location, Point
 
-with open('tests/data/addresses.txt', 'r') as file:
+with open(check_file_path('tests/data/addresses.txt'), 'r') as file:
     ADDRESSES = json.loads(file.read())
 
 

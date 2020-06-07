@@ -161,7 +161,7 @@ class Questioner:
         for m in self.orchestra.members.values():
             if m[members_attribute]:
                 for attr in question_attributes:
-                    if m[Orchestra.DICTS_TO_ATTRS[attr]]:
+                    if m[Orchestra.DICTS_TO_ATTRS[attr]] and m not in self.used_members[attr]:
                         out[attr].add(m)
 
         out = {k: v for k, v in out.items() if len(v) >= 4}
@@ -201,7 +201,7 @@ class Questioner:
         question = self.current_question
 
         if not question:
-            raise ValueError('I dont have a current question.')
+            raise RuntimeError('I dont have a current question.')
         is_correct = question.check_answer(update)
         self.member.user_score.add_to_score(1, int(is_correct))
         self.score.answers += 1

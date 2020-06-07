@@ -9,6 +9,7 @@ from components import Gender, Member, instruments, UserScore
 from telegram import User
 
 from tests.addresses import get_address_from_cache
+from tests.check_file_path import check_file_path
 
 
 @pytest.fixture(scope='function')
@@ -18,7 +19,7 @@ def member(monkeypatch):
 
 @pytest.fixture(scope='module')
 def photo_file_id(bot, chat_id):
-    with open('tests/data/vcard_photo.png', 'rb') as file:
+    with open(check_file_path('tests/data/vcard_photo.png'), 'rb') as file:
         message = bot.send_photo(chat_id=chat_id, photo=file)
         min_file = min(message.photo, key=lambda x: x.file_size)
         return min_file.file_id
@@ -345,7 +346,7 @@ class TestMember:
         config = ConfigParser()
         config.read('bot.ini')
         url = config['akadressen']['url']
-        with open('tests/data/akadressen.pdf', 'rb') as akadressen:
+        with open(check_file_path('tests/data/akadressen.pdf'), 'rb') as akadressen:
             responses.add(responses.GET,
                           url,
                           body=akadressen.read(),

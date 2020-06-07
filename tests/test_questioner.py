@@ -130,7 +130,7 @@ class TestQuestioner:
 
         assert questioner.current_question
         assert questioner.current_question.poll is poll_message.poll
-        assert not questioner.used_members
+        assert all([questioner.used_members[key] == set() for key in questioner.used_members])
 
         update = Update(123,
                         poll_answer=PollAnswer(poll_message.poll.id, User(123, 'foo', False),
@@ -152,7 +152,7 @@ class TestQuestioner:
         questioner.handle_update(update)
         assert questioner.score.answers == 1
         assert questioner.score.correct == 0
-        assert len(questioner.used_members) == 0
+        assert all([questioner.used_members[key] == set() for key in questioner.used_members])
 
         update = Update(123,
                         poll_answer=PollAnswer(poll_message.poll.id, User(chat_id, 'foo', False),
@@ -162,8 +162,9 @@ class TestQuestioner:
         questioner.handle_update(update)
         assert questioner.score.answers == 2
         assert questioner.score.correct == 1
-        assert len(questioner.used_members) == 1
-        assert len(questioner.used_members[list(questioner.used_members.keys())[0]]) == 1
+        um = questioner.used_members
+        assert len([1 for key in questioner.used_members if len(um[key]) > 0]) == 1
+        assert len([1 for key in questioner.used_members if len(um[key]) == 1]) == 1
 
     @pytest.mark.parametrize('runs', range(20))
     @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
@@ -205,7 +206,7 @@ class TestQuestioner:
             assert questioner.current_question.poll is poll_message.poll
         else:
             assert not questioner.current_question.poll
-        assert not questioner.used_members
+        assert all([questioner.used_members[key] == set() for key in questioner.used_members])
 
         if questioner.current_question.multiple_choice:
             update = Update(
@@ -241,7 +242,7 @@ class TestQuestioner:
         questioner.handle_update(update)
         assert questioner.score.answers == 1
         assert questioner.score.correct == 0
-        assert len(questioner.used_members) == 0
+        assert all([questioner.used_members[key] == set() for key in questioner.used_members])
         if not questioner.current_question.multiple_choice:
             assert 'nicht korrekt' in answer_message.text
 
@@ -268,8 +269,9 @@ class TestQuestioner:
         questioner.handle_update(update)
         assert questioner.score.answers == 2
         assert questioner.score.correct == 1
-        assert len(questioner.used_members) == 1
-        assert len(questioner.used_members[list(questioner.used_members.keys())[0]]) == 1
+        um = questioner.used_members
+        assert len([1 for key in questioner.used_members if len(um[key]) > 0]) == 1
+        assert len([1 for key in questioner.used_members if len(um[key]) == 1]) == 1
         if not questioner.current_question.multiple_choice:
             assert 'richtig!' in answer_message.text
 
@@ -347,3 +349,82 @@ class TestQuestioner:
         assert len(questioner.used_members[list(questioner.used_members.keys())[0]]) == 1
         if not questioner.current_question.multiple_choice:
             assert 'richtig!' in answer_message.text
+
+    def test_truncate_long_answers(self, bot, chat_id, empty_orchestra, monkeypatch, empty_member):
+        orig_send_poll = bot.send_poll
+        poll_message = None
+
+        def send_poll(*args, **kwargs):
+            nonlocal poll_message
+            poll_message = orig_send_poll(*args, **kwargs)
+            return poll_message
+
+        monkeypatch.setattr(bot, 'send_poll', send_poll)
+
+        for i in range(10):
+            empty_orchestra.register_member(Member(i, first_name=str(i), last_name=150 * 'X'))
+        empty_orchestra.register_member(empty_member)
+
+        questioner = Questioner(user_id=int(chat_id),
+                                orchestra=empty_orchestra,
+                                hint_attributes=[],
+                                question_attributes=['full_name'],
+                                number_of_questions=42,
+                                bot=bot,
+                                multiple_choice=True)
+
+        questioner.ask_question()
+        for option in poll_message.poll.options:
+            assert option.text[2:] == 94 * 'X' + ' ...'
+
+    @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
+    def test_no_current_question(self, bot, chat_id, populated_orchestra, empty_member):
+        populated_orchestra.register_member(empty_member)
+        questioner = Questioner(user_id=int(chat_id),
+                                orchestra=populated_orchestra,
+                                hint_attributes=[],
+                                question_attributes=[],
+                                number_of_questions=42,
+                                bot=bot)
+        update = Update(123, poll_answer=PollAnswer(chat_id, User(chat_id, '', False), [1]))
+
+        assert not questioner.check_update(update)
+        with pytest.raises(RuntimeError, match='current question'):
+            questioner.handle_update(update)
+
+    def test_clear_used_members(self, bot, chat_id, empty_orchestra, empty_member, monkeypatch):
+        orig_send_poll = bot.send_poll
+        poll_message = None
+
+        def send_poll(*args, **kwargs):
+            nonlocal poll_message
+            poll_message = orig_send_poll(*args, **kwargs)
+            return poll_message
+
+        monkeypatch.setattr(bot, 'send_poll', send_poll)
+
+        empty_orchestra.register_member(empty_member)
+        for i in range(4):
+            empty_orchestra.register_member(Member(i, first_name=str(i), last_name=str(i)))
+
+        questioner = Questioner(user_id=int(chat_id),
+                                orchestra=empty_orchestra,
+                                hint_attributes=['first_name'],
+                                question_attributes=['last_name'],
+                                number_of_questions=42,
+                                bot=bot)
+
+        questioner.ask_question()
+        update = Update(123,
+                        poll_answer=PollAnswer(poll_message.poll.id, User(chat_id, 'foo', False),
+                                               [poll_message.poll.correct_option_id]))
+        questioner.handle_update(update)
+
+        um = questioner.used_members
+        assert list(um.keys()) == ['last_names']
+        assert len(um['last_names']) == 1
+        am = questioner.available_members('first_name')
+        assert list(am.keys()) == ['last_names']
+        assert len(am['last_names']) == 4
+        um = questioner.used_members
+        assert all([um[key] == set() for key in um])

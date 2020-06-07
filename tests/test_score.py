@@ -47,6 +47,7 @@ class TestScore:
     def test_comparison(self):
         score_1 = Score(4, 2)
         score_2 = Score(8, 4)
+        member = Member(123)
 
         assert score_1 <= score_2
         assert score_2 >= score_1
@@ -69,14 +70,21 @@ class TestScore:
         assert not score_1 < score_1
         assert score_1 == score_1
 
+        assert not (score_1 < member)
+        assert not (score_1 <= member)
+        assert not (score_1 > member)
+        assert not (score_1 >= member)
+
     def test_equality(self):
         a = Score(7, 5)
         b = Score(7, 5)
         c = Score(6, 5)
         d = Score(7, 6)
         e = Score()
+        f = Member(123)
 
         assert a == b
         assert a != c
         assert a != d
         assert a != e
+        assert a != f
