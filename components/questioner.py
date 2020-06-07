@@ -223,7 +223,11 @@ class Questioner:
         """
         Asks the next question.
         """
-        hint_attribute = random.choice(self.hint_attributes)
+        if len(self.question_attributes) == 1:
+            choose_from = [ha for ha in self.hint_attributes if ha != self.question_attributes[0]]
+        else:
+            choose_from = self.hint_attributes
+        hint_attribute = random.choice(choose_from)
 
         available_members = self.available_members(hint_attribute)
         question_attribute: str = random.choice(list(available_members.keys()))
