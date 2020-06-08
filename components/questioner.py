@@ -33,7 +33,7 @@ class Questioner:
         used_members (Dict[:obj:`str`, Set[:class:`components.Member`]]): For every attribute in
             :attr:`hint_attributes` the corresponding set will contain all members of
             :attr:`orchestra`, whose corresponding attribute was already subject to a question
-            *and was answered correctly`.
+            *and* was answered correctly.
 
     Args:
         user_id: The ID of the user this instance is associated with.

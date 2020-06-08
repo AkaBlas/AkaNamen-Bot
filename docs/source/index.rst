@@ -12,6 +12,7 @@
    akablas
    game
    utils
+   bot
    contributing
    hosting
    changelog
