@@ -8,7 +8,7 @@ from .instruments import (Instrument, WoodwindInstrument, BrassInstrument, HighB
                           LowBrassInstrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
                           Saxophone, SopranoSaxophone, AltoSaxophone, TenorSaxophone,
                           BaritoneSaxophone, Euphonium, Baritone, BaritoneHorn, Trombone, Tuba,
-                          Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar)
+                          Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Conductor)
 from .score import Score
 from .userscore import UserScore
 from .member import Member
@@ -46,6 +46,7 @@ __all__ = [
     'BaritoneHorn',
     'Guitar',
     'BassGuitar',
+    'Conductor',
     # AkaBlas related
     'Member',
     'Gender',

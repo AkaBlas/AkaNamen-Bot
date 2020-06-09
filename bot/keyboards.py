@@ -6,7 +6,7 @@ from components import (Instrument, WoodwindInstrument, BrassInstrument, HighBra
                         LowBrassInstrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
                         Saxophone, SopranoSaxophone, AltoSaxophone, TenorSaxophone,
                         BaritoneSaxophone, Euphonium, BaritoneHorn, Baritone, Trombone, Tuba,
-                        Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar)
+                        Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Conductor)
 
 from typing import Dict, Optional, List
 
@@ -19,6 +19,7 @@ NEXT_TEXT = 'Weiter ➡️'
 NEXT_DATA = 'NEXT_BUTTON'
 """":obj:`str`: Callback data to use for buttons leading to the next menu."""
 
+# yapf: disable
 INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
     [WoodwindInstrument()],
     [Flute(), Clarinet()],
@@ -38,7 +39,9 @@ INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
     [BassGuitar()],
     [PercussionInstrument()],
     [Drums()],
+    [Conductor()]
 ]
+# yapf: enable
 
 
 def build_instruments_keyboard(
