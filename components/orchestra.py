@@ -623,3 +623,21 @@ class Orchestra(PicklableBase):
         if k not in ['male_first_names', 'female_first_names']
     }
     """Dict[:obj:`str`, :obj:`str`]: Essentially the inverse of :attr:`lists_to_attr`."""
+
+    DICTS_TO_HR: Dict[str, str] = {
+        'first_names': 'Vorname',
+        'male_first_names': 'Vorname (Männlich)',
+        'female_first_names': 'Vorname (Weiblich)',
+        'last_names': 'Nachname',
+        'full_names': 'Ganzer Name',
+        'nicknames': 'Spitzname',
+        'genders': 'Geschlecht',
+        'dates_of_birth': 'Geburtsdatum',
+        'instruments': 'Instrument',
+        'addresses': 'Addresse',
+        'ages': 'Alter',
+        'birthdays': 'Geburtstag',
+        'photo_file_ids': 'Photo',
+    }
+    """Dict[:obj:`str`, :obj:`str`]: A map from the names of the different properties of this
+    class to the human readable strings."""
