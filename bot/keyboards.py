@@ -7,7 +7,7 @@ from components import (Instrument, WoodwindInstrument, BrassInstrument, HighBra
                         Saxophone, SopranoSaxophone, AltoSaxophone, TenorSaxophone,
                         BaritoneSaxophone, Euphonium, BaritoneHorn, Baritone, Trombone, Tuba,
                         Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Conductor, Orchestra)
-
+from bot import REGISTRATION_PATTERN
 from typing import Dict, Optional, List
 
 SELECTED = '✔️'
@@ -18,6 +18,13 @@ NEXT_TEXT = 'Weiter ➡️'
 """":obj:`str`: Text to use for buttons leading to the next menu."""
 NEXT_DATA = 'NEXT_BUTTON'
 """":obj:`str`: Callback data to use for buttons leading to the next menu."""
+REGISTRATION_KEYBOARD = InlineKeyboardMarkup.from_button(
+    InlineKeyboardButton(text='Anmeldungs-Anfrage senden ✉️', callback_data=REGISTRATION_PATTERN))
+""":class:`telegram.InlineKeyboardMarkup`: Keyboard that triggers the registration process."""
+DOCS_KEYBOARD = InlineKeyboardMarkup.from_button(
+    InlineKeyboardButton(text='Benutzerhandbuch 📖',
+                         url='https://bibo-joshi.github.io/AkaNamen-Bot/'))
+""":class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the docs."""
 
 # yapf: disable
 INSTRUMENT_KEYBOARD: List[List[Instrument]] = [

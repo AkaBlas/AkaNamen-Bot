@@ -9,8 +9,8 @@ from queue import Queue
 from threading import Thread, Event
 from time import sleep
 
-from telegram import Bot
-from telegram.ext import Dispatcher, JobQueue, Updater
+from telegram import Bot, ParseMode
+from telegram.ext import Dispatcher, JobQueue, Updater, Defaults
 from geopy import Photon
 
 from tests.bots import get_bot
@@ -56,7 +56,9 @@ def bot_info():
 
 
 def make_bot(bot_info, **kwargs):
-    return Bot(bot_info['token'], **kwargs)
+    return Bot(bot_info['token'],
+               **kwargs,
+               defaults=Defaults(parse_mode=ParseMode.HTML, disable_notification=True))
 
 
 @pytest.fixture(scope='session')
@@ -66,7 +68,7 @@ def bot(bot_info):
 
 @pytest.fixture(scope='session')
 def chat_id(bot_info):
-    return bot_info['chat_id']
+    return int(bot_info['chat_id'])
 
 
 @pytest.fixture(scope='session')
