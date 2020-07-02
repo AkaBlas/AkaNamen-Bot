@@ -25,6 +25,9 @@ DOCS_KEYBOARD = InlineKeyboardMarkup.from_button(
     InlineKeyboardButton(text='Benutzerhandbuch 📖',
                          url='https://bibo-joshi.github.io/AkaNamen-Bot/'))
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the docs."""
+CHANNEL_KEYBOARD = InlineKeyboardMarkup.from_button(
+    InlineKeyboardButton(text='Info-Kanal 📣', url='https://t.me/AkaNamenInfo'))
+""":class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the info channel."""
 
 # yapf: disable
 INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
