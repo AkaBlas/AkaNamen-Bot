@@ -178,7 +178,7 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
     bot_data[ORCHESTRA_KEY].register_member(new_member)
     bot_data[PENDING_REGISTRATIONS_KEY].pop(user_id, None)
 
-    text = f'Du bis jetzt mit den folgenden Daten angemeldet:\n\n{new_member.to_str()}\n\n'
+    text = f'Du bis jetzt mit den folgenden Daten angemeldet: 🥳\n\n{new_member.to_str()}\n\n'
     if profile_ile_id:
         text += 'Als Photo wurde Dein Telegram-Profilbild gesetzt.'
     text += 'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten .'
@@ -202,7 +202,7 @@ def deny_registration_request(update: Update, context: CallbackContext) -> None:
 
     context.bot.send_message(chat_id=user_id,
                              text='Deine Anfrage wurde abgelehnt. Ich werde von jetzt an nicht '
-                             'mehr auf Dich reagieren.')
+                             'mehr auf Dich reagieren. 💁🏼‍♂️')
     update.effective_message.edit_text('Nutzer wurde abgelehnt und wird jetzt ignoriert.')
 
 

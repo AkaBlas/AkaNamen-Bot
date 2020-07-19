@@ -126,6 +126,7 @@ class Member:
     def to_str(self) -> str:
         with setlocale('de_DE.UTF-8'):
             return (f'Name: {self.full_name or "-"}\n'
+                    f'Geschlecht: {self.gender if self.gender else "-"}\n'
                     f'Geburtstag: '
                     f'{self.date_of_birth.strftime("%d. %B %Y") if self.date_of_birth else "-"}\n'
                     f'Instrument/e: {", ".join([str(i) for i in self.instruments]) or "-"}\n'

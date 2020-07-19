@@ -322,17 +322,24 @@ class TestMember:
     def test_to_string(self, member, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
 
-        assert member.to_str() == ('Name: -\nGeburtstag: -\nInstrument/e: -\nAdresse: -\n'
-                                   'Mobil: -\nPhoto: -')
+        assert member.to_str() == ('Name: -\n'
+                                   'Geschlecht: -\n'
+                                   'Geburtstag: -\n'
+                                   'Instrument/e: -\n'
+                                   'Adresse: -\n'
+                                   'Mobil: -\n'
+                                   'Photo: -')
         member.first_name = self.first_name
         member.nickname = self.nickname
         member.last_name = self.last_name
+        member.gender = Gender.MALE
         member.set_address(self.address)
         member.date_of_birth = self.date_of_birth
         member.photo_file_id = self.photo_file_id
         member.phone_number = self.phone_number
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
         assert member.to_str() == ('Name: first_name "nickname" last_name\n'
+                                   f'Geschlecht: {Gender.MALE}\n'
                                    'Geburtstag: 10. August 1996\n'
                                    'Instrument/e: Tuba, Trompete\n'
                                    'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
