@@ -10,7 +10,8 @@ from .constants import (
     EDITING_MESSAGE_KEY,
 )
 from .keyboards import (build_instruments_keyboard, parse_instruments_keyboard,
-                        REGISTRATION_KEYBOARD, DOCS_KEYBOARD, DONE, SELECTED, BACK)
+                        REGISTRATION_KEYBOARD, DOCS_KEYBOARD, DONE, SELECTED, BACK,
+                        CHANNEL_KEYBOARD)
 from .setup import register_dispatcher
 
 __all__ = [
@@ -22,6 +23,7 @@ __all__ = [
     'DONE',
     'SELECTED',
     'BACK',
+    'CHANNEL_KEYBOARD',
     # Setup
     'register_dispatcher',
     # Constants

@@ -21,6 +21,12 @@ DOCS_KEYBOARD = InlineKeyboardMarkup.from_button(
     InlineKeyboardButton(text='Benutzerhandbuch 📖',
                          url='https://bibo-joshi.github.io/AkaNamen-Bot/'))
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the docs."""
+CHANNEL_KEYBOARD = InlineKeyboardMarkup.from_column([
+    InlineKeyboardButton(text='Info-Kanal 📣', url='https://t.me/AkaNamenInfo'),
+    InlineKeyboardButton(text='Benutzerhandbuch 📖',
+                         url='https://bibo-joshi.github.io/AkaNamen-Bot/')
+])
+""":class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the info channel and the docs."""
 BACK = 'Zurück'
 """:obj:`str`: Text indicating a 'back' action. Use as text or callback data."""
 DONE = 'Fertig'
