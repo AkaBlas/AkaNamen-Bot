@@ -470,7 +470,7 @@ class Member:
             if string is np.nan:
                 return None
             # string = string.replace('Mrz', 'Mar')
-            with setlocale('German'):
+            with setlocale('de_DE.UTF-8'):
                 try:
                     out = dt.datetime.strptime(string, '%d. %b. %y').date()
                 except ValueError:
