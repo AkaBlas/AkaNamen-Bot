@@ -87,7 +87,7 @@ class Question:
         else:
             attribute = self.member[self.MAP_ATTRIBUTES[self.attribute]]
             if isinstance(attribute, list):
-                return [str(a) for a in attribute]
+                return ', '.join(str(a) for a in attribute)
             return str(attribute)
 
     def check_answer(self, update: Update) -> bool:

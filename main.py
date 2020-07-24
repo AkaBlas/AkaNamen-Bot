@@ -6,6 +6,8 @@ from configparser import ConfigParser
 from telegram import ParseMode
 from telegram.ext import Updater, PicklePersistence, Defaults
 
+from bot.setup import register_dispatcher
+
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
@@ -20,6 +22,7 @@ def main() -> None:
     config = ConfigParser()
     config.read('bot.ini')
     token = config['akanamen-bot']['token']
+    admin = config['akanamen-bot']['admins_chat_id']
 
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
@@ -27,6 +30,8 @@ def main() -> None:
     defaults = Defaults(parse_mode=ParseMode.HTML, disable_notification=True)
     persistence = PicklePersistence('akanamen_db', single_file=False)
     updater = Updater(token, use_context=True, persistence=persistence, defaults=defaults)
+
+    register_dispatcher(updater.dispatcher, admin=admin)
 
     # Start the Bot
     updater.start_polling()

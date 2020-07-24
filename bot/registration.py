@@ -88,7 +88,7 @@ def start(update: Update, context: CallbackContext) -> None:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
-    text = 'Moin! Schön, dass Du mitspielen möchtest. 🙂 Bevor es losgehen kann, muss zuerst ' \
+    text = 'Moin! Schön, dass Du mitspielen möchtest. Bevor es losgehen kann, muss zuerst ' \
            'sichergestellt werden, dass Du auch wirklich bei AkaBlas bist. Falls Du in den ' \
            'AkaDressen zu finden bist, sollte das schnell gehen. Falls nicht, wird Hirsch Dich ' \
            'ggf. noch einmal direkt anschreiben. Klicke bitte einfach auf das Feld unten. Du ' \
@@ -109,6 +109,11 @@ def request_registration(update: Update, context: CallbackContext) -> None:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
+    update.callback_query.answer()
+    update.effective_message.edit_text(
+        'Anfrage gesendet! Bis sie bearbeitet wurde, kannst Du ja schon mal in die FAQ schauen. 😉',
+        reply_markup=DOCS_KEYBOARD)
+
     user = update.effective_user
     guessed_members = Member.guess_member(user)
 
@@ -139,9 +144,6 @@ def request_registration(update: Update, context: CallbackContext) -> None:
     context.bot.send_message(chat_id=context.bot_data[ADMIN_KEY],
                              text=text,
                              reply_markup=reply_markup)
-    update.effective_message.edit_text(
-        'Anfrage gesendet! Bis sie bearbeitet wurde, kannst Du ja schon mal in die FAQ schauen. 😉',
-        reply_markup=DOCS_KEYBOARD)
 
     context.bot_data[PENDING_REGISTRATIONS_KEY][user.id] = guessed_members or []
 
@@ -181,9 +183,10 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
     text = f'Du bis jetzt mit den folgenden Daten angemeldet: 🥳\n\n{new_member.to_str()}\n\n'
     if profile_ile_id:
         text += 'Als Photo wurde Dein Telegram-Profilbild gesetzt.'
-    text += 'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten .'
+    text += 'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten. Wofür die Daten ' \
+            'genutzt werden, kannst Du im Benutzerhandbuch nachlesen. '
 
-    context.bot.send_message(chat_id=user_id, text=text)
+    context.bot.send_message(chat_id=user_id, text=text, reply_markup=DOCS_KEYBOARD)
     update.effective_message.edit_text('Nutzer erfolgreich angemeldet.')
 
 

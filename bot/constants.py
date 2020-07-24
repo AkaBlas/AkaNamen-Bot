@@ -19,7 +19,15 @@ ids, which were denied registration.
 """
 ADMIN_KEY = 'admin_key'
 """
-:obj:`str`: Each ``context.bot_data[ADMIN_KEY]`` is expected to the admins chat id.
+:obj:`str`: Each ``context.bot_data[ADMIN_KEY]`` is expected to be the admins chat id.
+"""
+
+# User data keys
+EDITING_MESSAGE_KEY = 'editing_message_key'
+"""
+:obj:`str`: Each ``context.user_data[EDITING_MESSAGE_KEY]`` is expected to be the last
+:class:`telegram.Message` with an :class:`telegram.InlineKeyboardMarkup` sent in the process of
+editing the members data.
 """
 
 # Callback Data

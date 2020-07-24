@@ -1,10 +1,16 @@
 #!/usr/bin/env python
 """The Bot module."""
 
-from .constants import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_KEY,
-                        REGISTRATION_PATTERN, ADMIN_KEY)
+from .constants import (
+    ORCHESTRA_KEY,
+    PENDING_REGISTRATIONS_KEY,
+    DENIED_USERS_KEY,
+    REGISTRATION_PATTERN,
+    ADMIN_KEY,
+    EDITING_MESSAGE_KEY,
+)
 from .keyboards import (build_instruments_keyboard, parse_instruments_keyboard,
-                        REGISTRATION_KEYBOARD, DOCS_KEYBOARD)
+                        REGISTRATION_KEYBOARD, DOCS_KEYBOARD, DONE, SELECTED, BACK)
 from .setup import register_dispatcher
 
 __all__ = [
@@ -13,6 +19,9 @@ __all__ = [
     'parse_instruments_keyboard',
     'REGISTRATION_KEYBOARD',
     'DOCS_KEYBOARD',
+    'DONE',
+    'SELECTED',
+    'BACK',
     # Setup
     'register_dispatcher',
     # Constants
@@ -20,5 +29,6 @@ __all__ = [
     'PENDING_REGISTRATIONS_KEY',
     'DENIED_USERS_KEY',
     'REGISTRATION_PATTERN',
-    'ADMIN_KEY'
+    'ADMIN_KEY',
+    'EDITING_MESSAGE_KEY'
 ]

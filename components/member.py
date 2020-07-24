@@ -20,7 +20,7 @@ from tempfile import TemporaryFile, NamedTemporaryFile
 from configparser import ConfigParser
 from collections import defaultdict
 from camelot import read_pdf
-from typing import Optional, Union, List, Tuple, IO, Dict
+from typing import Optional, Union, List, Tuple, IO, Dict, Any
 
 from fuzzywuzzy import fuzz
 from telegram import Bot, User
@@ -99,7 +99,7 @@ class Member:
         # See https://github.com/python/mypy/issues/3004
         self.instruments = instruments  # type: ignore
 
-        self._geo_locator: Photon = Photon()
+        self._geo_locator: Photon = Photon(timeout=5)
         self._address: Optional[str] = None
         self._longitude: Optional[float] = None
         self._latitude: Optional[float] = None
@@ -123,6 +123,12 @@ class Member:
                            'subscription for it.')
         return getattr(self, item)
 
+    def __setitem__(self, item: str, value: Any) -> None:
+        if item not in self.SUBSCRIPTABLE:
+            raise KeyError('Member either does not have such an attribute or does not support '
+                           'subscription for it.')
+        return setattr(self, item, value)
+
     def to_str(self) -> str:
         with setlocale('de_DE.UTF-8'):
             return (f'Name: {self.full_name or "-"}\n'
@@ -132,7 +138,9 @@ class Member:
                     f'Instrument/e: {", ".join([str(i) for i in self.instruments]) or "-"}\n'
                     f'Adresse: {self.address or "-"}\n'
                     f'Mobil: {self.phone_number or "-"}\n'
-                    f'Photo: {"🖼" if self.photo_file_id else "-"}')
+                    f'Photo: {"🖼" if self.photo_file_id else "-"}\n'
+                    f'Daten an AkaBlasen weitergeben: '
+                    f'{"Aktiviert" if self.allow_contact_sharing else "Deaktiviert"}')
 
     def set_address(self,
                     address: str = None,
@@ -182,6 +190,15 @@ class Member:
             self._address = self._address.replace('Brunswick', 'Braunschweig')
 
         return self._address
+
+    def clear_address(self) -> None:
+        """
+        Deletes the address of this member.
+        """
+        self._raw_address = None
+        self._address = None
+        self._longitude = None
+        self._latitude = None
 
     @property
     def full_name(self) -> Optional[str]:
@@ -452,8 +469,8 @@ class Member:
         def string_to_date(string: Union[str, np.nan]) -> Optional[dt.date]:
             if string is np.nan:
                 return None
-            string = string.replace('Mrz', 'Mär')
-            with setlocale('de_DE.UTF-8'):
+            # string = string.replace('Mrz', 'Mar')
+            with setlocale('German'):
                 try:
                     out = dt.datetime.strptime(string, '%d. %b. %y').date()
                 except ValueError:
@@ -600,6 +617,6 @@ class Member:
     SUBSCRIPTABLE = sorted([
         'birthday', 'age', 'first_name', 'last_name', 'nickname', 'address', 'latitude',
         'longitude', 'instruments', 'gender', 'phone_number', 'date_of_birth', 'full_name',
-        'photo_file_id'
+        'photo_file_id', 'allow_contact_sharing'
     ])
     """List[:obj:`str`]: Attributes supported by subscription."""

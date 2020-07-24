@@ -14,10 +14,6 @@ SELECTED = '✔️'
 """:obj:`str`: Emoji to use to mark selected options."""
 DESELECTED = '❌'
 """:obj:`str`: Emoji to use to mark deselected options."""
-NEXT_TEXT = 'Weiter ➡️'
-"""":obj:`str`: Text to use for buttons leading to the next menu."""
-NEXT_DATA = 'NEXT_BUTTON'
-"""":obj:`str`: Callback data to use for buttons leading to the next menu."""
 REGISTRATION_KEYBOARD = InlineKeyboardMarkup.from_button(
     InlineKeyboardButton(text='Anmeldungs-Anfrage senden ✉️', callback_data=REGISTRATION_PATTERN))
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard that triggers the registration process."""
@@ -25,6 +21,10 @@ DOCS_KEYBOARD = InlineKeyboardMarkup.from_button(
     InlineKeyboardButton(text='Benutzerhandbuch 📖',
                          url='https://bibo-joshi.github.io/AkaNamen-Bot/'))
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the docs."""
+BACK = 'Zurück'
+""":obj:`str`: Text indicating a 'back' action. Use as text or callback data."""
+DONE = 'Fertig'
+""":obj:`str`: Text indicating a 'done' action. Use as text or callback data."""
 
 # yapf: disable
 INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
@@ -65,7 +65,7 @@ def build_instruments_keyboard(
     """
     Builds a :class:`telegram.InlineKeyboardMarkup` listing all instruments that are up for
     selection. The callback data for each button will equal its text.
-    Also appends a button with the text :attr:`NEXT_TEXT` and data :attr:`NEXT_DATA` at the very
+    Also appends a button with the text :attr:`DONE` and data :attr:`DONE` at the very
     end of the keyboard.
 
     Args:
@@ -87,7 +87,7 @@ def build_instruments_keyboard(
             button = InlineKeyboardButton(text=text, callback_data=text)
             button_row.append(button)
         buttons.append(button_row)
-    buttons.append([InlineKeyboardButton(text=NEXT_TEXT, callback_data=NEXT_DATA)])
+    buttons.append([InlineKeyboardButton(text=DONE, callback_data=DONE)])
     return InlineKeyboardMarkup(buttons)
 
 
@@ -117,7 +117,7 @@ def build_questions_hints_keyboard(
     """
     Builds a :class:`telegram.InlineKeyboardMarkup` listing all questions that are up for
     selection for the given orchestra. The callback data for each button will equal its text.
-    Also appends a button with the text :attr:`NEXT_TEXT` and data :attr:`NEXT_DATA` at the very
+    Also appends a button with the text :attr:`DONE` and data :attr:`DONE` at the very
     end of the keyboard.
 
     Args:
@@ -162,7 +162,7 @@ def build_questions_hints_keyboard(
             button_row.append(button)
         if row:
             buttons.append(button_row)
-    buttons.append([InlineKeyboardButton(text=NEXT_TEXT, callback_data=NEXT_DATA)])
+    buttons.append([InlineKeyboardButton(text=DONE, callback_data=DONE)])
     return InlineKeyboardMarkup(buttons)
 
 

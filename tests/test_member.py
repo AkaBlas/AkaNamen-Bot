@@ -328,7 +328,8 @@ class TestMember:
                                    'Instrument/e: -\n'
                                    'Adresse: -\n'
                                    'Mobil: -\n'
-                                   'Photo: -')
+                                   'Photo: -\n'
+                                   'Daten an AkaBlasen weitergeben: Deaktiviert')
         member.first_name = self.first_name
         member.nickname = self.nickname
         member.last_name = self.last_name
@@ -338,13 +339,15 @@ class TestMember:
         member.photo_file_id = self.photo_file_id
         member.phone_number = self.phone_number
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
+        member.allow_contact_sharing = True
         assert member.to_str() == ('Name: first_name "nickname" last_name\n'
                                    f'Geschlecht: {Gender.MALE}\n'
                                    'Geburtstag: 10. August 1996\n'
                                    'Instrument/e: Tuba, Trompete\n'
                                    'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
                                    'Mobil: phone_number\n'
-                                   'Photo: 🖼')
+                                   'Photo: 🖼\n'
+                                   'Daten an AkaBlasen weitergeben: Aktiviert')
 
     @responses.activate
     def test_guess_member(self, monkeypatch):

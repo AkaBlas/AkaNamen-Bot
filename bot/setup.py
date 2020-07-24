@@ -7,11 +7,13 @@ from telegram import BotCommand, Update
 from telegram.ext import Dispatcher, TypeHandler, CommandHandler, CallbackQueryHandler
 from bot import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_KEY, ADMIN_KEY,
                  REGISTRATION_PATTERN)
+from bot.editing import EDITING_HANDLER
 import bot.registration as registration
 from components import Orchestra
 
 BOT_COMMANDS: List[BotCommand] = [
     BotCommand('start', 'Startet den Bot.'),
+    BotCommand('daten_bearbeiten', 'Daten wie Adresse und Photo ändern.'),
 ]
 """List[:class:`telegram.BotCommand`]: A list of commands of the bot."""
 
@@ -32,6 +34,7 @@ def register_dispatcher(disptacher: Dispatcher, admin: Union[int, str]) -> None:
         CallbackQueryHandler(registration.request_registration, pattern=REGISTRATION_PATTERN))
     disptacher.add_handler(registration.ACCEPT_REGISTRATION_HANDLER)
     disptacher.add_handler(registration.DENY_REGISTRATION_HANDLER)
+    disptacher.add_handler(EDITING_HANDLER)
 
     # Set commands
     disptacher.bot.set_my_commands(BOT_COMMANDS)

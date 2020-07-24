@@ -23,8 +23,8 @@ class TestKeyboards:
                 assert selection == keyboards.DESELECTED
         assert len(message.reply_markup.inline_keyboard[-1]) == 1
         button = message.reply_markup.inline_keyboard[-1][0]
-        assert button.text == keyboards.NEXT_TEXT
-        assert button.callback_data == keyboards.NEXT_DATA
+        assert button.text == keyboards.DONE
+        assert button.callback_data == keyboards.DONE
 
     def test_build_instruments_keyboard_with_arg(self, bot, chat_id):
         selection = {Tuba(): True, Trombone(): False}
@@ -44,8 +44,8 @@ class TestKeyboards:
                 assert sel == expected
         assert len(message.reply_markup.inline_keyboard[-1]) == 1
         button = message.reply_markup.inline_keyboard[-1][0]
-        assert button.text == keyboards.NEXT_TEXT
-        assert button.callback_data == keyboards.NEXT_DATA
+        assert button.text == keyboards.DONE
+        assert button.callback_data == keyboards.DONE
 
     def test_parse_instruments_keyboard(self, bot, chat_id):
         selection = {
@@ -86,8 +86,8 @@ class TestKeyboards:
                 assert selection == keyboards.DESELECTED
         assert len(message.reply_markup.inline_keyboard[-1]) == 1
         button = message.reply_markup.inline_keyboard[-1][0]
-        assert button.text == keyboards.NEXT_TEXT
-        assert button.callback_data == keyboards.NEXT_DATA
+        assert button.text == keyboards.DONE
+        assert button.callback_data == keyboards.DONE
 
     @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
     def test_build_questions_hints_keyboard_with_selection(self, bot, chat_id,
@@ -109,8 +109,8 @@ class TestKeyboards:
                 assert sel == expected
         assert len(message.reply_markup.inline_keyboard[-1]) == 1
         button = message.reply_markup.inline_keyboard[-1][0]
-        assert button.text == keyboards.NEXT_TEXT
-        assert button.callback_data == keyboards.NEXT_DATA
+        assert button.text == keyboards.DONE
+        assert button.callback_data == keyboards.DONE
 
     @pytest.mark.parametrize('populated_orchestra', [{'skip': ['date_of_birth']}], indirect=True)
     def test_build_questions_hints_keyboard_missing_attrs(self, bot, chat_id, populated_orchestra):
