@@ -168,6 +168,7 @@ class Member:
                 raw = location.raw['properties']
                 if ('street' in raw and 'postcode' in raw and 'housenumber' in raw
                         and 'city' in raw and 'country' in raw):
+                    raw['city'] = raw['city'].replace('Brunswick', 'Braunschweig')
                     self._address = (f"{raw['street']} {raw['housenumber']}, {raw['postcode']} "
                                      f"{raw['city']}")
                     if raw['country'] != 'Germany':
@@ -185,9 +186,6 @@ class Member:
             self._address = None
             self._longitude = None
             self._latitude = None
-
-        if self._address is not None:
-            self._address = self._address.replace('Brunswick', 'Braunschweig')
 
         return self._address
 

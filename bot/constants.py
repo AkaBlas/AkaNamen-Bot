@@ -36,3 +36,10 @@ REGISTRATION_PATTERN = 'requesting_registration'
 :obj:`str`: :class:`telegram.CallbackQuery` s with this as ``callback_data`` will trigger a
 registration request.
 """
+
+# Deep Linking
+INLINE_HELP = 'inline_help'
+"""
+:obj:`str`: If start message with this as deep linking parameter is received, a help message about
+the inline mode should be displayed.
+"""

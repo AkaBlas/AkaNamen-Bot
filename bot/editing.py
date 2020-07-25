@@ -6,7 +6,7 @@ import warnings
 from typing import Dict, Callable, List
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, Message, KeyboardButton, \
-    ReplyKeyboardMarkup, ReplyKeyboardRemove
+    ReplyKeyboardMarkup, ReplyKeyboardRemove, ChatAction
 from telegram.error import BadRequest
 from telegram.ext import ConversationHandler, CallbackContext, CommandHandler, Filters, \
     MessageHandler, CallbackQueryHandler, Handler
@@ -406,6 +406,8 @@ def address(update: Update, context: CallbackContext) -> str:
             addr = None
             location = message.location
             coordinates = (location.latitude, location.longitude)
+
+        context.bot.send_chat_action(update.effective_user.id, action=ChatAction.TYPING)
 
         found_address = member.set_address(address=addr, coordinates=coordinates)
         text = TEXTS[ADDRESS_CONFIRMATION].format(found_address or "-")

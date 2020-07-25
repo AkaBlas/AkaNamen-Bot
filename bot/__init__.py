@@ -8,6 +8,7 @@ from .constants import (
     REGISTRATION_PATTERN,
     ADMIN_KEY,
     EDITING_MESSAGE_KEY,
+    INLINE_HELP,
 )
 from .keyboards import (build_instruments_keyboard, parse_instruments_keyboard,
                         REGISTRATION_KEYBOARD, DOCS_KEYBOARD, DONE, SELECTED, BACK,
@@ -32,5 +33,6 @@ __all__ = [
     'DENIED_USERS_KEY',
     'REGISTRATION_PATTERN',
     'ADMIN_KEY',
-    'EDITING_MESSAGE_KEY'
+    'EDITING_MESSAGE_KEY',
+    'INLINE_HELP'
 ]

@@ -88,7 +88,7 @@ def start(update: Update, context: CallbackContext) -> None:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
-    text = 'Moin! Schön, dass Du mitspielen möchtest. Bevor es losgehen kann, muss zuerst ' \
+    text = 'Moin! 🙂 Schön, dass Du mitspielen möchtest. Bevor es losgehen kann, muss zuerst ' \
            'sichergestellt werden, dass Du auch wirklich bei AkaBlas bist. Falls Du in den ' \
            'AkaDressen zu finden bist, sollte das schnell gehen. Falls nicht, wird Hirsch Dich ' \
            'ggf. noch einmal direkt anschreiben. Klicke bitte einfach auf das Feld unten. Du ' \
@@ -182,7 +182,7 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
 
     text = f'Du bis jetzt mit den folgenden Daten angemeldet: 🥳\n\n{new_member.to_str()}\n\n'
     if profile_ile_id:
-        text += 'Als Photo wurde Dein Telegram-Profilbild gesetzt.'
+        text += 'Als Photo wurde Dein Telegram-Profilbild gesetzt. '
     text += 'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten. Wofür die Daten ' \
             'genutzt werden, kannst Du im Benutzerhandbuch nachlesen. \n\nBitte tritt ' \
             'außerdem dem Info-Kanal bei. Dort werden ggf. Informationen zu Neuerungen am Bot ' \
