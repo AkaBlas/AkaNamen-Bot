@@ -13,7 +13,7 @@ class PicklableBase:
 
     def __getstate__(self) -> Dict[str, Any]:
         """
-        Get's called, when object is being pickled. Sets all variables ending on ``_lock`` to
+        Gets called, when object is being pickled. Sets all variables ending on ``_lock`` to
         :obj:`None`.
 
         Returns: The dictionary describing the current state of the object.
@@ -25,7 +25,7 @@ class PicklableBase:
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
         """
-        Get's called, when object is being un-pickled. Sets all variables ending on ``_lock`` to
+        Gets called, when object is being un-pickled. Sets all variables ending on ``_lock`` to
         a new :class:`threading.Lock` instance.
 
         Args:

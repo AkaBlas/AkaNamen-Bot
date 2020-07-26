@@ -38,7 +38,7 @@ extensions = [
 
 # Use intersphinx to reference the python-telegram-bot docs
 intersphinx_mapping = {'telegram': ('https://python-telegram-bot.readthedocs.io/en/latest/', None),
-                       'https://docs.python.org/': None}
+                       'https://docs.python.org/3/': None}
 
 # Include special members in doc
 napoleon_include_special_with_doc = True

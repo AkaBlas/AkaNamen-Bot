@@ -13,7 +13,7 @@ Use as ``ACCEPT_REGISTRATION_MEMBER.format(chat_id, data_index)``. Use ``''`` fo
 given data is to be accepted."""
 ACCEPT_REGISTRATION_PATTERN = r'accept_registration (\d*)(?: (\d*))?'
 """:obj:`str`: Callback data  pattern for accepting a registration request with a suggested members
-data. ``context.match.group(1)`` will be users id and ``context.match.group(2) the index of the
+data. ``context.match.group(1)`` will be users id and ``context.match.group(2)`` the index of the
 accepted member date or :obj:`None`."""
 DENY_REGISTRATION = 'deny_registration {}'
 """:obj:`str`: Callback data for denying a registration request.
@@ -135,6 +135,11 @@ def request_registration(update: Update, context: CallbackContext) -> None:
                 InlineKeyboardButton(text=f'Akzeptiere als Mitglied {i+1}',
                                      callback_data=ACCEPT_REGISTRATION.format(user.id, i))
             ])
+
+        buttons.append([
+            InlineKeyboardButton(text='Akzeptieren ohne AkaDressen-Daten',
+                                 callback_data=ACCEPT_REGISTRATION.format(user.id, ''))
+        ])
 
     buttons.append(
         [InlineKeyboardButton(text='Ablehnen', callback_data=DENY_REGISTRATION.format(user.id))])

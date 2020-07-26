@@ -43,7 +43,7 @@ INSTRUMENTS = 'instruments'
 ALLOW_CONTACT_SHARING = 'allow_contact_sharing'
 """:obj:`str`: Identifier of the state in which the privacy setting is changed."""
 PHONE_NUMBER = 'phone_number'
-""":obj:`str`Identifier of the state in which the phone number is changed."""
+""":obj:`str`: Identifier of the state in which the phone number is changed."""
 
 # Texts
 TEXTS: Dict[str, str] = {
@@ -324,8 +324,8 @@ def simple_handler_factory(attr: str, message_handler: bool = True) -> List[Hand
     """
     Creates handlers for the simple to handle attributes. The returned list consists of
 
-    * ``MessageHandler(Filters.text & ~Filters.command, simple_callback_factory(attr)), if
-        requested
+    * ``MessageHandler(Filters.text & ~Filters.command, simple_callback_factory(attr))``, if
+      requested
     * ``CallbackQueryHandler(simple_callback_factory(attr))``
 
     Args:

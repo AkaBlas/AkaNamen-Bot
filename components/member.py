@@ -559,7 +559,7 @@ class Member:
     _AKADRESSEN_CACHE_TIME: Optional[dt.date] = None
 
     @classmethod
-    def guess_member(cls, user: User) -> Optional[List[Member]]:
+    def guess_member(cls, user: User) -> Optional[List['Member']]:
         """
         Tries to guess a :class:`components.Member` from the AkaDressen based on the Telegram
         users attributes. May return no or several hits.
