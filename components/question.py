@@ -118,7 +118,7 @@ class Question:
             elif self.attribute == self.AGE:
                 return answer == str(self.member.age)
             elif self.attribute == self.INSTRUMENT:
-                return answer in ', '.join(str(i) for i in self.member.instruments)
+                return self.member.compare_instruments_to(answer) >= 0.85
             # self.attribute == self.ADDRESS:
             else:
                 if answer:

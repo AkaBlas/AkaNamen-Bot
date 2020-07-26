@@ -222,6 +222,16 @@ class TestMember:
         assert member.full_name == ' '.join([f'"{self.nickname}"', self.last_name])
         assert member['full_name'] == ' '.join([f'"{self.nickname}"', self.last_name])
 
+    def test_instruments_str(self, member):
+        member.instruments = None
+        assert member.instruments_str is None
+
+        member.instruments = instruments.Tuba()
+        assert member.instruments_str == 'Tuba'
+
+        member.instruments = [instruments.Tuba(), instruments.Trumpet()]
+        assert member.instruments_str == 'Tuba, Trompete'
+
     def test_vcard_filename(self, member):
         member.first_name = self.first_name
         member.last_name = self.last_name
@@ -318,6 +328,14 @@ class TestMember:
         member.last_name = 'Jochen'
         assert 0 <= member.compare_last_name_to(test_string) <= 1
         assert member.compare_last_name_to(member.last_name) == pytest.approx(1)
+
+    def test_compare_instruments_to(self, member, test_string):
+        with pytest.raises(ValueError, match='This member has no'):
+            member.compare_instruments_to(test_string)
+
+        member.instruments = instruments.Tuba()
+        assert 0 <= member.compare_instruments_to(test_string) <= 1
+        assert member.compare_instruments_to(member.instruments_str) == pytest.approx(1)
 
     def test_to_string(self, member, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)

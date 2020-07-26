@@ -19,7 +19,8 @@ def member(monkeypatch):
                   photo_file_id='file_id',
                   gender=Gender.MALE,
                   date_of_birth=dt.date(dt.date.today().year - 21, 12, 31),
-                  instruments=instruments.AltoSaxophone(),
+                  instruments=[instruments.AltoSaxophone(),
+                               instruments.Trumpet()],
                   address='Universitätsplatz 2, 38106 Braunschweig')
 
 
@@ -177,13 +178,14 @@ class TestQuestion:
 
     @pytest.mark.parametrize('answer, result', [(str(instruments.AltoSaxophone()), True),
                                                 (f' {instruments.AltoSaxophone()} ', True),
+                                                ('altsaxphon ', True), (' Tromete', True),
                                                 (str(instruments.SopranoSaxophone()), False),
-                                                (f'{instruments.Saxophone()} ', False)])
+                                                (f'{instruments.Trombone()} ', False)])
     def test_check_answer_free_text_instrument(self, answer, result, member):
         q = Question(member, Question.INSTRUMENT, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
-        assert q.correct_answer == ', '.join(str(i) for i in member.instruments)
+        assert q.correct_answer == member.instruments_str
 
     @pytest.mark.parametrize('answer, result', [('Universitätsplatz, Braunschweig', True),
                                                 ('Univeritätsplatz 2, Braunschweig', True),
