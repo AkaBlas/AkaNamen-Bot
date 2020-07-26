@@ -29,6 +29,12 @@ EDITING_MESSAGE_KEY = 'editing_message_key'
 :class:`telegram.Message` with an :class:`telegram.InlineKeyboardMarkup` sent in the process of
 editing the members data.
 """
+CANCELLATION_MESSAGE_KEY = 'cancellation_message_key'
+"""
+:obj:`str`: Each ``context.user_data[CANCELLATION_MESSAGE_KEY]`` is expected to be the last
+:class:`telegram.Message` with an :class:`telegram.InlineKeyboardMarkup` sent in the process of
+cancelling the members membership.
+"""
 
 # Callback Data
 REGISTRATION_PATTERN = 'requesting_registration'

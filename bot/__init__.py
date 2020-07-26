@@ -9,6 +9,7 @@ from .constants import (
     ADMIN_KEY,
     EDITING_MESSAGE_KEY,
     INLINE_HELP,
+    CANCELLATION_MESSAGE_KEY,
 )
 from .keyboards import (build_instruments_keyboard, parse_instruments_keyboard,
                         REGISTRATION_KEYBOARD, DOCS_KEYBOARD, DONE, SELECTED, BACK,
@@ -34,5 +35,6 @@ __all__ = [
     'REGISTRATION_PATTERN',
     'ADMIN_KEY',
     'EDITING_MESSAGE_KEY',
-    'INLINE_HELP'
+    'INLINE_HELP',
+    'CANCELLATION_MESSAGE_KEY'
 ]

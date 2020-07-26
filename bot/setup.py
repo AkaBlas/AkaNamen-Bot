@@ -10,6 +10,7 @@ from bot import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_KEY, ADM
                  REGISTRATION_PATTERN, INLINE_HELP)
 
 from bot.editing import EDITING_HANDLER
+from bot.cancel_membership import CANCEL_MEMBERSHIP_HANDLER
 import bot.registration as registration
 import bot.commands as commands
 import bot.inline as inline
@@ -25,6 +26,7 @@ BOT_COMMANDS: List[BotCommand] = [
     BotCommand('hilfe', 'Zeigt ein paar generelle Hinweise zum Bot'),
     BotCommand('kontakt_abrufen', 'Kontaktdaten anderer AkaBlasen abrufen'),
     BotCommand('start', 'Startet den Bot'),
+    BotCommand('abmelden', 'Vom Bot abmelden und alle Daten löschen'),
 ]
 """List[:class:`telegram.BotCommand`]: A list of commands of the bot."""
 
@@ -55,6 +57,9 @@ def register_dispatcher(disptacher: Dispatcher, admin: Union[int, str]) -> None:
 
     # Edit user data
     disptacher.add_handler(EDITING_HANDLER)
+
+    # Cancel membership
+    disptacher.add_handler(CANCEL_MEMBERSHIP_HANDLER)
 
     # Simple commands
     disptacher.add_handler(CommandHandler('hilfe', commands.help_message))

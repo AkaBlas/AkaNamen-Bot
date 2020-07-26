@@ -627,4 +627,4 @@ EDITING_HANDLER = ConversationHandler(
         ALLOW_CONTACT_SHARING: [CallbackQueryHandler(allow_contact_sharing)],
     },
     fallbacks=[])
-""":class:`telegram.ext.ConversationHandler`: Handler used allow users to change their data."""
+""":class:`telegram.ext.ConversationHandler`: Handler used to allow users to change their data."""
