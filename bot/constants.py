@@ -35,6 +35,11 @@ CANCELLATION_MESSAGE_KEY = 'cancellation_message_key'
 :class:`telegram.Message` with an :class:`telegram.InlineKeyboardMarkup` sent in the process of
 cancelling the members membership.
 """
+BANNING_KEY = 'banning_key'
+"""
+:obj:`str`: Each ``context.user_data[BANNING_KEY]`` is expected to be the last user id of a user
+to be banned from the bot.
+"""
 
 # Callback Data
 REGISTRATION_PATTERN = 'requesting_registration'

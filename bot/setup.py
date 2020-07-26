@@ -11,6 +11,8 @@ from bot import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_KEY, ADM
 
 from bot.editing import EDITING_HANDLER
 from bot.cancel_membership import CANCEL_MEMBERSHIP_HANDLER
+from bot.ban import build_banning_handler
+from bot.check_user_status import schedule_daily_job
 import bot.registration as registration
 import bot.commands as commands
 import bot.inline as inline
@@ -61,8 +63,11 @@ def register_dispatcher(disptacher: Dispatcher, admin: Union[int, str]) -> None:
     # Cancel membership
     disptacher.add_handler(CANCEL_MEMBERSHIP_HANDLER)
 
+    # Banning members
+    disptacher.add_handler(build_banning_handler(int(admin)))
+
     # Simple commands
-    disptacher.add_handler(CommandHandler('hilfe', commands.help_message))
+    disptacher.add_handler(CommandHandler(['hilfe', 'help'], commands.help_message))
     disptacher.add_handler(CommandHandler('daten_anzeigen', commands.show_data))
     disptacher.add_handler(CommandHandler('kontakt_abrufen', commands.start_inline))
     disptacher.add_handler(
@@ -84,7 +89,10 @@ def register_dispatcher(disptacher: Dispatcher, admin: Union[int, str]) -> None:
     # Set commands
     disptacher.bot.set_my_commands(BOT_COMMANDS)
 
-    # Set up bot_dat
+    # Schedule job deleting users who blocked the bot
+    schedule_daily_job(disptacher)
+
+    # Set up bot_data
     bot_data = disptacher.bot_data
     if not bot_data.get(ORCHESTRA_KEY):
         bot_data[ORCHESTRA_KEY] = Orchestra()
