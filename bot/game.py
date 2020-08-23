@@ -3,11 +3,11 @@
 """This module contains classes and functions for playing the game."""
 from dataclasses import dataclass, field
 from threading import Lock
-from typing import Optional, List, cast, Dict, Any, Union
+from typing import Optional, List, cast, Dict, Union
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ConversationHandler, CallbackContext, DispatcherHandlerStop, Handler, \
-    Dispatcher, CommandHandler, CallbackQueryHandler
+from telegram.ext import ConversationHandler, CallbackContext, Handler, \
+    CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 
 from bot import ORCHESTRA_KEY, GAME_KEY, parse_questions_hints_keyboard, \
     build_questions_hints_keyboard, SELECTED, DONE
@@ -179,23 +179,6 @@ class QuestionHandler(Handler):
                 return ConversationHandler.END
 
 
-class BlockingConversationHandler(ConversationHandler):
-    """
-    A simple subclass of :class:`telegram.ext.ConversationHandler` setting ``context.is_handled``
-    on each context for a handled update in order to be able to raise
-    :class:`telegram.ext.DispatcherHandlerStop` in a subsequent handler.
-
-    Note:
-        This workaround is due to raising ``DPHS`` in conversation callbacks currently not being
-        supported by PTB, see
-        `this issue <https://github.com/python-telegram-bot/python-telegram-bot/issues/2057>`_.
-    """
-
-    def collect_additional_context(self, context: CallbackContext, update: Update,
-                                   dispatcher: Dispatcher, check_result: Any) -> None:
-        context.is_handled = True
-
-
 # ----------------------------------------------------------------------------------------------- #
 
 QUESTION_HANDLER = QuestionHandler()
@@ -361,20 +344,21 @@ def cancel(update: Update, context: CallbackContext) -> int:
     return ConversationHandler.END
 
 
-def raise_dp_handler_stop(update: Update, context: CallbackContext) -> None:
+def fallback(update: Update, context: CallbackContext) -> None:
     """
+    Reminds the user that they are playing a game and other functionality will not work.
+
     Args:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
-
-    Raises:
-        :class:`telegram.ext.DispatcherHandlerStop`
     """
-    if hasattr(context, 'is_handled') and context.is_handled is True:
-        raise DispatcherHandlerStop()
+    update.effective_message.reply_text('Du spielst gerade ein Spiel. 🧐 Bitte antworte nur auf '
+                                        'die Fragen und mach keine anderen Eingaben. Wenn Du das '
+                                        'Spiel abbrechen möchtest, nutze den Befehl '
+                                        '/spiel_abbrechen.')
 
 
-GAME_HANDLER = BlockingConversationHandler(
+GAME_HANDLER = ConversationHandler(
     entry_points=[CommandHandler('spiel_starten', hint_attributes)],
     states={
         HINT_ATTRIBUTES: [CallbackQueryHandler(hint_attributes)],
@@ -383,7 +367,8 @@ GAME_HANDLER = BlockingConversationHandler(
         MULTIPLE_CHOICE: [CallbackQueryHandler(multiple_choice)],
         GAME: [QUESTION_HANDLER]
     },
-    fallbacks=[CommandHandler('spiel_abbrechen', cancel)],
+    fallbacks=[CommandHandler('spiel_abbrechen', cancel),
+               MessageHandler(Filters.all, fallback)],
     # We need to set per_chat to False in order to be able to handle PollAnswer updates
     per_chat=False)
 """:class:`telegram.ext.ConversationHandler`: Handler for playing games."""

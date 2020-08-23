@@ -48,12 +48,11 @@ def register_dispatcher(disptacher: Dispatcher, admin: Union[int, str]) -> None:
     # Handlers
 
     # Registration status
-    disptacher.add_handler(TypeHandler(Update, registration.check_registration_status), group=-3)
+    disptacher.add_handler(TypeHandler(Update, registration.check_registration_status), group=-1)
 
     # Game Conversation
-    # Should raise DispatcherHandlerStop in order to not allow interruption of the conversation
-    disptacher.add_handler(game.GAME_HANDLER, group=-2)
-    disptacher.add_handler(TypeHandler(Update, game.raise_dp_handler_stop), group=-1)
+    # Must be first so that the fallback can catch unrelated messages
+    disptacher.add_handler(game.GAME_HANDLER)
 
     # Registration process
     # We need the filter here in order to not catch /start with deep linking parameter used for
