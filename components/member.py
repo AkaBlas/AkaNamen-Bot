@@ -16,6 +16,7 @@ import shutil
 import re
 
 from geopy import Photon, distance
+from geopy.exc import GeopyError
 from tempfile import TemporaryFile, NamedTemporaryFile
 from configparser import ConfigParser
 from collections import defaultdict
@@ -158,10 +159,18 @@ class Member:
         """
         if bool(address and coordinates) or not bool(address or coordinates):
             raise ValueError('Exactly one of the parameters must be passed!')
-        if address:
-            location = self._geo_locator.geocode(address)
-        else:
-            location = self._geo_locator.reverse(coordinates)
+        try:
+            if address:
+                location = self._geo_locator.geocode(address)
+            else:
+                location = self._geo_locator.reverse(coordinates)
+        except GeopyError:
+            self._raw_address = None
+            self._address = None
+            self._longitude = None
+            self._latitude = None
+
+            return self._address
 
         if location:
             if 'properties' in location.raw:

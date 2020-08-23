@@ -18,10 +18,13 @@ import bot.commands as commands
 import bot.inline as inline
 import bot.highscore as highscore
 import bot.error as error
+import bot.game as game
 
 from components import Orchestra
 
 BOT_COMMANDS: List[BotCommand] = [
+    BotCommand('spiel_starten', 'Startet ein neues Spiel'),
+    BotCommand('spiel_abbrechen', 'Bricht das aktuelle Spiel ab'),
     BotCommand('daten_anzeigen', 'Zeigt Deine gespeicherten Daten an'),
     BotCommand('daten_bearbeiten', 'Daten wie Adresse und Photo ändern'),
     BotCommand('highscore', 'Zeigt den aktuellen Highscore an'),
@@ -45,7 +48,12 @@ def register_dispatcher(disptacher: Dispatcher, admin: Union[int, str]) -> None:
     # Handlers
 
     # Registration status
-    disptacher.add_handler(TypeHandler(Update, registration.check_registration_status), group=-1)
+    disptacher.add_handler(TypeHandler(Update, registration.check_registration_status), group=-3)
+
+    # Game Conversation
+    # Should raise DispatcherHandlerStop in order to not allow interruption of the conversation
+    disptacher.add_handler(game.GAME_HANDLER, group=-2)
+    disptacher.add_handler(TypeHandler(Update, game.raise_dp_handler_stop), group=-1)
 
     # Registration process
     # We need the filter here in order to not catch /start with deep linking parameter used for

@@ -40,6 +40,11 @@ BANNING_KEY = 'banning_key'
 :obj:`str`: Each ``context.user_data[BANNING_KEY]`` is expected to be the last user id of a user
 to be banned from the bot.
 """
+GAME_KEY = 'game_key'
+"""
+:obj:`str`: Each ``context.user_data[GAME_KEY]`` is expected to contain information to be used
+by :class:`bot.GameHandler`.
+"""
 
 # Callback Data
 REGISTRATION_PATTERN = 'requesting_registration'

@@ -78,7 +78,7 @@ class Questioner:
             raise ValueError('Number of questions must be greater than zero. Joke Cookie.')
         else:
             self.number_of_questions = number_of_questions
-        self.number_of_question_asked = 0
+        self.number_of_questions_asked = 0
 
         # Filter stupid input
         if (len(hint_attributes) == 1 and len(question_attributes) == 1
@@ -221,8 +221,14 @@ class Questioner:
 
     def ask_question(self) -> None:
         """
-        Asks the next question.
+        Asks the next question, if there is another.
+
+        Raises:
+            RuntimeError: If there are no more questions to be asked.
         """
+        if self.number_of_questions_asked == self.number_of_questions:
+            raise RuntimeError('No more questions to ask!')
+
         if len(self.question_attributes) == 1:
             choose_from = [ha for ha in self.hint_attributes if ha != self.question_attributes[0]]
         else:
@@ -297,3 +303,5 @@ class Questioner:
             self.current_question = Question(member,
                                              supported_question_attribute,
                                              multiple_choice=multiple_choice)
+
+        self.number_of_questions_asked += 1

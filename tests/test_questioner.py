@@ -127,6 +127,7 @@ class TestQuestioner:
 
         monkeypatch.setattr(questioner.bot, 'send_poll', send_poll)
         questioner.ask_question()
+        assert questioner.number_of_questions_asked == 1
 
         assert questioner.current_question
         assert questioner.current_question.poll is poll_message.poll
@@ -199,6 +200,7 @@ class TestQuestioner:
         monkeypatch.setattr(questioner.bot, 'send_poll', send_poll)
         monkeypatch.setattr(questioner.bot, 'send_message', send_message)
         questioner.ask_question()
+        assert questioner.number_of_questions_asked == 1
 
         assert questioner.current_question
         if questioner.current_question.multiple_choice:
@@ -300,6 +302,7 @@ class TestQuestioner:
 
         monkeypatch.setattr(questioner.bot, 'send_message', send_message)
         questioner.ask_question()
+        assert questioner.number_of_questions_asked == 1
 
         assert questioner.current_question
         assert not questioner.current_question.poll
@@ -377,6 +380,7 @@ class TestQuestioner:
                                 multiple_choice=True)
 
         questioner.ask_question()
+        assert questioner.number_of_questions_asked == 1
         for option in poll_message.poll.options:
             assert option.text[2:] == 94 * 'X' + ' ...'
 
@@ -418,6 +422,7 @@ class TestQuestioner:
                                 bot=bot)
 
         questioner.ask_question()
+        assert questioner.number_of_questions_asked == 1
         update = Update(123,
                         poll_answer=PollAnswer(poll_message.poll.id, User(chat_id, 'foo', False),
                                                [poll_message.poll.correct_option_id]))
@@ -431,3 +436,18 @@ class TestQuestioner:
         assert len(am['last_names']) == 4
         um = questioner.used_members
         assert all([um[key] == set() for key in um])
+
+    def test_no_more_questions_to_ask(self, bot, chat_id, empty_orchestra, empty_member):
+        empty_orchestra.register_member(empty_member)
+        for i in range(4):
+            empty_orchestra.register_member(Member(i, first_name=str(i), last_name=str(i)))
+
+        questioner = Questioner(user_id=int(chat_id),
+                                orchestra=empty_orchestra,
+                                hint_attributes=['first_name'],
+                                question_attributes=['last_name'],
+                                number_of_questions=42,
+                                bot=bot)
+        questioner.number_of_questions_asked = 42
+        with pytest.raises(RuntimeError, match='No more questions to ask!'):
+            questioner.ask_question()

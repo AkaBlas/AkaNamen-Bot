@@ -12,5 +12,6 @@ Bot package
     bot.error
     bot.inline
     bot.keyboards
+    bot.game
     bot.registration
     bot.setup
