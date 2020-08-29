@@ -45,10 +45,11 @@ Da sitzt man so in seiner Reihe und pustet munter in sein Instrument, während m
 Der AkaNamen-Bot hilft Dir, sämtliche Namen, Spitznamen, Instrumente, Sozialversicherungsnummern und Unterhosengrößen Deiner Mit-AkaBlasen zu lernen!
 Wie genau das funktioniert, wohin Hirsch Deine Daten verkauft (wer Hirsch überhaupt ist) und was Geranien denken, währen sie vom Balkon stürzen erklärt Dir in aller Ausführlichkeit das `Benutzerhandbuch`_.
 
-Wenn Du Dich noch nicht mit Telegram und/oder Telegram-Bots auskennst, wird einen Blick in die :ref:`quickstart`.
+Wenn Du Dich noch nicht mit Telegram und/oder Telegram-Bots auskennst, wird einen Blick in die `Kurzanleitung`_.
 
 .. _`@AkaNamenBot`: http://t.me/AkaNamenBot
 .. _`Benutzerhandbuch`: https://bibo-joshi.github.io/AkaNamen-Bot/
+.. _`Kurzanleitung`: https://bibo-joshi.github.io/AkaNamen-Bot/quickstart.html
 
 For Developers
 --------------
