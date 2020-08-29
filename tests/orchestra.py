@@ -3,7 +3,6 @@
 import random
 import datetime as dt
 from components import Gender, instruments, Member, Orchestra
-from tests.check_file_path import check_file_path
 
 
 def value_or_none(value):
@@ -191,17 +190,10 @@ def address():
 
 
 class PhotoFileID:
-    PHOTO_FILE_IDS = []
 
     @classmethod
     def photo_file_id(cls, bot, chat_id):
-        if not cls.PHOTO_FILE_IDS:
-            for _ in range(10):
-                with open(check_file_path('tests/data/vcard_photo.png'), 'rb') as file:
-                    message = bot.send_photo(chat_id=chat_id, photo=file)
-                    min_file = min(message.photo, key=lambda x: x.file_size)
-                    cls.PHOTO_FILE_IDS.append(min_file.file_id)
-        return random.choice(cls.PHOTO_FILE_IDS)
+        return str(random.randint(5, 555))
 
 
 def orchestra(members, bot, chat_id, skip=None):

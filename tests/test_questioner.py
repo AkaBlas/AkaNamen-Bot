@@ -2,7 +2,7 @@
 import random
 import pytest
 
-from telegram import Update, PollAnswer, User, Message, Chat, Location
+from telegram import Update, PollAnswer, User, Message, Chat, Location, Poll, PollOption
 from components import Member, Orchestra, Questioner, Question
 
 
@@ -14,6 +14,15 @@ def empty_member(chat_id):
 @pytest.fixture(scope='function')
 def empty_orchestra():
     return Orchestra()
+
+
+def fake_poll():
+    return Message(123,
+                   None,
+                   None,
+                   None,
+                   poll=Poll(random.randint(100, 500), 'question', None, 0, False, False,
+                             Poll.QUIZ, False, random.randint(0, 3)))
 
 
 class TestQuestioner:
@@ -102,18 +111,19 @@ class TestQuestioner:
                        number_of_questions=42,
                        bot=bot)
 
-    @pytest.mark.parametrize('runs', range(20))
+    @pytest.mark.parametrize('runs', range(50))
     @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
     def test_ask_question_multiple_choice(self, bot, chat_id, populated_orchestra, empty_member,
                                           monkeypatch, runs):
-        orig_send_poll = bot.send_poll
-
         poll_message = None
 
         def send_poll(*args, **kwargs):
             nonlocal poll_message
-            poll_message = orig_send_poll(*args, **kwargs)
+            poll_message = fake_poll()
             return poll_message
+
+        def send_pass(*args, **kwargs):
+            pass
 
         orchestra = populated_orchestra
         orchestra.register_member(empty_member)
@@ -126,6 +136,8 @@ class TestQuestioner:
                                 multiple_choice=True)
 
         monkeypatch.setattr(questioner.bot, 'send_poll', send_poll)
+        monkeypatch.setattr(questioner.bot, 'send_photo', send_pass)
+        monkeypatch.setattr(questioner.bot, 'send_media_group', send_pass)
         questioner.ask_question()
         assert questioner.number_of_questions_asked == 1
 
@@ -167,25 +179,26 @@ class TestQuestioner:
         assert len([1 for key in um if len(um[key]) > 0]) == 1
         assert len([1 for key in um if len(um[key]) == 1]) == 1
 
-    @pytest.mark.parametrize('runs', range(20))
+    @pytest.mark.parametrize('runs', range(50))
     @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
     def test_ask_question_free_text(self, bot, chat_id, populated_orchestra, empty_member,
                                     monkeypatch, runs):
-        orig_send_poll = bot.send_poll
-        orig_send_message = bot.send_message
 
         poll_message = None
-        answer_message = None
+        answer_message_text = ''
 
         def send_poll(*args, **kwargs):
             nonlocal poll_message
-            poll_message = orig_send_poll(*args, **kwargs)
+            poll_message = fake_poll()
             return poll_message
 
         def send_message(*args, **kwargs):
-            nonlocal answer_message
-            answer_message = orig_send_message(*args, **kwargs)
-            return answer_message
+            nonlocal answer_message_text
+            answer_message_text = kwargs['text']
+            return answer_message_text
+
+        def send_pass(*args, **kwargs):
+            pass
 
         orchestra = populated_orchestra
         orchestra.register_member(empty_member)
@@ -199,6 +212,8 @@ class TestQuestioner:
 
         monkeypatch.setattr(questioner.bot, 'send_poll', send_poll)
         monkeypatch.setattr(questioner.bot, 'send_message', send_message)
+        monkeypatch.setattr(questioner.bot, 'send_photo', send_pass)
+        monkeypatch.setattr(questioner.bot, 'send_media_group', send_pass)
         questioner.ask_question()
         assert questioner.number_of_questions_asked == 1
 
@@ -246,7 +261,7 @@ class TestQuestioner:
         assert questioner.score.correct == 0
         assert all([questioner.used_members[key] == set() for key in questioner.used_members])
         if not questioner.current_question.multiple_choice:
-            assert 'nicht korrekt' in answer_message.text
+            assert 'nicht korrekt' in answer_message_text
 
         if questioner.current_question.multiple_choice:
             update = Update(123,
@@ -275,20 +290,21 @@ class TestQuestioner:
         assert len([1 for key in um if len(um[key]) > 0]) == 1
         assert len([1 for key in um if len(um[key]) == 1]) == 1
         if not questioner.current_question.multiple_choice:
-            assert 'richtig!' in answer_message.text
+            assert 'richtig!' in answer_message_text
 
     @pytest.mark.parametrize('runs', range(3))
     @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
     def test_ask_question_location(self, bot, chat_id, populated_orchestra, empty_member,
                                    monkeypatch, runs):
-        orig_send_message = bot.send_message
-
-        answer_message = None
+        answer_message_text = ''
 
         def send_message(*args, **kwargs):
-            nonlocal answer_message
-            answer_message = orig_send_message(*args, **kwargs)
-            return answer_message
+            nonlocal answer_message_text
+            answer_message_text = kwargs['text']
+            return answer_message_text
+
+        def send_pass(*args, **kwargs):
+            pass
 
         orchestra = populated_orchestra
         orchestra.register_member(empty_member)
@@ -301,6 +317,8 @@ class TestQuestioner:
                                 multiple_choice=False)
 
         monkeypatch.setattr(questioner.bot, 'send_message', send_message)
+        monkeypatch.setattr(questioner.bot, 'send_photo', send_pass)
+        monkeypatch.setattr(questioner.bot, 'send_media_group', send_pass)
         questioner.ask_question()
         assert questioner.number_of_questions_asked == 1
 
@@ -334,7 +352,7 @@ class TestQuestioner:
         um = questioner.used_members
         assert all([um[key] == set() for key in um])
         if not questioner.current_question.multiple_choice:
-            assert 'nicht korrekt' in answer_message.text
+            assert 'nicht korrekt' in answer_message_text
 
         longitude = questioner.current_question.member.longitude
         latitude = questioner.current_question.member.latitude
@@ -354,15 +372,15 @@ class TestQuestioner:
         assert len([1 for key in um if len(um[key]) > 0]) == 1
         assert len([1 for key in um if len(um[key]) == 1]) == 1
         if not questioner.current_question.multiple_choice:
-            assert 'richtig!' in answer_message.text
+            assert 'richtig!' in answer_message_text
 
     def test_truncate_long_answers(self, bot, chat_id, empty_orchestra, monkeypatch, empty_member):
-        orig_send_poll = bot.send_poll
         poll_message = None
 
         def send_poll(*args, **kwargs):
             nonlocal poll_message
-            poll_message = orig_send_poll(*args, **kwargs)
+            poll_message = fake_poll()
+            poll_message.poll.options = [PollOption(o, 0) for o in kwargs['options']]
             return poll_message
 
         monkeypatch.setattr(bot, 'send_poll', send_poll)
@@ -400,12 +418,11 @@ class TestQuestioner:
             questioner.handle_update(update)
 
     def test_clear_used_members(self, bot, chat_id, empty_orchestra, empty_member, monkeypatch):
-        orig_send_poll = bot.send_poll
         poll_message = None
 
         def send_poll(*args, **kwargs):
             nonlocal poll_message
-            poll_message = orig_send_poll(*args, **kwargs)
+            poll_message = fake_poll()
             return poll_message
 
         monkeypatch.setattr(bot, 'send_poll', send_poll)
