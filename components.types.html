@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>components.types Module &mdash; AkaNamen Bot  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bot package" href="bot.html" />
+    <link rel="prev" title="components.PicklableBase" href="components.picklablebase.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+          
+
+          
+            
+            <img src="_static/AkaNamen-logo-no-background.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="akablas.html">AkaBlas components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="utils.html">Utility components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="components.helpers.html">components.helpers Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.picklablebase.html">components.PicklableBase</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">components.types Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AkaNamen Bot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="utils.html">Utility components</a> &raquo;</li>
+        
+      <li>components.types Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/components.types.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-components.types">
+<span id="components-types-module"></span><h1>components.types Module<a class="headerlink" href="#module-components.types" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the classes MessageType and UpdateType.</p>
+<dl class="py class">
+<dt id="components.types.MessageType">
+<em class="property">class </em><code class="sig-prename descclassname">components.types.</code><code class="sig-name descname">MessageType</code><a class="headerlink" href="#components.types.MessageType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This object represents message types relevant for the AkaNamen Bot.</p>
+<dl class="py attribute">
+<dt id="components.types.MessageType.ALL_TYPES">
+<code class="sig-name descname">ALL_TYPES</code><em class="property"> = ['text', 'photo', 'location']</em><a class="headerlink" href="#components.types.MessageType.ALL_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd><p>All relevant types</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.MessageType.LOCATION">
+<code class="sig-name descname">LOCATION</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'location'</em><a class="headerlink" href="#components.types.MessageType.LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Location messages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.MessageType.PHOTO">
+<code class="sig-name descname">PHOTO</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'photo'</em><a class="headerlink" href="#components.types.MessageType.PHOTO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Photo messages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.MessageType.TEXT">
+<code class="sig-name descname">TEXT</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'text'</em><a class="headerlink" href="#components.types.MessageType.TEXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Text messages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.types.MessageType.relevant_type">
+<em class="property">classmethod </em><code class="sig-name descname">relevant_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">entity</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.types.MessageType.relevant_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the type of the message, if it is relevant for the AkaNamen Bot in terms of
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">All_TYPES</span></code>. If it’s not relevant, the output will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In contrast to <code class="xref py py-meth docutils literal notranslate"><span class="pre">telegram.utils.helpers.effective_message_type()</span></code> , only updates
+with <code class="docutils literal notranslate"><span class="pre">update.message</span></code> are considered.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code>]) – A <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a> or <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.types.UpdateType">
+<em class="property">class </em><code class="sig-prename descclassname">components.types.</code><code class="sig-name descname">UpdateType</code><a class="headerlink" href="#components.types.UpdateType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This object represents update types relevant for the AkaNamen Bot.</p>
+<dl class="py attribute">
+<dt id="components.types.UpdateType.ALL_TYPES">
+<code class="sig-name descname">ALL_TYPES</code><em class="property"> = ['message', 'inline_query', 'chosen_inline_result', 'callback_query', 'poll', 'poll_answer']</em><a class="headerlink" href="#components.types.UpdateType.ALL_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd><p>All relevant types</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.UpdateType.CALLBACK_QUERY">
+<code class="sig-name descname">CALLBACK_QUERY</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'callback_query'</em><a class="headerlink" href="#components.types.UpdateType.CALLBACK_QUERY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback query updates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.UpdateType.CHOSEN_INLINE_RESULT">
+<code class="sig-name descname">CHOSEN_INLINE_RESULT</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'chosen_inline_result'</em><a class="headerlink" href="#components.types.UpdateType.CHOSEN_INLINE_RESULT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chosen inline result updates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.UpdateType.INLINE_QUERY">
+<code class="sig-name descname">INLINE_QUERY</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'inline_query'</em><a class="headerlink" href="#components.types.UpdateType.INLINE_QUERY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inline query updates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.UpdateType.MESSAGE">
+<code class="sig-name descname">MESSAGE</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'message'</em><a class="headerlink" href="#components.types.UpdateType.MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Message updates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.UpdateType.POLL">
+<code class="sig-name descname">POLL</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'poll'</em><a class="headerlink" href="#components.types.UpdateType.POLL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Poll updates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.types.UpdateType.POLL_ANSWER">
+<code class="sig-name descname">POLL_ANSWER</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></em><em class="property"> = 'poll_answer'</em><a class="headerlink" href="#components.types.UpdateType.POLL_ANSWER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Poll answer updates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.types.UpdateType.relevant_type">
+<em class="property">classmethod </em><code class="sig-name descname">relevant_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.types.UpdateType.relevant_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the type of the update, if it is relevant for the AkaNamen Bot in terms of
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">All_TYPES</span></code>. If it’s not relevant, the output will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – A <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bot.html" class="btn btn-neutral float-right" title="Bot package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="components.picklablebase.html" class="btn btn-neutral float-left" title="components.PicklableBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Hinrich Mahler
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

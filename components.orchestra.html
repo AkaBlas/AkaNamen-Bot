@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>components.Orchestra &mdash; AkaNamen Bot  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Game related components" href="game.html" />
+    <link rel="prev" title="components.Member" href="components.member.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+          
+
+          
+            
+            <img src="_static/AkaNamen-logo-no-background.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="akablas.html">AkaBlas components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="components.gender.html">components.Gender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.instruments.html">components.instruments Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.member.html">components.Member</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">components.Orchestra</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AkaNamen Bot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="akablas.html">AkaBlas components</a> &raquo;</li>
+        
+      <li>components.Orchestra</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/components.orchestra.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="components-orchestra">
+<h1>components.Orchestra<a class="headerlink" href="#components-orchestra" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="components.Orchestra">
+<em class="property">class </em><code class="sig-prename descclassname">components.</code><code class="sig-name descname">Orchestra</code><a class="headerlink" href="#components.Orchestra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code></p>
+<p>An orchestra. Keeps tracks of its members.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Orchestra instance support subscription for all properties listed as keys of
+<a class="reference internal" href="#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DICTS_TO_ATTRS</span></code></a>.</p>
+</div>
+<dl class="py attribute">
+<dt id="components.Orchestra.ATTRS_TO_DICTS">
+<code class="sig-name descname">ATTRS_TO_DICTS</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><em class="property"> = {'address': 'addresses', 'age': 'ages', 'birthday': 'birthdays', 'date_of_birth': 'dates_of_birth', 'first_name': 'first_names', 'full_name': 'full_names', 'gender': 'genders', 'instruments': 'instruments', 'last_name': 'last_names', 'nickname': 'nicknames', 'photo_file_id': 'photo_file_ids'}</em><a class="headerlink" href="#components.Orchestra.ATTRS_TO_DICTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Essentially the inverse of <code class="xref py py-attr docutils literal notranslate"><span class="pre">lists_to_attr</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Orchestra.DICTS_TO_ATTRS">
+<code class="sig-name descname">DICTS_TO_ATTRS</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><em class="property"> = {'addresses': 'address', 'ages': 'age', 'birthdays': 'birthday', 'dates_of_birth': 'date_of_birth', 'female_first_names': 'first_name', 'first_names': 'first_name', 'full_names': 'full_name', 'genders': 'gender', 'instruments': 'instruments', 'last_names': 'last_name', 'male_first_names': 'first_name', 'nicknames': 'nickname', 'photo_file_ids': 'photo_file_id'}</em><a class="headerlink" href="#components.Orchestra.DICTS_TO_ATTRS" title="Permalink to this definition">¶</a></dt>
+<dd><p>A map from the names of the different properties of this
+class to the <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> attributes encoded in those properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Orchestra.DICTS_TO_HR">
+<code class="sig-name descname">DICTS_TO_HR</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><em class="property"> = {'addresses': 'Addresse', 'ages': 'Alter', 'birthdays': 'Geburtstag', 'dates_of_birth': 'Geburtsdatum', 'female_first_names': 'Vorname (Weiblich)', 'first_names': 'Vorname', 'full_names': 'Ganzer Name', 'genders': 'Geschlecht', 'instruments': 'Instrument', 'last_names': 'Nachname', 'male_first_names': 'Vorname (Männlich)', 'nicknames': 'Spitzname', 'photo_file_ids': 'Photo'}</em><a class="headerlink" href="#components.Orchestra.DICTS_TO_HR" title="Permalink to this definition">¶</a></dt>
+<dd><p>A map from the names of the different properties of this
+class to the human readable strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.addresses">
+<em class="property">property </em><code class="sig-name descname">addresses</code><a class="headerlink" href="#components.Orchestra.addresses" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding address are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.ages">
+<em class="property">property </em><code class="sig-name descname">ages</code><a class="headerlink" href="#components.Orchestra.ages" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding age (on evaluation time)
+are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.birthdays">
+<em class="property">property </em><code class="sig-name descname">birthdays</code><a class="headerlink" href="#components.Orchestra.birthdays" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding birthdays are the
+values. The keys are the dates in <code class="docutils literal notranslate"><span class="pre">DD.MM.</span></code> format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.dates_of_birth">
+<em class="property">property </em><code class="sig-name descname">dates_of_birth</code><a class="headerlink" href="#components.Orchestra.dates_of_birth" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding date of birth are the
+values. The keys are <a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></a> objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.date" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.draw_members">
+<code class="sig-name descname">draw_members</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em>, <em class="sig-param"><span class="n">attribute</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.draw_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a orchestra member and an attribute, select three other members who also have the
+attribute, but with a different value. Shuffles the four members and returns bot the index
+of the correct member (the argument to this function) and a tuple of all four members.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>member</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>) – The member to ask the question about.</p></li>
+<li><p><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The attribute to be subject of the question. Must be present in
+<a class="reference internal" href="#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DICTS_TO_ATTRS</span></code></a> as either key or value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If the attribute is not supported either in general or for this orchestra
+    (see <a class="reference internal" href="#components.Orchestra.questionable" title="components.Orchestra.questionable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">questionable</span></code></a>) or the passed member doesn’t have the specified
+    attribute.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>, …]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.female_first_names">
+<em class="property">property </em><code class="sig-name descname">female_first_names</code><a class="headerlink" href="#components.Orchestra.female_first_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all female members with the corresponding last names are the
+values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.first_names">
+<em class="property">property </em><code class="sig-name descname">first_names</code><a class="headerlink" href="#components.Orchestra.first_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding first name are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.full_names">
+<em class="property">property </em><code class="sig-name descname">full_names</code><a class="headerlink" href="#components.Orchestra.full_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding full name are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.genders">
+<em class="property">property </em><code class="sig-name descname">genders</code><a class="headerlink" href="#components.Orchestra.genders" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding gender are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.instruments">
+<em class="property">property </em><code class="sig-name descname">instruments</code><a class="headerlink" href="#components.Orchestra.instruments" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members that play the corresponding instrument the values.
+The keys are <code class="xref py py-class docutils literal notranslate"><span class="pre">components.Instrument</span></code> objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference internal" href="components.instruments.html#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.kick_member">
+<code class="sig-name descname">kick_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.kick_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kicks a member from the orchestra.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>) – The member to kick.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If member is not registered.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.last_names">
+<em class="property">property </em><code class="sig-name descname">last_names</code><a class="headerlink" href="#components.Orchestra.last_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding last name are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.male_first_names">
+<em class="property">property </em><code class="sig-name descname">male_first_names</code><a class="headerlink" href="#components.Orchestra.male_first_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all male members with the corresponding last names are the
+values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.members">
+<em class="property">property </em><code class="sig-name descname">members</code><a class="headerlink" href="#components.Orchestra.members" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the members of the orchestra. The keys are the <a class="reference internal" href="components.member.html#components.Member.user_id" title="components.Member.user_id"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Member.user_id</span></code></a> s, the
+values are the actual members.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.months_score">
+<em class="property">property </em><code class="sig-name descname">months_score</code><a class="headerlink" href="#components.Orchestra.months_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a list of each members score of the current month sorted descending by
+<a class="reference internal" href="components.score.html#components.Score.ratio" title="components.Score.ratio"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Score.ratio</span></code></a> .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Score</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.months_score_text">
+<code class="sig-name descname">months_score_text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.months_score_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation of <a class="reference internal" href="#components.Orchestra.months_score" title="components.Orchestra.months_score"><code class="xref py py-attr docutils literal notranslate"><span class="pre">months_score</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Maximum number of members to display. If not passed, will write down all
+members.</p></li>
+<li><p><strong>html</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, will embed HTML tags in the string. Use this to send the string
+with a Telegram bot using <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.parsemode.html#telegram.ParseMode.HTML" title="(in Python Telegram Bot v12.8)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">telegram.ParseMode.HTML</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.nicknames">
+<em class="property">property </em><code class="sig-name descname">nicknames</code><a class="headerlink" href="#components.Orchestra.nicknames" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding nickname are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.overall_score">
+<em class="property">property </em><code class="sig-name descname">overall_score</code><a class="headerlink" href="#components.Orchestra.overall_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a list of each members overall score sorted descending by
+<a class="reference internal" href="components.score.html#components.Score.ratio" title="components.Score.ratio"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Score.ratio</span></code></a> .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Score</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.overall_score_text">
+<code class="sig-name descname">overall_score_text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.overall_score_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation of <a class="reference internal" href="#components.Orchestra.overall_score" title="components.Orchestra.overall_score"><code class="xref py py-attr docutils literal notranslate"><span class="pre">overall_score</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Maximum number of members to display. If not passed, will write down all
+members.</p></li>
+<li><p><strong>html</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, will embed HTML tags in the string. Use this to send the string
+with a Telegram bot using <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.parsemode.html#telegram.ParseMode.HTML" title="(in Python Telegram Bot v12.8)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">telegram.ParseMode.HTML</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.photo_file_ids">
+<em class="property">property </em><code class="sig-name descname">photo_file_ids</code><a class="headerlink" href="#components.Orchestra.photo_file_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></a>. For each key, all members with the corresponding photo file ID
+are the values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.questionable">
+<em class="property">property </em><code class="sig-name descname">questionable</code><a class="headerlink" href="#components.Orchestra.questionable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a list of string tuples, each representing a pair of hint attribute and question
+attribute, which have enough different values for the orchestras members to generate
+questions from it.</p>
+<p class="rubric">Example</p>
+<p>To generate a question asking for the age of a member based on their first name, the
+orchestra needs at least</p>
+<ul class="simple">
+<li><p>one member with <em>both</em> a <a class="reference internal" href="components.member.html#components.Member.first_name" title="components.Member.first_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Member.first_name</span></code></a> and an
+<a class="reference internal" href="components.member.html#components.Member.age" title="components.Member.age"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Member.age</span></code></a></p></li>
+<li><p>at least three other members with a (pairwise) different
+<a class="reference internal" href="components.member.html#components.Member.age" title="components.Member.age"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Member.age</span></code></a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">first_names</span></code> will be listed as questionable attribute, if at least one of
+<code class="docutils literal notranslate"><span class="pre">male_first_names</span></code> <em>or</em> <code class="docutils literal notranslate"><span class="pre">female_first_names</span></code> is.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gender</span></code> will never be listed</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Tuples of keys of <a class="reference internal" href="#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DICTS_TO_ATTRS</span></code></a>. May be empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.register_member">
+<code class="sig-name descname">register_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.register_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a new member for this orchestra.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Copies the member so changes to the instance wont directly affect the orchestra.
+Use <a class="reference internal" href="#components.Orchestra.update_member" title="components.Orchestra.update_member"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update_member()</span></code></a> to update the information about this member.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>) – The new member</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If member is already registered.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.todays_score">
+<em class="property">property </em><code class="sig-name descname">todays_score</code><a class="headerlink" href="#components.Orchestra.todays_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a list of each members score of today sorted descending by
+<a class="reference internal" href="components.score.html#components.Score.ratio" title="components.Score.ratio"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Score.ratio</span></code></a> .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Score</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.todays_score_text">
+<code class="sig-name descname">todays_score_text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.todays_score_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation of <a class="reference internal" href="#components.Orchestra.todays_score" title="components.Orchestra.todays_score"><code class="xref py py-attr docutils literal notranslate"><span class="pre">todays_score</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Maximum number of members to display. If not passed, will write down all
+members.</p></li>
+<li><p><strong>html</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, will embed HTML tags in the string. Use this to send the string
+with a Telegram bot using <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.parsemode.html#telegram.ParseMode.HTML" title="(in Python Telegram Bot v12.8)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">telegram.ParseMode.HTML</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.update_member">
+<code class="sig-name descname">update_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.update_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the information of a member. As <code class="xref py py-meth docutils literal notranslate"><span class="pre">register_user()</span></code>, this will copy the
+member. To update the information again, call this method again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>) – The member with new information.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.weeks_score">
+<em class="property">property </em><code class="sig-name descname">weeks_score</code><a class="headerlink" href="#components.Orchestra.weeks_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a list of each members score of the current week sorted descending by
+<a class="reference internal" href="components.score.html#components.Score.ratio" title="components.Score.ratio"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Score.ratio</span></code></a> .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Score</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.weeks_score_text">
+<code class="sig-name descname">weeks_score_text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.weeks_score_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation of <a class="reference internal" href="#components.Orchestra.weeks_score" title="components.Orchestra.weeks_score"><code class="xref py py-attr docutils literal notranslate"><span class="pre">weeks_score</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Maximum number of members to display. If not passed, will write down all
+members.</p></li>
+<li><p><strong>html</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, will embed HTML tags in the string. Use this to send the string
+with a Telegram bot using <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.parsemode.html#telegram.ParseMode.HTML" title="(in Python Telegram Bot v12.8)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">telegram.ParseMode.HTML</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.years_score">
+<em class="property">property </em><code class="sig-name descname">years_score</code><a class="headerlink" href="#components.Orchestra.years_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a list of each members score of the current year sorted descending by
+<a class="reference internal" href="components.score.html#components.Score.ratio" title="components.Score.ratio"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Score.ratio</span></code></a> .</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Score</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Orchestra.years_score_text">
+<code class="sig-name descname">years_score_text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">html</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Orchestra.years_score_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>String representation of <a class="reference internal" href="#components.Orchestra.years_score" title="components.Orchestra.years_score"><code class="xref py py-attr docutils literal notranslate"><span class="pre">years_score</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Maximum number of members to display. If not passed, will write down all
+members.</p></li>
+<li><p><strong>html</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>, will embed HTML tags in the string. Use this to send the string
+with a Telegram bot using <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.parsemode.html#telegram.ParseMode.HTML" title="(in Python Telegram Bot v12.8)"><code class="xref py py-attr docutils literal notranslate"><span class="pre">telegram.ParseMode.HTML</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="game.html" class="btn btn-neutral float-right" title="Game related components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="components.member.html" class="btn btn-neutral float-left" title="components.Member" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Hinrich Mahler
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

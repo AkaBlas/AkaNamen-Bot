@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; AkaNamen Bot  documentation</title>
+  <title>bot.error Module &mdash; AkaNamen Bot  documentation</title>
   
 
   
@@ -38,7 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Hosting this bot" href="hosting.html" /> 
+    <link rel="next" title="bot.inline Module" href="bot.inline.html" />
+    <link rel="prev" title="bot.editing Module" href="bot.editing.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,10 +98,24 @@
 <li class="toctree-l1"><a class="reference internal" href="akablas.html">AkaBlas components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bot.html">Bot package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bot.ban.html">bot.ban Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.cancel_membership.html">bot.cancel_membership Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.check_user_status.html">bot.check_user_status Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.commands.html">bot.commands Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.constants.html">bot.constants Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.editing.html">bot.editing Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bot.error Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.inline.html">bot.inline Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.keyboards.html">bot.keyboards Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.game.html">bot.game Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.registration.html">bot.registration Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.setup.html">bot.setup Module</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
             
@@ -147,14 +162,16 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Changelog</li>
+          <li><a href="bot.html">Bot package</a> &raquo;</li>
+        
+      <li>bot.error Module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/changelog.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/bot.error.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -168,8 +185,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="changelog">
-<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-bot.error">
+<span id="bot-error-module"></span><h1>bot.error Module<a class="headerlink" href="#module-bot.error" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions for handling errors.</p>
+<dl class="py function">
+<dt id="bot.error.handle_error">
+<code class="sig-prename descclassname">bot.error.</code><code class="sig-name descname">handle_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.error.handle_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Informs the originator of the update that an error occurred and forwards the traceback to the
+admin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The Telegram update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The callback context as provided by the dispatcher.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -180,8 +216,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="bot.inline.html" class="btn btn-neutral float-right" title="bot.inline Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="hosting.html" class="btn btn-neutral float-left" title="Hosting this bot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="bot.editing.html" class="btn btn-neutral float-left" title="bot.editing Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

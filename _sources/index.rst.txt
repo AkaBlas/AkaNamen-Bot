@@ -7,8 +7,20 @@
 
 .. toctree::
    :hidden:
+   :caption: Benutzerhandbuch
+
+   quickstart
+   privacy
+   faq
+
+.. toctree::
+   :hidden:
    :caption: Developer Reference
 
+   akablas
+   game
+   utils
+   bot
    contributing
    hosting
    changelog

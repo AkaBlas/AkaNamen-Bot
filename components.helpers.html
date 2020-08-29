@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; AkaNamen Bot  documentation</title>
+  <title>components.helpers Module &mdash; AkaNamen Bot  documentation</title>
   
 
   
@@ -38,7 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Hosting this bot" href="hosting.html" /> 
+    <link rel="next" title="components.PicklableBase" href="components.picklablebase.html" />
+    <link rel="prev" title="Utility components" href="utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,11 +97,16 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="akablas.html">AkaBlas components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="utils.html">Utility components</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">components.helpers Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.picklablebase.html">components.PicklableBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.types.html">components.types Module</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
             
@@ -147,14 +153,16 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Changelog</li>
+          <li><a href="utils.html">Utility components</a> &raquo;</li>
+        
+      <li>components.helpers Module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/changelog.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/components.helpers.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -168,8 +176,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="changelog">
-<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-components.helpers">
+<span id="components-helpers-module"></span><h1>components.helpers Module<a class="headerlink" href="#module-components.helpers" title="Permalink to this headline">¶</a></h1>
+<p>This module contains helper functions and casses.</p>
+<dl class="py function">
+<dt id="components.helpers.setlocale">
+<code class="sig-prename descclassname">components.helpers.</code><code class="sig-name descname">setlocale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.helpers.setlocale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper to set locale. Use like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">setlocale</span><span class="p">(</span><span class="s1">&#39;de_DE.UTF-8&#39;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">string</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s1">&#39;%B %Y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -180,8 +204,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="components.picklablebase.html" class="btn btn-neutral float-right" title="components.PicklableBase" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="hosting.html" class="btn btn-neutral float-left" title="Hosting this bot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="utils.html" class="btn btn-neutral float-left" title="Utility components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

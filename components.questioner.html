@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>components.Questioner &mdash; AkaNamen Bot  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="components.Score" href="components.score.html" />
+    <link rel="prev" title="components.Question" href="components.question.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+          
+
+          
+            
+            <img src="_static/AkaNamen-logo-no-background.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="akablas.html">AkaBlas components</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="game.html">Game related components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="components.question.html">components.Question</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">components.Questioner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.score.html">components.Score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.texts.html">components.texts Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.userscore.html">components.UserScore</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AkaNamen Bot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="game.html">Game related components</a> &raquo;</li>
+        
+      <li>components.Questioner</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/components.questioner.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="components-questioner">
+<h1>components.Questioner<a class="headerlink" href="#components-questioner" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="components.Questioner">
+<em class="property">class </em><code class="sig-prename descclassname">components.</code><code class="sig-name descname">Questioner</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span></em>, <em class="sig-param"><span class="n">orchestra</span></em>, <em class="sig-param"><span class="n">hint_attributes</span></em>, <em class="sig-param"><span class="n">question_attributes</span></em>, <em class="sig-param"><span class="n">number_of_questions</span></em>, <em class="sig-param"><span class="n">bot</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Questioner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Helper class generating and tracking the questions of a single game for a single user.</p>
+<dl class="py attribute">
+<dt id="components.Questioner.member">
+<code class="sig-name descname">member</code><a class="headerlink" href="#components.Questioner.member" title="Permalink to this definition">¶</a></dt>
+<dd><p>The member, this instance is associated with.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.orchestra">
+<code class="sig-name descname">orchestra</code><a class="headerlink" href="#components.Questioner.orchestra" title="Permalink to this definition">¶</a></dt>
+<dd><p>The orchestra, this instance is associated with.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="components.orchestra.html#components.Orchestra" title="components.Orchestra"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Orchestra</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.hint_attributes">
+<code class="sig-name descname">hint_attributes</code><a class="headerlink" href="#components.Questioner.hint_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subset of the keys of
+<a class="reference internal" href="components.orchestra.html#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Orchestra.DICTS_TO_ATTRS</span></code></a>. These will be given as hints for the
+questions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.question_attributes">
+<code class="sig-name descname">question_attributes</code><a class="headerlink" href="#components.Questioner.question_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subset of the keys of
+<a class="reference internal" href="components.orchestra.html#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Orchestra.DICTS_TO_ATTRS</span></code></a>. These will be asked for in the
+questions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.number_of_questions">
+<code class="sig-name descname">number_of_questions</code><a class="headerlink" href="#components.Questioner.number_of_questions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of questions to ask the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.number_of_questions_asked">
+<code class="sig-name descname">number_of_questions_asked</code><a class="headerlink" href="#components.Questioner.number_of_questions_asked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of questions already asked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.current_question">
+<code class="sig-name descname">current_question</code><a class="headerlink" href="#components.Questioner.current_question" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional. The question currently presented
+to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="components.question.html#components.Question" title="components.Question"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Question</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.bot">
+<code class="sig-name descname">bot</code><a class="headerlink" href="#components.Questioner.bot" title="Permalink to this definition">¶</a></dt>
+<dd><p>The bot to use for asking questions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.bot.html#telegram.Bot" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Bot</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.multiple_choice">
+<code class="sig-name descname">multiple_choice</code><a class="headerlink" href="#components.Questioner.multiple_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the question to be asked are multiple choice or free
+text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.score">
+<code class="sig-name descname">score</code><a class="headerlink" href="#components.Questioner.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>The score for this game.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="components.score.html#components.Score" title="components.Score"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Score</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.Questioner.used_members">
+<code class="sig-name descname">used_members</code><a class="headerlink" href="#components.Questioner.used_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>For every attribute in
+<a class="reference internal" href="#components.Questioner.hint_attributes" title="components.Questioner.hint_attributes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hint_attributes</span></code></a> the corresponding set will contain all members of
+<a class="reference internal" href="#components.Questioner.orchestra" title="components.Questioner.orchestra"><code class="xref py py-attr docutils literal notranslate"><span class="pre">orchestra</span></code></a>, whose corresponding attribute was already subject to a question
+<em>and</em> was answered correctly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>, Set[<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The ID of the user this instance is associated with.</p></li>
+<li><p><strong>orchestra</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Orchestra</span></code>) – The orchestra, this instance is associated with.</p></li>
+<li><p><strong>hint_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of strings, appearing either in
+<a class="reference internal" href="components.question.html#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Question.SUPPORTED_ATTRIBUTES</span></code></a> or as keys in
+<a class="reference internal" href="components.orchestra.html#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Orchestra.DICTS_TO_ATTRS</span></code></a>. These will be given as hints for the
+questions. May be empty, in which case all available attributes are allowed.</p></li>
+<li><p><strong>question_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of strings, appearing either in
+<a class="reference internal" href="components.question.html#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Question.SUPPORTED_ATTRIBUTES</span></code></a> or as keys in
+<a class="reference internal" href="components.orchestra.html#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Orchestra.DICTS_TO_ATTRS</span></code></a>. These will be asked for in the
+questions. May be empty, in which case all available attributes are allowed.</p></li>
+<li><p><strong>number_of_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of questions to ask the user.</p></li>
+<li><p><strong>bot</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Bot</span></code>) – The bot to use for asking questions.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the question to be asked are multiple choice or free text.
+Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
+<li><p><strong>Note</strong> – <code class="docutils literal notranslate"><span class="pre">fe/male_first_names</span></code> is valid for neither <a class="reference internal" href="#components.Questioner.hint_attributes" title="components.Questioner.hint_attributes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hint_attributes</span></code></a> nor
+<a class="reference internal" href="#components.Questioner.question_attributes" title="components.Questioner.question_attributes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">question_attributes</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="components.Questioner.ask_question">
+<code class="sig-name descname">ask_question</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#components.Questioner.ask_question" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asks the next question, if there is another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.8)"><strong>RuntimeError</strong></a> – If there are no more questions to be asked.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Questioner.available_members">
+<code class="sig-name descname">available_members</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hint_attribute</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Questioner.available_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>For an attribute <code class="docutils literal notranslate"><span class="pre">k</span></code> in <code class="xref py py-attr docutils literal notranslate"><span class="pre">question_attribute</span></code>, the corresponding value is the set
+of all members of <a class="reference internal" href="#components.Questioner.orchestra" title="components.Questioner.orchestra"><code class="xref py py-attr docutils literal notranslate"><span class="pre">orchestra</span></code></a>, which have both the <code class="xref py py-attr docutils literal notranslate"><span class="pre">hint_attribute</span></code> passed to
+this function and the attribute <code class="docutils literal notranslate"><span class="pre">k</span></code> acting as key for this very set <em>and</em> and are
+not listed in the corresponding set of <a class="reference internal" href="#components.Questioner.used_members" title="components.Questioner.used_members"><code class="xref py py-attr docutils literal notranslate"><span class="pre">used_members</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">hint_attribute</span></code> is in <a class="reference internal" href="#components.Questioner.question_attributes" title="components.Questioner.question_attributes"><code class="xref py py-attr docutils literal notranslate"><span class="pre">question_attributes</span></code></a>, it will not be present as
+key.</p></li>
+<li><p>Attributes, whose corresponding sets have fewer than four members, are discarded.</p></li>
+<li><p>If the resulting dictionary would only have entries with fewer than four members,
+<a class="reference internal" href="#components.Questioner.used_members" title="components.Questioner.used_members"><code class="xref py py-attr docutils literal notranslate"><span class="pre">used_members</span></code></a> will automatically be emptied and the result is re-computed.</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hint_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Must be present in either <a class="reference internal" href="components.orchestra.html#components.Orchestra.DICTS_TO_ATTRS" title="components.Orchestra.DICTS_TO_ATTRS"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Orchestra.DICTS_TO_ATTRS</span></code></a>
+as key or in <a class="reference internal" href="components.question.html#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Question.SUPPORTED_ATTRIBUTES</span></code></a>.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">hint_attribute</span></code> is invalid.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Questioner.check_update">
+<code class="sig-name descname">check_update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Questioner.check_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks, if th given update is a valid response to the current question and can be handled
+by <code class="xref py py-meth docutils literal notranslate"><span class="pre">current_question.check_answer()</span></code>. Will return <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>, if there is no current
+question.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a> to be tested.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Questioner.handle_update">
+<code class="sig-name descname">handle_update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Questioner.handle_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles the given update by updating the <a class="reference internal" href="components.userscore.html#components.UserScore" title="components.UserScore"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.UserScore</span></code></a> of
+<a class="reference internal" href="#components.Questioner.member" title="components.Questioner.member"><code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code></a>. Call only, if <a class="reference internal" href="#components.Questioner.check_update" title="components.Questioner.check_update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_update()</span></code></a> returned <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a> to be tested.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="components.score.html" class="btn btn-neutral float-right" title="components.Score" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="components.question.html" class="btn btn-neutral float-left" title="components.Question" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Hinrich Mahler
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

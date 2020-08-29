@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>components.instruments Module &mdash; AkaNamen Bot  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="components.Member" href="components.member.html" />
+    <link rel="prev" title="components.Gender" href="components.gender.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+          
+
+          
+            
+            <img src="_static/AkaNamen-logo-no-background.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="akablas.html">AkaBlas components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="components.gender.html">components.Gender</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">components.instruments Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.member.html">components.Member</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.orchestra.html">components.Orchestra</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AkaNamen Bot</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="akablas.html">AkaBlas components</a> &raquo;</li>
+        
+      <li>components.instruments Module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/components.instruments.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-components.instruments">
+<span id="components-instruments-module"></span><h1>components.instruments Module<a class="headerlink" href="#module-components.instruments" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the instrument classes.</p>
+<dl class="py class">
+<dt id="components.instruments.AltoSaxophone">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">AltoSaxophone</code><a class="headerlink" href="#components.instruments.AltoSaxophone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Saxophone" title="components.instruments.Saxophone"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Saxophone</span></code></a></p>
+<p>An alto saxophone.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Baritone">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Baritone</code><a class="headerlink" href="#components.instruments.Baritone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.LowBrassInstrument" title="components.instruments.LowBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.LowBrassInstrument</span></code></a></p>
+<p>A baritone.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.BaritoneHorn">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">BaritoneHorn</code><a class="headerlink" href="#components.instruments.BaritoneHorn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.LowBrassInstrument" title="components.instruments.LowBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.LowBrassInstrument</span></code></a></p>
+<p>A baritone horn.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.BaritoneSaxophone">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">BaritoneSaxophone</code><a class="headerlink" href="#components.instruments.BaritoneSaxophone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Saxophone" title="components.instruments.Saxophone"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Saxophone</span></code></a></p>
+<p>A baritone saxophone.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.BassGuitar">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">BassGuitar</code><a class="headerlink" href="#components.instruments.BassGuitar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Guitar" title="components.instruments.Guitar"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Guitar</span></code></a></p>
+<p>A bass guitar.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Bassoon">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Bassoon</code><a class="headerlink" href="#components.instruments.Bassoon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.WoodwindInstrument" title="components.instruments.WoodwindInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.WoodwindInstrument</span></code></a></p>
+<p>A bassoon.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.BrassInstrument">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">BrassInstrument</code><a class="headerlink" href="#components.instruments.BrassInstrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Instrument</span></code></a></p>
+<p>A brass instrument.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Clarinet">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Clarinet</code><a class="headerlink" href="#components.instruments.Clarinet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.WoodwindInstrument" title="components.instruments.WoodwindInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.WoodwindInstrument</span></code></a></p>
+<p>A clarinet.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Conductor">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Conductor</code><a class="headerlink" href="#components.instruments.Conductor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Instrument</span></code></a></p>
+<p>A conductor. Yeah, not really an instrument. Neither is mayonnaise, Patrick! Who cares?</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Drums">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Drums</code><a class="headerlink" href="#components.instruments.Drums" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.PercussionInstrument" title="components.instruments.PercussionInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.PercussionInstrument</span></code></a></p>
+<p>The drums.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Euphonium">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Euphonium</code><a class="headerlink" href="#components.instruments.Euphonium" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.LowBrassInstrument" title="components.instruments.LowBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.LowBrassInstrument</span></code></a></p>
+<p>An euphonium.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Flugelhorn">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Flugelhorn</code><a class="headerlink" href="#components.instruments.Flugelhorn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.HighBrassInstrument" title="components.instruments.HighBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.HighBrassInstrument</span></code></a></p>
+<p>A flugelhorn.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Flute">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Flute</code><a class="headerlink" href="#components.instruments.Flute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.WoodwindInstrument" title="components.instruments.WoodwindInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.WoodwindInstrument</span></code></a></p>
+<p>A flute.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Guitar">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Guitar</code><a class="headerlink" href="#components.instruments.Guitar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Instrument</span></code></a></p>
+<p>A guitar.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.HighBrassInstrument">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">HighBrassInstrument</code><a class="headerlink" href="#components.instruments.HighBrassInstrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.BrassInstrument" title="components.instruments.BrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.BrassInstrument</span></code></a></p>
+<p>A high brass instrument.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Horn">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Horn</code><a class="headerlink" href="#components.instruments.Horn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.HighBrassInstrument" title="components.instruments.HighBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.HighBrassInstrument</span></code></a></p>
+<p>A horn.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Instrument">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Instrument</code><a class="headerlink" href="#components.instruments.Instrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for all instruments. Instruments are comparable, where the order is defined by
+class inheritance. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Trumpet</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">BrassInstrument</span><span class="p">()</span> <span class="c1"># True</span>
+<span class="n">Flugelhorn</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">Trumpet</span><span class="p">()</span> <span class="c1"># False</span>
+<span class="n">BrassInstrument</span><span class="p">()</span> <span class="o">==</span> <span class="n">BrassInstrument</span><span class="p">()</span> <span class="c1"># True</span>
+<span class="n">AltoSaxophone</span><span class="p">()</span> <span class="o">==</span> <span class="n">Saxophone</span><span class="p">()</span> <span class="c1"># False</span>
+</pre></div>
+</div>
+<p>Moreover, strings can be tested for equality with instruments. The comparison is case
+insensitive. The string will be compared to the string representation of the instrument.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Trumpet</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Trompete&#39;</span> <span class="c1"># True</span>
+<span class="n">Trumpet</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;trompete&#39;</span> <span class="c1"># True</span>
+<span class="n">Trupmet</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Saxophon&#39;</span> <span class="c1"># False</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt id="components.instruments.Instrument.from_string">
+<em class="property">static </em><code class="sig-name descname">from_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.instruments.Instrument.from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a string representation or an AkaBlas-style abbreviation of an instrument, this will
+return a corresponding <code class="xref py py-class docutils literal notranslate"><span class="pre">components.Instrument</span></code> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The string.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If the abbreviation is not known.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.LowBrassInstrument">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">LowBrassInstrument</code><a class="headerlink" href="#components.instruments.LowBrassInstrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.BrassInstrument" title="components.instruments.BrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.BrassInstrument</span></code></a></p>
+<p>A low brass instrument.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Oboe">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Oboe</code><a class="headerlink" href="#components.instruments.Oboe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.WoodwindInstrument" title="components.instruments.WoodwindInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.WoodwindInstrument</span></code></a></p>
+<p>An oboe.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.PercussionInstrument">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">PercussionInstrument</code><a class="headerlink" href="#components.instruments.PercussionInstrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Instrument</span></code></a></p>
+<p>A percussion instrument.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Saxophone">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Saxophone</code><a class="headerlink" href="#components.instruments.Saxophone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.WoodwindInstrument" title="components.instruments.WoodwindInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.WoodwindInstrument</span></code></a></p>
+<p>A saxophone.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.SopranoSaxophone">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">SopranoSaxophone</code><a class="headerlink" href="#components.instruments.SopranoSaxophone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Saxophone" title="components.instruments.Saxophone"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Saxophone</span></code></a></p>
+<p>A soprano saxophone.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.TenorSaxophone">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">TenorSaxophone</code><a class="headerlink" href="#components.instruments.TenorSaxophone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Saxophone" title="components.instruments.Saxophone"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Saxophone</span></code></a></p>
+<p>A tenor saxophone.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Trombone">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Trombone</code><a class="headerlink" href="#components.instruments.Trombone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.LowBrassInstrument" title="components.instruments.LowBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.LowBrassInstrument</span></code></a></p>
+<p>A trombone.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Trumpet">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Trumpet</code><a class="headerlink" href="#components.instruments.Trumpet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.HighBrassInstrument" title="components.instruments.HighBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.HighBrassInstrument</span></code></a></p>
+<p>A trumpet.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.Tuba">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">Tuba</code><a class="headerlink" href="#components.instruments.Tuba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.LowBrassInstrument" title="components.instruments.LowBrassInstrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.LowBrassInstrument</span></code></a></p>
+<p>A tuba.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.instruments.WoodwindInstrument">
+<em class="property">class </em><code class="sig-prename descclassname">components.instruments.</code><code class="sig-name descname">WoodwindInstrument</code><a class="headerlink" href="#components.instruments.WoodwindInstrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.instruments.Instrument</span></code></a></p>
+<p>A woodwind instrument.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="components.member.html" class="btn btn-neutral float-right" title="components.Member" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="components.gender.html" class="btn btn-neutral float-left" title="components.Gender" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Hinrich Mahler
+
+    </p>
+  </div>
+    
+    
+      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
