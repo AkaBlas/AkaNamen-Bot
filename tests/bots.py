@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 """Provide a bot to tests"""
 import random
+import time
+
+import pytest
+from telegram.error import RetryAfter
+from telegram.utils.request import Request
 
 BOTS = [{
     'token': '1076068896:AAFdpos7qs7aaZfaGMsSydrqY063NFV4cXM',
@@ -31,3 +36,21 @@ BOTS = [{
 
 def get_bot():
     return random.choice(BOTS)
+
+
+# Patch request to xfail on flood control errors
+original_request_wrapper = Request._request_wrapper
+
+
+def patient_request_wrapper(*args, **kwargs):
+    try:
+        return original_request_wrapper(*args, **kwargs)
+    except RetryAfter as e:
+        time.sleep(e.retry_after + 2)
+        try:
+            return original_request_wrapper(*args, **kwargs)
+        except RetryAfter as f:
+            pytest.xfail('Not waiting for flood control: {}'.format(f))
+
+
+Request._request_wrapper = patient_request_wrapper
