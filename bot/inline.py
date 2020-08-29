@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """This module contains functions for the inline mode."""
+from typing import Union
+
 from telegram import (Update, InlineQueryResultArticle, InputTextMessageContent,
                       InlineKeyboardMarkup, InlineKeyboardButton, ChatAction)
+from telegram.constants import MAX_INLINE_QUERY_RESULTS
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
 from bot import ORCHESTRA_KEY, INLINE_HELP
@@ -30,10 +33,10 @@ def search_users(update: Update, context: CallbackContext) -> None:
         offset = int(inline_query.offset)
     else:
         offset = 0
+    next_offset: Union[str, int] = ''
 
     if not query:
         results = []
-        next_offset = None
     else:
         orchestra = context.bot_data[ORCHESTRA_KEY]
         user_id = update.effective_user.id
@@ -43,13 +46,12 @@ def search_users(update: Update, context: CallbackContext) -> None:
         sorted_members = sorted(members, key=lambda m: m.compare_full_name_to(query), reverse=True)
 
         # Telegram only likes up to 50 results
-        if offset == 0:
-            sorted_members = sorted_members[:50] if len(sorted_members) > 50 else sorted_members
-            next_offset = 51 if len(sorted_members) > 50 else None
+        if len(sorted_members) > (offset + 1) * MAX_INLINE_QUERY_RESULTS:
+            next_offset = offset + 1
+            sorted_members = sorted_members[offset * MAX_INLINE_QUERY_RESULTS:offset
+                                            * MAX_INLINE_QUERY_RESULTS + MAX_INLINE_QUERY_RESULTS]
         else:
-            sorted_members = (sorted_members[offset - 1:offset + 50 - 1]
-                              if len(sorted_members) > offset + 50 - 1 else sorted_members)
-            next_offset = offset + 50 if len(sorted_members) > offset + 50 - 1 else None
+            sorted_members = sorted_members[offset * MAX_INLINE_QUERY_RESULTS:]
 
         results = [
             InlineQueryResultArticle(id=m.user_id,
