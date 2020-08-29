@@ -69,6 +69,8 @@ Der AkaNamen-Bot benutzt ein Software-Paket namens ``fuzzywuzzy``, das es mögli
 Der Bot ist dabei schon ziemlich großzügig. Trotzdem wird der Bot manchmal Antworten als falsch markieren, ob wohl sie (mehr oder weniger) richtig sind - und andersherum.
 Daher ist der Freitext-Modus als »für Fortgeschrittene« gekennzeichnet.
 
+*Übrigens:* Wenn Du nach eine Adresse gefragt wirst, kannst Du als Antwort auch einen Standort senden!
+
 Kann der Bot nicht auch noch … ?
 --------------------------------
 
