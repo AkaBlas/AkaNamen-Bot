@@ -577,14 +577,14 @@ class Member:
                 df = df.dropna(thresh=4)
 
                 # Parse all the data
-                df['date_of_birth'] = df.loc[:, 'date_of_birth'].apply(string_to_date)
-                df['instrument'] = df.loc[:, 'instrument'].apply(string_to_instrument)
-                df['address'] = df.loc[:, 'address'].apply(expand_brunswick)
-                df['name'] = df.loc[:, 'name'].apply(remove_whitespaces)
-                df['nickname'] = df.loc[:, 'name'].apply(extract_nickname)
-                df['name'] = df.loc[:, 'name'].apply(remove_nickname)
-                df['first_name'] = df.loc[:, 'name'].apply(first_name)
-                df['last_name'] = df.loc[:, 'name'].apply(last_name)
+                df.loc[:, 'date_of_birth'] = df.loc[:, 'date_of_birth'].apply(string_to_date)
+                df.loc[:, 'instrument'] = df.loc[:, 'instrument'].apply(string_to_instrument)
+                df.loc[:, 'address'] = df.loc[:, 'address'].apply(expand_brunswick)
+                df.loc[:, 'name'] = df.loc[:, 'name'].apply(remove_whitespaces)
+                df.loc[:, 'nickname'] = df.loc[:, 'name'].apply(extract_nickname)
+                df.loc[:, 'name'] = df.loc[:, 'name'].apply(remove_nickname)
+                df.loc[:, 'first_name'] = df.loc[:, 'name'].apply(first_name)
+                df.loc[:, 'last_name'] = df.loc[:, 'name'].apply(last_name)
 
                 return df
             else:
