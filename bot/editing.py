@@ -265,7 +265,8 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
             else:
                 text = TEXTS[data].format("-")
         elif data == DATE_OF_BIRTH:
-            text = TEXTS[DATE_OF_BIRTH].format(member.date_of_birth.strftime('%d.%m.%Y') or "-")
+            text = TEXTS[DATE_OF_BIRTH].format(
+                member.date_of_birth.strftime('%d.%m.%Y') if member.date_of_birth else "-")
         elif data == GENDER:
             reply_markup = GENDER_KEYBOARD
         elif data == PHONE_NUMBER:
