@@ -127,10 +127,10 @@ def request_registration(update: Update, context: CallbackContext) -> None:
                                  callback_data=ACCEPT_REGISTRATION.format(user.id, ''))
         ]]
     else:
-        results = 'In den AkaDressen wurden folgende passende Mitglieder gefunden:\n\n'
+        results = 'In den AkaDressen wurden folgende passende Mitglieder gefunden:'
         buttons = []
         for i, member in enumerate(guessed_members):
-            results += f'{i+1}.\n{member.to_str()}'
+            results += f'\n\n<b>{i+1}.</b>\n{member.to_str()}'
             buttons.append([
                 InlineKeyboardButton(text=f'Akzeptiere als Mitglied {i+1}',
                                      callback_data=ACCEPT_REGISTRATION.format(user.id, i))
