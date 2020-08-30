@@ -192,7 +192,7 @@ def reply_photo_state(update: Update, member: Member) -> Message:
 
     if member.photo_file_id:
         update.effective_message.delete()
-        message = update.effective_message.reply_photo(text=text,
+        message = update.effective_message.reply_photo(caption=text,
                                                        photo=member.photo_file_id,
                                                        reply_markup=BACK_OR_DELETE_KEYBOARD)
     else:
