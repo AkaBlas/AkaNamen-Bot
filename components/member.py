@@ -502,8 +502,8 @@ class Member:
         def string_to_date(string: Union[str, np.nan]) -> Optional[dt.date]:
             if string is np.nan:
                 return None
-            # string = string.replace('Mrz', 'Mar')
             with setlocale('de_DE.UTF-8'):
+                string = string.replace('Mrz', dt.datetime(2020, 3, 1).strftime('%b'))
                 try:
                     out = dt.datetime.strptime(string, '%d. %b. %y').date()
                 except ValueError:
@@ -577,14 +577,14 @@ class Member:
                 df = df.dropna(thresh=4)
 
                 # Parse all the data
-                df['date_of_birth'] = df['date_of_birth'].apply(string_to_date)
-                df['instrument'] = df['instrument'].apply(string_to_instrument)
-                df['address'] = df['address'].apply(expand_brunswick)
-                df['name'] = df['name'].apply(remove_whitespaces)
-                df['nickname'] = df['name'].apply(extract_nickname)
-                df['name'] = df['name'].apply(remove_nickname)
-                df['first_name'] = df['name'].apply(first_name)
-                df['last_name'] = df['name'].apply(last_name)
+                df.loc[:, 'date_of_birth'] = df.loc[:, 'date_of_birth'].apply(string_to_date)
+                df.loc[:, 'instrument'] = df.loc[:, 'instrument'].apply(string_to_instrument)
+                df.loc[:, 'address'] = df.loc[:, 'address'].apply(expand_brunswick)
+                df.loc[:, 'name'] = df.loc[:, 'name'].apply(remove_whitespaces)
+                df.loc[:, 'nickname'] = df.loc[:, 'name'].apply(extract_nickname)
+                df.loc[:, 'name'] = df.loc[:, 'name'].apply(remove_nickname)
+                df.loc[:, 'first_name'] = df.loc[:, 'name'].apply(first_name)
+                df.loc[:, 'last_name'] = df.loc[:, 'name'].apply(last_name)
 
                 return df
             else:
