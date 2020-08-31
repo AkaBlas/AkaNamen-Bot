@@ -66,7 +66,7 @@ TEXTS: Dict[str, str] = {
                    '<i>DD.MM.JJJJ</i>. Um das Datum so zu lassen oder zu löschen, nutze die Knöpfe'
                    ' unten.',
     ADDRESS: 'Die Adresse, die ich gespeichert habe lautet:\n\nAdresse: {}\n\nUm '
-             'die Adresse zu ändern, schicke mir entweder die Addresse als Text oder schicke mir '
+             'die Adresse zu ändern, schicke mir entweder die Adresse als Text oder schicke mir '
              'einen Standort. Um die Adresse so zu lassen oder zu löschen, nutze die Knöpfe '
              'unten.',
     ADDRESS_CONFIRMATION: 'Okay, ich habe die folgende Adresse erkannt:\n\n{}\n\nWenn das '
@@ -126,8 +126,7 @@ GENDER_KEYBOARD = InlineKeyboardMarkup([[
 ]])
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for selecting a gender."""
 PHONE_NUMBER_KEYBOARD = InlineKeyboardMarkup([[
-    InlineKeyboardButton(text='Nummer ändern', callback_data=PHONE_NUMBER),
-    InlineKeyboardButton(text='Löschen', callback_data=DELETE)
+    InlineKeyboardButton(text='Nummer ändern', callback_data=PHONE_NUMBER)
 ], [
     InlineKeyboardButton(text=BACK, callback_data=BACK),
     InlineKeyboardButton(text='Löschen', callback_data=DELETE)
