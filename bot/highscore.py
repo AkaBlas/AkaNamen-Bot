@@ -30,16 +30,26 @@ HEADINGS = {
 
 BUTTON_TEXTS = {
     OVERALL_SCORE: 'Gesamter Highscore',
-    TODAYS_SCORE: 'Highscore von heute',
-    WEEKS_SCORE: 'Highscore der aktuellen Woche',
-    MONTHS_SCORE: 'Highscore des aktuellen Monats',
-    YEARS_SCORE: 'Highscore des aktuellen Jahres',
+    TODAYS_SCORE: 'Heute',
+    WEEKS_SCORE: 'Woche',
+    MONTHS_SCORE: 'Monats',
+    YEARS_SCORE: 'Jahr',
 }
 """Dict[str, str]: Mapping giving for each callback data a corresponding text for the keyboard.
 """
 
-HIGHSCORE_KEYBOARD = InlineKeyboardMarkup.from_column(
-    [InlineKeyboardButton(t, callback_data=d) for d, t in BUTTON_TEXTS.items()])
+# yapf: disable
+HIGHSCORE_KEYBOARD = InlineKeyboardMarkup([
+    [InlineKeyboardButton(BUTTON_TEXTS[OVERALL_SCORE], callback_data=OVERALL_SCORE)],
+    [
+        InlineKeyboardButton(BUTTON_TEXTS[TODAYS_SCORE], callback_data=TODAYS_SCORE),
+        InlineKeyboardButton(BUTTON_TEXTS[WEEKS_SCORE], callback_data=WEEKS_SCORE)
+    ],
+    [
+        InlineKeyboardButton(BUTTON_TEXTS[MONTHS_SCORE], callback_data=MONTHS_SCORE),
+        InlineKeyboardButton(BUTTON_TEXTS[YEARS_SCORE], callback_data=YEARS_SCORE)
+    ]])
+# yapf: enable
 """
 :class:`telegram.InlineKeyboardMarkup`: Keyboard to switch between the different highscores.
 """
@@ -54,7 +64,7 @@ def build_text(orchestra: Orchestra, interval: str) -> str:
         interval: The requested interval.
     """
     method = getattr(orchestra, "{}_score_text".format(interval))
-    return f'<b>{HEADINGS["{} highscore".format(interval)]}</b>\n\n{method(length=25, html=True)}'
+    return f'<b>{HEADINGS["{} highscore".format(interval)]}</b>\n\n{method(length=10, html=True)}'
 
 
 def show_highscore(update: Update, context: CallbackContext) -> None:
