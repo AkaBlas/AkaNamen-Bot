@@ -535,6 +535,8 @@ def phone_number(update: Update, context: CallbackContext) -> str:
 
     if update.message:
         number = update.message.contact.phone_number
+        if number.startswith('49'):
+            number = f'+{number}'
         member.phone_number = number
         orchestra.update_member(member)
 
