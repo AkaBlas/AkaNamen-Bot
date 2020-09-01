@@ -145,7 +145,7 @@ class Question:
     ADDRESS: str = 'address'
     """:obj:`str`: Instrument of an AkaBlas member"""
     PHOTO: str = 'photo_file_id'
-    """:obj:`str`: Photo of an AkaBlas member"""
+    """:obj:`str`: Foto of an AkaBlas member"""
     SUPPORTED_ATTRIBUTES = [
         FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS, FULL_NAME, PHOTO
     ]

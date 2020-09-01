@@ -74,13 +74,13 @@ TEXTS: Dict[str, str] = {
                           'war, versuch bitte, die Adresse genauer aufzuschreiben oder den '
                           'Standort genauer zu wählen.',
     PHOTO: {  # type: ignore
-        True: 'Dies ist das Photo, das ich aktuell gespeichert habe. Um Dein Photo '
-              'zu ändern, schicke mir das neue Photo. Bitte achte darauf, dass man Dich darauf '
-              'gut erkennen kann. Um das Photo so zu lassen oder zu löschen, nutze die Knöpfe '
+        True: 'Dies ist das Foto, das ich aktuell gespeichert habe. Um Dein Foto '
+              'zu ändern, schicke mir das neue Foto. Bitte achte darauf, dass man Dich darauf '
+              'gut erkennen kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe '
               'unten.',
-        False: 'Aktuell habe ich kein Photo von Dir. Um ein Photo zu hinterlegen, '
-               'schicke mir das Photo. Bitte achte darauf, dass man Dich darauf gut erkennen '
-               'kann. Um das Photo so zu lassen oder zu löschen, nutze die Knöpfe unten.',
+        False: 'Aktuell habe ich kein Foto von Dir. Um ein Foto zu hinterlegen, '
+               'schicke mir das Foto. Bitte achte darauf, dass man Dich darauf gut erkennen '
+               'kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe unten.',
     },
     INSTRUMENTS: 'Die Instrumente, die Du aktuell spielst, sind unten markiert. Um '
                  'die Auswahl zu ändern, klicke auf die Instrumente.\n\nBitte wähle nur eine '
@@ -458,7 +458,7 @@ def photo(update: Update, context: CallbackContext) -> str:
                                      reply_markup=SELECTION_KEYBOARD)
             context.user_data[EDITING_MESSAGE_KEY] = msg
         else:
-            message.reply_text(text=('Bitte sende mir das Bild als Photo anstatt als Datei, '
+            message.reply_text(text=('Bitte sende mir das Bild als Foto anstatt als Datei, '
                                      'd.h. <i>nicht</i> über die Büroklammer.'))
             return PHOTO
     else:
