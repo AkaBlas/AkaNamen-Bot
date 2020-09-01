@@ -139,7 +139,7 @@ class Member:
                     f'Instrument/e: {", ".join([str(i) for i in self.instruments]) or "-"}\n'
                     f'Adresse: {self.address or "-"}\n'
                     f'Mobil: {self.phone_number or "-"}\n'
-                    f'Photo: {"🖼" if self.photo_file_id else "-"}\n'
+                    f'Foto: {"🖼" if self.photo_file_id else "-"}\n'
                     f'Daten an AkaBlasen weitergeben: '
                     f'{"Aktiviert" if self.allow_contact_sharing else "Deaktiviert"}')
 

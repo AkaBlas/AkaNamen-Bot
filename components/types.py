@@ -14,7 +14,7 @@ class MessageType:
     TEXT: str = 'text'
     """:obj:`str`: Text messages"""
     PHOTO: str = 'photo'
-    """:obj:`str`: Photo messages"""
+    """:obj:`str`: Foto messages"""
     LOCATION: str = 'location'
     """:obj:`str`: Location messages"""
     ALL_TYPES = [TEXT, PHOTO, LOCATION]

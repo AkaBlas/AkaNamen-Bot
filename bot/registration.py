@@ -187,7 +187,7 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
 
     text = f'Du bis jetzt mit den folgenden Daten angemeldet: 🥳\n\n{new_member.to_str()}\n\n'
     if profile_ile_id:
-        text += 'Als Photo wurde Dein Telegram-Profilbild gesetzt. '
+        text += 'Als Foto wurde Dein Telegram-Profilbild gesetzt. '
     text += 'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten. Wofür die Daten ' \
             'genutzt werden, kannst Du im Benutzerhandbuch nachlesen. \n\nBitte tritt ' \
             'außerdem dem Info-Kanal bei. Dort werden ggf. Informationen zu Neuerungen am Bot ' \

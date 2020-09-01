@@ -26,7 +26,7 @@ BOT_COMMANDS: List[BotCommand] = [
     BotCommand('spiel_starten', 'Startet ein neues Spiel'),
     BotCommand('spiel_abbrechen', 'Bricht das aktuelle Spiel ab'),
     BotCommand('daten_anzeigen', 'Zeigt Deine gespeicherten Daten an'),
-    BotCommand('daten_bearbeiten', 'Daten wie Adresse und Photo ändern'),
+    BotCommand('daten_bearbeiten', 'Daten wie Adresse und Foto ändern'),
     BotCommand('highscore', 'Zeigt den aktuellen Highscore an'),
     BotCommand('hilfe', 'Zeigt ein paar generelle Hinweise zum Bot'),
     BotCommand('kontakt_abrufen', 'Kontaktdaten anderer AkaBlasen abrufen'),
