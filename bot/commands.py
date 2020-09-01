@@ -39,7 +39,7 @@ def help_message(update: Update, context: CallbackContext) -> None:
             ' AkaNamen-Bot werden über den Channel (s. unten) bekanntgegeben. Tritt gerne bei!\n\n'
             '• Im Zweifel lieber noch ein bisschen mehr Gurkenwasser an den Labskaus geben.\n\n• '
             'Wenn der Schnee gelb ist, solltest Du ihn lieber nicht essen.\n\n• Ein bisschen Hello'
-            'Dolly hat noch nie geschadet!')
+            ' Dolly hat noch nie geschadet!')
     update.message.reply_text(text=text, reply_markup=CHANNEL_KEYBOARD)
 
 

@@ -189,9 +189,10 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
     if profile_ile_id:
         text += 'Als Photo wurde Dein Telegram-Profilbild gesetzt. '
     text += 'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten. Wofür die Daten ' \
-            'genutzt werden, kannst Du im Benutzerhandbuch nachlesen. \n\nBitte tritt ' \
+            'genutzt werden, kannst Du im Benutzerhandbuch nachlesen.\n\nBitte tritt ' \
             'außerdem dem Info-Kanal bei. Dort werden ggf. Informationen zu Neuerungen am Bot ' \
-            'oder Wartungsarbeiten bekanntgegeben. '
+            'oder Wartungsarbeiten bekanntgegeben.\n\nWenn Du Hilfe brauchst, tippe einfach ' \
+            '/hilfe ein.'
 
     context.bot.send_message(chat_id=user_id, text=text, reply_markup=CHANNEL_KEYBOARD)
     update.effective_message.edit_text('Nutzer erfolgreich angemeldet.')
