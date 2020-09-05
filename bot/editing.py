@@ -507,7 +507,9 @@ def instruments(update: Update, context: CallbackContext) -> str:
     else:
         current_selection = parse_instruments_keyboard(message.reply_markup)
         instrument, selection = data.split(' ')
-        current_selection[Instrument.from_string(instrument)] = not (selection == SELECTED)
+        key = Instrument.from_string(instrument, allowed=Member.ALLOWED_INSTRUMENTS)
+        if key is not None:
+            current_selection[key] = not (selection == SELECTED)
         member.instruments = [i for i, s in current_selection.items() if s]
 
         orchestra.update_member(member)

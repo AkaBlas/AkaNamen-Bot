@@ -2,7 +2,7 @@
 import pytest
 import datetime as dt
 from geopy import Photon
-from components import Member, Gender, instruments, Question, question_text, Orchestra
+from components import Member, Gender, instruments, Question, question_text
 
 from tests.addresses import get_address_from_cache
 
@@ -34,14 +34,8 @@ class TestTexts:
                         assert '{' not in text
                         assert '}' not in text
 
-        for q in [
-                k for k, v in Orchestra.DICTS_TO_ATTRS.items()
-                if k != 'photo_file_ids' and v in Question.SUPPORTED_ATTRIBUTES
-        ]:
-            for h in [
-                    k for k, v in Orchestra.DICTS_TO_ATTRS.items()
-                    if v in Question.SUPPORTED_ATTRIBUTES
-            ]:
+        for q in [k for k in Question.SUPPORTED_ATTRIBUTES if k != Question.PHOTO]:
+            for h in [k for k in Question.SUPPORTED_ATTRIBUTES if k != Question.PHOTO]:
                 if h not in q and q not in h:
                     for m in [True, False]:
                         text = question_text(member, q, h, m)
@@ -61,11 +55,8 @@ class TestTexts:
             assert '{' not in text
             assert '}' not in text
 
-        q = 'photo_file_ids'
-        for h in [
-                k for k, v in Orchestra.DICTS_TO_ATTRS.items()
-                if k != q and v in Question.SUPPORTED_ATTRIBUTES
-        ]:
+        q = 'photo_file_id'
+        for h in [k for k in Question.SUPPORTED_ATTRIBUTES if k != Question.PHOTO]:
             with pytest.raises(ValueError, match='Photos are'):
                 question_text(member, q, h, False)
 

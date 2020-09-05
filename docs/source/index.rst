@@ -17,9 +17,7 @@
    :hidden:
    :caption: Developer Reference
 
-   akablas
-   game
-   utils
+   components
    bot
    contributing
    hosting

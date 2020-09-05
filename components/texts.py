@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """This module contains functions for generating often needed texts."""
 import random
-from components import Question, Orchestra
+from components import Question
 from typing import Optional, TYPE_CHECKING
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
@@ -69,7 +69,7 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.INSTRUMENT: ('Welches Instrument spielt das Mitglied von AkaBlas, das jetzt '
                               '{hint} Jahre alt ist?'),
         Question.ADDRESS: 'Wo wohnt das Mitglied von AkaBlas, das jetzt {hint} Jahre alt ist?',
-        Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mietglied, das {hint} Jahre alt ist?',
+        Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, das {hint} Jahre alt ist?',
     },
     Question.INSTRUMENT: {
         Question.FIRST_NAME:
@@ -241,15 +241,10 @@ def question_text(member: 'Member',
     Args:
         member: The orchestra member with the correct answer.
         question_attribute: The attribute that is asked for. One of
-            :attr:`components.Question.SUPPORTED_ATTRIBUTES` or a key of
-            :attr:`components.Orchestra.DICTS_TO_ATTRS`.
+            :attr:`components.Question.SUPPORTED_ATTRIBUTES`.
         hint_attribute: The attribute to give as a hint.
         multiple_choice: Whether this is a multiple choice question. Defaults to :obj:`True`.
     """
-    if question_attribute in Orchestra.DICTS_TO_ATTRS.keys():
-        question_attribute = Question.PAM_ATTRIBUTES[Orchestra.DICTS_TO_ATTRS[question_attribute]]
-    if hint_attribute in Orchestra.DICTS_TO_ATTRS.keys():
-        hint_attribute = Question.PAM_ATTRIBUTES[Orchestra.DICTS_TO_ATTRS[hint_attribute]]
 
     if question_attribute not in Question.SUPPORTED_ATTRIBUTES:
         raise ValueError('Unsupported question_attribute!')
@@ -259,7 +254,7 @@ def question_text(member: 'Member',
     if question_attribute == Question.PHOTO and not multiple_choice:
         raise ValueError('Photos are only supported as multiple choice questions.')
 
-    hint = member[Question.MAP_ATTRIBUTES[hint_attribute]]
+    hint = member[hint_attribute]
     if isinstance(hint, list):
         hint = str(random.choice(hint))
 

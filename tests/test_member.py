@@ -116,8 +116,16 @@ class TestMember:
         assert member.instruments == []
         member.instruments = instruments.Oboe()
         assert member.instruments == [instruments.Oboe()]
-        member.instruments = [instruments.Oboe(), instruments.Baritone]
-        assert member.instruments == [instruments.Oboe(), instruments.Baritone]
+        member.instruments = [instruments.Oboe(), instruments.Baritone()]
+        assert member.instruments == [instruments.Oboe(), instruments.Baritone()]
+        member.instruments = [
+            instruments.Oboe(),
+            instruments.Baritone(),
+            instruments.WoodwindInstrument()
+        ]
+        assert member.instruments == [instruments.Oboe(), instruments.Baritone()]
+        member.instruments = instruments.WoodwindInstrument()
+        assert member.instruments == []
 
     def test_address_and_coordinates(self):
         with pytest.raises(ValueError, match='Only address'):

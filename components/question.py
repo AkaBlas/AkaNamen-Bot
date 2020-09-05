@@ -16,7 +16,7 @@ class Question:
     Representation of a single question asked in an AkaNamen Bot components.
 
     Attributes:
-        member (:class:`components.Member`): The member, whos attribute is the correct answer.
+        member (:class:`components.Member`): The member, who's attribute is the correct answer.
         attribute (:obj:`str`): The attribute that is asked for.
         multiple_choice (:obj:`bool`): If :obj:`False`, the question is to be answered with
             "free text" instead of choosing an option from a poll.
@@ -48,8 +48,8 @@ class Question:
         if attribute == self.PHOTO and not multiple_choice:
             raise ValueError('Photos are supported only as multiple choice.')
 
-        if bool(member[self.MAP_ATTRIBUTES[attribute]]) is False:
-            raise ValueError('The member doesn\'t have the required attribute.')
+        if bool(member[attribute]) is False:
+            raise ValueError("The member doesn't have the required attribute.")
 
         self.member: 'Member' = member
         self.attribute: str = attribute
@@ -85,7 +85,7 @@ class Question:
         if self.multiple_choice and self.poll:
             return self.poll.options[self.poll.correct_option_id]
         else:
-            attribute = self.member[self.MAP_ATTRIBUTES[self.attribute]]
+            attribute = self.member[self.attribute]
             if isinstance(attribute, list):
                 return ', '.join(str(a) for a in attribute)
             return str(attribute)
@@ -140,7 +140,7 @@ class Question:
     """:obj:`str`: Birthday of an AkaBlas member"""
     AGE: str = 'age'
     """:obj:`str`: Age of an AkaBlas member"""
-    INSTRUMENT: str = 'instrument'
+    INSTRUMENT: str = 'instruments'
     """:obj:`str`: Instrument of an AkaBlas member"""
     ADDRESS: str = 'address'
     """:obj:`str`: Instrument of an AkaBlas member"""
@@ -150,19 +150,3 @@ class Question:
         FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS, FULL_NAME, PHOTO
     ]
     """List[:obj:`str`]: Attributes usable for questions"""
-    MAP_ATTRIBUTES = {
-        FIRST_NAME: 'first_name',
-        LAST_NAME: 'last_name',
-        NICKNAME: 'nickname',
-        FULL_NAME: 'full_name',
-        BIRTHDAY: 'birthday',
-        AGE: 'age',
-        INSTRUMENT: 'instruments',
-        ADDRESS: 'address',
-        PHOTO: 'photo_file_id',
-    }
-    """Dict[:obj:`str`, :obj:`str`]: For each attribute in :attr:`SUPPORTED_TYPES`, the
-    corresponding value is the name of the :class:`components.Member` attribute, the member
-    associated with this question must have."""
-    PAM_ATTRIBUTES = {v: k for k, v in MAP_ATTRIBUTES.items()}
-    """Dict[:obj:`str`, :obj:`str`]: Inverse of :attr:`MAP_ATTRIBUTES`."""

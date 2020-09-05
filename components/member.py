@@ -3,7 +3,9 @@
 """This module contains the Member class."""
 from __future__ import annotations
 
-from components import Instrument
+from components import Instrument, PercussionInstrument, Flute, Clarinet, Oboe, \
+    SopranoSaxophone, AltoSaxophone, TenorSaxophone, BaritoneSaxophone, Euphonium, BaritoneHorn, \
+    Baritone, Trombone, Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Bassoon, Tuba
 from components.helpers import setlocale
 from .userscore import UserScore
 
@@ -109,6 +111,9 @@ class Member:
             self.set_address(address=address)
         if longitude and latitude:
             self.set_address(coordinates=(latitude, longitude))
+
+    def __repr__(self) -> str:
+        return f'Member({self.full_name or str(self.user_id)})'
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Member):
@@ -266,9 +271,9 @@ class Member:
         if instruments is None:
             self._instruments = []
         elif isinstance(instruments, Instrument):
-            self._instruments = [instruments]
+            self._instruments = [instruments] if instruments in self.ALLOWED_INSTRUMENTS else []
         else:
-            self._instruments = instruments
+            self._instruments = [i for i in instruments if i in self.ALLOWED_INSTRUMENTS]
 
     @property
     def instruments_str(self) -> Optional[str]:
@@ -653,3 +658,27 @@ class Member:
         'photo_file_id', 'allow_contact_sharing'
     ])
     """List[:obj:`str`]: Attributes supported by subscription."""
+
+    ALLOWED_INSTRUMENTS: List[Instrument] = [
+        PercussionInstrument(),
+        Flute(),
+        Clarinet(),
+        Oboe(),
+        Bassoon(),
+        SopranoSaxophone(),
+        AltoSaxophone(),
+        TenorSaxophone(),
+        BaritoneSaxophone(),
+        Euphonium(),
+        BaritoneHorn(),
+        Baritone(),
+        Trombone(),
+        Tuba(),
+        Trumpet(),
+        Flugelhorn(),
+        Horn(),
+        Drums(),
+        Guitar(),
+        BassGuitar(),
+    ]
+    """List[:class:`components.Instrument`]: Instruments that members are allowed to play."""

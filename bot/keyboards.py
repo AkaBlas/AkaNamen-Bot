@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 """This module contains functions for generating often needed keyboards."""
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-from components import (Instrument, WoodwindInstrument, BrassInstrument, HighBrassInstrument,
-                        LowBrassInstrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
-                        Saxophone, SopranoSaxophone, AltoSaxophone, TenorSaxophone,
-                        BaritoneSaxophone, Euphonium, BaritoneHorn, Baritone, Trombone, Tuba,
-                        Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Conductor, Orchestra)
+from components import (Instrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
+                        SopranoSaxophone, AltoSaxophone, TenorSaxophone, BaritoneSaxophone,
+                        Euphonium, BaritoneHorn, Baritone, Trombone, Tuba, Trumpet, Flugelhorn,
+                        Horn, Drums, Guitar, BassGuitar, Conductor, Orchestra, Member)
 from bot import REGISTRATION_PATTERN
 from typing import Dict, Optional, List
 
@@ -34,25 +33,18 @@ DONE = 'Fertig'
 
 # yapf: disable
 INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
-    [WoodwindInstrument()],
     [Flute(), Clarinet()],
     [Oboe(), Bassoon()],
-    [Saxophone()],
     [SopranoSaxophone(), AltoSaxophone()],
     [TenorSaxophone(), BaritoneSaxophone()],
-    [BrassInstrument()],
-    [HighBrassInstrument()],
     [Trumpet(), Flugelhorn()],
     [Horn()],
-    [LowBrassInstrument()],
     [Euphonium(), Baritone()],
     [BaritoneHorn(), Trombone()],
     [Tuba()],
-    [Guitar()],
-    [BassGuitar()],
-    [PercussionInstrument()],
-    [Drums()],
-    [Conductor()]
+    [Guitar(), BassGuitar()],
+    [PercussionInstrument(), Drums()],
+    [Conductor()],
 ]
 
 QUESTION_HINT_KEYBOARD: List[List[str]] = [
@@ -110,7 +102,9 @@ def parse_instruments_keyboard(keyboard: InlineKeyboardMarkup) -> Dict[Instrumen
     for row in keyboard.inline_keyboard[:-1]:
         for button in row:
             instrument, selection = button.text.split(' ')
-            current_selection[Instrument.from_string(instrument)] = selection == SELECTED
+            key = Instrument.from_string(instrument, allowed=Member.ALLOWED_INSTRUMENTS)
+            if key is not None:
+                current_selection[key] = selection == SELECTED
 
     return current_selection
 
@@ -148,11 +142,11 @@ def build_questions_hints_keyboard(
 
     current_selection = current_selection or dict()
 
-    questionable = orchestra.questionable
+    questionable = orchestra.questionable()
     if not questionable:
         raise RuntimeError('Orchestra currently has no questionable attributes.')
-    hints = [q[0] for q in questionable]
-    questions = [q[1] for q in questionable]
+    hints = [q[0].description for q in questionable]
+    questions = [q[1].description for q in questionable]
 
     buttons = []
     for row in QUESTION_HINT_KEYBOARD:
@@ -161,7 +155,7 @@ def build_questions_hints_keyboard(
             if (hint and option not in hints) or (question and option not in questions):
                 continue
 
-            text = (f'{Orchestra.DICTS_TO_HR[option]} '
+            text = (f'{Orchestra.TO_HR[option]} '
                     f'{SELECTED if current_selection.get(option) else DESELECTED}')
             callback_data = f'{option} {SELECTED if current_selection.get(option) else DESELECTED}'
             button = InlineKeyboardButton(text=text, callback_data=callback_data)
