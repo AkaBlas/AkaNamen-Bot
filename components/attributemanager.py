@@ -246,7 +246,7 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
             return False
         return any(
             self.is_hintable_with_member(attribute_manager, m, multiple_choice=multiple_choice)
-            for m in self.available_members)
+            for m in self.available_members.intersection(attribute_manager.available_members))
 
     def draw_hint_member(self,
                          attribute_manager: AttributeManager,
