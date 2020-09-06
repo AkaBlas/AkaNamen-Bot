@@ -3,6 +3,7 @@
 """This module contains the instrument classes."""
 import sys
 import inspect
+from typing import Union, Optional, Sequence
 
 
 class Instrument:
@@ -24,64 +25,74 @@ class Instrument:
 
         Trumpet() == 'Trompete' # True
         Trumpet() == 'trompete' # True
-        Trupmet() == 'Saxophon' # False
+        Trumpet() == 'Saxophon' # False
     """
     name: str = 'Instrument'
 
     @staticmethod
-    def from_string(string: str) -> 'Instrument':
+    def from_string(string: str,
+                    allowed: Sequence[Union['Instrument', str]] = None) -> Optional['Instrument']:
         """
         Given a string representation or an AkaBlas-style abbreviation of an instrument, this will
         return a corresponding :class:`components.Instrument` instance.
 
         Args:
             string: The string.
+            allowed: A list of allowed instruments. If the return value would not be in this list,
+                :obj:`None` ist returned.
 
         Raises:
             ValueError: If the abbreviation is not known.
         """
-        string = string.lower().strip(' ')
 
-        if string == 'flö':
-            return Flute()
-        elif string == 'kla':
-            return Clarinet()
-        elif string == 'obe':
-            return Oboe()
-        elif string == 'hlz':
-            return WoodwindInstrument()
-        elif string == 'sax':
-            return Saxophone()
-        elif string == 'asx':
-            return AltoSaxophone()
-        elif string == 'tsx':
-            return TenorSaxophone()
-        elif string == 'fag':
-            return Bassoon()
-        elif string == 'trp':
-            return Trumpet()
-        elif string in ['flü', Flugelhorn.name.lower()]:
-            return Flugelhorn()
-        elif string == 'teh':
-            return BaritoneHorn()
-        elif string == 'hrn':
-            return Horn()
-        elif string == 'pos':
-            return Trombone()
-        elif string == 'tub':
-            return Tuba()
-        elif string == 'tpd':
-            return PercussionInstrument()
-        elif string == 'git':
-            return Guitar()
-        elif string == 'bss':
-            return BassGuitar()
-        else:
-            cls_members = inspect.getmembers(sys.modules[__name__], inspect.isclass)
-            for cls in cls_members:
-                if string == cls[1].name.lower():
-                    return cls[1]()
-        raise ValueError('Unknown instrument description.')
+        def _from_string(strg: str) -> 'Instrument':
+            if strg == 'flö':
+                return Flute()
+            elif strg == 'kla':
+                return Clarinet()
+            elif strg == 'obe':
+                return Oboe()
+            elif strg == 'hlz':
+                return WoodwindInstrument()
+            elif strg == 'sax':
+                return Saxophone()
+            elif strg == 'asx':
+                return AltoSaxophone()
+            elif strg == 'tsx':
+                return TenorSaxophone()
+            elif strg == 'fag':
+                return Bassoon()
+            elif strg == 'trp':
+                return Trumpet()
+            elif strg in ['flü', Flugelhorn.name.lower()]:
+                return Flugelhorn()
+            elif strg == 'teh':
+                return BaritoneHorn()
+            elif strg == 'hrn':
+                return Horn()
+            elif strg == 'pos':
+                return Trombone()
+            elif strg == 'tub':
+                return Tuba()
+            elif strg == 'tpd':
+                return PercussionInstrument()
+            elif strg == 'git':
+                return Guitar()
+            elif strg == 'bss':
+                return BassGuitar()
+            else:
+                cls_members = inspect.getmembers(sys.modules[__name__], inspect.isclass)
+                for cls in cls_members:
+                    if strg == cls[1].name.lower():
+                        return cls[1]()
+            raise ValueError('Unknown instrument description.')
+
+        string = string.lower().strip(' ')
+        instrument = _from_string(string)
+
+        if allowed is not None:
+            return instrument if instrument in allowed or str(instrument) in allowed else None
+        return instrument
 
     def __str__(self) -> str:
         return self.name

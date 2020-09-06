@@ -106,6 +106,14 @@ class TestMember:
         assert member.user_id == self.user_id
         assert member.instruments == [instruments.Bassoon()]
 
+    def test_repr(self, member):
+        member.first_name = 'first'
+        member.nickname = 'nick'
+        member.last_name = 'last'
+        assert repr(member) == 'Member(first "nick" last)'
+        member = Member(1)
+        assert repr(member) == 'Member(1)'
+
     def test_subscriptable_error(self, member):
         with pytest.raises(KeyError, match='Member either'):
             member['foo']
@@ -116,8 +124,16 @@ class TestMember:
         assert member.instruments == []
         member.instruments = instruments.Oboe()
         assert member.instruments == [instruments.Oboe()]
-        member.instruments = [instruments.Oboe(), instruments.Baritone]
-        assert member.instruments == [instruments.Oboe(), instruments.Baritone]
+        member.instruments = [instruments.Oboe(), instruments.Baritone()]
+        assert member.instruments == [instruments.Oboe(), instruments.Baritone()]
+        member.instruments = [
+            instruments.Oboe(),
+            instruments.Baritone(),
+            instruments.WoodwindInstrument()
+        ]
+        assert member.instruments == [instruments.Oboe(), instruments.Baritone()]
+        member.instruments = instruments.WoodwindInstrument()
+        assert member.instruments == []
 
     def test_address_and_coordinates(self):
         with pytest.raises(ValueError, match='Only address'):

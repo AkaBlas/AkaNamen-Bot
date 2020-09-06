@@ -13,11 +13,11 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        python-version: [3.7, 3.8]
+        python-version: [3.8]
         os: [ubuntu-latest]
         include:
           - os: ubuntu-latest
-            python-version: 3.7
+            python-version: 3.8
             test-build: True
       fail-fast: False
     steps:
@@ -64,7 +64,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.8]
         os: [ubuntu-latest]
       fail-fast: False
     steps:

@@ -10,7 +10,7 @@ from telegram.ext import ConversationHandler, CallbackContext, Handler, \
     CommandHandler, CallbackQueryHandler, MessageHandler, Filters
 
 from bot import ORCHESTRA_KEY, GAME_KEY, parse_questions_hints_keyboard, \
-    build_questions_hints_keyboard, SELECTED, DONE
+    build_questions_hints_keyboard, SELECTED, DONE, ALL
 from components import Questioner, Member
 
 # States of the conversation
@@ -22,7 +22,7 @@ QUESTION_ATTRIBUTES = 'QUESTION_ATTRIBUTES'
 NUMBER_QUESTIONS = 'NUMBER_QUESTIONS'
 """:obj:`str`: Identifier of the state in which the number of question attributes is selected."""
 MULTIPLE_CHOICE = 'Multiple Choice'
-""":obj:`str`: Identifier of the state in the type of questions is seleted.."""
+""":obj:`str`: Identifier of the state in the type of questions is selected."""
 GAME = 'GAME'
 """:obj:`str`: Identifier of the state in which the questions are asked and answered."""
 
@@ -212,6 +212,16 @@ def hint_attributes(update: Update, context: CallbackContext) -> Union[str, int]
                               reply_markup=build_questions_hints_keyboard(orchestra=orchestra,
                                                                           question=True))
             return QUESTION_ATTRIBUTES
+        elif data == ALL:
+            current_selection = parse_questions_hints_keyboard(message.reply_markup)
+            current_value = all(current_selection.values())
+            for entry in current_selection:
+                current_selection[entry] = not current_value
+
+            message.edit_reply_markup(reply_markup=build_questions_hints_keyboard(
+                orchestra=orchestra, hint=True, current_selection=current_selection))
+
+            return HINT_ATTRIBUTES
         else:
             current_selection = parse_questions_hints_keyboard(message.reply_markup)
             attr, selection = data.split(' ')
@@ -261,6 +271,16 @@ def question_attributes(update: Update, context: CallbackContext) -> str:
 
         message.edit_text(text=TEXTS[NUMBER_QUESTIONS], reply_markup=NUMBER_QUESTIONS_KEYBOARD)
         return NUMBER_QUESTIONS
+    elif data == ALL:
+        current_selection = parse_questions_hints_keyboard(message.reply_markup)
+        current_value = all(current_selection.values())
+        for entry in current_selection:
+            current_selection[entry] = not current_value
+
+        message.edit_reply_markup(reply_markup=build_questions_hints_keyboard(
+            orchestra=orchestra, hint=True, current_selection=current_selection))
+
+        return QUESTION_ATTRIBUTES
     else:
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
         attr, selection = data.split(' ')

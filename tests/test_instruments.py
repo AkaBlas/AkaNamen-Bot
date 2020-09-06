@@ -39,6 +39,12 @@ class TestInstruments:
         with pytest.raises(ValueError, match='Unknown'):
             Instrument.from_string(string)
 
+    def test_from_string_allowed(self):
+        assert Instrument.from_string('tub', []) is None
+        assert Instrument.from_string('tub', [Trombone(), 'Schlagzeug']) is None
+        assert Instrument.from_string('tub', ['Tuba']) == Tuba()
+        assert Instrument.from_string('tub', [Tuba()]) == Tuba()
+
     @pytest.mark.parametrize('cls',
                              [i for i in instruments.__dict__.values() if isinstance(i, type)])
     def test_global(self, cls):

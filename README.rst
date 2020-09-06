@@ -1,7 +1,7 @@
 AkaNamen Bot
 ============
 
-.. image:: https://img.shields.io/badge/python-3.7%20%7C%203.8-blue
+.. image:: https://img.shields.io/badge/python-3.8+-blue
    :target: https://www.python.org/doc/versions/
    :alt: Supported Python versions
 
