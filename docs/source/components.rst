@@ -1,5 +1,5 @@
-Game related components
-=======================
+Backend: Components package
+===========================
 
 .. toctree::
 

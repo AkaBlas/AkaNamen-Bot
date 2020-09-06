@@ -341,7 +341,7 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
 
         1. The member serving as hint
         2. The attribute to be given as hint
-        4. The correct answer/a list of correct answers.
+        3. The correct answer/a list of correct answers.
 
         Args:
             attribute_manager: The manager describing the attribute serving as question.
