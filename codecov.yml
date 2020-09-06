@@ -1,2 +1,11 @@
 # Don't comment on PRs
 comment: false
+
+coverage:
+  status:
+    project:
+      default:
+        # We allow small coverage decreases in the project. E.g. the typing imports not being hit
+        # already add noise to the coverage.
+        target: auto
+        threshold: 0.1%
