@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 import pytest
-import os
 import datetime as dt
-import pickle
 from geopy import Photon
 
 from components import Gender, Member, instruments, Orchestra, Score, AttributeManager
-from tempfile import NamedTemporaryFile
 
 from tests.addresses import get_address_from_cache
 
@@ -124,22 +121,6 @@ class TestOrchestra:
 
         with pytest.raises(ValueError, match='not'):
             orchestra.kick_member(member)
-
-    @pytest.mark.skipif(os.name == 'nt',
-                        reason="Not worth the struggle stetting this up for windows.")
-    def test_pickle(self, orchestra, member):
-        member.first_name = 'John'
-        member.last_name = 'Doe'
-        orchestra.register_member(member)
-
-        with NamedTemporaryFile() as file:
-            pickle.dump(orchestra, file)
-            file.flush()
-            o = pickle.load(open(file.name, 'rb'))
-
-            assert o.members == {member.user_id: member}
-            assert o.first_names['John'] == {member}
-            assert o.last_names['Doe'] == {member}
 
     def test_scores(self, today):
         todays_score = score_orchestra(today).todays_score

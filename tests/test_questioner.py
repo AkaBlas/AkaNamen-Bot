@@ -188,7 +188,7 @@ class TestQuestioner:
         assert questioner.score.correct == 1
 
     @pytest.mark.parametrize('runs', range(50))
-    @pytest.mark.parametrize('populated_orchestra', [{}], indirect=True)
+    @pytest.mark.parametrize('populated_orchestra', [{'members': 20}], indirect=True)
     def test_ask_question_free_text(self, bot, chat_id, populated_orchestra, empty_member,
                                     monkeypatch, runs):
 
