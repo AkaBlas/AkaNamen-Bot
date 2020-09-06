@@ -354,7 +354,7 @@ class TestMember:
                                    'Instrument/e: -\n'
                                    'Adresse: -\n'
                                    'Mobil: -\n'
-                                   'Photo: -\n'
+                                   'Foto: -\n'
                                    'Daten an AkaBlasen weitergeben: Deaktiviert')
         member.first_name = self.first_name
         member.nickname = self.nickname
@@ -372,7 +372,7 @@ class TestMember:
                                    'Instrument/e: Tuba, Trompete\n'
                                    'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
                                    'Mobil: phone_number\n'
-                                   'Photo: 🖼\n'
+                                   'Foto: 🖼\n'
                                    'Daten an AkaBlasen weitergeben: Aktiviert')
 
     @responses.activate

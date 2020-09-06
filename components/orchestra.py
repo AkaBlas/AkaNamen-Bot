@@ -307,7 +307,7 @@ class Orchestra(PicklableBase):
         'age': 'Alter',
         'birthdays': 'Geburtstag',
         'birthday': 'Geburtstag',
-        'photo_file_ids': 'Photo',
+        'photo_file_ids': 'Foto',
         'photo_file_id': 'Photo',
     }
     """Dict[:obj:`str`, :obj:`str`]: A map from the names of the different properties of this
