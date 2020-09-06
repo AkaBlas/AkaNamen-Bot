@@ -52,8 +52,9 @@ class Orchestra(PicklableBase):
                     'last_name',
                     list(self.ATTRIBUTE_MANAGERS.difference(['last_name', 'full_name']))),
             'nickname':
-                AttributeManager('nickname',
-                                 list(self.ATTRIBUTE_MANAGERS.difference(['nickname']))),
+                AttributeManager(
+                    'nickname', list(self.ATTRIBUTE_MANAGERS.difference(['nickname',
+                                                                         'full_name']))),
             'photo_file_id':
                 AttributeManager('photo_file_id',
                                  list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id']))),

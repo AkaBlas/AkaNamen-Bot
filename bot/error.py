@@ -7,6 +7,7 @@ import traceback
 
 from emoji import emojize
 from telegram import Update
+from telegram.error import BadRequest
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 
@@ -52,4 +53,11 @@ def handle_error(update: Update, context: CallbackContext) -> None:
            f'{payload}. The full traceback:\n\n<code>{html.escape(trace)}</code>'
 
     # Send to admin
-    context.bot.send_message(context.bot_data[ADMIN_KEY], text)
+    try:
+        context.bot.send_message(context.bot_data[ADMIN_KEY], text)
+    except BadRequest as e:
+        if 'Message is too long' in str(e):
+            text = f'Hey.\nThe error <code>{html.escape(str(context.error))}</code> happened' \
+                   f'{payload}. The traceback is too long to send, but it was written to the log' \
+                   f' file.'
+            context.bot.send_message(context.bot_data[ADMIN_KEY], text)

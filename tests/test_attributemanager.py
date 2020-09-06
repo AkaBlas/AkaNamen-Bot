@@ -164,6 +164,13 @@ class TestAttributeManager:
                                              Member(100, first_name='c',
                                                     last_name='b')) == {'0', '1', '2', '3', '4'}
 
+    def test_unique_attributes_of(self, member):
+        member.instruments = [Tuba(), Trombone()]
+        am = AttributeManager('instruments', [])
+        am.register_member(member)
+        am.register_member(Member(5, instruments=[Tuba()]))
+        assert am.unique_attributes_of(member) == [Trombone()]
+
     def test_available_members(self, member):
         am = AttributeManager(self.description, [])
 
@@ -194,9 +201,24 @@ class TestAttributeManager:
         assert not bm.is_hintable_with_member(am, Member(100, first_name='a', last_name='b'))
         assert bm.is_hintable_with_member(am, Member(100, first_name='c', last_name='b'))
 
-    def test_is_hintable_with(self, dummy_am):
+    def test_is_hintable_with_member_free_text(self):
+        am = AttributeManager(self.description, [])
+        bm = AttributeManager('first_name', [])
+
+        for i in range(10):
+            am.register_member(Member(i, first_name='a', last_name='b'))
+            bm.register_member(Member(i, first_name='a', last_name='b'))
+
+        assert not bm.is_hintable_with_member(
+            am, Member(100, first_name='a', last_name='b'), multiple_choice=False)
+        assert bm.is_hintable_with_member(am,
+                                          Member(100, first_name='c', last_name='b'),
+                                          multiple_choice=False)
+
+    @pytest.mark.parametrize('multiple_choice', [True, False])
+    def test_is_hintable_with(self, dummy_am, multiple_choice):
         am = AttributeManager('last_name', [])
-        assert not am.is_hintable_with(dummy_am)
+        assert not am.is_hintable_with(dummy_am, multiple_choice=False)
 
         am = AttributeManager('last_name', ['first_name'])
         bm = AttributeManager('first_name', [])
@@ -208,27 +230,27 @@ class TestAttributeManager:
         am.register_member(member)
         bm.register_member(member)
 
-        assert not am.is_hintable_with(bm)
+        assert not am.is_hintable_with(bm, multiple_choice=multiple_choice)
 
         for i in range(3, 10):
             member = Member(i, first_name='a', last_name='b')
             am.register_member(member)
             bm.register_member(member)
 
-        assert not am.is_hintable_with(bm)
+        assert not am.is_hintable_with(bm, multiple_choice=multiple_choice)
 
         for i in [42, 43, 44, 45]:
             member = Member(i, first_name=str(i), last_name='b')
             am.register_member(member)
             bm.register_member(member)
 
-        assert not am.is_hintable_with(bm)
+        assert not am.is_hintable_with(bm, multiple_choice=multiple_choice)
 
         member = Member(100, first_name='7', last_name='8')
         am.register_member(member)
         bm.register_member(member)
 
-        assert am.is_hintable_with(bm)
+        assert am.is_hintable_with(bm, multiple_choice=multiple_choice)
 
     def test_draw_hint_member_errors(self, dummy_am):
         am = AttributeManager(self.description, [])
@@ -262,6 +284,34 @@ class TestAttributeManager:
         assert member in bm.available_members
         assert am.is_hintable_with_member(bm, member)
         assert len(bm.distinct_values_for_member(am, member)) >= 3
+
+    def test_draw_hint_member_free_text(self):
+        am = AttributeManager(self.description, ['first_name'])
+        bm = AttributeManager('first_name', [])
+
+        for i in range(4):
+            member = Member(i, first_name=str(i), last_name=str(i))
+            am.register_member(member)
+            bm.register_member(member)
+
+            member = Member(i + 10, first_name=str(i))
+            am.register_member(member)
+            bm.register_member(member)
+
+            member = Member(i + 20, last_name=str(i))
+            am.register_member(member)
+            bm.register_member(member)
+
+        member = Member(100, first_name='A', last_name='B')
+        am.register_member(member)
+        bm.register_member(member)
+
+        member = am.draw_hint_member(bm, multiple_choice=False)
+        assert member.last_name and member.first_name
+        assert member in am.available_members
+        assert member in bm.available_members
+        assert am.is_hintable_with_member(bm, member, multiple_choice=False)
+        assert len(am.unique_attributes_of(member)) >= 1
 
     def test_draw_question_attributes_error(self):
         am = AttributeManager(self.description, [])
@@ -330,6 +380,30 @@ class TestAttributeManager:
                 for m in bm.available_members)
         assert attr == 'B'
         assert len(set(opts)) == 4
+
+    def test_build_question_free_text(self):
+        am = AttributeManager(self.description, ['first_name'])
+        bm = AttributeManager('first_name', [])
+
+        for i in range(4):
+            member = Member(i, first_name='A', last_name='B')
+            am.register_member(member)
+            bm.register_member(member)
+
+        with pytest.raises(RuntimeError, match=f'currently not hintable for first_name'):
+            am.build_question_with(bm, multiple_choice=False)
+
+        member = Member(100, first_name='100', last_name='200')
+        am.register_member(member)
+        bm.register_member(member)
+
+        member, attr, correct = am.build_question_with(bm, multiple_choice=False)
+        assert attr in am.data
+        assert member in am.available_members
+        assert member in bm.available_members
+        assert len(am.data[attr]) == 1
+        assert attr == '200'
+        assert correct == bm.get_members_attribute(member)
 
     def test_build_question_list_as_hint(self):
         am = AttributeManager('instruments', ['first_name'])
@@ -535,6 +609,23 @@ class TestFirstNameManager:
         assert am.distinct_values_for_member(
             bm, Member(100, last_name='c', first_name='b', gender=other_gender)) == set()
 
+    def test_unique_attributes_of(self, member):
+        member.first_name = 'test'
+        member.gender = Gender.MALE
+
+        am = FirstNameManager([])
+        am.register_member(member)
+        am.register_member(Member(1, first_name='test', gender=Gender.MALE))
+        assert am.unique_attributes_of(member) == []
+
+        member = Member(2, first_name='test', gender=Gender.FEMALE)
+        am.register_member(member)
+        assert am.unique_attributes_of(member) == []
+
+        member = Member(3, first_name='test1', gender=Gender.FEMALE)
+        am.register_member(member)
+        assert am.unique_attributes_of(member) == ['test1']
+
     def test_available_male_members(self, member):
         am = FirstNameManager([])
 
@@ -603,6 +694,31 @@ class TestFirstNameManager:
                 for m in bm.available_members)
         assert attr == 'A'
         assert len(set(opts)) == 4
+
+    @pytest.mark.parametrize('gender', [Gender.MALE, Gender.FEMALE])
+    def test_build_question_free_text(self, gender):
+        bm = FirstNameManager(['last_name'])
+        am = AttributeManager('last_name', ['first_name'])
+
+        for i in range(4):
+            member = Member(i, last_name='A', first_name='B', gender=gender)
+            am.register_member(member)
+            bm.register_member(member)
+
+        with pytest.raises(RuntimeError, match=f'currently not hintable for last_name'):
+            bm.build_question_with(am, multiple_choice=False)
+
+        member = Member(100, first_name='100', last_name='200', gender=gender)
+        am.register_member(member)
+        bm.register_member(member)
+
+        member, attr, correct = bm.build_question_with(am, multiple_choice=False)
+        data = bm.female_data if member.gender == Gender.FEMALE else bm.male_data
+        assert attr in data
+        assert member in am.available_members
+        assert member in bm.available_members
+        assert attr == '100'
+        assert correct == am.get_members_attribute(member)
 
 
 class TestChangingAttributeManager:

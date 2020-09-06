@@ -44,6 +44,15 @@ class TestTexts:
                         assert '{' not in text
                         assert '}' not in text
 
+    def test_hint_value(self, member):
+        text = question_text(member,
+                             Question.FULL_NAME,
+                             Question.INSTRUMENT,
+                             multiple_choice=False,
+                             hint_value='foo')
+        assert 'foo' in text
+        assert member.instruments_str not in text
+
     def test_photo(self, member):
         q = Question.PHOTO
         for h in [a for a in Question.SUPPORTED_ATTRIBUTES if a != q]:

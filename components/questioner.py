@@ -131,8 +131,7 @@ class Questioner:
 
     def handle_update(self, update: Update) -> None:
         """
-        Handles the given update by updating the :class:`components.UserScore` of
-        :attr:`member`. Call only, if :meth:`check_update` returned :obj:`True`.
+        Handles the given update. Call only, if :meth:`check_update` returned :obj:`True`.
 
         Args:
             update: The :class:`telegram.Update` to be tested.
@@ -142,7 +141,6 @@ class Questioner:
         if not question:
             raise RuntimeError('I dont have a current question.')
         is_correct = question.check_answer(update)
-        self.member.user_score.add_to_score(1, int(is_correct))
         self.score.answers += 1
         self.score.correct += int(is_correct)
 
@@ -185,13 +183,16 @@ class Questioner:
             multiple_choice = self.multiple_choice
             photo_question = False
 
-        member, hint, opts, index = hint_manager.build_question_with(question_manager)
-        question = question_text(member, question_attribute, hint_attribute, multiple_choice)
-
-        options = list(str(o) for o in opts)
-
         if multiple_choice:
-            # Truncate options
+            member, hint, opts, index = hint_manager.build_question_with(question_manager,
+                                                                         multiple_choice=True)
+            question = question_text(member,
+                                     question_attribute,
+                                     hint_attribute,
+                                     multiple_choice=True)
+            options = list(str(o) for o in opts)
+
+            # Truncate long options
             for idx, o in enumerate(options):
                 if len(o) > 100:
                     options[idx] = o[:96] + ' ...'
@@ -221,6 +222,13 @@ class Questioner:
                                              poll=poll,
                                              multiple_choice=multiple_choice)
         else:
+            member, hint, _ = hint_manager.build_question_with(question_manager,
+                                                               multiple_choice=False)
+            question = question_text(member,
+                                     question_attribute,
+                                     hint_attribute,
+                                     multiple_choice=False,
+                                     hint_value=hint)
             if hint_attribute == Question.PHOTO:
                 self.bot.send_photo(chat_id=self.member.user_id,
                                     photo=member.photo_file_id,

@@ -9,7 +9,7 @@ from collections import defaultdict
 from copy import copy
 from threading import Lock
 from typing import Callable, Any, List, TypeVar, Dict, Set, Optional, Tuple, FrozenSet, Generic, \
-    TYPE_CHECKING, Union, cast
+    TYPE_CHECKING, Union, cast, overload, Literal
 
 from components import PicklableBase, Gender
 
@@ -65,13 +65,17 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         self._lock = Lock()
 
         if not get_members_attribute:
-            self._get_members_attribute = lambda m: m[self.description]
+            self._get_members_attribute = self._default_gma
         else:
-            self._get_members_attribute = get_members_attribute
+            self._get_members_attribute = get_members_attribute  # type: ignore
 
     @property
     def data(self) -> MemberDict:
         return self._data
+
+    def _default_gma(self,
+                     member: 'Member') -> Optional[Union[AttributeType, List[AttributeType]]]:
+        return member[self.description]  # type: ignore
 
     def get_members_attribute(
             self, member: 'Member') -> Optional[Union[AttributeType, List[AttributeType]]]:
@@ -174,13 +178,27 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
             attribute_manager: The manager describing the attribute serving as hint.
             member: The member.
         """
-        members_attribute = self.get_members_attribute(member)
-        if members_attribute is None:
+        members_attributes = self._gma_as_list(member)
+        if members_attributes is None:
             return set()
 
         with self._lock:
-            return set(key for key in self.data if key != members_attribute and not any(
-                attribute_manager.members_share_attribute(member, m) for m in self.data[key]))
+            return set(key for key in self.data if key not in members_attributes and not any(
+                attribute_manager.members_share_attribute(member, m)
+                or self.members_share_attribute(member, m) for m in self.data[key]))
+
+    def unique_attributes_of(self, member: Member) -> List[AttributeType]:
+        """
+        Given a member this returns a list of attribute values managed by this instance that only
+        appear for that member, making it the unique correct answer for it.
+
+        Args:
+            member: The member.
+        """
+        attributes = self._gma_as_list(member)
+        if attributes is None:
+            return []
+        return [attr for attr in attributes if len(self.data[attr].difference({member})) == 0]
 
     @property
     def available_members(self) -> FrozenSet['Member']:
@@ -190,7 +208,10 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         with self._lock:
             return frozenset(set().union(*self.data.values()))  # type: ignore
 
-    def is_hintable_with_member(self, attribute_manager: AttributeManager, member: Member) -> bool:
+    def is_hintable_with_member(self,
+                                attribute_manager: AttributeManager,
+                                member: Member,
+                                multiple_choice: bool = True) -> bool:
         """
         If the given members attribute managed by this instance can be used as hint where the
         question is the attribute managed by :attr:`attribute_manager`.
@@ -198,30 +219,45 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         Args:
             attribute_manager: The manager describing the attribute serving as question.
             member: The member.
+            multiple_choice: Whether this is a multiple choice question or not. Defaults to
+                :obj:`True`
         """
-        return len(attribute_manager.distinct_values_for_member(self, member)) >= 3
+        if multiple_choice:
+            return len(attribute_manager.distinct_values_for_member(self, member)) >= 3
+        else:
+            return (attribute_manager.get_members_attribute(member) is not None
+                    and len(self.unique_attributes_of(member)) >= 1)
 
-    def is_hintable_with(self, attribute_manager: AttributeManager) -> bool:
+    def is_hintable_with(self,
+                         attribute_manager: AttributeManager,
+                         multiple_choice: bool = True) -> bool:
         """
         If the attribute managed by this instance can be used as hint where the question is the
         attribute managed by :attr:`attribute_manager`.
 
         Args:
             attribute_manager: The manager describing the attribute serving as question.
+            multiple_choice: Whether this is a multiple choice question or not. Defaults to
+                :obj:`True`
         """
         if attribute_manager not in self.questionable_attributes:
             return False
         if self.available_members.isdisjoint(attribute_manager.available_members):
             return False
         return any(
-            self.is_hintable_with_member(attribute_manager, m) for m in self.available_members)
+            self.is_hintable_with_member(attribute_manager, m, multiple_choice=multiple_choice)
+            for m in self.available_members)
 
-    def draw_hint_member(self, attribute_manager: AttributeManager) -> 'Member':
+    def draw_hint_member(self,
+                         attribute_manager: AttributeManager,
+                         multiple_choice: bool = True) -> 'Member':
         """
         Draws a member to build a question for.
 
         Args:
             attribute_manager: The manager describing the attribute serving as question.
+            multiple_choice: Whether this is a multiple choice question or not. Defaults to
+                :obj:`True`
 
         Raises:
             ValueError: If :attr:`attribute_manager` is not a valid question for this instance in
@@ -232,14 +268,15 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         if attribute_manager not in self.questionable_attributes:
             raise ValueError(
                 f'{attribute_manager.description} is not a valid question for {self.description}')
-        if not self.is_hintable_with(attribute_manager):
+        if not self.is_hintable_with(attribute_manager, multiple_choice=multiple_choice):
             raise RuntimeError(f'{self.description} currently not hintable for '
                                f'{attribute_manager.description}')
 
         return random.choice(
             list(
                 m for m in self.available_members.intersection(attribute_manager.available_members)
-                if self.is_hintable_with_member(attribute_manager, m)))
+                if self.is_hintable_with_member(
+                    attribute_manager, m, multiple_choice=multiple_choice)))
 
     def draw_question_attributes(
         self, attribute_manager: AttributeManager, member: 'Member'
@@ -250,7 +287,7 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         of :attr:`member`.
 
         Args:
-            attribute_manager: The manager describing the attribute serving as question.
+            attribute_manager: The manager describing the attribute serving as hint.
             member: The member that defines the correct answer.
         """
         correct_attributes = self._gma_as_list(member)
@@ -271,20 +308,45 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
 
         return tuple(attributes), attributes.index(correct_attribute)  # type: ignore
 
+    @overload
     def build_question_with(
-        self, attribute_manager: AttributeManager
+        self, attribute_manager: AttributeManager, multiple_choice: Literal[False]
+    ) -> Tuple[Member, AttributeType, Union[Any, List[Any]]]:
+        ...
+
+    @overload
+    def build_question_with(  # noqa: F811
+        self,
+        attribute_manager: AttributeManager,
+        multiple_choice: Literal[True],
     ) -> Tuple[Member, AttributeType, Tuple[Any, Any, Any, Any], int]:
+        ...
+
+    def build_question_with(  # noqa: F811
+        self,
+        attribute_manager: AttributeManager,
+        multiple_choice: bool = True,
+    ) -> Union[Tuple[Member, AttributeType, Tuple[Any, Any, Any, Any], int], Tuple[
+            Member, AttributeType, Any]]:
         """
         Builds a question where this instance is serving as hint and :attr:`attribute_manager`
-        servers as question. The output is a 3-tuple of
+        servers as question. For multiple choice questions the output is a 4-tuple of
 
         1. The member serving as hint
         2. The attribute to be given as hint
         3. The attributes to be given as options for the answer
-        4. The index of the correct answer
+        4. The index of the correct answer.
+
+        For free text questions, the output is a 3-tuple of
+
+        1. The member serving as hint
+        2. The attribute to be given as hint
+        4. The correct answer/a list of correct answers.
 
         Args:
             attribute_manager: The manager describing the attribute serving as question.
+            multiple_choice: Whether this is a multiple choice question or not. Defaults to
+                :obj:`True`
 
         Raises:
             ValueError: If :attr:`attribute_manager` is not a valid question for this instance in
@@ -292,13 +354,18 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
             ValueError: If :attr:`attribute_manager` is currently not questionable for this
                 instance
         """
-        hint_member = self.draw_hint_member(attribute_manager)
-        attributes, idx = attribute_manager.draw_question_attributes(attribute_manager,
-                                                                     hint_member)
+        hint_member = self.draw_hint_member(attribute_manager, multiple_choice=multiple_choice)
 
-        # draw_hint_member makes sure that this is not None, but MyPy can't see that ...
-        hint_attributes = cast(list, self._gma_as_list(hint_member))
-        return hint_member, random.choice(hint_attributes), attributes, idx
+        if multiple_choice:
+            # draw_hint_member makes sure that this is not None, but MyPy can't see that ...
+            hint_attributes = cast(list, self._gma_as_list(hint_member))
+            attributes, idx = attribute_manager.draw_question_attributes(self, hint_member)
+            return hint_member, random.choice(hint_attributes), attributes, idx
+        else:
+            hint_attributes = self.unique_attributes_of(hint_member)
+            attribute = attribute_manager.get_members_attribute(hint_member)
+
+            return hint_member, random.choice(hint_attributes), attribute
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, AttributeManager):
@@ -330,9 +397,13 @@ class FirstNameManager(AttributeManager):
     def __init__(self, questionable_attributes: List[Union[AttributeManager, str]]) -> None:
         super().__init__('first_name',
                          questionable_attributes=questionable_attributes,
-                         get_members_attribute=lambda m: m.first_name if m.gender else None)
+                         get_members_attribute=self.get_first_name)
         self.male_data: MemberDict = defaultdict(set)
         self.female_data: MemberDict = defaultdict(set)
+
+    @staticmethod
+    def get_first_name(member: 'Member') -> Optional[str]:
+        return member.first_name if member.gender else None
 
     def register_member(self, member: 'Member') -> None:
         """
@@ -395,11 +466,28 @@ class FirstNameManager(AttributeManager):
         if members_attribute is None:
             return set()
 
-        attr = attribute_manager.get_members_attribute(member)
         data = self.male_data if member.gender is Gender.MALE else self.female_data
         with self._lock:
-            return set(key for key in data if key != members_attribute and all(
-                attribute_manager.get_members_attribute(m) != attr for m in data[key]))
+            return set(key for key in data if key != members_attribute and not any(
+                attribute_manager.members_share_attribute(member, m) for m in data[key]))
+
+    def unique_attributes_of(self, member: Member) -> List[AttributeType]:
+        """
+        Given a member this returns a list of attribute values managed by this instance that only
+        appear for that member, making it the unique correct answer for it.
+
+        Args:
+            member: The member.
+        """
+        attributes = self._gma_as_list(member)
+        if attributes is None:
+            return []
+        data = self.male_data if member.gender is Gender.MALE else self.female_data
+        other_data = self.female_data if member.gender is Gender.MALE else self.male_data
+        return [
+            attr for attr in attributes if len(data[attr].difference({member})) == 0 and (
+                attr not in other_data or len(other_data[attr].difference({member})) == 0)
+        ]
 
     @property
     def available_male_members(self) -> FrozenSet['Member']:

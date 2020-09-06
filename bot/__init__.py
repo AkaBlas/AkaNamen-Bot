@@ -8,7 +8,7 @@ from .constants import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_K
 from .keyboards import (build_instruments_keyboard, parse_instruments_keyboard,
                         build_questions_hints_keyboard, parse_questions_hints_keyboard,
                         REGISTRATION_KEYBOARD, DOCS_KEYBOARD, DONE, SELECTED, BACK,
-                        CHANNEL_KEYBOARD)
+                        CHANNEL_KEYBOARD, ALL)
 from .setup import register_dispatcher
 
 __all__ = [
@@ -23,6 +23,7 @@ __all__ = [
     'SELECTED',
     'BACK',
     'CHANNEL_KEYBOARD',
+    'ALL',
     # Setup
     'register_dispatcher',
     # Constants

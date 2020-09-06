@@ -30,6 +30,8 @@ BACK = 'Zurück'
 """:obj:`str`: Text indicating a 'back' action. Use as text or callback data."""
 DONE = 'Fertig'
 """:obj:`str`: Text indicating a 'done' action. Use as text or callback data."""
+ALL = 'Alles'
+""":obj:`str`: Text indicating to select all. Use as text or callback data."""
 
 # yapf: disable
 INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
@@ -48,11 +50,11 @@ INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
 ]
 
 QUESTION_HINT_KEYBOARD: List[List[str]] = [
-    ['first_names', 'last_names'],
-    ['full_names', 'nicknames'],
-    ['ages', 'birthdays'],
+    ['first_name', 'last_name'],
+    ['full_name', 'nickname'],
+    ['age', 'birthday'],
     ['instruments'],
-    ['addresses', 'photo_file_ids']
+    ['address', 'photo_file_id']
 ]
 
 # yapf: enable
@@ -162,7 +164,10 @@ def build_questions_hints_keyboard(
             button_row.append(button)
         if row:
             buttons.append(button_row)
-    buttons.append([InlineKeyboardButton(text=DONE, callback_data=DONE)])
+    buttons.append([
+        InlineKeyboardButton(text=ALL, callback_data=ALL),
+        InlineKeyboardButton(text=DONE, callback_data=DONE)
+    ])
     return InlineKeyboardMarkup(buttons)
 
 
