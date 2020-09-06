@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="components.types Module" href="components.types.html" />
-    <link rel="prev" title="components.helpers Module" href="components.helpers.html" /> 
+    <link rel="next" title="components.Question" href="components.question.html" />
+    <link rel="prev" title="components.Orchestra" href="components.orchestra.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,12 +95,20 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="akablas.html">AkaBlas components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="utils.html">Utility components</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Game related components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="components.attributemanager.html">components.attributemanager Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.gender.html">components.Gender</a></li>
 <li class="toctree-l2"><a class="reference internal" href="components.helpers.html">components.helpers Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.instruments.html">components.instruments Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.member.html">components.Member</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.orchestra.html">components.Orchestra</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">components.PicklableBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.question.html">components.Question</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.questioner.html">components.Questioner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.score.html">components.Score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.texts.html">components.texts Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="components.types.html">components.types Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.userscore.html">components.UserScore</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
@@ -153,7 +161,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="utils.html">Utility components</a> &raquo;</li>
+          <li><a href="components.html">Game related components</a> &raquo;</li>
         
       <li>components.PicklableBase</li>
     
@@ -178,42 +186,6 @@
             
   <div class="section" id="components-picklablebase">
 <h1>components.PicklableBase<a class="headerlink" href="#components-picklablebase" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="components.PicklableBase">
-<em class="property">class </em><code class="sig-prename descclassname">components.</code><code class="sig-name descname">PicklableBase</code><a class="headerlink" href="#components.PicklableBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>A base class for objects using locks for thread safety. All locks must have names ending on
-<code class="docutils literal notranslate"><span class="pre">_lock</span></code>.</p>
-<dl class="py method">
-<dt id="components.PicklableBase.__getstate__">
-<code class="sig-name descname">__getstate__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#components.PicklableBase.__getstate__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets called, when object is being pickled. Sets all variables ending on <code class="docutils literal notranslate"><span class="pre">_lock</span></code> to
-<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
-<p>Returns: The dictionary describing the current state of the object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="components.PicklableBase.__setstate__">
-<code class="sig-name descname">__setstate__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.PicklableBase.__setstate__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets called, when object is being un-pickled. Sets all variables ending on <code class="docutils literal notranslate"><span class="pre">_lock</span></code> to
-a new <a class="reference external" href="https://docs.python.org/3/library/threading.html#threading.Lock" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Lock</span></code></a> instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – The pickled state of the object as produced by <a class="reference internal" href="#components.PicklableBase.__getstate__" title="components.PicklableBase.__getstate__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getstate__()</span></code></a>.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -224,10 +196,10 @@ a new <a class="reference external" href="https://docs.python.org/3/library/thre
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="components.types.html" class="btn btn-neutral float-right" title="components.types Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="components.question.html" class="btn btn-neutral float-right" title="components.Question" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="components.helpers.html" class="btn btn-neutral float-left" title="components.helpers Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="components.orchestra.html" class="btn btn-neutral float-left" title="components.Orchestra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

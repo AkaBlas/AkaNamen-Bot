@@ -95,9 +95,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="akablas.html">AkaBlas components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Game related components</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Bot package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bot.ban.html">bot.ban Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.cancel_membership.html">bot.cancel_membership Module</a></li>
@@ -185,78 +183,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bot.inline">
-<span id="bot-inline-module"></span><h1>bot.inline Module<a class="headerlink" href="#module-bot.inline" title="Permalink to this headline">¶</a></h1>
-<p>This module contains functions for the inline mode.</p>
-<dl class="py data">
-<dt id="bot.inline.REQUEST_CONTACT">
-<code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">REQUEST_CONTACT</code><em class="property"> = 'contact_request {}'</em><a class="headerlink" href="#bot.inline.REQUEST_CONTACT" title="Permalink to this definition">¶</a></dt>
-<dd><p>Callback data for requesting the vCard of a member.
-Use as <code class="docutils literal notranslate"><span class="pre">REQUEST_CONTACT.format(user_id)</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py data">
-<dt id="bot.inline.REQUEST_CONTACT_PATTERN">
-<code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">REQUEST_CONTACT_PATTERN</code><em class="property"> = 'contact_request (\\d*)'</em><a class="headerlink" href="#bot.inline.REQUEST_CONTACT_PATTERN" title="Permalink to this definition">¶</a></dt>
-<dd><p>Callback data  pattern for requesting the vCard of a member.
-<code class="docutils literal notranslate"><span class="pre">context.match.group(1)</span></code> will be users id.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py data">
-<dt id="bot.inline.SEND_VCARD_HANDLER">
-<code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">SEND_VCARD_HANDLER</code><em class="property"> = &lt;telegram.ext.callbackqueryhandler.CallbackQueryHandler object&gt;</em><a class="headerlink" href="#bot.inline.SEND_VCARD_HANDLER" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handler used to send vCards on request.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.callbackqueryhandler.html#telegram.ext.CallbackQueryHandler" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.CallbackQueryHandler</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="bot.inline.search_users">
-<code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">search_users</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.inline.search_users" title="Permalink to this definition">¶</a></dt>
-<dd><p>Searches the orchestras members for a match of the inline query and answers the query.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="bot.inline.send_vcard">
-<code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">send_vcard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.inline.send_vcard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sends the vCard of a Member as requested by the keyboard attached to an inline query result.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
+  <div class="section" id="bot-inline-module">
+<h1>bot.inline Module<a class="headerlink" href="#bot-inline-module" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

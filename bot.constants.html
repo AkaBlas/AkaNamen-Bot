@@ -95,9 +95,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="akablas.html">AkaBlas components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Game related components</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Bot package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bot.ban.html">bot.ban Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.cancel_membership.html">bot.cancel_membership Module</a></li>
@@ -277,7 +275,7 @@ the inline mode should be displayed.</p>
 <dt id="bot.constants.ORCHESTRA_KEY">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">ORCHESTRA_KEY</code><em class="property"> = 'orchestra'</em><a class="headerlink" href="#bot.constants.ORCHESTRA_KEY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.bot_data[ORCHESTRA_KEY]</span></code> is expected to be an
-<a class="reference internal" href="components.orchestra.html#components.Orchestra" title="components.Orchestra"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Orchestra</span></code></a>.</p>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">components.Orchestra</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
@@ -289,7 +287,7 @@ the inline mode should be displayed.</p>
 <dt id="bot.constants.PENDING_REGISTRATIONS_KEY">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">PENDING_REGISTRATIONS_KEY</code><em class="property"> = 'pending_registrations'</em><a class="headerlink" href="#bot.constants.PENDING_REGISTRATIONS_KEY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.bot_data[PENDING_REGISTRATIONS_KEY]</span></code> is expected to be a dictionary of
-type Dict[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, List[<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a>]], where each entry represents a user
+type Dict[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, List[<code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code>]], where each entry represents a user
 registration request, which needs to be processed by the admin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>

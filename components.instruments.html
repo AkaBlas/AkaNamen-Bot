@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="components.Member" href="components.member.html" />
-    <link rel="prev" title="components.Gender" href="components.gender.html" /> 
+    <link rel="prev" title="components.helpers Module" href="components.helpers.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,15 +95,22 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="akablas.html">AkaBlas components</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="components.html">Game related components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="components.attributemanager.html">components.attributemanager Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="components.gender.html">components.Gender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.helpers.html">components.helpers Module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">components.instruments Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="components.member.html">components.Member</a></li>
 <li class="toctree-l2"><a class="reference internal" href="components.orchestra.html">components.Orchestra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.picklablebase.html">components.PicklableBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.question.html">components.Question</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.questioner.html">components.Questioner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.score.html">components.Score</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.texts.html">components.texts Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.types.html">components.types Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.userscore.html">components.UserScore</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="game.html">Game related components</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">Utility components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bot.html">Bot package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hosting.html">Hosting this bot</a></li>
@@ -154,7 +161,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="akablas.html">AkaBlas components</a> &raquo;</li>
+          <li><a href="components.html">Game related components</a> &raquo;</li>
         
       <li>components.instruments Module</li>
     
@@ -308,23 +315,27 @@ class inheritance. For example:</p>
 insensitive. The string will be compared to the string representation of the instrument.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Trumpet</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Trompete&#39;</span> <span class="c1"># True</span>
 <span class="n">Trumpet</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;trompete&#39;</span> <span class="c1"># True</span>
-<span class="n">Trupmet</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Saxophon&#39;</span> <span class="c1"># False</span>
+<span class="n">Trumpet</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Saxophon&#39;</span> <span class="c1"># False</span>
 </pre></div>
 </div>
 <dl class="py method">
 <dt id="components.instruments.Instrument.from_string">
-<em class="property">static </em><code class="sig-name descname">from_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.instruments.Instrument.from_string" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">from_string</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">allowed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.instruments.Instrument.from_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a string representation or an AkaBlas-style abbreviation of an instrument, this will
 return a corresponding <code class="xref py py-class docutils literal notranslate"><span class="pre">components.Instrument</span></code> instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The string.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The string.</p></li>
+<li><p><strong>allowed</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]]) – A list of allowed instruments. If the return value would not be in this list,
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> ist returned.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If the abbreviation is not known.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#components.instruments.Instrument" title="components.instruments.Instrument"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -414,7 +425,7 @@ return a corresponding <code class="xref py py-class docutils literal notranslat
         <a href="components.member.html" class="btn btn-neutral float-right" title="components.Member" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="components.gender.html" class="btn btn-neutral float-left" title="components.Gender" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="components.helpers.html" class="btn btn-neutral float-left" title="components.helpers Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
