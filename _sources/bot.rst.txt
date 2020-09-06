@@ -1,5 +1,5 @@
-Bot package
-===========
+Frontend: Bot package
+=====================
 
 .. toctree::
 
