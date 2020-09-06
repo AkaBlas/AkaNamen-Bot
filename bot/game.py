@@ -278,7 +278,7 @@ def question_attributes(update: Update, context: CallbackContext) -> str:
             current_selection[entry] = not current_value
 
         message.edit_reply_markup(reply_markup=build_questions_hints_keyboard(
-            orchestra=orchestra, hint=True, current_selection=current_selection))
+            orchestra=orchestra, question=True, current_selection=current_selection))
 
         return QUESTION_ATTRIBUTES
     else:
