@@ -363,7 +363,7 @@ class TestAttributeManager:
         with pytest.raises(RuntimeError, match=f'currently not hintable for first_name'):
             am.build_question_with(bm)
 
-        for i in range(100):
+        for i in range(250):
             member = Member(i + 10,
                             first_name=random.choice(['1', '2', '3', '4', '5']),
                             last_name=random.choice(['a', 'b', 'c', 'd', 'e']))
