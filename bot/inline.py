@@ -8,7 +8,7 @@ from telegram import (Update, InlineQueryResultArticle, InputTextMessageContent,
 from telegram.constants import MAX_INLINE_QUERY_RESULTS
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
-from bot import ORCHESTRA_KEY, INLINE_HELP
+from bot import ORCHESTRA_KEY, INLINE_HELP, ADMIN_KEY
 
 REQUEST_CONTACT = 'contact_request {}'
 """:obj:`str`: Callback data for requesting the vCard of a member.
@@ -39,9 +39,11 @@ def search_users(update: Update, context: CallbackContext) -> None:
         results = []
     else:
         orchestra = context.bot_data[ORCHESTRA_KEY]
+        admin_id = context.bot_data[ADMIN_KEY]
         user_id = update.effective_user.id
         members = [
-            m for uid, m in orchestra.members.items() if m.allow_contact_sharing and uid != user_id
+            m for uid, m in orchestra.members.items()
+            if (m.allow_contact_sharing and uid != user_id) or user_id == admin_id
         ]
         sorted_members = sorted(members, key=lambda m: m.compare_full_name_to(query), reverse=True)
 
