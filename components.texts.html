@@ -184,8 +184,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="components-texts-module">
-<h1>components.texts Module<a class="headerlink" href="#components-texts-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-components.texts">
+<span id="components-texts-module"></span><h1>components.texts Module<a class="headerlink" href="#module-components.texts" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions for generating often needed texts.</p>
+<dl class="py data">
+<dt id="components.texts.PHOTO_OPTIONS">
+<code class="sig-prename descclassname">components.texts.</code><code class="sig-name descname">PHOTO_OPTIONS</code><em class="property"> = ['Oben links', 'Oben rechts', 'Unten links', 'Unten rechts']</em><a class="headerlink" href="#components.texts.PHOTO_OPTIONS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Poll options to present when the question attribute is
+<a class="reference internal" href="components.question.html#components.Question.PHOTO" title="components.Question.PHOTO"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Question.PHOTO</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="components.texts.question_text">
+<code class="sig-prename descclassname">components.texts.</code><code class="sig-name descname">question_text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em>, <em class="sig-param"><span class="n">question_attribute</span></em>, <em class="sig-param"><span class="n">hint_attribute</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">hint_value</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.texts.question_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives the question text for the question specified by the parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The orchestra member with the correct answer.</p></li>
+<li><p><strong>question_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The attribute that is asked for. One of
+<a class="reference internal" href="components.question.html#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Question.SUPPORTED_ATTRIBUTES</span></code></a>.</p></li>
+<li><p><strong>hint_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The attribute to give as a hint.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – Whether this is a multiple choice question. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
+<li><p><strong>hint_value</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – Optional. A specific value to use as hint. Useful if the hint attribute is a
+list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 

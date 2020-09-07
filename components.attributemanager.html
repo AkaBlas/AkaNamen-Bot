@@ -184,8 +184,486 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="components-attributemanager-module">
-<h1>components.attributemanager Module<a class="headerlink" href="#components-attributemanager-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-components.attributemanager">
+<span id="components-attributemanager-module"></span><h1>components.attributemanager Module<a class="headerlink" href="#module-components.attributemanager" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the classes for attributes.</p>
+<dl class="py class">
+<dt id="components.attributemanager.AttributeManager">
+<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">AttributeManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></p>
+<p>A class to keep track on a specific attribute of <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instances and
+what questions can be asked based on it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Instances of this class are comparable by means of equality by <a class="reference internal" href="#components.attributemanager.AttributeManager.description" title="components.attributemanager.AttributeManager.description"><code class="xref py py-attr docutils literal notranslate"><span class="pre">description</span></code></a>. They
+are also comparable to strings by the same definition.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If :meth:get_members_attribute returns a list, it will <em>not</em> be treated as a single value
+but instead as the member having multiple values for this attribute.</p>
+</div>
+<dl class="py attribute">
+<dt id="components.attributemanager.AttributeManager.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#components.attributemanager.AttributeManager.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A description of the attribute the instance manages.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.attributemanager.AttributeManager.questionable_attributes">
+<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.AttributeManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+manages attributes, which are available as questions for the attribute this instance
+manages.</p>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
+<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+manages attributes, which are available as questions for the attribute this instance
+manages.</p></li>
+<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <code class="docutils literal notranslate"><span class="pre">None</span></code>]]]) – <p>A callable that extracts the attribute managed by this class from
+a <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instance. Defaults to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">member</span><span class="p">:</span> <span class="n">member</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+</pre></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.available_members">
+<em class="property">property </em><code class="sig-name descname">available_members</code><a class="headerlink" href="#components.attributemanager.AttributeManager.available_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the members that have the attribute managed by this instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.FrozenSet" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenSet</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.build_question_with">
+<code class="sig-name descname">build_question_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager">components.attributemanager.AttributeManager</a></span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="p">:</span> <span class="n">Literal<span class="p">[</span>False<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Member<span class="p">, </span>AttributeType<span class="p">, </span>Union<span class="p">[</span>Any<span class="p">, </span>List<span class="p">[</span>Any<span class="p">]</span><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#components.attributemanager.AttributeManager.build_question_with" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">build_question_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager">components.attributemanager.AttributeManager</a></span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="p">:</span> <span class="n">Literal<span class="p">[</span>True<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Member<span class="p">, </span>AttributeType<span class="p">, </span>Tuple<span class="p">[</span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></dt>
+<dd><p>Builds a question where this instance is serving as hint and <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code>
+servers as question. For multiple choice questions the output is a 4-tuple of</p>
+<ol class="arabic simple">
+<li><p>The member serving as hint</p></li>
+<li><p>The attribute to be given as hint</p></li>
+<li><p>The attributes to be given as options for the answer</p></li>
+<li><p>The index of the correct answer.</p></li>
+</ol>
+<p>For free text questions, the output is a 3-tuple of</p>
+<ol class="arabic simple">
+<li><p>The member serving as hint</p></li>
+<li><p>The attribute to be given as hint</p></li>
+<li><p>The correct answer/a list of correct answers.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as question.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is not a valid question for this instance in
+    general</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is currently not questionable for this
+    instance</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[Tuple[<a class="reference internal" href="components.member.html#components.Member" title="components.Member">Member</a>, AttributeType, Tuple[Any, Any, Any, Any], <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>], Tuple[<a class="reference internal" href="components.member.html#components.Member" title="components.Member">Member</a>, AttributeType, Any]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.distinct_values_for_member">
+<code class="sig-name descname">distinct_values_for_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an attribute manager and a member from it’s available members, this returns a set
+of the distinct attribute values appearing across the members <code class="docutils literal notranslate"><span class="pre">m</span></code> in
+<a class="reference internal" href="#components.attributemanager.AttributeManager.available_members" title="components.attributemanager.AttributeManager.available_members"><code class="xref py py-attr docutils literal notranslate"><span class="pre">available_members</span></code></a> who satisfy:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">self.members_share_attribute(member,</span> <span class="pre">m)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">attribute_manager.members_share_attribute(member,</span> <span class="pre">m)</span></code></p></li>
+</ol>
+<p>If <code class="docutils literal notranslate"><span class="pre">self.get_members_attribute(member)</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, will just return an empty set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as hint.</p></li>
+<li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Set[AttributeType]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.draw_hint_member">
+<code class="sig-name descname">draw_hint_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.draw_hint_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws a member to build a question for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>) – The manager describing the attribute serving as question.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is not a valid question for this instance in
+    general</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is currently not questionable for this
+    instance</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.draw_question_attributes">
+<code class="sig-name descname">draw_question_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.draw_question_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws question attributes for the given member. The first output is a 4-tuple of the
+drawn options. The second output is the index of the correct answer, i.e. the attribute
+of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>) – The manager describing the attribute serving as hint.</p></li>
+<li><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member that defines the correct answer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[~AttributeType, ~AttributeType, ~AttributeType, ~AttributeType], <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.get_members_attribute">
+<code class="sig-name descname">get_members_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.get_members_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives the attribute of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code> that is managed by this instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.is_hintable_with">
+<code class="sig-name descname">is_hintable_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.is_hintable_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the attribute managed by this instance can be used as hint where the question is the
+attribute managed by <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>) – The manager describing the attribute serving as question.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.is_hintable_with_member">
+<code class="sig-name descname">is_hintable_with_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.is_hintable_with_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the given members attribute managed by this instance can be used as hint where the
+question is the attribute managed by <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as question.</p></li>
+<li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.kick_member">
+<code class="sig-name descname">kick_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.kick_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kicks a member, if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member to kick.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.members_share_attribute">
+<code class="sig-name descname">members_share_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member1</span></em>, <em class="sig-param"><span class="n">member2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.members_share_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if <code class="xref py py-attr docutils literal notranslate"><span class="pre">member1</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">member2</span></code> share the attribute described by this
+instance. This usually means a check by equality instead of the case, where the attribute
+is given by a list. In this case, <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> is returned, if the lists have at least one
+common element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>member1</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – Member 1.</p></li>
+<li><p><strong>member2</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – Member 2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.register_member">
+<code class="sig-name descname">register_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.register_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a new member.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Copies the member so changes to the instance wont directly affect the orchestra.
+Use <a class="reference internal" href="#components.attributemanager.AttributeManager.update_member" title="components.attributemanager.AttributeManager.update_member"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update_member()</span></code></a> to update the information about this member.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The new member</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.unique_attributes_of">
+<code class="sig-name descname">unique_attributes_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.unique_attributes_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a member this returns a list of attribute values managed by this instance that only
+appear for that member, making it the unique correct answer for it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[AttributeType]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.AttributeManager.update_member">
+<code class="sig-name descname">update_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.update_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the information of a member.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As <code class="xref py py-meth docutils literal notranslate"><span class="pre">register_user()</span></code>, this will copy the
+member. To update the information again, call this method again.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member with new information.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.attributemanager.ChangingAttributeManager">
+<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">ChangingAttributeManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.attributemanager.AttributeManager</span></code></a></p>
+<p>Subclass of <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a> that updates it’s members attributes once a day. This is
+needed, for attributes like age, which can change on a daily basis.</p>
+<dl class="py attribute">
+<dt id="components.attributemanager.ChangingAttributeManager.description">
+<code class="sig-name descname">description</code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A description of the attribute the instance manages.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="components.attributemanager.ChangingAttributeManager.questionable_attributes">
+<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+manages attributes, which are available as questions for the attribute this instance
+manages.</p>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
+<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+manages attributes, which are available as questions for the attribute this instance
+manages.</p></li>
+<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <code class="docutils literal notranslate"><span class="pre">None</span></code>]]]) – <p>A callable that extracts the attribute managed by this class from
+a <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instance. Defaults to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">member</span><span class="p">:</span> <span class="n">member</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+</pre></div>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="components.attributemanager.FirstNameManager">
+<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">FirstNameManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">questionable_attributes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.FirstNameManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.attributemanager.AttributeManager</span></code></a></p>
+<p>Subclass of <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a> for first names. This is needed, as the gender of a
+member needs to be taken into account.</p>
+<dl class="py attribute">
+<dt id="components.attributemanager.FirstNameManager.questionable_attributes">
+<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.FirstNameManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+manages attributes, which are available as questions for the attribute this instance
+manages.</p>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+manages attributes, which are available as questions for the attribute this instance
+manages.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="components.attributemanager.FirstNameManager.available_female_members">
+<em class="property">property </em><code class="sig-name descname">available_female_members</code><a class="headerlink" href="#components.attributemanager.FirstNameManager.available_female_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the female members that have the attribute managed by this instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.FrozenSet" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenSet</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.FirstNameManager.available_male_members">
+<em class="property">property </em><code class="sig-name descname">available_male_members</code><a class="headerlink" href="#components.attributemanager.FirstNameManager.available_male_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the male members that have the attribute managed by this instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.FrozenSet" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenSet</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.FirstNameManager.available_members">
+<em class="property">property </em><code class="sig-name descname">available_members</code><a class="headerlink" href="#components.attributemanager.FirstNameManager.available_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the members of both genders that have the attribute managed by this instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.FrozenSet" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenSet</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.FirstNameManager.distinct_values_for_member">
+<code class="sig-name descname">distinct_values_for_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.FirstNameManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an attribute manager and a member from it’s available members, this returns a set
+of the distinct attribute values appearing across the members <code class="docutils literal notranslate"><span class="pre">m</span></code> in
+<a class="reference internal" href="#components.attributemanager.FirstNameManager.available_members" title="components.attributemanager.FirstNameManager.available_members"><code class="xref py py-attr docutils literal notranslate"><span class="pre">available_members</span></code></a> who satisfy:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">self.members_share_attribute(member,</span> <span class="pre">m)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">attribute_manager.members_share_attribute(member,</span> <span class="pre">m)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">m</span></code> has the same gender as <code class="docutils literal notranslate"><span class="pre">member</span></code></p></li>
+</ol>
+<p>If <code class="docutils literal notranslate"><span class="pre">self.get_members_attribute(member)</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a> or has no gender, will just return
+an empty set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as hint.</p></li>
+<li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Set[AttributeType]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.FirstNameManager.kick_member">
+<code class="sig-name descname">kick_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.FirstNameManager.kick_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kicks a member, if present.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member to kick.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.FirstNameManager.register_member">
+<code class="sig-name descname">register_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.FirstNameManager.register_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a new member.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Copies the member so changes to the instance wont directly affect the orchestra.
+Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">update_member()</span></code> to update the information about this member.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The new member</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.attributemanager.FirstNameManager.unique_attributes_of">
+<code class="sig-name descname">unique_attributes_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.FirstNameManager.unique_attributes_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a member this returns a list of attribute values managed by this instance that only
+appear for that member, making it the unique correct answer for it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[AttributeType]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

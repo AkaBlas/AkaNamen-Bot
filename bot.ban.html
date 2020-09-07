@@ -183,8 +183,139 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="bot-ban-module">
-<h1>bot.ban Module<a class="headerlink" href="#bot-ban-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-bot.ban">
+<span id="bot-ban-module"></span><h1>bot.ban Module<a class="headerlink" href="#module-bot.ban" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions for banning users.</p>
+<dl class="py data">
+<dt id="bot.ban.BANNING_PATTERN">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">BANNING_PATTERN</code><em class="property"> = '.*ID:(\\d*)'</em><a class="headerlink" href="#bot.ban.BANNING_PATTERN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pattern to extract the ID to be banned in the <a class="reference internal" href="#bot.ban.CONFIRMATION" title="bot.ban.CONFIRMATION"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CONFIRMATION</span></code></a> state.
+<code class="docutils literal notranslate"><span class="pre">context.matches.group(1)</span></code> will be the id (as string).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>obj</p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p><cite>str</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt id="bot.ban.CONFIRMATION">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">CONFIRMATION</code><em class="property"> = 'CONFIRMATION'</em><a class="headerlink" href="#bot.ban.CONFIRMATION" title="Permalink to this definition">¶</a></dt>
+<dd><p>State of the conversation in which the cancellation is to be confirmed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt id="bot.ban.CONFIRMATION_TEXT">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">CONFIRMATION_TEXT</code><em class="property"> = 'Hinfort! Garstiges Gesindel!'</em><a class="headerlink" href="#bot.ban.CONFIRMATION_TEXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The text used to confirm the ban.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt id="bot.ban.SELECTING_USER">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">SELECTING_USER</code><em class="property"> = 'SELECTING_USER'</em><a class="headerlink" href="#bot.ban.SELECTING_USER" title="Permalink to this definition">¶</a></dt>
+<dd><p>State of the conversation in which the user to ban is selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.ban.ask_for_confirmation">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">ask_for_confirmation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.ban.ask_for_confirmation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asks the admin for confirmation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.ban.build_banning_handler">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">build_banning_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">admin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.ban.build_banning_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a handler used to ban members, which is accessible only for the admin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>admin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The admins ID</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ConversationHandler</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.ban.cancel_banning">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">cancel_banning</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.ban.cancel_banning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancels the banning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.ban.confirm">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">confirm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.ban.confirm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the member, bans it permanently and informs both the admin and the member.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.ban.select_user">
+<code class="sig-prename descclassname">bot.ban.</code><code class="sig-name descname">select_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.ban.select_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asks the admin which user is to be banned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 

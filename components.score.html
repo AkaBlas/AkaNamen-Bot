@@ -186,6 +186,59 @@
             
   <div class="section" id="components-score">
 <h1>components.Score<a class="headerlink" href="#components-score" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="components.Score">
+<em class="property">class </em><code class="sig-prename descclassname">components.</code><code class="sig-name descname">Score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">answers</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">correct</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">member</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A single score count. Scores are comparable, i.e. <code class="docutils literal notranslate"><span class="pre">score_1</span> <span class="pre">==</span> <span class="pre">score_2</span></code> if and only if the
+<a class="reference internal" href="#components.Score.answers" title="components.Score.answers"><code class="xref py py-attr docutils literal notranslate"><span class="pre">answers</span></code></a> and <a class="reference internal" href="#components.Score.correct" title="components.Score.correct"><code class="xref py py-attr docutils literal notranslate"><span class="pre">correct</span></code></a> attributes are equal. Moreover, scores can be evaluated as
+boolean, where <code class="docutils literal notranslate"><span class="pre">bool(score)</span> <span class="pre">==</span> <span class="pre">True</span></code> if <a class="reference internal" href="#components.Score.answers" title="components.Score.answers"><code class="xref py py-attr docutils literal notranslate"><span class="pre">answers</span></code></a> is greater than zero. Finally, scores
+are ordered: <code class="docutils literal notranslate"><span class="pre">score_1</span> <span class="pre">&lt;</span> <span class="pre">score_2</span></code>, if <code class="docutils literal notranslate"><span class="pre">score_1</span></code> has a smaller <a class="reference internal" href="#components.Score.ratio" title="components.Score.ratio"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ratio</span></code></a> than <cite>score_2</cite>,
+or, if the ratios coincide, has fewer recorded answers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>answers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The number of answers that were given. Defaults to zero.</p></li>
+<li><p><strong>correct</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The number of answers that were correct. Defaults to zero.</p></li>
+<li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member this score is associated with.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="components.Score.answers">
+<em class="property">property </em><code class="sig-name descname">answers</code><a class="headerlink" href="#components.Score.answers" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of answers that were given.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Score.correct">
+<em class="property">property </em><code class="sig-name descname">correct</code><a class="headerlink" href="#components.Score.correct" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of answers that were correct.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Score.ratio">
+<em class="property">property </em><code class="sig-name descname">ratio</code><a class="headerlink" href="#components.Score.ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ratio of given and correct answers in percentage with two decimal places.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
