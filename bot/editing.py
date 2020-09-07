@@ -83,10 +83,9 @@ TEXTS: Dict[str, str] = {
                'kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe unten.',
     },
     INSTRUMENTS: 'Die Instrumente, die Du aktuell spielst, sind unten markiert. Um '
-                 'die Auswahl zu ändern, klicke auf die Instrumente.\n\nBitte wähle nur eine '
-                 'Instrumentengruppe <i>oder</i> ein speziellen Instrument aus also z.B. nicht '
-                 '<i>Altsaxophon</i> und <i>Saxophon</i> und <i>Holzblasinstrument</i>\n\nWenn '
-                 'Du fertig bist, klicke unten auf <i>Weiter</i>.',
+                 'die Auswahl zu ändern, klicke auf die Instrumente.\n\nDu kannst auch mehrere '
+                 'Instrumente auswählen. Bitte mach das nur, wenn Du sie auch alle regelmäßig '
+                 'bei AkaBlas spielst. 😉\n\nWenn Du fertig bist, klicke unten auf <i>Weiter</i>.',
     ALLOW_CONTACT_SHARING: 'Du kannst entscheiden, '
                            'ob andere AkaBlasen, die auch den AkaNamen-Bot nutzen, Deine Daten '
                            'über diesen abrufen dürfen. Deine aktuelle Einstellung ist: {}. '
@@ -132,8 +131,10 @@ PHONE_NUMBER_KEYBOARD = InlineKeyboardMarkup([[
     InlineKeyboardButton(text='Löschen', callback_data=DELETE)
 ]])
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for selecting a gender."""
-ADDRESS_CONFIRMATION_KEYBOARD = InlineKeyboardMarkup.from_button(
-    InlineKeyboardButton(text=CORRECT, callback_data=CORRECT))
+ADDRESS_CONFIRMATION_KEYBOARD = InlineKeyboardMarkup.from_row([
+    InlineKeyboardButton(text=CORRECT, callback_data=CORRECT),
+    InlineKeyboardButton(text='Löschen', callback_data=DELETE)
+])
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for confirming the address."""
 SELECTION_KEYBOARD = InlineKeyboardMarkup([[
     InlineKeyboardButton('Vorname', callback_data=FIRST_NAME),
@@ -257,12 +258,9 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
         text = TEXTS[data].format(member[data] or "-")
 
         if data == INSTRUMENTS:
-            if member.instruments:
-                current_selection = {i: True for i in member.instruments}
-                reply_markup = build_instruments_keyboard(current_selection=current_selection)
-                text = TEXTS[data].format(str(i) for i in member.instruments)
-            else:
-                text = TEXTS[data].format("-")
+            current_selection = {i: True for i in member.instruments} if member.instruments else {}
+            reply_markup = build_instruments_keyboard(current_selection=current_selection)
+            text = TEXTS[data].format(member.instruments_str or '-')
         elif data == DATE_OF_BIRTH:
             text = TEXTS[DATE_OF_BIRTH].format(
                 member.date_of_birth.strftime('%d.%m.%Y') if member.date_of_birth else "-")
@@ -371,6 +369,8 @@ def date_of_birth(update: Update, context: CallbackContext) -> str:
                                       'Format <i>DD.MM.JJJJ</i> ein.')
             return DATE_OF_BIRTH
     else:
+        if update.callback_query.data == DELETE:
+            member.date_of_birth = None
         update.callback_query.answer()
         msg = update.callback_query.edit_message_text(text=TEXTS[MENU].format(member.to_str()),
                                                       reply_markup=SELECTION_KEYBOARD)
@@ -630,5 +630,6 @@ EDITING_HANDLER = ConversationHandler(
         ],
         ALLOW_CONTACT_SHARING: [CallbackQueryHandler(allow_contact_sharing)],
     },
-    fallbacks=[])
+    fallbacks=[],
+    allow_reentry=True)
 """:class:`telegram.ext.ConversationHandler`: Handler used to allow users to change their data."""
