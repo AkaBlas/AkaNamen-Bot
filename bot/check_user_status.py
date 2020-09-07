@@ -27,17 +27,16 @@ def check_users(context: CallbackContext) -> None:
         except Unauthorized:
             blocked_users.append(uid)
 
-    blocked_users_text = []
-    for uid in blocked_users:
-        member = orchestra.members[uid]
-        blocked_users_text.append(member.full_name)
-        orchestra.kick_member(member)
-
-    insert_text = '\n'.join(blocked_users_text)
-    text = 'Seit der letzten Überprüfung haben die folgenden AkaBlasen den Bot blockiert:\n\n' \
-           f'{insert_text}\n\nSie wurden aus dem digitalen Orchester gelöscht.'
-
     if blocked_users:
+        blocked_users_text = []
+        for uid in blocked_users:
+            member = orchestra.members[uid]
+            blocked_users_text.append(f'Name:{member.full_name or "-"}, ID: {member.user_id}')
+            orchestra.kick_member(member)
+
+        insert_text = '\n'.join(blocked_users_text)
+        text = ('Seit der letzten Überprüfung haben die folgenden AkaBlasen den Bot blockiert:\n\n'
+                f'{insert_text}\n\nSie wurden aus dem digitalen Orchester gelöscht.')
         context.bot.send_message(chat_id=context.bot_data[ADMIN_KEY], text=text)
 
 
