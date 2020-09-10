@@ -42,7 +42,7 @@ class UserScore(PicklableBase):
         with self._high_score_lock:
             return self._high_score[date]
 
-    def add_to_score(self, answers: int, correct: int, date: dt.date = dt.date.today()) -> None:
+    def add_to_score(self, answers: int, correct: int, date: dt.date = None) -> None:
         """
         Adds the given answers to the score of the given date.
 
@@ -56,6 +56,9 @@ class UserScore(PicklableBase):
         """
         if correct > answers:
             raise ValueError('There can\'t be more correct answers than overall answers!')
+
+        if date is None:
+            date = dt.date.today()
 
         score = self[date]
         score.answers += answers
