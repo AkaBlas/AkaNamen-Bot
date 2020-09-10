@@ -30,11 +30,30 @@ class TestUserScore:
             us.add_to_score(5, 10)
 
         score = us[today]
-        us.add_to_score(answers=5, correct=3, date=today)
+        us.add_to_score(answers=5, correct=3)
 
         assert score.answers == 5
         assert score.correct == 3
         assert not us[today + dt.timedelta(days=1)]
+
+    def test_add_to_score_tomorrow(self, us, monkeypatch):
+        today = dt.date.today()
+        tomorrow = today + dt.timedelta(days=1)
+
+        class MyDate:
+
+            def today(*args, **kwargs):  # pylint: disable=E0211
+                return tomorrow
+
+        monkeypatch.setattr(dt, 'date', MyDate)
+
+        score = us[tomorrow]
+        us.add_to_score(answers=5, correct=3)
+
+        assert score.answers == 5
+        assert score.correct == 3
+        assert not us[today]
+        assert not us[tomorrow + dt.timedelta(days=1)]
 
     def test_todays_score(self, us, today):
         us.add_to_score(answers=5, correct=3, date=today)

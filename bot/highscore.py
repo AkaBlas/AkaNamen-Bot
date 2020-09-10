@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """This module contains functions for showing the highscore."""
-from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton, ChatAction
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
 from bot import ORCHESTRA_KEY
@@ -17,6 +17,8 @@ MONTHS_SCORE = 'months highscore'
 """:obj:`str`: Callback data for the monthly score."""
 YEARS_SCORE = 'years highscore'
 """:obj:`str`: Callback data for the yearly score."""
+CURRENT = 'current highscore'
+""":obj:`str` Callback data for the current view."""
 
 HEADINGS = {
     OVERALL_SCORE: 'Highscore:',
@@ -38,21 +40,29 @@ BUTTON_TEXTS = {
 """Dict[str, str]: Mapping giving for each callback data a corresponding text for the keyboard.
 """
 
-# yapf: disable
-HIGHSCORE_KEYBOARD = InlineKeyboardMarkup([
-    [InlineKeyboardButton(BUTTON_TEXTS[OVERALL_SCORE], callback_data=OVERALL_SCORE)],
-    [
-        InlineKeyboardButton(BUTTON_TEXTS[TODAYS_SCORE], callback_data=TODAYS_SCORE),
-        InlineKeyboardButton(BUTTON_TEXTS[WEEKS_SCORE], callback_data=WEEKS_SCORE)
-    ],
-    [
-        InlineKeyboardButton(BUTTON_TEXTS[MONTHS_SCORE], callback_data=MONTHS_SCORE),
-        InlineKeyboardButton(BUTTON_TEXTS[YEARS_SCORE], callback_data=YEARS_SCORE)
-    ]])
-# yapf: enable
-"""
-:class:`telegram.InlineKeyboardMarkup`: Keyboard to switch between the different highscores.
-"""
+
+def build_keyboard(view: str = OVERALL_SCORE) -> InlineKeyboardMarkup:
+    """
+    Builds the keyboard for the highscore message.
+
+    Args:
+        view: One of attr:`OVERALL_SCORE`, attr:`TODAYS_SCORE`: 'Highscore von heute:',
+            attr:`WEEKS_SCORE`, attr:`MONTHS_SCORE` and attr:`YEARS_SCORE`. The corresponding
+            button will have :attr:`CURRENT` as data. Defaults to :attr:`OVERALL_SCORE`.
+    """
+    data = {k: k if k != view else CURRENT for k in BUTTON_TEXTS.keys()}
+    # yapf: disable
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton(BUTTON_TEXTS[OVERALL_SCORE], callback_data=data[OVERALL_SCORE])],
+        [
+            InlineKeyboardButton(BUTTON_TEXTS[TODAYS_SCORE], callback_data=data[TODAYS_SCORE]),
+            InlineKeyboardButton(BUTTON_TEXTS[WEEKS_SCORE], callback_data=data[WEEKS_SCORE])
+        ],
+        [
+            InlineKeyboardButton(BUTTON_TEXTS[MONTHS_SCORE], callback_data=data[MONTHS_SCORE]),
+            InlineKeyboardButton(BUTTON_TEXTS[YEARS_SCORE], callback_data=data[YEARS_SCORE])
+        ]])
+    # yapf: enable
 
 
 def build_text(orchestra: Orchestra, interval: str) -> str:
@@ -76,16 +86,20 @@ def show_highscore(update: Update, context: CallbackContext) -> None:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
-    context.bot.send_chat_action(update.effective_user.id, action=ChatAction.TYPING)
     orchestra = context.bot_data[ORCHESTRA_KEY]
 
     if update.message:
         update.message.reply_text(text=build_text(orchestra, 'overall'),
-                                  reply_markup=HIGHSCORE_KEYBOARD)
+                                  reply_markup=build_keyboard())
     else:
-        update.callback_query.answer()
-        update.effective_message.edit_text(text=build_text(orchestra, context.matches[0].group(1)),
-                                           reply_markup=HIGHSCORE_KEYBOARD)
+        data = update.callback_query.data
+        if data != CURRENT:
+            update.callback_query.answer()
+            update.effective_message.edit_text(text=build_text(orchestra,
+                                                               context.matches[0].group(1)),
+                                               reply_markup=build_keyboard(data))
+        else:
+            update.callback_query.answer(text='Wird bereits angezeigt.', show_alert=True)
 
 
 HIGHSCORE_HANDLER = CallbackQueryHandler(show_highscore, pattern=r'(\w*) highscore')
