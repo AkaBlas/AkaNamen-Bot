@@ -3,7 +3,7 @@ import random
 import datetime as dtm
 import pytest
 
-from components import Member, AttributeManager, FirstNameManager, Gender, Tuba, Trombone, \
+from components import Member, AttributeManager, NameManager, Gender, Tuba, Trombone, \
     Trumpet, Drums, Bassoon, Clarinet, Horn, Flute, ChangingAttributeManager
 
 
@@ -171,6 +171,9 @@ class TestAttributeManager:
         am.register_member(Member(5, instruments=[Tuba()]))
         assert am.unique_attributes_of(member) == [Trombone()]
 
+        bm = AttributeManager('age', [])
+        assert bm.unique_attributes_of(member) == []
+
     def test_available_members(self, member):
         am = AttributeManager(self.description, [])
 
@@ -211,9 +214,11 @@ class TestAttributeManager:
 
         assert not bm.is_hintable_with_member(
             am, Member(100, first_name='a', last_name='b'), multiple_choice=False)
-        assert bm.is_hintable_with_member(am,
-                                          Member(100, first_name='c', last_name='b'),
-                                          multiple_choice=False)
+
+        member = Member(100, first_name='c', last_name='b')
+        am.register_member(member)
+        bm.register_member(member)
+        assert bm.is_hintable_with_member(am, member, multiple_choice=False)
 
     @pytest.mark.parametrize('multiple_choice', [True, False])
     def test_is_hintable_with(self, dummy_am, multiple_choice):
@@ -470,29 +475,29 @@ class TestAttributeManager:
                 for m in bm.available_members)
 
 
-class TestFirstNameManager:
+class TestNameManager:
     description = 'first_name'
 
     def test_init(self, member, dummy_am):
-        am = FirstNameManager([dummy_am])
+        am = NameManager(self.description, [dummy_am])
         member.first_name = 'test'
         assert am.description == self.description
         assert am.questionable_attributes == [dummy_am]
         assert am.male_data == {}
         assert am.female_data == {}
-        assert am.get_members_attribute(member) is None
+        assert am.get_members_attribute(member) == 'test'
         member.gender = Gender.MALE
         assert am.get_members_attribute(member) == 'test'
 
     def test_register_member_without_attribute(self, member):
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
         am.register_member(member)
         assert am.male_data == {}
         assert am.female_data == {}
 
     def test_register_member_without_gender(self, member):
         member.first_name = 'test'
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
         am.register_member(member)
         assert am.male_data == {}
         assert am.female_data == {}
@@ -500,7 +505,7 @@ class TestFirstNameManager:
     def test_register_female_member(self, member):
         member.first_name = 'test1'
         member.gender = Gender.FEMALE
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
 
         am.register_member(member)
         assert am.male_data == {}
@@ -522,7 +527,7 @@ class TestFirstNameManager:
     def test_register_male_member(self, member):
         member.first_name = 'test1'
         member.gender = Gender.MALE
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
 
         am.register_member(member)
         assert am.female_data == {}
@@ -544,7 +549,7 @@ class TestFirstNameManager:
     def test_double_register(self, member):
         member.first_name = 'test'
         member.gender = Gender.MALE
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
 
         am.register_member(member)
         with pytest.raises(RuntimeError, match='Member is already registered.'):
@@ -554,7 +559,7 @@ class TestFirstNameManager:
     def test_kick_member(self, member, gender):
         member.first_name = 'test'
         member.gender = gender
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
 
         am.register_member(member)
         data = am.male_data if gender == Gender.MALE else am.female_data
@@ -567,7 +572,7 @@ class TestFirstNameManager:
         assert data == {}
 
     def test_distinct_values_for_member_no_attr(self, member):
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
         bm = AttributeManager('last_name', [])
 
         assert am.distinct_values_for_member(bm, Member(1)) == set()
@@ -575,8 +580,8 @@ class TestFirstNameManager:
     @pytest.mark.parametrize('gender,other_gender', [(Gender.MALE, Gender.FEMALE),
                                                      (Gender.FEMALE, Gender.MALE)])
     def test_distinct_values_for_member(self, member, gender, other_gender):
-        am = FirstNameManager([])
-        bm = AttributeManager('last_name', [])
+        am = NameManager(self.description, [])
+        bm = AttributeManager('last_name', [], gendered_questions=True)
 
         for i in range(10):
             am.register_member(Member(i, last_name='a', first_name='b', gender=gender))
@@ -609,11 +614,33 @@ class TestFirstNameManager:
         assert am.distinct_values_for_member(
             bm, Member(100, last_name='c', first_name='b', gender=other_gender)) == set()
 
+    @pytest.mark.parametrize('gender,other_gender', [(Gender.MALE, Gender.FEMALE),
+                                                     (Gender.FEMALE, Gender.MALE)])
+    def test_distinct_values_for_member_full_name(self, member, gender, other_gender):
+        am = NameManager('full_name', [])
+        bm = AttributeManager('instruments', [], gendered_questions=True)
+
+        for i in range(10):
+            am.register_member(Member(i, last_name='a', instruments=[Tuba()]))
+
+        for g in [None, gender, other_gender]:
+            assert am.distinct_values_for_member(
+                bm, Member(100, last_name='a', instruments=[Tuba()], gender=g)) == set()
+            assert am.distinct_values_for_member(
+                bm, Member(100, last_name='c', instruments=[Tuba()], gender=g)) == set()
+
+        am.register_member(Member(200, last_name='A', instruments=[Trumpet()]))
+        assert am.distinct_values_for_member(
+            bm, Member(200, last_name='A', instruments=[Trumpet()], gender=gender)) == set()
+        assert am.distinct_values_for_member(bm, Member(200,
+                                                        last_name='A',
+                                                        instruments=[Trumpet()])) == {'a'}
+
     def test_unique_attributes_of(self, member):
         member.first_name = 'test'
         member.gender = Gender.MALE
 
-        am = FirstNameManager([])
+        am = NameManager(self.description, [])
         am.register_member(member)
         am.register_member(Member(1, first_name='test', gender=Gender.MALE))
         assert am.unique_attributes_of(member) == []
@@ -626,40 +653,10 @@ class TestFirstNameManager:
         am.register_member(member)
         assert am.unique_attributes_of(member) == ['test1']
 
-    def test_available_male_members(self, member):
-        am = FirstNameManager([])
-
-        for i in range(10):
-            am.register_member(Member(user_id=i, first_name=str(i), gender=Gender.MALE))
-            am.register_member(Member(user_id=i + 10, first_name=str(i + 10),
-                                      gender=Gender.FEMALE))
-
-        assert am.available_male_members == frozenset(Member(i) for i in range(10))
-
-    def test_available_female_members(self, member):
-        am = FirstNameManager([])
-
-        for i in range(10):
-            am.register_member(Member(user_id=i, first_name=str(i), gender=Gender.FEMALE))
-            am.register_member(Member(user_id=i + 10, first_name=str(i + 10), gender=Gender.MALE))
-
-        assert am.available_female_members == frozenset(Member(i) for i in range(10))
-
-    def test_available_members(self, member):
-        am = FirstNameManager([])
-
-        for i in range(10):
-            am.register_member(
-                Member(user_id=i,
-                       first_name=str(i),
-                       gender=random.choice([Gender.MALE, Gender.FEMALE])))
-
-        assert am.available_members == frozenset(Member(i) for i in range(10))
-
     @pytest.mark.parametrize('gender', [Gender.MALE, Gender.FEMALE])
     def test_build_question(self, gender):
-        bm = FirstNameManager(['last_name'])
-        am = AttributeManager('last_name', ['first_name'])
+        bm = NameManager(self.description, ['last_name'])
+        am = AttributeManager('last_name', ['first_name'], gendered_questions=True)
 
         for i in range(4):
             member = Member(i, last_name='A', first_name='B', gender=gender)
@@ -694,10 +691,15 @@ class TestFirstNameManager:
                 for m in bm.available_members)
         assert attr == 'A'
         assert len(set(opts)) == 4
+        for o in opts:
+            if gender == Gender.MALE:
+                assert o in ['1', '2', '3', '4', '5', 'B']
+            else:
+                assert o in ['6', '7', '8', '9', '10', 'B']
 
     @pytest.mark.parametrize('gender', [Gender.MALE, Gender.FEMALE])
     def test_build_question_free_text(self, gender):
-        bm = FirstNameManager(['last_name'])
+        bm = NameManager(self.description, ['last_name'])
         am = AttributeManager('last_name', ['first_name'])
 
         for i in range(4):

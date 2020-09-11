@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """This module contains functions for generating often needed keyboards."""
+
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 from components import (Instrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
                         SopranoSaxophone, AltoSaxophone, TenorSaxophone, BaritoneSaxophone,
@@ -111,11 +112,12 @@ def parse_instruments_keyboard(keyboard: InlineKeyboardMarkup) -> Dict[Instrumen
     return current_selection
 
 
-def build_questions_hints_keyboard(
-        orchestra: Orchestra,
-        question: bool = False,
-        hint: bool = False,
-        current_selection: Optional[Dict[str, bool]] = None) -> InlineKeyboardMarkup:
+def build_questions_hints_keyboard(orchestra: Orchestra,
+                                   question: bool = False,
+                                   hint: bool = False,
+                                   current_selection: Optional[Dict[str, bool]] = None,
+                                   multiple_choice: bool = True,
+                                   allowed_hints: List[str] = None) -> InlineKeyboardMarkup:
     """
     Builds a :class:`telegram.InlineKeyboardMarkup` listing all questions that are up for
     selection for the given orchestra. The callback data for each button will equal its text.
@@ -129,6 +131,11 @@ def build_questions_hints_keyboard(
         current_selection: Optional. If passed, gives the current selection and the keyboard will
             reflect that selection state. If not present, all options will be deselected.
             A corresponding dictionary is returned e.g. by :meth:`parse_questions_hints_keyboard`.
+        multiple_choice: Optional. Whether the questions are supposed to be multiple choice or free
+            text. Defaults to :obj:`True`.
+        allowed_hints: Optional. Only relevant if :obj:`question` is :obj:`True`. If passed, in
+            this case only question attributes which are questionable for at least one of the
+            allowed hints will be listed in the keyboard.
 
     Note:
         Exactly one on :attr:`hint` and :attr:`question` must be :obj:`True`.
@@ -144,11 +151,15 @@ def build_questions_hints_keyboard(
 
     current_selection = current_selection or dict()
 
-    questionable = orchestra.questionable()
+    questionable = orchestra.questionable(multiple_choice=multiple_choice)
     if not questionable:
         raise RuntimeError('Orchestra currently has no questionable attributes.')
     hints = [q[0].description for q in questionable]
-    questions = [q[1].description for q in questionable]
+
+    if question and allowed_hints:
+        questions = [q[1].description for q in questionable if q[0] in allowed_hints]
+    else:
+        questions = [q[1].description for q in questionable]
 
     buttons = []
     for row in QUESTION_HINT_KEYBOARD:

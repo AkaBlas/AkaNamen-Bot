@@ -92,8 +92,10 @@ class Questioner:
                 raise ValueError(f'Unsupported question attribute {qa}.')
 
         # Filter input unsupported for the orchestras state
-        available_hints = [q[0] for q in self.orchestra.questionable()]
-        available_questions = [q[1] for q in self.orchestra.questionable()]
+        questionable = self.orchestra.questionable(self.multiple_choice)
+
+        available_hints = [q[0] for q in questionable]
+        available_questions = [q[1] for q in questionable]
         for ha in hint_attributes:
             if ha not in available_hints:
                 raise ValueError(f'Attribute {ha} not available as hint for this orchestra.')
@@ -102,12 +104,15 @@ class Questioner:
                 raise ValueError(f'Attribute {qa} not available as question for this orchestra.')
 
         if not hint_attributes:
-            hint_attributes = list(q[0].description for q in self.orchestra.questionable())
+            hint_attributes = list(q[0].description for q in questionable)
         if not question_attributes:
-            question_attributes = list(q[1].description for q in self.orchestra.questionable())
+            question_attributes = list(q[1].description for q in questionable)
 
-        if not hint_attributes or not question_attributes:
-            raise ValueError('hint_attributes and question_attributes must not be empty.')
+        # yapf: disable
+        if not any(
+                (ha, qa) in questionable for ha in hint_attributes for qa in question_attributes):
+            # yapf: enable
+            raise ValueError('No valid hint-question combination available.')
 
         self.hint_attributes = hint_attributes
         self.question_attributes = question_attributes
@@ -159,7 +164,7 @@ class Questioner:
         :attr:`orchestra` *and* is allowed for this questioner instance.
         """
         return [(h, q)
-                for (h, q) in self.orchestra.questionable()
+                for (h, q) in self.orchestra.questionable(self.multiple_choice)
                 if h in self.hint_attributes and q in self.question_attributes]
 
     def ask_question(self) -> None:

@@ -38,6 +38,8 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         questionable_attributes: A list of :class:`components.AttributeManager` instances that
             manages attributes, which are available as questions for the attribute this instance
             manages.
+        gendered_questions: Whether questions with tis attribute as hint should try to
+            list only members with the same gender as the hint member.
 
     Args:
         description: A description of the attribute the instance manages.
@@ -50,17 +52,20 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
             .. code:: python
 
                 lambda member: member[self.description]
+        gendered_questions: Optional. Whether questions with tis attribute as hint should try to
+            list only members with the same gender as the hint member. Defaults to :obj:`False`.
     """
 
-    def __init__(
-        self,
-        description: str,
-        questionable_attributes: List[Union[AttributeManager, str]],
-        get_members_attribute: Callable[['Member'], Optional[Union[AttributeType,
-                                                                   List[AttributeType]]]] = None
-    ) -> None:
+    def __init__(self,
+                 description: str,
+                 questionable_attributes: List[Union[AttributeManager, str]],
+                 get_members_attribute: Callable[['Member'],
+                                                 Optional[Union[AttributeType,
+                                                                List[AttributeType]]]] = None,
+                 gendered_questions: bool = False) -> None:
         self.description = description
         self.questionable_attributes = questionable_attributes
+        self.gendered_questions = gendered_questions
         self._data: MemberDict = defaultdict(set)
         self._lock = Lock()
 
@@ -98,7 +103,7 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
     def members_share_attribute(self, member1: Member, member2: Member) -> bool:
         """
         Checks if :attr:`member1` and :attr:`member2` share the attribute described by this
-        instance. This usually means a check by equality instead of the case, where the attribute
+        instance. This usually means a check by equality except in the case, where the attribute
         is given by a list. In this case, :obj:`True` is returned, if the lists have at least one
         common element.
 
@@ -192,6 +197,10 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         Given a member this returns a list of attribute values managed by this instance that only
         appear for that member, making it the unique correct answer for it.
 
+        Note:
+            This method is called *only* for requests for free text questions. Therefore subclasses
+            may decide to return something different from :meth:`get_members_attribute`.
+
         Args:
             member: The member.
         """
@@ -225,7 +234,7 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         if multiple_choice:
             return len(attribute_manager.distinct_values_for_member(self, member)) >= 3
         else:
-            return (attribute_manager.get_members_attribute(member) is not None
+            return (member in attribute_manager.available_members
                     and len(self.unique_attributes_of(member)) >= 1)
 
     def is_hintable_with(self,
@@ -242,11 +251,18 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         """
         if attribute_manager not in self.questionable_attributes:
             return False
-        if self.available_members.isdisjoint(attribute_manager.available_members):
-            return False
-        return any(
-            self.is_hintable_with_member(attribute_manager, m, multiple_choice=multiple_choice)
-            for m in self.available_members.intersection(attribute_manager.available_members))
+        if multiple_choice:
+            if self.available_members.isdisjoint(attribute_manager.available_members):
+                return False
+            return any(
+                self.is_hintable_with_member(attribute_manager, m, multiple_choice=multiple_choice)
+                for m in self.available_members.intersection(attribute_manager.available_members))
+        else:
+            if self.available_members.isdisjoint(attribute_manager.available_members):
+                return False
+            return any(
+                self.is_hintable_with_member(attribute_manager, m, multiple_choice=multiple_choice)
+                for m in self.available_members.intersection(attribute_manager.available_members))
 
     def draw_hint_member(self,
                          attribute_manager: AttributeManager,
@@ -378,151 +394,18 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         return f'AttributeManager({self.description})'
 
 
-class FirstNameManager(AttributeManager):
+class NameManager(AttributeManager):
     """
     Subclass of :class:`AttributeManager` for first names. This is needed, as the gender of a
     member needs to be taken into account.
-
-    Attributes:
-        questionable_attributes: A list of :class:`components.AttributeManager` instances that
-            manages attributes, which are available as questions for the attribute this instance
-            manages.
-
-    Args:
-        questionable_attributes: A list of :class:`components.AttributeManager` instances that
-            manages attributes, which are available as questions for the attribute this instance
-            manages.
-    """
-
-    def __init__(self, questionable_attributes: List[Union[AttributeManager, str]]) -> None:
-        super().__init__('first_name',
-                         questionable_attributes=questionable_attributes,
-                         get_members_attribute=self.get_first_name)
-        self.male_data: MemberDict = defaultdict(set)
-        self.female_data: MemberDict = defaultdict(set)
-
-    @staticmethod
-    def get_first_name(member: 'Member') -> Optional[str]:
-        return member.first_name if member.gender else None
-
-    def register_member(self, member: 'Member') -> None:
-        """
-        Registers a new member.
-
-        Note:
-            Copies the member so changes to the instance wont directly affect the orchestra.
-            Use :meth:`update_member` to update the information about this member.
-
-        Args:
-            member: The new member
-        """
-        if member in self.available_members:
-            raise RuntimeError('Member is already registered.')
-
-        new_member = copy(member)
-        attribute = self.get_members_attribute(new_member)
-        if not attribute:
-            return
-        with self._lock:
-            if new_member.gender == Gender.MALE:
-                self.male_data[attribute].add(new_member)
-            else:
-                self.female_data[attribute].add(new_member)
-
-    def kick_member(self, member: 'Member') -> None:
-        """
-        Kicks a member, if present.
-
-        Args:
-            member: The member to kick.
-        """
-        with self._lock:
-            for data in [self.female_data, self.male_data]:
-                for attr in list(data.keys()):
-                    data[attr].discard(member)
-                    # Make sure emtpy sets are deleted
-                    if len(data[attr]) == 0:
-                        data.pop(attr)
-
-    def distinct_values_for_member(self, attribute_manager: AttributeManager,
-                                   member: Member) -> Set[AttributeType]:
-        """
-        Given an attribute manager and a member from it's available members, this returns a set
-        of the distinct attribute values appearing across the members ``m`` in
-        :attr:`available_members` who satisfy:
-
-        1. ``not self.members_share_attribute(member, m)``
-        2. ``not attribute_manager.members_share_attribute(member, m)``
-        3. ``m`` has the same gender as ``member``
-
-        If ``self.get_members_attribute(member)`` is :obj:`None` or has no gender, will just return
-        an empty set.
-
-        Args:
-            attribute_manager: The manager describing the attribute serving as hint.
-            member: The member.
-        """
-        members_attribute = self.get_members_attribute(member)
-        if members_attribute is None:
-            return set()
-
-        data = self.male_data if member.gender is Gender.MALE else self.female_data
-        with self._lock:
-            return set(key for key in data if key != members_attribute and not any(
-                attribute_manager.members_share_attribute(member, m) for m in data[key]))
-
-    def unique_attributes_of(self, member: Member) -> List[AttributeType]:
-        """
-        Given a member this returns a list of attribute values managed by this instance that only
-        appear for that member, making it the unique correct answer for it.
-
-        Args:
-            member: The member.
-        """
-        attributes = self._gma_as_list(member)
-        if attributes is None:
-            return []
-        data = self.male_data if member.gender is Gender.MALE else self.female_data
-        other_data = self.female_data if member.gender is Gender.MALE else self.male_data
-        return [
-            attr for attr in attributes if len(data[attr].difference({member})) == 0 and (
-                attr not in other_data or len(other_data[attr].difference({member})) == 0)
-        ]
-
-    @property
-    def available_male_members(self) -> FrozenSet['Member']:
-        """
-        All the male members that have the attribute managed by this instance.
-        """
-        with self._lock:
-            return frozenset(set().union(*self.male_data.values()))  # type: ignore
-
-    @property
-    def available_female_members(self) -> FrozenSet['Member']:
-        """
-        All the female members that have the attribute managed by this instance.
-        """
-        with self._lock:
-            return frozenset(set().union(*self.female_data.values()))  # type: ignore
-
-    @property
-    def available_members(self) -> FrozenSet['Member']:
-        """
-        All the members of both genders that have the attribute managed by this instance.
-        """
-        return self.available_male_members.union(self.available_female_members)
-
-
-class ChangingAttributeManager(AttributeManager):
-    """
-    Subclass of :class:`AttributeManager` that updates it's members attributes once a day. This is
-    needed, for attributes like age, which can change on a daily basis.
 
     Attributes:
         description: A description of the attribute the instance manages.
         questionable_attributes: A list of :class:`components.AttributeManager` instances that
             manages attributes, which are available as questions for the attribute this instance
             manages.
+        gendered_questions: Whether questions with tis attribute as hint should try to
+            list only members with the same gender as the hint member.
 
     Args:
         description: A description of the attribute the instance manages.
@@ -535,18 +418,128 @@ class ChangingAttributeManager(AttributeManager):
             .. code:: python
 
                 lambda member: member[self.description]
+        gendered_questions: Optional. Whether questions with tis attribute as hint should try to
+            list only members with the same gender as the hint member. Defaults to :obj:`False`.
     """
 
-    def __init__(
-        self,
-        description: str,
-        questionable_attributes: List[Union[AttributeManager, str]],
-        get_members_attribute: Callable[['Member'], Optional[Union[AttributeType,
-                                                                   List[AttributeType]]]] = None
-    ) -> None:
+    def __init__(self,
+                 description: str,
+                 questionable_attributes: List[Union[AttributeManager, str]],
+                 get_members_attribute: Callable[['Member'],
+                                                 Optional[Union[AttributeType,
+                                                                List[AttributeType]]]] = None,
+                 gendered_questions: bool = False) -> None:
         super().__init__(description=description,
                          questionable_attributes=questionable_attributes,
-                         get_members_attribute=get_members_attribute)
+                         get_members_attribute=get_members_attribute,
+                         gendered_questions=gendered_questions)
+        self.male_data: MemberDict = defaultdict(set)
+        self.female_data: MemberDict = defaultdict(set)
+
+    def register_member(self, member: 'Member') -> None:
+        """
+        Registers a new member.
+
+        Note:
+            Copies the member so changes to the instance wont directly affect the orchestra.
+            Use :meth:`update_member` to update the information about this member.
+
+        Args:
+            member: The new member
+        """
+        super().register_member(member)
+
+        new_member = copy(member)
+        attribute = self.get_members_attribute(new_member)
+        if attribute and member.gender:
+            with self._lock:
+                if new_member.gender == Gender.MALE:
+                    self.male_data[attribute].add(new_member)
+                else:
+                    self.female_data[attribute].add(new_member)
+
+    def kick_member(self, member: 'Member') -> None:
+        """
+        Kicks a member, if present.
+
+        Args:
+            member: The member to kick.
+        """
+        super().kick_member(member)
+        with self._lock:
+            for data in [self.female_data, self.male_data]:
+                for attr in list(data.keys()):
+                    data[attr].discard(member)
+                    # Make sure emtpy sets are deleted
+                    if len(data[attr]) == 0:
+                        data.pop(attr)
+
+    def distinct_values_for_member(self, attribute_manager: AttributeManager,
+                                   member: Member) -> Set[AttributeType]:
+        """
+        If the member has a gender, this acts just like
+        :meth:`AttributeManager.distinct_values_for_member`. If it does not, an empty set is
+        returned.
+
+        Args:
+            attribute_manager: The manager describing the attribute serving as hint.
+            member: The member.
+        """
+        if attribute_manager.gendered_questions:
+            members_attribute = self.get_members_attribute(member)
+            if members_attribute is None or (member.first_name and member.gender is None):
+                return set()
+
+            if member.gender:
+                data = self.male_data if member.gender is Gender.MALE else self.female_data
+                with self._lock:
+                    return set(key for key in data if key != members_attribute and not any(
+                        attribute_manager.members_share_attribute(member, m) for m in data[key]))
+            else:
+                return super().distinct_values_for_member(attribute_manager, member)
+        else:
+            return super().distinct_values_for_member(attribute_manager, member)
+
+
+class ChangingAttributeManager(AttributeManager):
+    """
+    Subclass of :class:`AttributeManager` that updates it's members attributes once a day. This is
+    needed, for attributes like age, which can change on a daily basis.
+
+    Attributes:
+        description: A description of the attribute the instance manages.
+        questionable_attributes: A list of :class:`components.AttributeManager` instances that
+            manages attributes, which are available as questions for the attribute this instance
+            manages.
+        gendered_questions: Whether questions with tis attribute as hint should try to
+            list only members with the same gender as the hint member.
+
+    Args:
+        description: A description of the attribute the instance manages.
+        questionable_attributes: A list of :class:`components.AttributeManager` instances that
+            manages attributes, which are available as questions for the attribute this instance
+            manages.
+        get_members_attribute: A callable that extracts the attribute managed by this class from
+            a :class:`components.Member` instance. Defaults to
+
+            .. code:: python
+
+                lambda member: member[self.description]
+        gendered_questions: Optional. Whether questions with tis attribute as hint should try to
+            list only members with the same gender as the hint member. Defaults to :obj:`False`.
+    """
+
+    def __init__(self,
+                 description: str,
+                 questionable_attributes: List[Union[AttributeManager, str]],
+                 get_members_attribute: Callable[['Member'],
+                                                 Optional[Union[AttributeType,
+                                                                List[AttributeType]]]] = None,
+                 gendered_questions: bool = False) -> None:
+        super().__init__(description=description,
+                         questionable_attributes=questionable_attributes,
+                         get_members_attribute=get_members_attribute,
+                         gendered_questions=gendered_questions)
         self._cache_date: Optional[dtm.date] = None
 
     @property

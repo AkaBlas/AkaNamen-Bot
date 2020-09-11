@@ -10,7 +10,7 @@ from .instruments import (Instrument, WoodwindInstrument, BrassInstrument, HighB
                           BaritoneSaxophone, Euphonium, Baritone, BaritoneHorn, Trombone, Tuba,
                           Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Conductor)
 from .gender import Gender
-from .attributemanager import AttributeManager, FirstNameManager, ChangingAttributeManager
+from .attributemanager import AttributeManager, NameManager, ChangingAttributeManager
 from .score import Score
 from .userscore import UserScore
 from .member import Member
@@ -53,7 +53,7 @@ __all__ = [
     'Gender',
     'Orchestra',
     'AttributeManager',
-    'FirstNameManager',
+    'NameManager',
     'ChangingAttributeManager',
     # Game related
     'UserScore',

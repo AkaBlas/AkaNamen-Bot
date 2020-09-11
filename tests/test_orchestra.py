@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from uuid import uuid4
+
 import pytest
 import datetime as dt
 from geopy import Photon
@@ -257,3 +259,27 @@ class TestOrchestra:
         orchestra.register_member(
             Member(9, first_name='Dong', last_name='Silver', gender=Gender.MALE))
         assert orchestra.questionable() == [('last_name', 'first_name')]
+
+    def test_questionable_multiple_choice_first_name(self, orchestra):
+        assert orchestra.questionable() == []
+        orchestra.register_member(Member(1, first_name='John', last_name='test'))
+        orchestra.register_member(Member(5, first_name='Mike', last_name='test'))
+        orchestra.register_member(Member(6, first_name='Brad', last_name='test'))
+        orchestra.register_member(Member(7, first_name='Marc', last_name='test'))
+        orchestra.register_member(Member(8, first_name='Joe', last_name='test'))
+        assert orchestra.questionable() == []
+        assert orchestra.questionable(multiple_choice=False) == [('first_name', 'last_name')]
+
+    def test_questionable_multiple_choice_photo(self, orchestra):
+        assert orchestra.questionable() == []
+        orchestra.register_member(Member(1, first_name='John', photo_file_id=str(uuid4())))
+        orchestra.register_member(Member(5, first_name='Mike', photo_file_id=str(uuid4())))
+        orchestra.register_member(Member(6, first_name='Brad', photo_file_id=str(uuid4())))
+        orchestra.register_member(Member(7, first_name='Marc', photo_file_id=str(uuid4())))
+        orchestra.register_member(Member(8, first_name='Joe', photo_file_id=str(uuid4())))
+        assert orchestra.questionable() == [('first_name', 'photo_file_id'),
+                                            ('full_name', 'photo_file_id')]
+        assert orchestra.questionable(multiple_choice=False) == [('first_name', 'photo_file_id'),
+                                                                 ('full_name', 'photo_file_id'),
+                                                                 ('photo_file_id', 'first_name'),
+                                                                 ('photo_file_id', 'full_name')]
