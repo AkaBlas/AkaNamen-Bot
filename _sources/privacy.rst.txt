@@ -17,6 +17,7 @@ Gespeichert werden
 * Handynummer
 
 Alle diese Angaben sind freiwillig.
+Außerdem werden vom AkaNamen-Bot ein paar Nutzungsstatistiken angelegt, die allerdings nur von Hirsch eingesehen werden können.
 
 Wo/wie werden diese Daten gespeichert?
 --------------------------------------
