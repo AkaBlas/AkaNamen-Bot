@@ -437,7 +437,7 @@ False: Otherwise.</p>
 
 <dl class="py data">
 <dt id="bot.game.TEXTS">
-<code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">TEXTS</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><em class="property"> = {'HINT_ATTRIBUTES': 'Juhu, ein Spiel! Bitte wähle zunächst aus, welche Eigenschaften eines AkaBlasen als Hinweis gegeben werden können. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.', 'Multiple Choice': 'Schließlich kannst Du noch aussuchen, ob Du Multiple-Choice- oder Freitext-Fragen bekommst.\n\n&lt;i&gt;⚠️ Hinweis:&lt;/i&gt; Den Freitext-Modus solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen dazu gibt es in den &lt;a href=&quot;https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war-was-ist-da-los&quot;&gt;FAQ&lt;/a&gt;.', 'NUMBER_QUESTIONS': 'Supidupi. Wie viele Fragen möchtest Du insgesamt erhalten?', 'QUESTION_ATTRIBUTES': 'Alaska. Bitte wähle nun aus, nach welchen Eigenschaften eines AkaBlasen Du gefragt wirst. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.'}</em><a class="headerlink" href="#bot.game.TEXTS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">TEXTS</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><em class="property"> = {'HINT_ATTRIBUTES': 'Okidoki. Bitte wähle nun aus, welche Eigenschaften eines AkaBlasen als Hinweis gegeben werden können. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.', 'Multiple Choice': 'Juhu, ein Spiel! Bitte wähle zunächst aus, ob Du Multiple-Choice- oder Freitext-Fragen bekommst.\n\n&lt;i&gt;⚠️ Hinweis:&lt;/i&gt; Den Freitext-Modus solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen dazu gibt es in den &lt;a href=&quot;https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war-was-ist-da-los&quot;&gt;FAQ&lt;/a&gt;.', 'NUMBER_QUESTIONS': 'Supidupi. Wie viele Fragen möchtest Du insgesamt erhalten?', 'QUESTION_ATTRIBUTES': 'Alaska. Bitte wähle nun aus, nach welchen Eigenschaften eines AkaBlasen Du gefragt wirst. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.'}</em><a class="headerlink" href="#bot.game.TEXTS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Texts for the different states.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -505,10 +505,7 @@ corresponding response.</p>
 <dl class="py function">
 <dt id="bot.game.multiple_choice">
 <code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">multiple_choice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.game.multiple_choice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses the corresponding response for the question mode.
-Also starts the game by initializing the <a class="reference internal" href="components.questioner.html#components.Questioner" title="components.Questioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Questioner</span></code></a> and asking the first
-question.
-If the configuration was invalid, ends the conversation.</p>
+<dd><p>Parses the corresponding response for the question mode.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -525,7 +522,10 @@ If the configuration was invalid, ends the conversation.</p>
 <dl class="py function">
 <dt id="bot.game.number_questions">
 <code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">number_questions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.game.number_questions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses the corresponding response for the number of questions.</p>
+<dd><p>Parses the corresponding response for the number of questions.
+Also starts the game by initializing the <a class="reference internal" href="components.questioner.html#components.Questioner" title="components.Questioner"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Questioner</span></code></a> and asking the first
+question.
+If the configuration was invalid, ends the conversation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
