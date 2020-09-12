@@ -27,12 +27,22 @@ Bei einer App übersteigt so etwas leider Hirschs Fähigkeiten und es müsste je
 
 Einen Anlauf für eine App gab es Anfang 2019 übrigens trotzdem. Die App lief allerdings nur unter Android, war nicht sonderlich ausgefeilt und es haben sich nur wenige AkaBlasen gemeldet, die daran interessiert gewesen wären, in der App zu finden zu sein.
 
+Warum dann Telegram und nicht WhatsApp?
+---------------------------------------
+
+Bei WhatsApp gibt es Bots nur für Firmenkunden.
+
+Manchmal reagiert der Bot sehr langsam. Ist das normal?
+-------------------------------------------------------
+
+Wenn viele AkaBlasen gleichzeitig den Bot benutzen kann es passieren, dass er ein bisschen träge wird. Bitte hab ein bisschen Geduld mit ihm.
+
 Warum muss ich mein Geschlecht angeben? Ist das nicht voll 2010?
 ----------------------------------------------------------------
 
     Geschlechter sind wie die World Trade Center-Türme: Früher gab es zwei davon und heute ist es ein sensibles Thema.
 
-Der Grund ist ganz einfach: Wenn der Bot ein Bild von einem vollbärtigen Mann zeigt und Dich fragt, ob diese Person
+Der Grund ist ganz einfach: Wenn der Bot ein Bild eines vollbärtigen Mannes zeigt und Dich fragt, ob diese Person
 
 * Anna
 * Annette

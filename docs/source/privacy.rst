@@ -32,7 +32,7 @@ Klar. Wenn Du Dich über den Befehl ``/abmelden`` vom Bot abmeldest, werden Dein
 Kann außer Hirsch noch irgendjemand auf meine Daten zugreifen?
 --------------------------------------------------------------
 
-Ja. Das ist Sinn und Zweck des AkaNamen Bots. Alle anderen AkaBlasen, die den Bot nutzen und von Hirsch als AkaBlase identifiziert wurden, werden durch das Raten die Folgenden Daten von Dir sehen:
+Ja. Das ist Sinn und Zweck des AkaNamen Bots. Alle anderen AkaBlasen, die den Bot nutzen und von Hirsch als AkaBlase identifiziert wurden, werden durch das Raten die folgenden Daten von Dir sehen:
 
 * Name, Vorname, Spitzname
 * Geburtsdatum & Alter
