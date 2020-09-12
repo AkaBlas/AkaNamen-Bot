@@ -7,3 +7,4 @@ python-dateutil==2.8.1
 camelot-py[cv]
 numpy
 pandas
+git+https://gitlab.com/HirschHeissIch/ptbstats.git@v1.2
