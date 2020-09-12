@@ -12,7 +12,7 @@ Die Idee stammt tatsächlich ursprünglich von Nora.
 Warum ist das ganze ein Telegram-Bot und keine unabhängige App?
 ---------------------------------------------------------------
 
-Telegram ist platformunabhängig, d.h. Du kannst den Bot auf Deinem
+Telegram ist plattformunabhängig, d.h. Du kannst den Bot auf Deinem
 
 * Android-Smartphone/Tablet
 * Apple-Smartphone/Tablet
