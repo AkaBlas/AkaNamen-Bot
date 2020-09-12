@@ -5,7 +5,7 @@ from copy import copy
 from threading import Lock
 
 from components import Member, PicklableBase, Score, AttributeManager, ChangingAttributeManager, \
-    FirstNameManager
+    NameManager
 
 from typing import Dict, List, Optional, Tuple, Any, Set
 
@@ -36,10 +36,10 @@ class Orchestra(PicklableBase):
                 AttributeManager('birthday',
                                  list(self.ATTRIBUTE_MANAGERS.difference(['birthday', 'age']))),
             'first_name':
-                FirstNameManager(
-                    list(self.ATTRIBUTE_MANAGERS.difference(['first_name', 'full_name']))),
+                NameManager('first_name',
+                            list(self.ATTRIBUTE_MANAGERS.difference(['first_name', 'full_name']))),
             'full_name':
-                AttributeManager(
+                NameManager(
                     'full_name',
                     list(
                         self.ATTRIBUTE_MANAGERS.difference(
@@ -57,7 +57,8 @@ class Orchestra(PicklableBase):
                                                                          'full_name']))),
             'photo_file_id':
                 AttributeManager('photo_file_id',
-                                 list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id']))),
+                                 list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id'])),
+                                 gendered_questions=True),
         }
 
     def __getitem__(self, item: str) -> Any:
@@ -132,16 +133,28 @@ class Orchestra(PicklableBase):
         self.kick_member(member)
         self.register_member(member)
 
-    def questionable(self) -> List[Tuple[AttributeManager, AttributeManager]]:
+    # yapf: disable
+    def questionable(
+        self,
+        multiple_choice: bool = True
+    ) -> List[Tuple[AttributeManager, AttributeManager]]:
+        # yapf: enable
         """
         Gives a list of tuples of :class:`components.AttributeManager` instances, each representing
         a pair of hint attribute and question attribute, which have enough different values for the
         orchestras members to generate questions from it.
+
+        Args:
+            multiple_choice: Optional. Whether the questions will be multiple choice or free text.
+                Defaults to :obj:`True`.
         """
         out = []
         for am in self.attribute_managers.values():
             for bm in self.attribute_managers.values():
-                if am.is_hintable_with(bm):
+                if bm.description == 'photo_file_id':
+                    if am.is_hintable_with(bm, multiple_choice=True):
+                        out.append((am, bm))
+                elif am.is_hintable_with(bm, multiple_choice=multiple_choice):
                     out.append((am, bm))
         return out
 

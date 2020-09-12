@@ -29,6 +29,12 @@ EDITING_MESSAGE_KEY = 'editing_message_key'
 :class:`telegram.Message` with an :class:`telegram.InlineKeyboardMarkup` sent in the process of
 editing the members data.
 """
+GAME_MESSAGE_KEY = 'game_message_key'
+"""
+:obj:`str`: Each ``context.user_data[GAME_MESSAGE_KEY]`` is expected to be the last
+:class:`telegram.Message` with an :class:`telegram.InlineKeyboardMarkup` sent in the process of
+setting up a game.
+"""
 CANCELLATION_MESSAGE_KEY = 'cancellation_message_key'
 """
 :obj:`str`: Each ``context.user_data[CANCELLATION_MESSAGE_KEY]`` is expected to be the last
