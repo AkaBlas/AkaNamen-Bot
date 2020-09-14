@@ -29,7 +29,8 @@ GAME = 'GAME'
 
 # Texts
 TEXTS: Dict[str, str] = {
-    MULTIPLE_CHOICE: 'Juhu, ein Spiel! Bitte wähle zunächst aus, ob Du Multiple-Choice- oder '
+    MULTIPLE_CHOICE: '<b>1/4 - Spielmodus</b>\n\n'
+                     'Juhu, ein Spiel! Bitte wähle zunächst aus, ob Du Multiple-Choice- oder '
                      'Freitext-Fragen bekommst.\n\n<i>⚠️ Hinweis:</i> Den Freitext-Modus '
                      'solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, '
                      'dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen '
@@ -37,14 +38,17 @@ TEXTS: Dict[str, str] = {
                      'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext'
                      '-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war'
                      '-was-ist-da-los">FAQ</a>.',
-    HINT_ATTRIBUTES: 'Okidoki. Bitte wähle nun aus, welche Eigenschaften eines '
+    HINT_ATTRIBUTES: '<b>2/4 - Hinweise</b>\n\n'
+                     'Okidoki. Bitte wähle nun aus, welche Eigenschaften eines '
                      'AkaBlasen als Hinweis gegeben werden können. Um die Auswahl zu ändern, '
                      'klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf '
                      '<i>Weiter</i>.',
-    QUESTION_ATTRIBUTES: 'Alaska. Bitte wähle nun aus, nach welchen Eigenschaften eines '
+    QUESTION_ATTRIBUTES: '<b>3/4 - Fragen</b>\n\n'
+                         'Alaska. Bitte wähle nun aus, nach welchen Eigenschaften eines '
                          'AkaBlasen Du gefragt wirst. Um die Auswahl zu ändern, klicke auf die '
                          'Felder.\n\nWenn Du fertig bist, klicke unten auf <i>Weiter</i>.',
-    NUMBER_QUESTIONS: 'Supidupi. Wie viele Fragen möchtest Du insgesamt erhalten?',
+    NUMBER_QUESTIONS: '<b>4/4 - Anzahl der Fragen</b>\n\n'
+                      'Supidupi. Wie viele Fragen möchtest Du insgesamt erhalten?',
 }
 """Dict[:obj:`str`,:obj:`str`]: Texts for the different states."""
 
