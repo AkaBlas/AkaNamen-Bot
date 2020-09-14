@@ -3,6 +3,8 @@
 """This module contains the Member class."""
 from __future__ import annotations
 
+from io import BytesIO
+
 from components import Instrument, PercussionInstrument, Flute, Clarinet, Oboe, \
     SopranoSaxophone, AltoSaxophone, TenorSaxophone, BaritoneSaxophone, Euphonium, BaritoneHorn, \
     Baritone, Trombone, Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Bassoon, Tuba
@@ -19,11 +21,11 @@ import re
 
 from geopy import Photon, distance
 from geopy.exc import GeopyError
-from tempfile import TemporaryFile, NamedTemporaryFile
+from tempfile import NamedTemporaryFile
 from configparser import ConfigParser
 from collections import defaultdict
 from camelot import read_pdf
-from typing import Optional, Union, List, Tuple, IO, Dict, Any
+from typing import Optional, Union, List, Tuple, Dict, Any
 
 from fuzzywuzzy import fuzz
 from telegram import Bot, User
@@ -291,7 +293,7 @@ class Member:
         """
         return f'{self.full_name}.vcf'.replace(' ', '_').replace('"', '')
 
-    def vcard(self, bot: Bot) -> IO:
+    def vcard(self, bot: Bot) -> BytesIO:
         """
         Gives a vCard of the member.
 
@@ -300,7 +302,7 @@ class Member:
                 retrieved the file ID.
 
         Returns:
-            The vCard as `open` file. Make sure to close it!
+            The vCard as bytes stream. Make sure to close it!
 
         Raises:
             ValueError: If sharing contact information is not allowed.
@@ -308,43 +310,43 @@ class Member:
         if not self.allow_contact_sharing:
             raise ValueError('This member does not allow sharing it\'s contact information.')
 
-        with TemporaryFile() as photo_file:
-            vcard = vobject.vCard()
-            if self.full_name:
-                vcard.add('fn').value = self.full_name.replace('"', '')
-            else:
-                vcard.add('fn').value = ''
-            vcard.add('n').value = vobject.vcard.Name(family=self.last_name or '',
-                                                      given=self.first_name or '')
-            vcard.add('nickname').value = self.nickname or ''
-            vcard.add('tel').value = self.phone_number or ''
-            vcard.add('role').value = self.instruments_str or ''
-            vcard.add('org').value = ['AkaBlas e.V.']
+        vcard = vobject.vCard()
+        if self.full_name:
+            vcard.add('fn').value = self.full_name.replace('"', '')
+        else:
+            vcard.add('fn').value = ''
+        vcard.add('n').value = vobject.vcard.Name(family=self.last_name or '',
+                                                  given=self.first_name or '')
+        vcard.add('nickname').value = self.nickname or ''
+        vcard.add('tel').value = self.phone_number or ''
+        vcard.add('role').value = self.instruments_str or ''
+        vcard.add('org').value = ['AkaBlas e.V.']
 
-            if self.date_of_birth:
-                vcard.add('bday').value = self.date_of_birth.strftime('%Y%m%d')
+        if self.date_of_birth:
+            vcard.add('bday').value = self.date_of_birth.strftime('%Y%m%d')
 
-            if self._raw_address:
-                vcard.add('adr').value = vobject.vcard.Address(
-                    city=self._raw_address['city'],
-                    code=self._raw_address['postcode'],
-                    street=' '.join(
-                        [self._raw_address['street'],
-                         self._raw_address.get('housenumber', '')]))
+        if self._raw_address:
+            vcard.add('adr').value = vobject.vcard.Address(
+                city=self._raw_address['city'],
+                code=self._raw_address['postcode'],
+                street=' '.join(
+                    [self._raw_address['street'],
+                     self._raw_address.get('housenumber', '')]))
 
-            if self.photo_file_id:
-                file = bot.get_file(self.photo_file_id)
-                file.download(out=photo_file)
-                photo_file.seek(0)
-                photo = vcard.add('photo')
-                photo.encoding_param = 'B'
-                photo.type_param = 'JPG'
-                photo.value = photo_file.read()
+        if self.photo_file_id:
+            photo_stream = BytesIO()
+            file = bot.get_file(self.photo_file_id)
+            file.download(out=photo_stream)
+            photo_stream.seek(0)
+            photo = vcard.add('photo')
+            photo.encoding_param = 'B'
+            photo.type_param = 'JPG'
+            photo.value = photo_stream.read()
 
-            vcard_file = TemporaryFile()
-            vcard_file.write(vcard.serialize().encode('utf-8'))
-            vcard_file.seek(0)
-            return vcard_file
+        vcard_file = BytesIO()
+        vcard_file.write(vcard.serialize().encode('utf-8'))
+        vcard_file.seek(0)
+        return vcard_file
 
     @staticmethod
     def _compare(str1: str, str2: str) -> float:
