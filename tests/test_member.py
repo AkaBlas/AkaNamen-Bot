@@ -260,6 +260,10 @@ class TestMember:
             member.vcard(bot)
 
         member.allow_contact_sharing = True
+        with member.vcard(bot) as vcard:
+            vcard_string = vcard.read().decode('utf-8')
+            assert 'NAME' in vcard_string
+
         member.nickname = 'test'
         with member.vcard(bot) as vcard:
             vcard_string = vcard.read().decode('utf-8')
