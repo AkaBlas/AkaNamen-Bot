@@ -256,6 +256,8 @@ class TestAttributeManager:
         bm.register_member(member)
 
         assert am.is_hintable_with(bm, multiple_choice=multiple_choice)
+        assert not am.is_hintable_with(
+            bm, multiple_choice=multiple_choice, exclude_members=[Member(100)])
 
     def test_draw_hint_member_errors(self, dummy_am):
         am = AttributeManager(self.description, [])
@@ -266,7 +268,8 @@ class TestAttributeManager:
         with pytest.raises(RuntimeError, match=f'currently not hintable for dummy'):
             am.draw_hint_member(dummy_am)
 
-    def test_draw_hint_member(self):
+    @pytest.mark.parametrize('runs', list(range(10)))
+    def test_draw_hint_member(self, runs):
         am = AttributeManager(self.description, ['first_name'])
         bm = AttributeManager('first_name', [])
 
@@ -283,7 +286,8 @@ class TestAttributeManager:
             am.register_member(member)
             bm.register_member(member)
 
-        member = am.draw_hint_member(bm)
+        member = am.draw_hint_member(bm, exclude_members=[Member(0)])
+        assert member != Member(0)
         assert member.last_name and member.first_name
         assert member in am.available_members
         assert member in bm.available_members
@@ -336,7 +340,7 @@ class TestAttributeManager:
                        last_name=random.choice(['a', 'b', 'c', 'd', 'e'])))
 
         for i, name in enumerate(['a', 'b', 'c', 'd', 'e']):
-            with pytest.raises(RuntimeError, match='Given member is not hintable'):
+            with pytest.raises(RuntimeError, match='is not hintable for attribute'):
                 attrs, idx = am.draw_question_attributes(
                     bm, Member(1000, first_name=str(i + 1), last_name=name))
         for i, name in enumerate(['a', 'b', 'c', 'd', 'e']):
@@ -356,7 +360,8 @@ class TestAttributeManager:
         with pytest.raises(RuntimeError, match=f'currently not hintable for dummy'):
             am.build_question_with(dummy_am)
 
-    def test_build_question(self):
+    @pytest.mark.parametrize('runs', list(range(10)))
+    def test_build_question(self, runs):
         am = AttributeManager(self.description, ['first_name'])
         bm = AttributeManager('first_name', [])
 
@@ -375,7 +380,8 @@ class TestAttributeManager:
             am.register_member(member)
             bm.register_member(member)
 
-        member, attr, opts, idx = am.build_question_with(bm)
+        member, attr, opts, idx = am.build_question_with(bm, exclude_members=[Member(0)])
+        assert member != Member(0)
         assert attr in am.data
         assert member in am.available_members
         assert member in bm.available_members

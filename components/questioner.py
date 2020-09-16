@@ -92,7 +92,8 @@ class Questioner:
                 raise ValueError(f'Unsupported question attribute {qa}.')
 
         # Filter input unsupported for the orchestras state
-        questionable = self.orchestra.questionable(self.multiple_choice)
+        questionable = self.orchestra.questionable(self.multiple_choice,
+                                                   exclude_members=[self.member])
 
         available_hints = [q[0] for q in questionable]
         available_questions = [q[1] for q in questionable]
@@ -164,7 +165,8 @@ class Questioner:
         :attr:`orchestra` *and* is allowed for this questioner instance.
         """
         return [(h, q)
-                for (h, q) in self.orchestra.questionable(self.multiple_choice)
+                for (h, q) in self.orchestra.questionable(self.multiple_choice,
+                                                          exclude_members=[self.member])
                 if h in self.hint_attributes and q in self.question_attributes]
 
     def ask_question(self) -> None:
@@ -189,8 +191,8 @@ class Questioner:
             photo_question = False
 
         if multiple_choice:
-            member, hint, opts, index = hint_manager.build_question_with(question_manager,
-                                                                         multiple_choice=True)
+            member, hint, opts, index = hint_manager.build_question_with(
+                question_manager, multiple_choice=True, exclude_members=[self.member])
             question = question_text(member,
                                      question_attribute,
                                      hint_attribute,
@@ -228,7 +230,8 @@ class Questioner:
                                              multiple_choice=multiple_choice)
         else:
             member, hint, _ = hint_manager.build_question_with(question_manager,
-                                                               multiple_choice=False)
+                                                               multiple_choice=False,
+                                                               exclude_members=[self.member])
             question = question_text(member,
                                      question_attribute,
                                      hint_attribute,

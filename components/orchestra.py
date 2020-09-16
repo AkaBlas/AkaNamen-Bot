@@ -7,7 +7,7 @@ from threading import Lock
 from components import Member, PicklableBase, Score, AttributeManager, ChangingAttributeManager, \
     NameManager
 
-from typing import Dict, List, Optional, Tuple, Any, Set
+from typing import Dict, List, Optional, Tuple, Any, Set, Iterable
 
 
 class Orchestra(PicklableBase):
@@ -136,7 +136,8 @@ class Orchestra(PicklableBase):
     # yapf: disable
     def questionable(
         self,
-        multiple_choice: bool = True
+        multiple_choice: bool = True,
+        exclude_members: Iterable[Member] = None,
     ) -> List[Tuple[AttributeManager, AttributeManager]]:
         # yapf: enable
         """
@@ -147,14 +148,19 @@ class Orchestra(PicklableBase):
         Args:
             multiple_choice: Optional. Whether the questions will be multiple choice or free text.
                 Defaults to :obj:`True`.
+            exclude_members: Optional. Members to exclude from serving as hint.
         """
         out = []
         for am in self.attribute_managers.values():
             for bm in self.attribute_managers.values():
                 if bm.description == 'photo_file_id':
-                    if am.is_hintable_with(bm, multiple_choice=True):
+                    if am.is_hintable_with(bm,
+                                           multiple_choice=True,
+                                           exclude_members=exclude_members):
                         out.append((am, bm))
-                elif am.is_hintable_with(bm, multiple_choice=multiple_choice):
+                elif am.is_hintable_with(bm,
+                                         multiple_choice=multiple_choice,
+                                         exclude_members=exclude_members):
                     out.append((am, bm))
         return out
 

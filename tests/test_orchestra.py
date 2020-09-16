@@ -259,6 +259,7 @@ class TestOrchestra:
         orchestra.register_member(
             Member(9, first_name='Dong', last_name='Silver', gender=Gender.MALE))
         assert orchestra.questionable() == [('last_name', 'first_name')]
+        assert orchestra.questionable(exclude_members=[Member(9)]) == []
 
     def test_questionable_multiple_choice_first_name(self, orchestra):
         assert orchestra.questionable() == []

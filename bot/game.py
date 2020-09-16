@@ -212,7 +212,8 @@ def multiple_choice(update: Update, context: CallbackContext) -> Union[str, int]
                               reply_markup=build_questions_hints_keyboard(
                                   orchestra=orchestra,
                                   hint=True,
-                                  multiple_choice=game_settings.multiple_choice))
+                                  multiple_choice=game_settings.multiple_choice,
+                                  exclude_members=[orchestra.members[update.effective_user.id]]))
             return HINT_ATTRIBUTES
         except RuntimeError as e:
             if 'Orchestra currently has no questionable attributes.' == str(e):
@@ -247,6 +248,7 @@ def hint_attributes(update: Update, context: CallbackContext) -> Union[str, int]
     data = update.callback_query.data
     update.callback_query.answer()
     game_settings = cast(GameSettings, context.user_data[GAME_KEY])
+    exclude_members = [orchestra.members[update.effective_user.id]]
 
     if data == DONE:
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
@@ -257,7 +259,8 @@ def hint_attributes(update: Update, context: CallbackContext) -> Union[str, int]
                               orchestra=orchestra,
                               question=True,
                               multiple_choice=game_settings.multiple_choice,
-                              allowed_hints=game_settings.hint_attributes))
+                              allowed_hints=game_settings.hint_attributes,
+                              exclude_members=exclude_members))
         return QUESTION_ATTRIBUTES
     elif data == ALL:
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
@@ -270,7 +273,8 @@ def hint_attributes(update: Update, context: CallbackContext) -> Union[str, int]
             hint=True,
             current_selection=current_selection,
             multiple_choice=game_settings.multiple_choice,
-            allowed_hints=game_settings.hint_attributes))
+            allowed_hints=game_settings.hint_attributes,
+            exclude_members=exclude_members))
 
         return HINT_ATTRIBUTES
     else:
@@ -283,7 +287,8 @@ def hint_attributes(update: Update, context: CallbackContext) -> Union[str, int]
             hint=True,
             current_selection=current_selection,
             multiple_choice=game_settings.multiple_choice,
-            allowed_hints=game_settings.hint_attributes))
+            allowed_hints=game_settings.hint_attributes,
+            exclude_members=exclude_members))
 
         return HINT_ATTRIBUTES
 
@@ -305,6 +310,7 @@ def question_attributes(update: Update, context: CallbackContext) -> str:
     data = update.callback_query.data
     update.callback_query.answer()
     game_settings = cast(GameSettings, context.user_data[GAME_KEY])
+    exclude_members = [orchestra.members[update.effective_user.id]]
 
     if data == DONE:
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
@@ -323,7 +329,8 @@ def question_attributes(update: Update, context: CallbackContext) -> str:
             question=True,
             current_selection=current_selection,
             multiple_choice=game_settings.multiple_choice,
-            allowed_hints=game_settings.hint_attributes))
+            allowed_hints=game_settings.hint_attributes,
+            exclude_members=exclude_members))
 
         return QUESTION_ATTRIBUTES
     else:
@@ -336,7 +343,8 @@ def question_attributes(update: Update, context: CallbackContext) -> str:
             question=True,
             current_selection=current_selection,
             multiple_choice=game_settings.multiple_choice,
-            allowed_hints=game_settings.hint_attributes))
+            allowed_hints=game_settings.hint_attributes,
+            exclude_members=exclude_members))
 
         return QUESTION_ATTRIBUTES
 

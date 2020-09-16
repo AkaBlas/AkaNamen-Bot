@@ -8,7 +8,7 @@ from components import (Instrument, PercussionInstrument, Flute, Clarinet, Oboe,
                         Euphonium, BaritoneHorn, Baritone, Trombone, Tuba, Trumpet, Flugelhorn,
                         Horn, Drums, Guitar, BassGuitar, Conductor, Orchestra, Member)
 from bot import REGISTRATION_PATTERN
-from typing import Dict, Optional, List
+from typing import Dict, Optional, List, Iterable
 
 SELECTED = '✔️'
 """:obj:`str`: Emoji to use to mark selected options."""
@@ -112,12 +112,14 @@ def parse_instruments_keyboard(keyboard: InlineKeyboardMarkup) -> Dict[Instrumen
     return current_selection
 
 
-def build_questions_hints_keyboard(orchestra: Orchestra,
-                                   question: bool = False,
-                                   hint: bool = False,
-                                   current_selection: Optional[Dict[str, bool]] = None,
-                                   multiple_choice: bool = True,
-                                   allowed_hints: List[str] = None) -> InlineKeyboardMarkup:
+def build_questions_hints_keyboard(
+        orchestra: Orchestra,
+        question: bool = False,
+        hint: bool = False,
+        current_selection: Optional[Dict[str, bool]] = None,
+        multiple_choice: bool = True,
+        allowed_hints: List[str] = None,
+        exclude_members: Iterable[Member] = None) -> InlineKeyboardMarkup:
     """
     Builds a :class:`telegram.InlineKeyboardMarkup` listing all questions that are up for
     selection for the given orchestra. The callback data for each button will equal its text.
@@ -136,6 +138,7 @@ def build_questions_hints_keyboard(orchestra: Orchestra,
         allowed_hints: Optional. Only relevant if :obj:`question` is :obj:`True`. If passed, in
             this case only question attributes which are questionable for at least one of the
             allowed hints will be listed in the keyboard.
+        exclude_members: Optional. Members to exclude from serving as hint.
 
     Note:
         Exactly one on :attr:`hint` and :attr:`question` must be :obj:`True`.
@@ -151,7 +154,8 @@ def build_questions_hints_keyboard(orchestra: Orchestra,
 
     current_selection = current_selection or dict()
 
-    questionable = orchestra.questionable(multiple_choice=multiple_choice)
+    questionable = orchestra.questionable(multiple_choice=multiple_choice,
+                                          exclude_members=exclude_members)
     if not questionable:
         raise RuntimeError('Orchestra currently has no questionable attributes.')
     hints = [q[0].description for q in questionable]
