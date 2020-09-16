@@ -2,6 +2,43 @@
 Changelog
 =========
 
+Version 1.0
+===========
+*Released 2020-09-16*
+
+*Changes and bug fixes for the user experience:*
+
+- Add Headings to Game Setup (`#43`_)
+- Add Statistics (`#42`_)
+- Add some FAQ (`#41`_)
+- Improve Wording of Questions (`#39`_)
+- Fix ``UserScore.add_to_score()`` and /highscore Command (`#38`_)
+- Fix Bugs in Editing Conversation (`#35`_)
+- Allow Admins to see all User Data through Inline Mode (`#34`_)
+- Fix nightly Check of User Status(`#33`_)
+- Fix "Alle" Button for Question Attributes (`#26`_)
+
+*Bug fixes and changes to the backend:*
+
+- Exclude Player from Possible Hints (`#46`_)
+- Tweak Performance (`#44`_)
+- Overhaul ``AttributeManager`` Logic and Game Setup (`#40`_)
+- Run Docs Workflow on ``Py3.8`` (`#36`_)
+
+.. _`#43`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#43
+.. _`#42`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#42
+.. _`#41`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#41
+.. _`#39`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#39
+.. _`#38`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#38
+.. _`#35`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#35
+.. _`#34`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#34
+.. _`#33`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#33
+.. _`#26`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#26
+.. _`#46`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#46
+.. _`#44`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#44
+.. _`#40`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#40
+.. _`#36`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#36
+
 Version RC2
 ===========
 *Released 2020-09-06*
