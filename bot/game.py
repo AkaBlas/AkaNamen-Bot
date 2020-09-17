@@ -147,6 +147,8 @@ class QuestionHandler(Handler):
             True: If the update is to be handled
             False: Otherwise.
         """
+        if Filters.command(update):
+            return False
         user_id = update.effective_user.id
         with self._questioners_lock:
             if user_id in self._questioners and self._questioners[user_id].check_update(update):
