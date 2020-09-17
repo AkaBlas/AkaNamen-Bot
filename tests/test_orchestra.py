@@ -66,6 +66,7 @@ class TestOrchestra:
         orchestra.register_member(member)
         assert orchestra.members == {123456: member}
         assert orchestra.members[123456] is not member
+        assert orchestra.members[123456].user_score.member is not member
         assert orchestra.attribute_managers['first_name'].male_data == {'first_name': {member}}
         assert orchestra.attribute_managers['last_name'].data == {'last_name': {member}}
         assert orchestra.attribute_managers['nickname'].data == {'nickname': {member}}
@@ -98,6 +99,7 @@ class TestOrchestra:
         orchestra.update_member(member)
         assert orchestra.members == {123456: member}
         assert orchestra.members[123456] is not member
+        assert orchestra.members[123456].user_score.member is not member
         assert orchestra.attribute_managers['first_name'].female_data == {'First_name': {member}}
         assert orchestra.attribute_managers['last_name'].data == {'Last_name': {member}}
         assert orchestra.attribute_managers['nickname'].data == {'Nickname': {member}}
