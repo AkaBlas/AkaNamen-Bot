@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Question class."""
+import re
+
 from components import MessageType, UpdateType
 
 from telegram import Poll, Update
 
 from typing import TYPE_CHECKING, Union, List
+
+from components.helpers import COORDINATES_PATTERN
 
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
@@ -122,7 +126,12 @@ class Question:
             # self.attribute == self.ADDRESS:
             else:
                 if answer:
-                    return self.member.compare_address_to(answer) >= 0.85
+                    match = re.search(COORDINATES_PATTERN, answer)
+                    if match:
+                        return self.member.distance_of_address_to(
+                            (float(match.group(1)), float(match.group(2)))) <= 0.2
+                    else:
+                        return self.member.compare_address_to(answer) >= 0.85
                 else:
                     location = update.message.location
                     return self.member.distance_of_address_to(

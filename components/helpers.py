@@ -23,3 +23,9 @@ def setlocale(name: str) -> Generator:
             yield locale.setlocale(locale.LC_ALL, name)
         finally:
             locale.setlocale(locale.LC_ALL, saved)
+
+
+COORDINATES_PATTERN = r'(\d*\.\d*), *(\d*\.\d*)'
+"""
+:obj:`str`: Regex pattern for coordinates tuples.
+"""

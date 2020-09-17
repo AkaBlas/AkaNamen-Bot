@@ -193,7 +193,10 @@ class TestQuestion:
                                                 ('Schleinitzstraße 19, Braunschweig', False),
                                                 ('Schleinitzstraße 19, 38106 Braunschweig', False),
                                                 ('Universitätsplatz 2, 38106 Braunschweig', True),
-                                                ('Universtatsplatz Braunschweig', True)])
+                                                ('Universtatsplatz Braunschweig', True),
+                                                ('52.2736706, 10.5296817', True),
+                                                ('(52.2736706,10.5296817)', True),
+                                                ('geo:52.27350,10.52974?z=19', True)])
     def test_check_answer_free_text_location_text(self, answer, result, member):
         q = Question(member, Question.ADDRESS, multiple_choice=False)
         update = Update(1, message=Message(1, None, None, None, text=answer))

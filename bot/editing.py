@@ -17,6 +17,8 @@ from bot import (ORCHESTRA_KEY, build_instruments_keyboard, parse_instruments_ke
 from components import Member, Gender, Instrument
 
 # Ignore warnings from ConversationHandler
+from components.helpers import COORDINATES_PATTERN
+
 warnings.filterwarnings('ignore', message="If", module='telegram.ext.conversationhandler')
 
 # States of the conversation
@@ -73,7 +75,10 @@ TEXTS: Dict[str, str] = {
     ADDRESS_CONFIRMATION: 'Okay, ich habe die folgende Adresse erkannt:\n\n{}\n\nWenn das '
                           'richtig war, klicke bitte auf <i>Richtig</i>. Wenn das nicht richtig '
                           'war, versuch bitte, die Adresse genauer aufzuschreiben oder den '
-                          'Standort genauer zu wählen.',
+                          'Standort genauer zu wählen. Du kannst mir auch direkt die richtigen '
+                          'Koordinaten schicken. Mehr Infos dazu stehen in den <a '
+                          'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#der-bot'
+                          '-nimmt-meine-adresse-nicht-an-ist-der-blod">FAQ</a>. 🤓',
     PHOTO: {  # type: ignore
         True: 'Dies ist das Foto, das ich aktuell gespeichert habe. Um Dein Foto '
               'zu ändern, schicke mir das neue Foto. Bitte achte darauf, dass man Dich darauf '
@@ -160,6 +165,8 @@ SELECTION_KEYBOARD = InlineKeyboardMarkup([[
     InlineKeyboardButton(DONE, callback_data=DONE)
 ]])
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for confirming the address."""
+
+
 # yapf: enable
 
 
@@ -410,9 +417,14 @@ def address(update: Update, context: CallbackContext) -> str:
     if update.message:
         delete_keyboard(context)
         message = update.message
-        if message.text:
+        if context.match:
+            addr = None
+            latitude = float(context.match.group(1))
+            longitude = float(context.match.group(2))
+            coordinates = (latitude, longitude)
+        elif message.text:
             addr = update.message.text
-            coordinates = None
+            coordinates = None  # type: ignore
         else:
             addr = None
             location = message.location
@@ -615,6 +627,8 @@ def allow_contact_sharing(update: Update, context: CallbackContext) -> str:
     return MENU
 
 
+ADDRESS_FILTER = (
+    (Filters.regex(COORDINATES_PATTERN) | Filters.text) & ~Filters.command) | Filters.location
 EDITING_HANDLER = ConversationHandler(
     entry_points=[CommandHandler('daten_bearbeiten', menu)],
     states={
@@ -627,12 +641,10 @@ EDITING_HANDLER = ConversationHandler(
             MessageHandler((Filters.text & ~Filters.command), date_of_birth),
             CallbackQueryHandler(date_of_birth)
         ],
-        ADDRESS: [
-            MessageHandler((Filters.text & ~Filters.command) | Filters.location, address),
-            CallbackQueryHandler(address)
-        ],
+        ADDRESS: [MessageHandler(ADDRESS_FILTER, address),
+                  CallbackQueryHandler(address)],
         ADDRESS_CONFIRMATION: [
-            MessageHandler((Filters.text & ~Filters.command) | Filters.location, address),
+            MessageHandler(ADDRESS_FILTER, address),
             CallbackQueryHandler(address)
         ],
         PHOTO: [
