@@ -55,6 +55,25 @@ Wenn Du möchtest, dass andere AkaBlasen Deinen Vornamen lernen können, Du Dich
 * das Geschlecht angeben, das andere *wahrscheinlich* mit Deinem Vornamen assoziieren oder
 * eine Münze werfen.
 
+Der Bot nimmt meine Adresse nicht an. Ist der blöd?
+---------------------------------------------------
+
+Ja. Bzw. `OpenStreetMap`_  und `Photon`_ sind blöd. Damit als Antworten für Adressen im Freitext-Modus sowohl Adressen, als auch Standorte und Koordinaten angenommen werden können,
+nutzt der Bot diese beiden Dienste, um für Deine Adresse die genauen Koordinaten auszulesen. Gleichzeitig erlaubt Dir das, beim angeben einer Adresse z.B. ``Str.`` statt ``Straße`` zu schreiben.
+
+Bei manchen Adressen ist es leider nicht ganz einfach, die Koordinaten online nach zuschlagen und der Bot erkennt Deine Adresse nicht korrekt.
+Um ihm auf die Sprünge zu helfen, kannst Du
+
+1. versuchen, statt Deiner Adresse Deinen *Standort* zu schicken. Das hilft häufig schon.
+2. die Koordinaten Deines Domizils selbst herausfinden und dem Bot schicken. Bei `OpenStreetMap`_ geht das so:
+  1. Gib Deine Adresse ein
+  2. Wähle den passenden Treffer aus
+  3. Klicke auf »Teilen«
+  4. Kopiere die »Geo-URI« und schicke sie dem Bot.
+
+.. _`OpenStreetMap`: https://www.openstreetmap.org/
+.. _`Photon`: http://photon.komoot.de
+
 Ich habe eine Fehlermeldung bekommen. Was muss ich tun?
 -------------------------------------------------------
 

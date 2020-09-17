@@ -183,11 +183,13 @@ class Member:
         if location:
             if 'properties' in location.raw:
                 raw = location.raw['properties']
-                if ('street' in raw and 'postcode' in raw and 'housenumber' in raw
-                        and 'city' in raw and 'country' in raw):
+                if (('street' in raw or 'name' in raw) and 'postcode' in raw and 'city' in raw
+                        and 'country' in raw):
                     raw['city'] = raw['city'].replace('Brunswick', 'Braunschweig')
-                    self._address = (f"{raw['street']} {raw['housenumber']}, {raw['postcode']} "
-                                     f"{raw['city']}")
+                    street = raw.get('street') or raw.get('name')
+                    hm = raw.get('housenumber')
+                    housenumber = f" {hm}" if hm else ''
+                    self._address = f"{street}{housenumber}, {raw['postcode']} {raw['city']}"
                     if raw['country'] != 'Germany':
                         self._address += f" {raw['country']}"
                     self._raw_address = raw
