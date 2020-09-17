@@ -97,6 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#warum-dann-telegram-und-nicht-whatsapp">Warum dann Telegram und nicht WhatsApp?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#manchmal-reagiert-der-bot-sehr-langsam-ist-das-normal">Manchmal reagiert der Bot sehr langsam. Ist das normal?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#warum-muss-ich-mein-geschlecht-angeben-ist-das-nicht-voll-2010">Warum muss ich mein Geschlecht angeben? Ist das nicht voll 2010?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#der-bot-nimmt-meine-adresse-nicht-an-ist-der-blod">Der Bot nimmt meine Adresse nicht an. Ist der blöd?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ich-habe-eine-fehlermeldung-bekommen-was-muss-ich-tun">Ich habe eine Fehlermeldung bekommen. Was muss ich tun?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#meine-freitext-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war-was-ist-da-los">Meine Freitext-Antwort wurde als falsch gewertet, obwohl da nur in Tippfehler drin war. Was ist da los?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#kann-der-bot-nicht-auch-noch">Kann der Bot nicht auch noch … ?</a></li>
@@ -226,6 +227,25 @@ Wenn Du möchtest, dass andere AkaBlasen Deinen Vornamen lernen können, Du Dich
 <li><p>das Geschlecht angeben, das andere <em>wahrscheinlich</em> mit Deinem Vornamen assoziieren oder</p></li>
 <li><p>eine Münze werfen.</p></li>
 </ul>
+</div>
+<div class="section" id="der-bot-nimmt-meine-adresse-nicht-an-ist-der-blod">
+<h2>Der Bot nimmt meine Adresse nicht an. Ist der blöd?<a class="headerlink" href="#der-bot-nimmt-meine-adresse-nicht-an-ist-der-blod" title="Permalink to this headline">¶</a></h2>
+<p>Ja. Bzw. <a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap</a>  und <a class="reference external" href="http://photon.komoot.de">Photon</a> sind blöd. Damit als Antworten für Adressen im Freitext-Modus sowohl Adressen, als auch Standorte und Koordinaten angenommen werden können,
+nutzt der Bot diese beiden Dienste, um für Deine Adresse die genauen Koordinaten auszulesen. Gleichzeitig erlaubt Dir das, beim angeben einer Adresse z.B. <code class="docutils literal notranslate"><span class="pre">Str.</span></code> statt <code class="docutils literal notranslate"><span class="pre">Straße</span></code> zu schreiben.</p>
+<p>Bei manchen Adressen ist es leider nicht ganz einfach, die Koordinaten online nach zuschlagen und der Bot erkennt Deine Adresse nicht korrekt.
+Um ihm auf die Sprünge zu helfen, kannst Du</p>
+<ol class="arabic simple">
+<li><p>versuchen, statt Deiner Adresse Deinen <em>Standort</em> zu schicken. Das hilft häufig schon.</p></li>
+<li><p>die Koordinaten Deines Domizils selbst herausfinden und dem Bot schicken. Bei <a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap</a> geht das so:</p></li>
+</ol>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Gib Deine Adresse ein</p></li>
+<li><p>Wähle den passenden Treffer aus</p></li>
+<li><p>Klicke auf »Teilen«</p></li>
+<li><p>Kopiere die »Geo-URI« und schicke sie dem Bot.</p></li>
+</ol>
+</div></blockquote>
 </div>
 <div class="section" id="ich-habe-eine-fehlermeldung-bekommen-was-muss-ich-tun">
 <h2>Ich habe eine Fehlermeldung bekommen. Was muss ich tun?<a class="headerlink" href="#ich-habe-eine-fehlermeldung-bekommen-was-muss-ich-tun" title="Permalink to this headline">¶</a></h2>
