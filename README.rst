@@ -50,7 +50,7 @@ Wenn Du Dich noch nicht mit Telegram und/oder Telegram-Bots auskennst, wird eine
 Neuigkeiten
 ***********
 
-Neben dem vollständigen `Changelog`_ gibt es auch einen Infokanal, der Dich immer auf dem Laufenden hält:
+Neben dem vollständigen `Changelog`_ gibt es auch einen `Infokanal`_, der Dich immer auf dem Laufenden hält.
 
 .. raw:: html
 
@@ -63,6 +63,7 @@ Neben dem vollständigen `Changelog`_ gibt es auch einen Infokanal, der Dich imm
 .. _`Benutzerhandbuch`: https://bibo-joshi.github.io/AkaNamen-Bot/
 .. _`Kurzanleitung`: https://bibo-joshi.github.io/AkaNamen-Bot/quickstart.html
 .. _`Changelog`: https://bibo-joshi.github.io/AkaNamen-Bot/changelog.html
+.. _`Infokanal`: https://t.me/AkaNamenInfo
 
 For Developers
 --------------
