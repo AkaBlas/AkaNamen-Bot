@@ -7,7 +7,8 @@ from io import BytesIO
 
 from components import Instrument, PercussionInstrument, Flute, Clarinet, Oboe, \
     SopranoSaxophone, AltoSaxophone, TenorSaxophone, BaritoneSaxophone, Euphonium, BaritoneHorn, \
-    Baritone, Trombone, Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Bassoon, Tuba
+    Baritone, Trombone, Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Bassoon, Tuba, \
+    Conductor
 from components.helpers import setlocale
 from .userscore import UserScore
 
@@ -682,5 +683,6 @@ class Member:
         Drums(),
         Guitar(),
         BassGuitar(),
+        Conductor(),
     ]
     """List[:class:`components.Instrument`]: Instruments that members are allowed to play."""
