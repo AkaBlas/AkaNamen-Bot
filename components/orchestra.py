@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Orchestra class."""
-from copy import copy
+from copy import deepcopy
 from threading import Lock
 
 from components import Member, PicklableBase, Score, AttributeManager, ChangingAttributeManager, \
@@ -101,7 +101,7 @@ class Orchestra(PicklableBase):
         if member.user_id in self.members:
             raise ValueError('This member is already registered.')
 
-        self.members[member.user_id] = copy(member)
+        self.members[member.user_id] = deepcopy(member)
         for am in self.attribute_managers.values():
             am.register_member(member)
 

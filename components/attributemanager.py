@@ -6,7 +6,7 @@ from __future__ import annotations
 import random
 import datetime as dtm
 from collections import defaultdict
-from copy import copy
+from copy import deepcopy
 from threading import Lock
 from typing import Callable, Any, List, TypeVar, Dict, Set, Optional, Tuple, FrozenSet, Generic, \
     TYPE_CHECKING, Union, cast, overload, Literal, Iterable
@@ -131,7 +131,7 @@ class AttributeManager(PicklableBase, Generic[AttributeType]):
         if member in self.available_members:
             raise RuntimeError('Member is already registered.')
 
-        new_member = copy(member)
+        new_member = deepcopy(member)
         attributes = self._gma_as_list(new_member)
         if not attributes:
             return
@@ -468,7 +468,7 @@ class NameManager(AttributeManager):
         """
         super().register_member(member)
 
-        new_member = copy(member)
+        new_member = deepcopy(member)
         attribute = self.get_members_attribute(new_member)
         if attribute and member.gender:
             with self._lock:
