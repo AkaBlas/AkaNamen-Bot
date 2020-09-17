@@ -47,9 +47,22 @@ Wie genau das funktioniert, wohin Hirsch Deine Daten verkauft (wer Hirsch überh
 
 Wenn Du Dich noch nicht mit Telegram und/oder Telegram-Bots auskennst, wird einen Blick in die `Kurzanleitung`_.
 
+Neuigkeiten
+***********
+
+Neben dem vollständigen `Changelog`_ gibt es auch einen Infokanal, der Dich immer auf dem Laufenden hält:
+
+.. raw:: html
+
+    <iframe id="preview"
+            style="border:0;height:500px;width:500px;margin:0px;box-shadow: 0 0 16px 3px rgba(0,0,0,0.2);"
+            src="https://xn--r1a.website/s/AkaNamenInfo">
+    </iframe>
+
 .. _`@AkaNamenBot`: http://t.me/AkaNamenBot
 .. _`Benutzerhandbuch`: https://bibo-joshi.github.io/AkaNamen-Bot/
 .. _`Kurzanleitung`: https://bibo-joshi.github.io/AkaNamen-Bot/quickstart.html
+.. _`Changelog`: https://bibo-joshi.github.io/AkaNamen-Bot/changelog.html
 
 For Developers
 --------------
