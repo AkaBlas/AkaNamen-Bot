@@ -563,7 +563,7 @@ list only members with the same gender as the hint member. Defaults to <a class=
 
 <dl class="py class">
 <dt id="components.attributemanager.NameManager">
-<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">NameManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">NameManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gendered_questions</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.attributemanager.AttributeManager</span></code></a></p>
 <p>Subclass of <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a> for first and full names. This is needed, as the gender
 of a member needs to be taken into account.</p>
@@ -581,6 +581,13 @@ manages attributes, which are available as questions for the attribute this inst
 manages.</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt id="components.attributemanager.NameManager.gendered_questions">
+<code class="sig-name descname">gendered_questions</code><a class="headerlink" href="#components.attributemanager.NameManager.gendered_questions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether questions with tis attribute as hint should try to
+list only members with the same gender as the hint member.</p>
+</dd></dl>
+
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -594,6 +601,8 @@ a <a class="reference internal" href="components.member.html#components.Member" 
 </pre></div>
 </div>
 </p></li>
+<li><p><strong>gendered_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Optional. Whether questions with tis attribute as hint should try to
+list only members with the same gender as the hint member. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -645,71 +654,6 @@ Use <code class="xref py py-meth docutils literal notranslate"><span class="pre"
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="components.attributemanager.PhotoManager">
-<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">PhotoManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#components.attributemanager.NameManager" title="components.attributemanager.NameManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.attributemanager.NameManager</span></code></a></p>
-<p>Subclass of <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a> for photo file IDs. This is needed, as the gender
-of a member needs to be taken into account.</p>
-<dl class="py attribute">
-<dt id="components.attributemanager.PhotoManager.description">
-<code class="sig-name descname">description</code><a class="headerlink" href="#components.attributemanager.PhotoManager.description" title="Permalink to this definition">¶</a></dt>
-<dd><p>A description of the attribute the instance manages.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="components.attributemanager.PhotoManager.questionable_attributes">
-<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.PhotoManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
-<dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
-manages attributes, which are available as questions for the attribute this instance
-manages.</p>
-</dd></dl>
-
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
-<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
-manages attributes, which are available as questions for the attribute this instance
-manages.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt id="components.attributemanager.PhotoManager.distinct_values_for_member">
-<code class="sig-name descname">distinct_values_for_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
-<dd><p>If the member has a gender, this acts just like
-<a class="reference internal" href="#components.attributemanager.AttributeManager.distinct_values_for_member" title="components.attributemanager.AttributeManager.distinct_values_for_member"><code class="xref py py-meth docutils literal notranslate"><span class="pre">AttributeManager.distinct_values_for_member()</span></code></a>. If it does not, an empty set is
-returned.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as hint.</p></li>
-<li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Set[AttributeType]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="components.attributemanager.PhotoManager.get_members_attribute">
-<em class="property">static </em><code class="sig-name descname">get_members_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager.get_members_attribute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gives the attribute of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code> that is managed by this instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
