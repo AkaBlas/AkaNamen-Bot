@@ -66,6 +66,7 @@ Um ihm auf die Sprünge zu helfen, kannst Du
 
 1. versuchen, statt Deiner Adresse Deinen *Standort* zu schicken. Das hilft häufig schon.
 2. die Koordinaten Deines Domizils selbst herausfinden und dem Bot schicken. Bei `OpenStreetMap`_ geht das so:
+
   1. Gib Deine Adresse ein
   2. Wähle den passenden Treffer aus
   3. Klicke auf »Teilen«

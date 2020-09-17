@@ -2,6 +2,39 @@
 Changelog
 =========
 
+Version 1.1
+===========
+*Released 2020-09-17*
+
+*Changes and bug fixes for the user experience:*
+
+- Improve Parsing of Addresses (`#62`_)
+- Move Fetching TG Profile Picture to Editing Conversation (`#61`_)
+- Add Conductor to Allowed Instruments (`#56`_)
+- Fix Interrupting of Free Text Games (`#55`_)
+- Fix Typos (`#54`_)
+- Link Info Channel in Readme and Preview it in Docs (`#52`_)
+
+*Changes and bug fixes for the admin experience:*
+
+- Add ``/rebuild`` command for Admin (`#63`_)
+- Stabilize Registration Process (`#60`_)
+
+*Changes fixes and bugfixes to the backend:*
+
+- Gender Photo Questions (`#63`_)
+- Copy Members with ``deepcopy()`` (`#59`_)
+
+.. _`#62`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#62
+.. _`#61`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#61
+.. _`#56`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#56
+.. _`#55`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#55
+.. _`#54`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#54
+.. _`#52`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#52
+.. _`#63`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#63
+.. _`#60`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#60
+.. _`#59`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#59
+
 Version 1.0
 ===========
 *Released 2020-09-16*
