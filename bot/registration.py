@@ -165,32 +165,20 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
     bot_data = context.bot_data
     user_id = int(context.match.group(1))
     user = context.bot.get_chat_member(user_id, user_id).user
-    profile_photos = user.get_profile_photos()
-
-    if profile_photos.total_count >= 1:
-        profile_ile_id = profile_photos.photos[0][-1].file_id
-    else:
-        profile_ile_id = None
 
     idx = context.match.group(2)
     if not idx:
-        new_member = Member(user_id,
-                            first_name=user.first_name,
-                            last_name=user.last_name,
-                            photo_file_id=profile_ile_id)
+        new_member = Member(user_id, first_name=user.first_name, last_name=user.last_name)
     else:
         idx = int(idx)
         new_member = bot_data[PENDING_REGISTRATIONS_KEY][user_id][idx]
-        new_member.photo_file_id = profile_ile_id
 
-    text = f'Du bis jetzt mit den folgenden Daten angemeldet: 🥳\n\n{new_member.to_str()}\n\n'
-    if profile_ile_id:
-        text += 'Als Foto wurde Dein Telegram-Profilbild gesetzt. '
-    text += 'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten. Wofür die Daten ' \
-            'genutzt werden, kannst Du im Benutzerhandbuch nachlesen.\n\nBitte tritt ' \
-            'außerdem dem Info-Kanal bei. Dort werden ggf. Informationen zu Neuerungen am Bot ' \
-            'oder Wartungsarbeiten bekanntgegeben.\n\nWenn Du Hilfe brauchst, tippe einfach ' \
-            '/hilfe ein.'
+    text = f'Du bis jetzt mit den folgenden Daten angemeldet: 🥳\n\n{new_member.to_str()}\n\n' \
+           'Um die Daten zu bearbeiten, sende den Befehl /daten_bearbeiten. Wofür die Daten ' \
+           'genutzt werden, kannst Du im Benutzerhandbuch nachlesen.\n\nBitte tritt ' \
+           'außerdem dem Info-Kanal bei. Dort werden ggf. Informationen zu Neuerungen am Bot ' \
+           'oder Wartungsarbeiten bekanntgegeben.\n\nWenn Du Hilfe brauchst, tippe einfach ' \
+           '/hilfe ein.'
 
     try:
         context.bot.send_message(chat_id=user_id, text=text, reply_markup=CHANNEL_KEYBOARD)
