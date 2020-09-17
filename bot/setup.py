@@ -20,6 +20,7 @@ import bot.inline as inline
 import bot.highscore as highscore
 import bot.error as error
 import bot.game as game
+import bot.admin
 
 from components import Orchestra
 
@@ -112,6 +113,10 @@ def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
 
     # Set commands
     dispatcher.bot.set_my_commands(BOT_COMMANDS)
+
+    # Admin stuff
+    dispatcher.add_handler(
+        CommandHandler('rebuild', bot.admin.rebuild_orchestra, filters=Filters.user(int(admin))))
 
     # Schedule job deleting users who blocked the bot
     schedule_daily_job(dispatcher)

@@ -4,7 +4,7 @@ import datetime as dtm
 import pytest
 
 from components import Member, AttributeManager, NameManager, Gender, Tuba, Trombone, \
-    Trumpet, Drums, Bassoon, Clarinet, Horn, Flute, ChangingAttributeManager
+    Trumpet, Drums, Bassoon, Clarinet, Horn, Flute, ChangingAttributeManager, PhotoManager
 
 
 @pytest.fixture(scope='function')
@@ -730,6 +730,47 @@ class TestNameManager:
         assert member in bm.available_members
         assert attr == '100'
         assert correct == am.get_members_attribute(member)
+
+
+class TestPhotoAttributeManager:
+    description = 'photo_file_id'
+
+    @pytest.mark.parametrize('gender,other_gender', [(Gender.MALE, Gender.FEMALE),
+                                                     (Gender.FEMALE, Gender.MALE)])
+    def test_distinct_values_for_member(self, member, gender, other_gender):
+        am = PhotoManager(self.description, [])
+        bm = AttributeManager('last_name', [], gendered_questions=True)
+
+        for i in range(10):
+            am.register_member(Member(i, last_name='a', photo_file_id='b', gender=gender))
+
+        for g in [None, gender, other_gender]:
+            assert am.distinct_values_for_member(
+                bm, Member(100, last_name='a', photo_file_id='b', gender=g)) == set()
+            assert am.distinct_values_for_member(
+                bm, Member(100, last_name='c', photo_file_id='b', gender=g)) == set()
+
+        for i in range(5):
+            am.register_member(Member(i + 10, last_name=str(i), photo_file_id='b', gender=gender))
+
+        for g in [None, gender, other_gender]:
+            assert am.distinct_values_for_member(
+                bm, Member(100, last_name='a', photo_file_id='b', gender=g)) == set()
+            assert am.distinct_values_for_member(
+                bm, Member(100, last_name='c', photo_file_id='b', gender=g)) == set()
+
+        for i in range(5):
+            am.register_member(Member(i + 20, last_name='a', photo_file_id=str(i), gender=gender))
+
+        assert am.distinct_values_for_member(
+            bm, Member(100, last_name='a', photo_file_id='b', gender=gender)) == set()
+        assert am.distinct_values_for_member(
+            bm, Member(100, last_name='c', photo_file_id='b',
+                       gender=gender)) == {'0', '1', '2', '3', '4'}
+        assert am.distinct_values_for_member(
+            bm, Member(100, last_name='a', photo_file_id='b', gender=other_gender)) == set()
+        assert am.distinct_values_for_member(
+            bm, Member(100, last_name='c', photo_file_id='b', gender=other_gender)) == set()
 
 
 class TestChangingAttributeManager:

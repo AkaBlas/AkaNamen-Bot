@@ -3,6 +3,7 @@ Frontend: Bot package
 
 .. toctree::
 
+    bot.admin
     bot.ban
     bot.cancel_membership
     bot.check_user_status
