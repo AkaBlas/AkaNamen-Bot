@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """This module contains functions for registering users."""
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.error import Unauthorized
 from telegram.ext import CallbackContext, DispatcherHandlerStop, CallbackQueryHandler
 from bot import (PENDING_REGISTRATIONS_KEY, ORCHESTRA_KEY, DENIED_USERS_KEY, REGISTRATION_KEYBOARD,
                  DOCS_KEYBOARD, ADMIN_KEY, CHANNEL_KEYBOARD)
@@ -182,9 +183,6 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
         new_member = bot_data[PENDING_REGISTRATIONS_KEY][user_id][idx]
         new_member.photo_file_id = profile_ile_id
 
-    bot_data[ORCHESTRA_KEY].register_member(new_member)
-    bot_data[PENDING_REGISTRATIONS_KEY].pop(user_id, None)
-
     text = f'Du bis jetzt mit den folgenden Daten angemeldet: 🥳\n\n{new_member.to_str()}\n\n'
     if profile_ile_id:
         text += 'Als Foto wurde Dein Telegram-Profilbild gesetzt. '
@@ -194,8 +192,15 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
             'oder Wartungsarbeiten bekanntgegeben.\n\nWenn Du Hilfe brauchst, tippe einfach ' \
             '/hilfe ein.'
 
-    context.bot.send_message(chat_id=user_id, text=text, reply_markup=CHANNEL_KEYBOARD)
-    update.effective_message.edit_text('Nutzer erfolgreich angemeldet.')
+    try:
+        context.bot.send_message(chat_id=user_id, text=text, reply_markup=CHANNEL_KEYBOARD)
+        bot_data[ORCHESTRA_KEY].register_member(new_member)
+        update.effective_message.edit_text('Nutzer erfolgreich angemeldet.')
+    except Unauthorized:
+        update.effective_message.edit_text('Der Nutzer hat den Bot inzwischen blockiert. Er '
+                                           'wurde nicht registriert.')
+    finally:
+        bot_data[PENDING_REGISTRATIONS_KEY].pop(user_id, None)
 
 
 def deny_registration_request(update: Update, context: CallbackContext) -> None:
@@ -208,13 +213,19 @@ def deny_registration_request(update: Update, context: CallbackContext) -> None:
     """
     bot_data = context.bot_data
     user_id = int(context.match.group(1))
-    bot_data[PENDING_REGISTRATIONS_KEY].pop(user_id, None)
-    bot_data[DENIED_USERS_KEY].append(user_id)
 
-    context.bot.send_message(chat_id=user_id,
-                             text='Deine Anfrage wurde abgelehnt. Ich werde von jetzt an nicht '
-                             'mehr auf Dich reagieren. 💁🏼‍♂️')
-    update.effective_message.edit_text('Nutzer wurde abgelehnt und wird jetzt ignoriert.')
+    try:
+        context.bot.send_message(chat_id=user_id,
+                                 text='Deine Anfrage wurde abgelehnt. Ich werde von jetzt an nicht'
+                                 ' mehr auf Dich reagieren. 💁🏼‍♂️')
+        bot_data[DENIED_USERS_KEY].append(user_id)
+        update.effective_message.edit_text('Nutzer wurde abgelehnt und wird jetzt ignoriert.')
+    except Unauthorized:
+        update.effective_message.edit_text('Der Nutzer hat den Bot inzwischen blockiert. Er '
+                                           'wurde nicht registriert, darf es aber später noch '
+                                           'einmal versuchen.')
+    finally:
+        bot_data[PENDING_REGISTRATIONS_KEY].pop(user_id, None)
 
 
 ACCEPT_REGISTRATION_HANDLER = CallbackQueryHandler(accept_registration_request,
