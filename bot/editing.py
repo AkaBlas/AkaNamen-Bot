@@ -565,7 +565,7 @@ def phone_number(update: Update, context: CallbackContext) -> str:
             return MENU
         else:
             delete_keyboard(context)
-            text = 'Bitte nutze den Kopf unten, um mir Deine Nummer als Kontakt zu senden.'
+            text = 'Bitte nutze den Knopf unten, um mir Deine Nummer als Kontakt zu senden.'
             markup = ReplyKeyboardMarkup.from_button(
                 KeyboardButton('Kontakt senden', request_contact=True))
             message.reply_text(text=text, reply_markup=markup)

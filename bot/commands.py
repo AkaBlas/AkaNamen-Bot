@@ -52,7 +52,7 @@ def start_inline(update: Update, context: CallbackContext) -> None:
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
     text = ('Über den AkaNamen-Bot kannst Du Kontaktdaten von anderen AkaBlas abrufen, '
-            'sofern diese das erlauben. Das geht so:\n\n1. Drücke auf den Kopf unten. In deinem '
+            'sofern diese das erlauben. Das geht so:\n\n1. Drücke auf den Knopf unten. In deinem '
             'Textfeld erscheint dann »<code>@AkaNamenBot ...</code>«.\n2. Gib den '
             'Namen/Spitznamen des AkaBlasen ein, den Du suchst. Dir wird eine Liste von '
             'Vorschlägen gezeigt.\n3. Klicke auf den gewünschten AkaBlasen. Im Chat erscheinen '
