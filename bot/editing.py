@@ -3,6 +3,7 @@
 """This module contains functions for editing user information."""
 import datetime as dtm
 import warnings
+from copy import deepcopy
 from typing import Dict, Callable, List
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, Message, KeyboardButton, \
@@ -77,10 +78,11 @@ TEXTS: Dict[str, str] = {
         True: 'Dies ist das Foto, das ich aktuell gespeichert habe. Um Dein Foto '
               'zu ändern, schicke mir das neue Foto. Bitte achte darauf, dass man Dich darauf '
               'gut erkennen kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe '
-              'unten.',
+              'unten. Du kannst auch Dein aktuellen Telegram-Profilbild übernehmen.',
         False: 'Aktuell habe ich kein Foto von Dir. Um ein Foto zu hinterlegen, '
                'schicke mir das Foto. Bitte achte darauf, dass man Dich darauf gut erkennen '
-               'kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe unten.',
+               'kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe unten. Du '
+               'kannst auch Dein aktuellen Telegram-Profilbild übernehmen.',
     },
     INSTRUMENTS: 'Die Instrumente, die Du aktuell spielst, sind unten markiert. Um '
                  'die Auswahl zu ändern, klicke auf die Instrumente.\n\nDu kannst auch mehrere '
@@ -104,6 +106,9 @@ NO = 'Nein'
 """obj:`str`: Callback data for "no"."""
 CORRECT = 'Richtig'
 """obj:`str`: Callback data for "correct"."""
+TG_PROFILE_PICTURE = 'TG_PROFILE_PICTURE'
+"""obj:`str`: Callback data indicating that the profile picture of a user should be used as
+ picture. """
 BACK_OR_DELETE_KEYBOARD = InlineKeyboardMarkup.from_row([
     InlineKeyboardButton(text=BACK, callback_data=BACK),
     InlineKeyboardButton(text='Löschen', callback_data=DELETE)
@@ -188,16 +193,22 @@ def reply_photo_state(update: Update, member: Member) -> Message:
         Message: The newly sent message.
     """
     text = TEXTS[PHOTO][bool(member.photo_file_id)]
+    profile_photos = update.effective_user.get_profile_photos()
+    keyboard = deepcopy(BACK_OR_DELETE_KEYBOARD)
+
+    if profile_photos.total_count >= 1:
+        keyboard.inline_keyboard.insert(
+            0, [InlineKeyboardButton('Profilbild übernehmen', callback_data=TG_PROFILE_PICTURE)])
+
     update.callback_query.answer()
 
     if member.photo_file_id:
         update.effective_message.delete()
         message = update.effective_message.reply_photo(caption=text,
                                                        photo=member.photo_file_id,
-                                                       reply_markup=BACK_OR_DELETE_KEYBOARD)
+                                                       reply_markup=keyboard)
     else:
-        message = update.effective_message.edit_text(text=text,
-                                                     reply_markup=BACK_OR_DELETE_KEYBOARD)
+        message = update.effective_message.edit_text(text=text, reply_markup=keyboard)
 
     return message
 
@@ -463,8 +474,13 @@ def photo(update: Update, context: CallbackContext) -> str:
             return PHOTO
     else:
         update.callback_query.answer()
-        if update.callback_query.data == DELETE:
+        callback_data = update.callback_query.data
+
+        if callback_data == DELETE:
             member.photo_file_id = None
+        elif callback_data == TG_PROFILE_PICTURE:
+            profile_photos = update.effective_user.get_profile_photos()
+            member.photo_file_id = profile_photos.photos[0][-1].file_id
 
         if message.photo:
             message.delete()
