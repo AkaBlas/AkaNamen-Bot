@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bot.check_user_status Module &mdash; AkaNamen Bot  documentation</title>
+  <title>bot.admin Module &mdash; AkaNamen Bot  documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="bot.commands Module" href="bot.commands.html" />
-    <link rel="prev" title="bot.cancel_membership Module" href="bot.cancel_membership.html" /> 
+    <link rel="next" title="bot.ban Module" href="bot.ban.html" />
+    <link rel="prev" title="Frontend: Bot package" href="bot.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,10 +97,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="components.html">Backend: Components package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Frontend: Bot package</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="bot.admin.html">bot.admin Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bot.admin Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.ban.html">bot.ban Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.cancel_membership.html">bot.cancel_membership Module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">bot.check_user_status Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.check_user_status.html">bot.check_user_status Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.commands.html">bot.commands Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.constants.html">bot.constants Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.editing.html">bot.editing Module</a></li>
@@ -163,14 +163,14 @@
         
           <li><a href="bot.html">Frontend: Bot package</a> &raquo;</li>
         
-      <li>bot.check_user_status Module</li>
+      <li>bot.admin Module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/bot.check_user_status.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/bot.admin.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -184,31 +184,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bot.check_user_status">
-<span id="bot-check-user-status-module"></span><h1>bot.check_user_status Module<a class="headerlink" href="#module-bot.check_user_status" title="Permalink to this headline">¶</a></h1>
-<p>This module contains functions for checking if users blocked the bot.</p>
+  <div class="section" id="module-bot.admin">
+<span id="bot-admin-module"></span><h1>bot.admin Module<a class="headerlink" href="#module-bot.admin" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions for the admin.</p>
 <dl class="py function">
-<dt id="bot.check_user_status.check_users">
-<code class="sig-prename descclassname">bot.check_user_status.</code><code class="sig-name descname">check_users</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.check_user_status.check_users" title="Permalink to this definition">¶</a></dt>
-<dd><p>Checks for each member of the orchestra, if the bot can still access the user. If there are
-users, who blocked the bot, they are deleted from the orchestra and the admin is informed.</p>
+<dt id="bot.admin.rebuild_orchestra">
+<code class="sig-prename descclassname">bot.admin.</code><code class="sig-name descname">rebuild_orchestra</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.admin.rebuild_orchestra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a new orchestra by registering all members from the one in <code class="docutils literal notranslate"><span class="pre">context.bot_data</span></code> to a
+new instance of <a class="reference internal" href="components.orchestra.html#components.Orchestra" title="components.Orchestra"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Orchestra</span></code></a>. Puts the new orchestra in <code class="docutils literal notranslate"><span class="pre">bot_data</span></code>.
+Useful, if there have been changes to the attribute manager setup.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="bot.check_user_status.schedule_daily_job">
-<code class="sig-prename descclassname">bot.check_user_status.</code><code class="sig-name descname">schedule_daily_job</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dispatcher</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.check_user_status.schedule_daily_job" title="Permalink to this definition">¶</a></dt>
-<dd><p>Schedules a job running daily at 2AM UTC which run <a class="reference internal" href="#bot.check_user_status.check_users" title="bot.check_user_status.check_users"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_users()</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dispatcher</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dispatcher</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
@@ -226,10 +216,10 @@ users, who blocked the bot, they are deleted from the orchestra and the admin is
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bot.commands.html" class="btn btn-neutral float-right" title="bot.commands Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bot.ban.html" class="btn btn-neutral float-right" title="bot.ban Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="bot.cancel_membership.html" class="btn btn-neutral float-left" title="bot.cancel_membership Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="bot.html" class="btn btn-neutral float-left" title="Frontend: Bot package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
