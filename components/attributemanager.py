@@ -423,8 +423,6 @@ class NameManager(AttributeManager):
         questionable_attributes: A list of :class:`components.AttributeManager` instances that
             manages attributes, which are available as questions for the attribute this instance
             manages.
-        gendered_questions: Whether questions with tis attribute as hint should try to
-            list only members with the same gender as the hint member.
 
     Args:
         description: A description of the attribute the instance manages.
@@ -437,21 +435,19 @@ class NameManager(AttributeManager):
             .. code:: python
 
                 lambda member: member[self.description]
-        gendered_questions: Optional. Whether questions with tis attribute as hint should try to
-            list only members with the same gender as the hint member. Defaults to :obj:`False`.
     """
 
-    def __init__(self,
-                 description: str,
-                 questionable_attributes: List[Union[AttributeManager, str]],
-                 get_members_attribute: Callable[['Member'],
-                                                 Optional[Union[AttributeType,
-                                                                List[AttributeType]]]] = None,
-                 gendered_questions: bool = False) -> None:
+    def __init__(
+        self,
+        description: str,
+        questionable_attributes: List[Union[AttributeManager, str]],
+        get_members_attribute: Callable[['Member'], Optional[Union[AttributeType,
+                                                                   List[AttributeType]]]] = None
+    ) -> None:
         super().__init__(description=description,
                          questionable_attributes=questionable_attributes,
                          get_members_attribute=get_members_attribute,
-                         gendered_questions=gendered_questions)
+                         gendered_questions=True)
         self.male_data: MemberDict = defaultdict(set)
         self.female_data: MemberDict = defaultdict(set)
 
@@ -513,6 +509,58 @@ class NameManager(AttributeManager):
                 return self._distinct_values_for_member(data, attribute_manager, member)
             else:
                 return super().distinct_values_for_member(attribute_manager, member)
+        else:
+            return super().distinct_values_for_member(attribute_manager, member)
+
+
+class PhotoManager(NameManager):
+    """
+    Subclass of :class:`AttributeManager` for photo file IDs. This is needed, as the gender
+    of a member needs to be taken into account.
+
+    Attributes:
+        description: A description of the attribute the instance manages.
+        questionable_attributes: A list of :class:`components.AttributeManager` instances that
+            manages attributes, which are available as questions for the attribute this instance
+            manages.
+
+    Args:
+        description: A description of the attribute the instance manages.
+        questionable_attributes: A list of :class:`components.AttributeManager` instances that
+            manages attributes, which are available as questions for the attribute this instance
+            manages.
+    """
+
+    def __init__(self, description: str, questionable_attributes: List[Union[AttributeManager,
+                                                                             str]]) -> None:
+        super().__init__(description=description,
+                         questionable_attributes=questionable_attributes,
+                         get_members_attribute=self.get_members_attribute)
+        self.male_data: MemberDict = defaultdict(set)
+        self.female_data: MemberDict = defaultdict(set)
+
+    @staticmethod
+    def get_members_attribute(member: 'Member') -> Optional[str]:
+        return member.photo_file_id
+
+    def distinct_values_for_member(self, attribute_manager: AttributeManager,
+                                   member: Member) -> Set[AttributeType]:
+        """
+        If the member has a gender, this acts just like
+        :meth:`AttributeManager.distinct_values_for_member`. If it does not, an empty set is
+        returned.
+
+        Args:
+            attribute_manager: The manager describing the attribute serving as hint.
+            member: The member.
+        """
+        if attribute_manager.gendered_questions:
+            members_attribute = self.get_members_attribute(member)
+            if members_attribute is None or member.gender is None:
+                return set()
+            else:
+                data = self.male_data if member.gender is Gender.MALE else self.female_data
+                return self._distinct_values_for_member(data, attribute_manager, member)
         else:
             return super().distinct_values_for_member(attribute_manager, member)
 

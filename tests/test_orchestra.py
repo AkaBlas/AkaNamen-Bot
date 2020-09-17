@@ -280,9 +280,6 @@ class TestOrchestra:
         orchestra.register_member(Member(6, first_name='Brad', photo_file_id=str(uuid4())))
         orchestra.register_member(Member(7, first_name='Marc', photo_file_id=str(uuid4())))
         orchestra.register_member(Member(8, first_name='Joe', photo_file_id=str(uuid4())))
-        assert orchestra.questionable() == [('first_name', 'photo_file_id'),
-                                            ('full_name', 'photo_file_id')]
-        assert orchestra.questionable(multiple_choice=False) == [('first_name', 'photo_file_id'),
-                                                                 ('full_name', 'photo_file_id'),
-                                                                 ('photo_file_id', 'first_name'),
+        assert orchestra.questionable() == []
+        assert orchestra.questionable(multiple_choice=False) == [('photo_file_id', 'first_name'),
                                                                  ('photo_file_id', 'full_name')]

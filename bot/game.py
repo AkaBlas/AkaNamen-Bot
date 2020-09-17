@@ -147,7 +147,7 @@ class QuestionHandler(Handler):
             True: If the update is to be handled
             False: Otherwise.
         """
-        if Filters.command(update):
+        if update.effective_message and Filters.command(update):
             return False
         user_id = update.effective_user.id
         with self._questioners_lock:

@@ -5,7 +5,7 @@ from copy import deepcopy
 from threading import Lock
 
 from components import Member, PicklableBase, Score, AttributeManager, ChangingAttributeManager, \
-    NameManager
+    NameManager, PhotoManager
 
 from typing import Dict, List, Optional, Tuple, Any, Set, Iterable
 
@@ -56,9 +56,8 @@ class Orchestra(PicklableBase):
                     'nickname', list(self.ATTRIBUTE_MANAGERS.difference(['nickname',
                                                                          'full_name']))),
             'photo_file_id':
-                AttributeManager('photo_file_id',
-                                 list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id'])),
-                                 gendered_questions=True),
+                PhotoManager('photo_file_id',
+                             list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id']))),
         }
 
     def __getitem__(self, item: str) -> Any:
