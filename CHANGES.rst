@@ -25,15 +25,15 @@ Version 1.1
 - Gender Photo Questions (`#63`_)
 - Copy Members with ``deepcopy()`` (`#59`_)
 
-.. _`#62`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#62
-.. _`#61`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#61
-.. _`#56`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#56
-.. _`#55`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#55
-.. _`#54`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#54
-.. _`#52`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#52
-.. _`#63`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#63
-.. _`#60`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#60
-.. _`#59`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#59
+.. _`#62`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/62
+.. _`#61`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/61
+.. _`#56`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/56
+.. _`#55`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/55
+.. _`#54`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/54
+.. _`#52`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/52
+.. _`#63`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/63
+.. _`#60`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/60
+.. _`#59`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/59
 
 Version 1.0
 ===========
@@ -58,19 +58,19 @@ Version 1.0
 - Overhaul ``AttributeManager`` Logic and Game Setup (`#40`_)
 - Run Docs Workflow on ``Py3.8`` (`#36`_)
 
-.. _`#43`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#43
-.. _`#42`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#42
-.. _`#41`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#41
-.. _`#39`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#39
-.. _`#38`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#38
-.. _`#35`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#35
-.. _`#34`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#34
-.. _`#33`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#33
-.. _`#26`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#26
-.. _`#46`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#46
-.. _`#44`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#44
-.. _`#40`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#40
-.. _`#36`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/#36
+.. _`#43`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/43
+.. _`#42`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/42
+.. _`#41`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/41
+.. _`#39`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/39
+.. _`#38`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/38
+.. _`#35`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/35
+.. _`#34`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/34
+.. _`#33`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/33
+.. _`#26`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/26
+.. _`#46`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/46
+.. _`#44`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/44
+.. _`#40`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/40
+.. _`#36`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/36
 
 Version RC2
 ===========
