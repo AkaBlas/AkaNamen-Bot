@@ -2,6 +2,29 @@
 Changelog
 =========
 
+Version 1.1.1
+=============
+*Released 2020-09-18*
+
+*Changes and bug fixes for the user experience:*
+
+- Improve Highscore Texts (`#74`_)
+- Improve Inline Mode (`#73`_)
+- Fix vCard for no housenumber (`#72`_)
+
+*Other changes and bug fixes:*
+
+- Copy ``UserScore`` in /rebuild (`#71`_)
+- Fix Gender Equality Check in ``AttributeManagers`` (`#70`_)
+- Fix Links in Changelog (`#69`_)
+
+.. _`#74`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/74
+.. _`#73`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/73
+.. _`#72`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/72
+.. _`#71`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/71
+.. _`#70`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/70
+.. _`#69`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/69
+
 Version 1.1
 ===========
 *Released 2020-09-17*
