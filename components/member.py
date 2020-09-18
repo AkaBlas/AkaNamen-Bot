@@ -187,6 +187,7 @@ class Member:
                         and 'country' in raw):
                     raw['city'] = raw['city'].replace('Brunswick', 'Braunschweig')
                     street = raw.get('street') or raw.get('name')
+                    raw['street'] = street
                     hm = raw.get('housenumber')
                     housenumber = f" {hm}" if hm else ''
                     self._address = f"{street}{housenumber}, {raw['postcode']} {raw['city']}"
