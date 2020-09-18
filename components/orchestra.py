@@ -169,7 +169,12 @@ class Orchestra(PicklableBase):
         else:
             attr = f'{attr}s_score'
 
-        return sorted([getattr(m.user_score, attr) for m in self.members.values()], reverse=True)
+        return sorted([
+            getattr(m.user_score, attr)
+            for m in self.members.values()
+            if getattr(m.user_score, attr).answers > 0
+        ],
+                      reverse=True)  # noqa: E126
 
     def _score_text(self, attr: str, length: int = None, html: Optional[bool] = False) -> str:
         sorted_scores = self._score(attr)
@@ -201,6 +206,10 @@ class Orchestra(PicklableBase):
                     text += '\n'
 
                 text += f'{name_line}\n{ratio_line}'
+
+        if not text:
+            text = 'Noch keine Einträge vorhanden. Schnell ein /spiel_starten, dann bist Du auf ' \
+                   'Platz 1! 😎 '
 
         return text
 

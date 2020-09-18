@@ -40,6 +40,16 @@ def score_orchestra(date):
     return o
 
 
+def score_orchestra_anonymous(date):
+    o = Orchestra()
+    offset = dt.timedelta(weeks=100)
+    m_1 = Member(1)
+    m_1.user_score.add_to_score(8, 4, date)
+    m_1.user_score.add_to_score(10, 10, date - offset)
+    o.register_member(m_1)
+    return o
+
+
 class TestOrchestra:
 
     def test_init_and_subscriptable(self, orchestra):
@@ -152,6 +162,21 @@ class TestOrchestra:
         assert overall_score[3].member == Member(1)
         assert overall_score[3] == Score(18, 14)
 
+    def test_score_texts_empty(self, today, orchestra):
+        todays_score_text = orchestra.todays_score_text()
+        weeks_score_text = orchestra.weeks_score_text()
+        months_score_text = orchestra.months_score_text()
+        years_score_text = orchestra.years_score_text()
+        overall_score_text = orchestra.overall_score_text()
+
+        expected = 'Noch keine Einträge vorhanden.'
+
+        for score_text in [
+                todays_score_text, weeks_score_text, months_score_text, years_score_text,
+                overall_score_text
+        ]:
+            assert score_text.startswith(expected)
+
     def test_score_texts(self, today):
         todays_score_text = score_orchestra(today).todays_score_text()
         weeks_score_text = score_orchestra(today - dt.timedelta(
@@ -231,20 +256,26 @@ class TestOrchestra:
         for i in range(5, 101):
             o.register_member(Member(i))
 
-        assert o.todays_score_text().partition('\n')[0] == '  1. One: 4 / 8'
-        assert o.weeks_score_text().partition('\n')[0] == '  1. One: 4 / 8'
-        assert o.months_score_text().partition('\n')[0] == '  1. One: 4 / 8'
-        assert o.years_score_text().partition('\n')[0] == '  1. One: 4 / 8'
-        assert o.overall_score_text().partition('\n')[0] == '  1. Two: 12 / 14'
+        assert o.todays_score_text().partition('\n')[0] == '1. One: 4 / 8'
+        assert o.weeks_score_text().partition('\n')[0] == '1. One: 4 / 8'
+        assert o.months_score_text().partition('\n')[0] == '1. One: 4 / 8'
+        assert o.years_score_text().partition('\n')[0] == '1. One: 4 / 8'
+        assert o.overall_score_text().partition('\n')[0] == '1. Two: 12 / 14'
 
-    def test_score_text_anonymous_member(self):
-        o = Orchestra()
-        o.register_member(Member(1))
-        assert 'Anonym' in o.todays_score_text()
-        assert 'Anonym' in o.weeks_score_text()
-        assert 'Anonym' in o.months_score_text()
-        assert 'Anonym' in o.years_score_text()
-        assert 'Anonym' in o.overall_score_text()
+    def test_score_text_anonymous_member(self, today):
+        todays_score_text = score_orchestra_anonymous(today).todays_score_text()
+        weeks_score_text = score_orchestra_anonymous(today - dt.timedelta(
+            days=today.weekday())).weeks_score_text()
+        months_score_text = score_orchestra_anonymous(today - dt.timedelta(
+            days=today.day - 1)).months_score_text()
+        years_score_text = score_orchestra_anonymous(dt.date(today.year, 1, 1)).years_score_text()
+        overall_score_text = score_orchestra_anonymous(today).overall_score_text()
+
+        for score_text in [
+                todays_score_text, weeks_score_text, months_score_text, years_score_text,
+                overall_score_text
+        ]:
+            assert 'Anonym' in score_text
 
     def test_questionable(self, orchestra):
         assert orchestra.questionable() == []
