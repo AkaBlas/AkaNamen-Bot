@@ -80,6 +80,10 @@ def check_registration_status(update: Update, context: CallbackContext) -> None:
                 reply_markup=REGISTRATION_KEYBOARD)
             raise DispatcherHandlerStop()
 
+    # Deny access to inline mode to non-members
+    if user_id not in bot_data[ORCHESTRA_KEY].members and update.inline_query:
+        raise DispatcherHandlerStop()
+
 
 def start(update: Update, context: CallbackContext) -> None:
     """

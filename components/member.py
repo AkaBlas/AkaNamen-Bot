@@ -296,21 +296,23 @@ class Member:
         """
         return f'{self.full_name}.vcf'.replace(' ', '_').replace('"', '')
 
-    def vcard(self, bot: Bot) -> BytesIO:
+    def vcard(self, bot: Bot, admin: bool = False) -> BytesIO:
         """
         Gives a vCard of the member.
 
         Args:
             bot: A Telegram bot to retrieve the members photo (if set). Must be the same bot that
                 retrieved the file ID.
+            admin: Whether this method is invoked with admin rights.
 
         Returns:
             The vCard as bytes stream. Make sure to close it!
 
         Raises:
-            ValueError: If sharing contact information is not allowed.
+            ValueError: If sharing contact information is not allowed and :attr:`admin` is
+                :obj:`False`.
         """
-        if not self.allow_contact_sharing:
+        if not (self.allow_contact_sharing or admin):
             raise ValueError('This member does not allow sharing it\'s contact information.')
 
         vcard = vobject.vCard()
