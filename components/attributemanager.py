@@ -505,7 +505,7 @@ class NameManager(AttributeManager):
             if members_attribute is None or (member.first_name and member.gender is None):
                 return set()
             elif member.gender:
-                data = self.male_data if member.gender is Gender.MALE else self.female_data
+                data = self.male_data if member.gender == Gender.MALE else self.female_data
                 return self._distinct_values_for_member(data, attribute_manager, member)
             else:
                 return super().distinct_values_for_member(attribute_manager, member)
@@ -559,7 +559,7 @@ class PhotoManager(NameManager):
             if members_attribute is None or member.gender is None:
                 return set()
             else:
-                data = self.male_data if member.gender is Gender.MALE else self.female_data
+                data = self.male_data if member.gender == Gender.MALE else self.female_data
                 return self._distinct_values_for_member(data, attribute_manager, member)
         else:
             return super().distinct_values_for_member(attribute_manager, member)
