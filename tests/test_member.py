@@ -259,6 +259,10 @@ class TestMember:
         with pytest.raises(ValueError):
             member.vcard(bot)
 
+        with member.vcard(bot, admin=True) as vcard:
+            vcard_string = vcard.read().decode('utf-8')
+            assert 'NAME' in vcard_string
+
         member.allow_contact_sharing = True
         with member.vcard(bot) as vcard:
             vcard_string = vcard.read().decode('utf-8')
