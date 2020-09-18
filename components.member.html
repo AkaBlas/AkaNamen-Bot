@@ -629,12 +629,15 @@ parameters must be passed.</p>
 
 <dl class="py method">
 <dt id="components.Member.vcard">
-<code class="sig-name descname">vcard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bot</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Member.vcard" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">vcard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bot</span></em>, <em class="sig-param"><span class="n">admin</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Member.vcard" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gives a vCard of the member.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>bot</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Bot</span></code>) – A Telegram bot to retrieve the members photo (if set). Must be the same bot that
-retrieved the file ID.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bot</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Bot</span></code>) – A Telegram bot to retrieve the members photo (if set). Must be the same bot that
+retrieved the file ID.</p></li>
+<li><p><strong>admin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether this method is invoked with admin rights.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BytesIO</span></code></p>
@@ -643,7 +646,8 @@ retrieved the file ID.</p>
 <dd class="field-odd"><p>The vCard as bytes stream. Make sure to close it!</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If sharing contact information is not allowed.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If sharing contact information is not allowed and <code class="xref py py-attr docutils literal notranslate"><span class="pre">admin</span></code> is
+    <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd>
 </dl>
 </dd></dl>

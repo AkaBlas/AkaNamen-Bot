@@ -188,6 +188,17 @@
 <span id="bot-inline-module"></span><h1>bot.inline Module<a class="headerlink" href="#module-bot.inline" title="Permalink to this headline">¶</a></h1>
 <p>This module contains functions for the inline mode.</p>
 <dl class="py data">
+<dt id="bot.inline.MEMBERS_PER_PAGE">
+<code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">MEMBERS_PER_PAGE</code><em class="property"> = 10</em><a class="headerlink" href="#bot.inline.MEMBERS_PER_PAGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of members per page in inline mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
 <dt id="bot.inline.REQUEST_CONTACT">
 <code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">REQUEST_CONTACT</code><em class="property"> = 'contact_request {}'</em><a class="headerlink" href="#bot.inline.REQUEST_CONTACT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback data for requesting the vCard of a member.
@@ -225,7 +236,9 @@ Use as <code class="docutils literal notranslate"><span class="pre">REQUEST_CONT
 <dl class="py function">
 <dt id="bot.inline.search_users">
 <code class="sig-prename descclassname">bot.inline.</code><code class="sig-name descname">search_users</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.inline.search_users" title="Permalink to this definition">¶</a></dt>
-<dd><p>Searches the orchestras members for a match of the inline query and answers the query.</p>
+<dd><p>Searches the orchestras members for a match of the inline query and answers the query. If the
+query is empty, returns all members in alphabetical order.</p>
+<p>Results are paginated with at most <a class="reference internal" href="#bot.inline.MEMBERS_PER_PAGE" title="bot.inline.MEMBERS_PER_PAGE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MEMBERS_PER_PAGE</span></code></a> members per page.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
