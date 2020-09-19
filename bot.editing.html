@@ -244,6 +244,17 @@ deleting its current value.</p>
 </dd></dl>
 
 <dl class="py data">
+<dt id="bot.editing.CHOOSING_MEMBER">
+<code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">CHOOSING_MEMBER</code><em class="property"> = 'choosing_member'</em><a class="headerlink" href="#bot.editing.CHOOSING_MEMBER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifier of the state in which the admin chooses a member to edit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
 <dt id="bot.editing.CORRECT">
 <code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">CORRECT</code><em class="property"> = 'Richtig'</em><a class="headerlink" href="#bot.editing.CORRECT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback data for “correct”.</p>
@@ -278,17 +289,6 @@ deleting its current value.</p>
 </dd>
 <dt class="field-even">Type</dt>
 <dd class="field-even"><p><cite>str</cite></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py data">
-<dt id="bot.editing.EDITING_HANDLER">
-<code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">EDITING_HANDLER</code><em class="property"> = &lt;telegram.ext.conversationhandler.ConversationHandler object&gt;</em><a class="headerlink" href="#bot.editing.EDITING_HANDLER" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handler used to allow users to change their data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.conversationhandler.html#telegram.ext.ConversationHandler" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.ConversationHandler</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -501,6 +501,26 @@ picture.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="bot.editing.admin_menu">
+<code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">admin_menu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.admin_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the conversation for the admin and displays the menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#bot.editing.MENU" title="bot.editing.MENU"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MENU</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="bot.editing.allow_contact_sharing">
 <code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">allow_contact_sharing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.allow_contact_sharing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses the reply for the privacy settings.</p>
@@ -516,6 +536,40 @@ picture.</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#bot.editing.MENU" title="bot.editing.MENU"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MENU</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.editing.build_editing_handler">
+<code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">build_editing_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">admin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.build_editing_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a handler used to edit members, with a special menu only available for the admin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>admin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The admins ID</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ConversationHandler</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.editing.choose_member">
+<code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">choose_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.choose_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides the admin with a list of members to choose from.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#bot.editing.CHOOSING_MEMBER" title="bot.editing.CHOOSING_MEMBER"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CHOOSING_MEMBER</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -558,6 +612,24 @@ having no keyboard and hence it will be ignored.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="bot.editing.get_member">
+<code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">get_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.get_member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the member to be edited. Takes into account the the admin may be editing one of the
+orchestras members</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="bot.editing.instruments">
 <code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">instruments</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.instruments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses the reply and for the instruments.</p>
@@ -581,7 +653,7 @@ having no keyboard and hence it will be ignored.</p>
 <dl class="py function">
 <dt id="bot.editing.menu">
 <code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">menu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.menu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Starts the conversation and asks the user the input for the first name.</p>
+<dd><p>Starts the conversation and displays the menu.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -715,6 +787,26 @@ requested</p></li>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bot.editing.start_admin_editing">
+<code class="sig-prename descclassname">bot.editing.</code><code class="sig-name descname">start_admin_editing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.editing.start_admin_editing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the editing conversation for the admin by redirecting to inline mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#bot.editing.CHOOSING_MEMBER" title="bot.editing.CHOOSING_MEMBER"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CHOOSING_MEMBER</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
