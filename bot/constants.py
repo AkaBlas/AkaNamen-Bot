@@ -29,6 +29,11 @@ EDITING_MESSAGE_KEY = 'editing_message_key'
 :class:`telegram.Message` with an :class:`telegram.InlineKeyboardMarkup` sent in the process of
 editing the members data.
 """
+EDITING_USER_KEY = 'editing_user_key'
+"""
+:obj:`str`: Each ``context.user_data[EDITING_USER_KEY]`` is expected to be the id of a user to be
+edited. Only relevant for the admin.
+"""
 GAME_MESSAGE_KEY = 'game_message_key'
 """
 :obj:`str`: Each ``context.user_data[GAME_MESSAGE_KEY]`` is expected to be the last

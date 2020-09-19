@@ -10,7 +10,7 @@ from ptbstats import set_dispatcher, register_stats, SimpleStats
 
 from bot import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_KEY, ADMIN_KEY,
                  REGISTRATION_PATTERN, INLINE_HELP)
-from bot.editing import EDITING_HANDLER
+from bot.editing import build_editing_handler
 from bot.cancel_membership import CANCEL_MEMBERSHIP_HANDLER
 from bot.ban import build_banning_handler
 from bot.check_user_status import schedule_daily_job
@@ -83,7 +83,7 @@ def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
     dispatcher.add_handler(registration.DENY_REGISTRATION_HANDLER)
 
     # Edit user data
-    dispatcher.add_handler(EDITING_HANDLER)
+    dispatcher.add_handler(build_editing_handler(int(admin)))
 
     # Cancel membership
     dispatcher.add_handler(CANCEL_MEMBERSHIP_HANDLER)

@@ -31,12 +31,16 @@ def rebuild_orchestra(update: Update, context: CallbackContext) -> None:
             gender=m.gender,
             date_of_birth=m.date_of_birth,
             instruments=m.instruments,
-            address=m.address,
+            address=None,
             photo_file_id=m.photo_file_id,
             allow_contact_sharing=m.allow_contact_sharing,
         )
         new_member.user_score = m.user_score
         new_member.user_score.member = new_member
+        new_member._raw_address = m._raw_address
+        new_member._address = m._address
+        new_member._longitude = m._longitude
+        new_member._latitude = m._latitude
         orchestra.register_member(new_member)
 
     context.bot_data[ORCHESTRA_KEY] = orchestra

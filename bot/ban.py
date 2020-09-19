@@ -131,7 +131,7 @@ def build_banning_handler(admin: int) -> ConversationHandler:
     """
     # yapf: disable
     return ConversationHandler(
-        entry_points=[CommandHandler('ban', select_user)],
+        entry_points=[CommandHandler('ban', select_user, filters=Filters.user(admin))],
         states={
             SELECTING_USER: [MessageHandler(Filters.regex(BANNING_PATTERN) & Filters.user(admin),
                                             ask_for_confirmation)],
