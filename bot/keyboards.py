@@ -166,6 +166,7 @@ def build_questions_hints_keyboard(
         questions = [q[1].description for q in questionable]
 
     buttons = []
+    any_selected = False
     for row in QUESTION_HINT_KEYBOARD:
         button_row = []
         for option in row:
@@ -177,12 +178,18 @@ def build_questions_hints_keyboard(
             callback_data = f'{option} {SELECTED if current_selection.get(option) else DESELECTED}'
             button = InlineKeyboardButton(text=text, callback_data=callback_data)
             button_row.append(button)
+
+            if current_selection.get(option):
+                any_selected = True
         if row:
             buttons.append(button_row)
-    buttons.append([
-        InlineKeyboardButton(text=ALL, callback_data=ALL),
-        InlineKeyboardButton(text=DONE, callback_data=DONE)
-    ])
+    if any_selected:
+        buttons.append([
+            InlineKeyboardButton(text=ALL, callback_data=ALL),
+            InlineKeyboardButton(text=DONE, callback_data=DONE)
+        ])
+    else:
+        buttons.append([InlineKeyboardButton(text=ALL, callback_data=DONE)])
     return InlineKeyboardMarkup(buttons)
 
 
