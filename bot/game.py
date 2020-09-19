@@ -230,7 +230,8 @@ def multiple_choice(update: Update, context: CallbackContext) -> Union[str, int]
     else:
         msg = message.reply_text(TEXTS[MULTIPLE_CHOICE], reply_markup=MULTIPLE_CHOICE_KEYBOARD)
         context.user_data[GAME_MESSAGE_KEY] = msg
-        context.user_data.get(GAME_KEY, GameSettings())
+        if GAME_KEY not in context.user_data:
+            context.user_data[GAME_KEY] = GameSettings()
         return MULTIPLE_CHOICE
 
 
