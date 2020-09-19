@@ -210,12 +210,14 @@ def multiple_choice(update: Update, context: CallbackContext) -> Union[str, int]
         game_settings.multiple_choice = data == 'True'
 
         try:
-            message.edit_text(TEXTS[HINT_ATTRIBUTES],
-                              reply_markup=build_questions_hints_keyboard(
-                                  orchestra=orchestra,
-                                  hint=True,
-                                  multiple_choice=game_settings.multiple_choice,
-                                  exclude_members=[orchestra.members[update.effective_user.id]]))
+            message.edit_text(
+                TEXTS[HINT_ATTRIBUTES],
+                reply_markup=build_questions_hints_keyboard(
+                    orchestra=orchestra,
+                    hint=True,
+                    multiple_choice=game_settings.multiple_choice,
+                    exclude_members=[orchestra.members[update.effective_user.id]],
+                    current_selection={h: True for h in game_settings.hint_attributes}))
             return HINT_ATTRIBUTES
         except RuntimeError as e:
             if 'Orchestra currently has no questionable attributes.' == str(e):
@@ -228,7 +230,7 @@ def multiple_choice(update: Update, context: CallbackContext) -> Union[str, int]
     else:
         msg = message.reply_text(TEXTS[MULTIPLE_CHOICE], reply_markup=MULTIPLE_CHOICE_KEYBOARD)
         context.user_data[GAME_MESSAGE_KEY] = msg
-        context.user_data[GAME_KEY] = GameSettings()
+        context.user_data.get(GAME_KEY, GameSettings())
         return MULTIPLE_CHOICE
 
 
@@ -256,13 +258,15 @@ def hint_attributes(update: Update, context: CallbackContext) -> Union[str, int]
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
         game_settings.hint_attributes = [attr for attr, sl in current_selection.items() if sl]
 
-        message.edit_text(text=TEXTS[QUESTION_ATTRIBUTES],
-                          reply_markup=build_questions_hints_keyboard(
-                              orchestra=orchestra,
-                              question=True,
-                              multiple_choice=game_settings.multiple_choice,
-                              allowed_hints=game_settings.hint_attributes,
-                              exclude_members=exclude_members))
+        message.edit_text(
+            text=TEXTS[QUESTION_ATTRIBUTES],
+            reply_markup=build_questions_hints_keyboard(
+                orchestra=orchestra,
+                question=True,
+                multiple_choice=game_settings.multiple_choice,
+                allowed_hints=game_settings.hint_attributes,
+                exclude_members=exclude_members,
+                current_selection={q: True for q in game_settings.question_attributes}))
         return QUESTION_ATTRIBUTES
     elif data == ALL:
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
@@ -370,15 +374,14 @@ def number_questions(update: Update, context: CallbackContext) -> str:
     game_settings = cast(GameSettings, context.user_data[GAME_KEY])
     game_settings.number_of_questions = int(data)
 
-    settings = cast(GameSettings, context.user_data[GAME_KEY])
     try:
         questioner = Questioner(user_id=user_id,
                                 orchestra=context.bot_data[ORCHESTRA_KEY],
-                                hint_attributes=settings.hint_attributes,
-                                question_attributes=settings.question_attributes,
-                                number_of_questions=settings.number_of_questions,
+                                hint_attributes=game_settings.hint_attributes,
+                                question_attributes=game_settings.question_attributes,
+                                number_of_questions=game_settings.number_of_questions,
                                 bot=context.bot,
-                                multiple_choice=settings.multiple_choice)
+                                multiple_choice=game_settings.multiple_choice)
         QUESTION_HANDLER.set_questioner(user_id, questioner)
         message.delete()
 
