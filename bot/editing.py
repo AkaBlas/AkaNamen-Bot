@@ -4,16 +4,18 @@
 import datetime as dtm
 import warnings
 from copy import deepcopy
-from typing import Dict, Callable, List
+from typing import Dict, Callable, List, Union
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, Message, KeyboardButton, \
-    ReplyKeyboardMarkup, ReplyKeyboardRemove, ChatAction
+    ReplyKeyboardMarkup, ReplyKeyboardRemove, ChatAction, InlineQueryResultArticle, \
+    InputTextMessageContent
 from telegram.error import BadRequest
 from telegram.ext import ConversationHandler, CallbackContext, CommandHandler, Filters, \
-    MessageHandler, CallbackQueryHandler, Handler
+    MessageHandler, CallbackQueryHandler, Handler, InlineQueryHandler
+from telegram.constants import MAX_INLINE_QUERY_RESULTS
 
 from bot import (ORCHESTRA_KEY, build_instruments_keyboard, parse_instruments_keyboard,
-                 EDITING_MESSAGE_KEY, DONE, SELECTED, BACK)
+                 EDITING_MESSAGE_KEY, EDITING_USER_KEY, DONE, SELECTED, BACK, ADMIN_KEY)
 from components import Member, Gender, Instrument
 
 # Ignore warnings from ConversationHandler
@@ -47,6 +49,8 @@ ALLOW_CONTACT_SHARING = 'allow_contact_sharing'
 """:obj:`str`: Identifier of the state in which the privacy setting is changed."""
 PHONE_NUMBER = 'phone_number'
 """:obj:`str`: Identifier of the state in which the phone number is changed."""
+CHOOSING_MEMBER = 'choosing_member'
+""":obj:`str`: Identifier of the state in which the admin chooses a member to edit."""
 
 # Texts
 TEXTS: Dict[str, str] = {
@@ -170,6 +174,26 @@ SELECTION_KEYBOARD = InlineKeyboardMarkup([[
 # yapf: enable
 
 
+def get_member(update: Update, context: CallbackContext) -> Member:
+    """
+    Returns the member to be edited. Takes into account the the admin may be editing one of the
+    orchestras members
+
+    Args:
+        update: The update.
+        context: The context as provided by the :class:`telegram.ext.Dispatcher`.
+    """
+    orchestra = context.bot_data[ORCHESTRA_KEY]
+    admin_id = context.bot_data[ADMIN_KEY]
+    user_id = update.effective_user.id
+
+    if user_id == admin_id:
+        edit_id = context.user_data.get(EDITING_USER_KEY, admin_id)
+        return orchestra.members[edit_id]
+    else:
+        return orchestra.members[user_id]
+
+
 def delete_keyboard(context: CallbackContext) -> None:
     """
     Tries to delete the inline keyboard from the last message. If a
@@ -220,9 +244,69 @@ def reply_photo_state(update: Update, member: Member) -> Message:
     return message
 
 
-def menu(update: Update, context: CallbackContext) -> str:
+def start_admin_editing(update: Update, context: CallbackContext) -> str:
     """
-    Starts the conversation and asks the user the input for the first name.
+    Starts the editing conversation for the admin by redirecting to inline mode.
+
+    Args:
+        update: The update.
+        context: The context as provided by the :class:`telegram.ext.Dispatcher`.
+
+    Returns:
+        :attr:`CHOOSING_MEMBER`
+    """
+    update.effective_message.reply_text(
+        'Okay, such Dir jemanden aus',
+        reply_markup=InlineKeyboardMarkup.from_button(
+            InlineKeyboardButton(text='Klick', switch_inline_query_current_chat='')))
+    return CHOOSING_MEMBER
+
+
+def choose_member(update: Update, context: CallbackContext) -> str:
+    """
+    Provides the admin with a list of members to choose from.
+
+    Args:
+        update: The update.
+        context: The context as provided by the :class:`telegram.ext.Dispatcher`.
+
+    Returns:
+        :attr:`CHOOSING_MEMBER`
+    """
+    inline_query = update.inline_query
+    orchestra = context.bot_data[ORCHESTRA_KEY]
+
+    if inline_query.offset:
+        offset = int(inline_query.offset)
+    else:
+        offset = 0
+    next_offset: Union[str, int] = ''
+
+    members = sorted(list(orchestra.members.values()), key=lambda member: member.full_name)
+
+    # Telegram only likes up to 50 results
+    if len(members) > (offset + 1) * MAX_INLINE_QUERY_RESULTS:
+        next_offset = offset + 1
+        members = members[offset * MAX_INLINE_QUERY_RESULTS:offset * MAX_INLINE_QUERY_RESULTS
+                          + MAX_INLINE_QUERY_RESULTS]
+    else:
+        members = members[offset * MAX_INLINE_QUERY_RESULTS:]
+
+    results = [
+        InlineQueryResultArticle(id=m.user_id,
+                                 title=m.full_name,
+                                 input_message_content=InputTextMessageContent(m.user_id))
+        for m in members
+    ]
+
+    inline_query.answer(results=results, next_offset=next_offset)
+
+    return CHOOSING_MEMBER
+
+
+def admin_menu(update: Update, context: CallbackContext) -> str:
+    """
+    Starts the conversation for the admin and displays the menu.
 
     Args:
         update: The update.
@@ -231,8 +315,29 @@ def menu(update: Update, context: CallbackContext) -> str:
     Returns:
         :attr:`MENU`
     """
-    orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    user_id = int(update.message.text)
+    context.user_data[EDITING_USER_KEY] = user_id
+    member = get_member(update, context)
+    text = TEXTS[MENU].format(member.to_str())
+
+    msg = update.effective_message.reply_text(text=text, reply_markup=SELECTION_KEYBOARD)
+    context.user_data[EDITING_MESSAGE_KEY] = msg
+
+    return MENU
+
+
+def menu(update: Update, context: CallbackContext) -> str:
+    """
+    Starts the conversation and displays the menu.
+
+    Args:
+        update: The update.
+        context: The context as provided by the :class:`telegram.ext.Dispatcher`.
+
+    Returns:
+        :attr:`MENU`
+    """
+    member = get_member(update, context)
     text = TEXTS[MENU].format(member.to_str())
 
     msg = update.effective_message.reply_text(text=text, reply_markup=SELECTION_KEYBOARD)
@@ -258,8 +363,7 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
     data = update.callback_query.data
     message = update.effective_message
 
-    orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    member = get_member(update, context)
 
     if data == DONE:
         text = f'Hervorragend 🙆‍♂️. Deine Daten lauten nun wie folgt:\n\n{member.to_str()}' \
@@ -267,6 +371,9 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
                f'sicherlich auch über Deine neuen Daten 😉. Schreib ihm doch eine Mail an ' \
                f'vorstand@akablas.de. ✉️ '
         message.edit_text(text=text)
+
+        # Only relevant for admin
+        context.user_data.pop(EDITING_USER_KEY, None)
 
         return ConversationHandler.END
     elif data == PHOTO:
@@ -308,7 +415,7 @@ def simple_callback_factory(attr: str) -> Callable[[Update, CallbackContext], st
 
     def callback(update: Update, context: CallbackContext) -> str:
         orchestra = context.bot_data[ORCHESTRA_KEY]
-        member = orchestra.members[update.effective_user.id]
+        member = get_member(update, context)
         reply_markup = SELECTION_KEYBOARD
 
         if update.message:
@@ -371,7 +478,7 @@ def date_of_birth(update: Update, context: CallbackContext) -> str:
         :attr:`ADDRESS`: Else.
     """
     orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    member = get_member(update, context)
 
     if update.message:
         delete_keyboard(context)
@@ -412,7 +519,7 @@ def address(update: Update, context: CallbackContext) -> str:
         :attr:`PHOTO`: Else.
     """
     orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    member = get_member(update, context)
 
     if update.message:
         delete_keyboard(context)
@@ -467,7 +574,7 @@ def photo(update: Update, context: CallbackContext) -> str:
         :attr:`MENU`
     """
     orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    member = get_member(update, context)
     message = update.effective_message
 
     if update.message:
@@ -524,7 +631,7 @@ def instruments(update: Update, context: CallbackContext) -> str:
     message = update.effective_message
     data = update.callback_query.data
     orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    member = get_member(update, context)
 
     update.callback_query.answer()
 
@@ -560,7 +667,7 @@ def phone_number(update: Update, context: CallbackContext) -> str:
         :attr:`MENU`: Else
     """
     orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    member = get_member(update, context)
     message = update.effective_message
 
     if update.message:
@@ -617,7 +724,7 @@ def allow_contact_sharing(update: Update, context: CallbackContext) -> str:
     data = update.callback_query.data
 
     orchestra = context.bot_data[ORCHESTRA_KEY]
-    member = orchestra.members[update.effective_user.id]
+    member = get_member(update, context)
 
     member.allow_contact_sharing = data == YES
     orchestra.update_member(member)
@@ -629,35 +736,51 @@ def allow_contact_sharing(update: Update, context: CallbackContext) -> str:
 
 ADDRESS_FILTER = (
     (Filters.regex(COORDINATES_PATTERN) | Filters.text) & ~Filters.command) | Filters.location
-EDITING_HANDLER = ConversationHandler(
-    entry_points=[CommandHandler('daten_bearbeiten', menu)],
-    states={
-        MENU: [CallbackQueryHandler(parse_selection)],
-        FIRST_NAME: simple_handler_factory(FIRST_NAME),
-        LAST_NAME: simple_handler_factory(LAST_NAME),
-        NICKNAME: simple_handler_factory(NICKNAME),
-        GENDER: simple_handler_factory(GENDER, message_handler=False),
-        DATE_OF_BIRTH: [
-            MessageHandler((Filters.text & ~Filters.command), date_of_birth),
-            CallbackQueryHandler(date_of_birth)
+
+
+def build_editing_handler(admin: int) -> ConversationHandler:
+    """
+    Returns a handler used to edit members, with a special menu only available for the admin.
+
+    Args:
+        admin: The admins ID
+    """
+    return ConversationHandler(
+        entry_points=[
+            CommandHandler('daten_bearbeiten', menu),
+            CommandHandler('edit_member', start_admin_editing, filters=Filters.user(admin))
         ],
-        ADDRESS: [MessageHandler(ADDRESS_FILTER, address),
-                  CallbackQueryHandler(address)],
-        ADDRESS_CONFIRMATION: [
-            MessageHandler(ADDRESS_FILTER, address),
-            CallbackQueryHandler(address)
-        ],
-        PHOTO: [
-            MessageHandler(Filters.photo | Filters.document.image, photo),
-            CallbackQueryHandler(photo)
-        ],
-        INSTRUMENTS: [CallbackQueryHandler(instruments)],
-        PHONE_NUMBER: [
-            MessageHandler(Filters.contact, phone_number),
-            CallbackQueryHandler(phone_number)
-        ],
-        ALLOW_CONTACT_SHARING: [CallbackQueryHandler(allow_contact_sharing)],
-    },
-    fallbacks=[],
-    allow_reentry=True)
-""":class:`telegram.ext.ConversationHandler`: Handler used to allow users to change their data."""
+        states={
+            CHOOSING_MEMBER: [
+                InlineQueryHandler(choose_member),
+                MessageHandler(Filters.text & ~Filters.command, admin_menu)
+            ],
+            MENU: [CallbackQueryHandler(parse_selection)],
+            FIRST_NAME: simple_handler_factory(FIRST_NAME),
+            LAST_NAME: simple_handler_factory(LAST_NAME),
+            NICKNAME: simple_handler_factory(NICKNAME),
+            GENDER: simple_handler_factory(GENDER, message_handler=False),
+            DATE_OF_BIRTH: [
+                MessageHandler((Filters.text & ~Filters.command), date_of_birth),
+                CallbackQueryHandler(date_of_birth)
+            ],
+            ADDRESS: [MessageHandler(ADDRESS_FILTER, address),
+                      CallbackQueryHandler(address)],
+            ADDRESS_CONFIRMATION: [
+                MessageHandler(ADDRESS_FILTER, address),
+                CallbackQueryHandler(address)
+            ],
+            PHOTO: [
+                MessageHandler(Filters.photo | Filters.document.image, photo),
+                CallbackQueryHandler(photo)
+            ],
+            INSTRUMENTS: [CallbackQueryHandler(instruments)],
+            PHONE_NUMBER: [
+                MessageHandler(Filters.contact, phone_number),
+                CallbackQueryHandler(phone_number)
+            ],
+            ALLOW_CONTACT_SHARING: [CallbackQueryHandler(allow_contact_sharing)],
+        },
+        fallbacks=[],
+        allow_reentry=True,
+        per_chat=False)
