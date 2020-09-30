@@ -581,15 +581,27 @@ def photo(update: Update, context: CallbackContext) -> str:
         delete_keyboard(context)
 
         if update.message.photo:
-            file_id = update.message.photo[-1].file_id
+            photo_size = update.message.photo[-1]
+
+            if photo_size.width > photo_size.height:
+                msg = message.reply_text(
+                    'Ich kann leider keine Fotos im Querformat annehmen. 😕 '
+                    'Bitte  schick mir ein anderes Foto.',
+                    reply_markup=BACK_OR_DELETE_KEYBOARD)
+                context.user_data[EDITING_MESSAGE_KEY] = msg
+                return PHOTO
+
+            file_id = photo_size.file_id
             member.photo_file_id = file_id
 
             msg = message.reply_text(text=TEXTS[MENU].format(member.to_str()),
                                      reply_markup=SELECTION_KEYBOARD)
             context.user_data[EDITING_MESSAGE_KEY] = msg
         else:
-            message.reply_text(text=('Bitte sende mir das Bild als Foto anstatt als Datei, '
-                                     'd.h. <i>nicht</i> über die Büroklammer.'))
+            msg = message.reply_text(text=('Bitte sende mir das Bild als Foto anstatt als Datei, '
+                                           'd.h. <i>nicht</i> über die Büroklammer.'),
+                                     reply_markup=BACK_OR_DELETE_KEYBOARD)
+            context.user_data[EDITING_MESSAGE_KEY] = msg
             return PHOTO
     else:
         update.callback_query.answer()
