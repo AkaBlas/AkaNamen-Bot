@@ -462,8 +462,7 @@ class Member:
         """
         if self.address is None:
             raise ValueError('This member has no address.')
-        return max(self._compare(self.address.lower(), string.lower()),
-                   fuzz.token_set_ratio(self.address.lower(), string.lower()) / 100)
+        return fuzz.token_sort_ratio(self.address.lower(), string.lower()) / 100
 
     def distance_of_address_to(self, coordinates: Tuple[float, float]) -> float:
         """
