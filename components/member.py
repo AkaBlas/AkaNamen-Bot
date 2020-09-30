@@ -521,6 +521,8 @@ class Member:
                     out = dt.datetime.strptime(string, '%d. %b. %y').date()
                 except ValueError:
                     out = dt.datetime.strptime(string, '%d. %b. %Y').date()
+                if out.year >= dt.datetime.now().year:
+                    out = out.replace(year=out.year - 100)
             return out
 
         def string_to_instrument(string: str) -> Optional[Instrument]:
