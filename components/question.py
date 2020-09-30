@@ -113,7 +113,7 @@ class Question:
 
             if self.attribute in [self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.FULL_NAME]:
                 accuracy = getattr(self.member, f'compare_{self.attribute}_to')(answer)
-                return accuracy >= 0.85
+                return accuracy >= 0.90
             elif self.attribute == self.BIRTHDAY:
                 bd_string = self.member.birthday.replace('0', '').replace('.', '')  # type: ignore
                 answer = answer.replace('.', '').replace(',', '').replace(';', '')
@@ -131,7 +131,7 @@ class Question:
                         return self.member.distance_of_address_to(
                             (float(match.group(1)), float(match.group(2)))) <= 0.2
                     else:
-                        return self.member.compare_address_to(answer) >= 0.85
+                        return self.member.compare_address_to(answer) >= 0.90
                 else:
                     location = update.message.location
                     return self.member.distance_of_address_to(

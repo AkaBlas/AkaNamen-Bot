@@ -141,12 +141,13 @@ class TestQuestion:
         assert q.correct_answer == member.nickname
 
     @pytest.mark.parametrize('answer, result', [('first nick last', True),
-                                                ('FiRSt niCKnaMe LaSt', True),
-                                                ('FIRST NICKNAME LAST', True),
+                                                ('FiRSt nick LaSt', True),
+                                                ('FiRSt niCKnaMe LaSt', False),
+                                                ('FIRST NICKNAME LAST', False),
                                                 ('  FIRST   NICK   LAST  ', True),
                                                 ('first last', True), ('first nick', True),
-                                                ('nick last', True), ('nick', False),
-                                                ('last', False), ('fisrt nik lst', True),
+                                                ('nick last', False), ('nick', False),
+                                                ('last', False), ('fisrt nik lst', False),
                                                 ('first', False), ('none', False),
                                                 ('some very wrong answer', False)])
     def test_check_answer_free_text_full_name(self, answer, result, member):
@@ -187,13 +188,13 @@ class TestQuestion:
         assert q.check_answer(update) is result
         assert q.correct_answer == member.instruments_str
 
-    @pytest.mark.parametrize('answer, result', [('Universitätsplatz, Braunschweig', True),
+    @pytest.mark.parametrize('answer, result', [('Universitätsplatz, Braunschweig', False),
                                                 ('Univeritätsplatz 2, Braunschweig', True),
-                                                ('Universitätpltz 3, BRAUNSCHWEIG', True),
+                                                ('Universitätpltz 3, BRAUNSCHWEIG', False),
                                                 ('Schleinitzstraße 19, Braunschweig', False),
                                                 ('Schleinitzstraße 19, 38106 Braunschweig', False),
                                                 ('Universitätsplatz 2, 38106 Braunschweig', True),
-                                                ('Universtatsplatz Braunschweig', True),
+                                                ('Universtatsplatz Braunschweig', False),
                                                 ('52.2736706, 10.5296817', True),
                                                 ('(52.2736706,10.5296817)', True),
                                                 ('geo:52.27350,10.52974?z=19', True)])
