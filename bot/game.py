@@ -8,10 +8,10 @@ from typing import Optional, List, cast, Dict, Union
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
 from telegram.ext import ConversationHandler, CallbackContext, Handler, \
-    CommandHandler, CallbackQueryHandler, MessageHandler, Filters
+    CommandHandler, CallbackQueryHandler, Filters
 
 from bot import ORCHESTRA_KEY, GAME_KEY, parse_questions_hints_keyboard, \
-    build_questions_hints_keyboard, SELECTED, DONE, ALL, GAME_MESSAGE_KEY
+    build_questions_hints_keyboard, SELECTED, DONE, ALL, GAME_MESSAGE_KEY, CONVERSATION_KEY
 from components import Questioner, Member
 
 # States of the conversation
@@ -26,6 +26,18 @@ MULTIPLE_CHOICE = 'Multiple Choice'
 """:obj:`str`: Identifier of the state in the type of questions is selected."""
 GAME = 'GAME'
 """:obj:`str`: Identifier of the state in which the questions are asked and answered."""
+CONVERSATION_VALUE = 'game'
+"""
+:obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a game
+conversation.
+"""
+CONVERSATION_INTERRUPT_TEXT = ('Du spielst gerade ein Spiel. 🧐 Bitte antworte nur auf '
+                               'die Fragen und mach keine anderen Eingaben. Wenn Du das '
+                               'Spiel abbrechen möchtest, nutze den Befehl '
+                               '/spiel_abbrechen.')
+"""
+:obj:`str`: Message to send, if the user tries to interrupt this conversation.
+"""
 
 # Texts
 TEXTS: Dict[str, str] = {
@@ -183,6 +195,7 @@ class QuestionHandler(Handler):
                 member = cast(Member, orchestra.members[user_id])
                 member.user_score.add_to_score(total, correct)
 
+                context.user_data[CONVERSATION_KEY] = False
                 return ConversationHandler.END
 
 
@@ -199,6 +212,7 @@ def multiple_choice(update: Update, context: CallbackContext) -> Union[str, int]
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
+    context.user_data[CONVERSATION_KEY] = CONVERSATION_VALUE
     message = update.effective_message
     orchestra = context.bot_data[ORCHESTRA_KEY]
 
@@ -224,6 +238,7 @@ def multiple_choice(update: Update, context: CallbackContext) -> Union[str, int]
                 message.reply_text('Es sind leider noch nicht genug AkaBlasen angemeldet, um ein '
                                    'Spiel starten zu können. 😕 Bitte versuche es später erneut.')
                 message.delete()
+                context.user_data[CONVERSATION_KEY] = False
                 return ConversationHandler.END
             else:
                 raise e
@@ -392,6 +407,7 @@ def number_questions(update: Update, context: CallbackContext) -> str:
     except ValueError:
         message.edit_text('Die gewählte Spielkonfiguration ist leider ungültig. Bitte versuche '
                           'es erneut.')
+        context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
 
 
@@ -409,21 +425,8 @@ def cancel(update: Update, context: CallbackContext) -> int:
         context.user_data[GAME_MESSAGE_KEY].delete()
     except BadRequest:
         pass
+    context.user_data[CONVERSATION_KEY] = False
     return ConversationHandler.END
-
-
-def fallback(update: Update, context: CallbackContext) -> None:
-    """
-    Reminds the user that they are playing a game and other functionality will not work.
-
-    Args:
-        update: The update.
-        context: The context as provided by the :class:`telegram.ext.Dispatcher`.
-    """
-    update.effective_message.reply_text('Du spielst gerade ein Spiel. 🧐 Bitte antworte nur auf '
-                                        'die Fragen und mach keine anderen Eingaben. Wenn Du das '
-                                        'Spiel abbrechen möchtest, nutze den Befehl '
-                                        '/spiel_abbrechen.')
 
 
 GAME_HANDLER = ConversationHandler(
@@ -435,8 +438,7 @@ GAME_HANDLER = ConversationHandler(
         NUMBER_QUESTIONS: [CallbackQueryHandler(number_questions)],
         GAME: [QUESTION_HANDLER]
     },
-    fallbacks=[CommandHandler('spiel_abbrechen', cancel),
-               MessageHandler(Filters.all, fallback)],
+    fallbacks=[CommandHandler('spiel_abbrechen', cancel)],
     # We need to set per_chat to False in order to be able to handle PollAnswer updates
     per_chat=False)
 """:class:`telegram.ext.ConversationHandler`: Handler for playing games."""

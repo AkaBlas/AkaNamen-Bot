@@ -15,7 +15,8 @@ from telegram.ext import ConversationHandler, CallbackContext, CommandHandler, F
 from telegram.constants import MAX_INLINE_QUERY_RESULTS
 
 from bot import (ORCHESTRA_KEY, build_instruments_keyboard, parse_instruments_keyboard,
-                 EDITING_MESSAGE_KEY, EDITING_USER_KEY, DONE, SELECTED, BACK, ADMIN_KEY)
+                 EDITING_MESSAGE_KEY, EDITING_USER_KEY, DONE, SELECTED, BACK, ADMIN_KEY,
+                 CONVERSATION_KEY)
 from components import Member, Gender, Instrument
 
 # Ignore warnings from ConversationHandler
@@ -51,6 +52,16 @@ PHONE_NUMBER = 'phone_number'
 """:obj:`str`: Identifier of the state in which the phone number is changed."""
 CHOOSING_MEMBER = 'choosing_member'
 """:obj:`str`: Identifier of the state in which the admin chooses a member to edit."""
+CONVERSATION_VALUE = 'editing'
+"""
+:obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a editing
+conversation.
+"""
+CONVERSATION_INTERRUPT_TEXT = 'Upsi! Du bearbeitest gerade noch Deine Daten. Bitte schließe das ' \
+                              'ab. Danach kannst Du mit mir machen, was Du willst. 😏 '
+"""
+:obj:`str`: Message to send, if the user tries to interrupt this conversation.
+"""
 
 # Texts
 TEXTS: Dict[str, str] = {
@@ -255,6 +266,7 @@ def start_admin_editing(update: Update, context: CallbackContext) -> str:
     Returns:
         :attr:`CHOOSING_MEMBER`
     """
+    context.user_data[CONVERSATION_KEY] = CONVERSATION_VALUE
     update.effective_message.reply_text(
         'Okay, such Dir jemanden aus',
         reply_markup=InlineKeyboardMarkup.from_button(
@@ -337,6 +349,7 @@ def menu(update: Update, context: CallbackContext) -> str:
     Returns:
         :attr:`MENU`
     """
+    context.user_data[CONVERSATION_KEY] = CONVERSATION_VALUE
     member = get_member(update, context)
     text = TEXTS[MENU].format(member.to_str())
 
@@ -375,6 +388,7 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
         # Only relevant for admin
         context.user_data.pop(EDITING_USER_KEY, None)
 
+        context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
     elif data == PHOTO:
         msg = reply_photo_state(update, member)
@@ -794,5 +808,4 @@ def build_editing_handler(admin: int) -> ConversationHandler:
             ALLOW_CONTACT_SHARING: [CallbackQueryHandler(allow_contact_sharing)],
         },
         fallbacks=[],
-        allow_reentry=True,
         per_chat=False)
