@@ -201,8 +201,13 @@
 <dl class="py function">
 <dt id="bot.setup.register_dispatcher">
 <code class="sig-prename descclassname">bot.setup.</code><code class="sig-name descname">register_dispatcher</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dispatcher</span></em>, <em class="sig-param"><span class="n">admin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.setup.register_dispatcher" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds handlers. Convenience method to avoid doing that all in the main script.
-Also sets the bot commands and makes sure <code class="docutils literal notranslate"><span class="pre">dispatcher.bot_data</span></code> is set up correctly.</p>
+<dd><ul class="simple">
+<li><p>Adds handlers. Convenience method to avoid doing that all in the main script.</p></li>
+<li><p>Sets the bot commands and makes sure <code class="docutils literal notranslate"><span class="pre">dispatcher.bot_data</span></code> is set up correctly.</p></li>
+<li><p>Registers a <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.typehandler.html#telegram.ext.TypeHandler" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.TypeHandler</span></code></a> that makes sure that conversations are not
+interrupted</p></li>
+<li><p>Sets up statistics</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
