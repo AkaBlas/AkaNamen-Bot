@@ -5,7 +5,7 @@ from telegram import (Update, InlineKeyboardMarkup, InlineKeyboardButton)
 from telegram.ext import CallbackContext, CallbackQueryHandler, ConversationHandler, \
     CommandHandler, MessageHandler, Filters
 
-from bot import ORCHESTRA_KEY, CANCELLATION_MESSAGE_KEY
+from bot import ORCHESTRA_KEY, CANCELLATION_MESSAGE_KEY, CONVERSATION_KEY
 
 CONFIRMATION_TEXT = 'Oooh, Så svinge vi på seidelen igen ... Skål!'
 """
@@ -14,6 +14,16 @@ CONFIRMATION_TEXT = 'Oooh, Så svinge vi på seidelen igen ... Skål!'
 CONFIRMATION = 'CONFIRMATION'
 """
 :obj:`str`: State of the conversation in which the cancellation is to be confirmed.
+"""
+CONVERSATION_VALUE = 'cancelling_membership'
+"""
+:obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a membership
+cancellation conversation.
+"""
+CONVERSATION_INTERRUPT_TEXT = 'Hey! Entscheid Dich erst einmal, ob Du noch angemeldet bleiben ' \
+                              'möchtest, bevor Du etwas anderes versuchst. 🙄 '
+"""
+:obj:`str`: Message to send, if the user tries to interrupt this conversation.
 """
 
 
@@ -26,6 +36,7 @@ def ask_for_confirmation(update: Update, context: CallbackContext) -> str:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
+    context.user_data[CONVERSATION_KEY] = CONVERSATION_VALUE
     text = 'Bist Du Dir <i>ganz</i> sicher, dass Du das möchtest? 🥺 Wenn Du Dich abmeldest, ' \
            'kannst Du den AkaNamen-Bot nicht mehr nutzen und andere AkaBlasen können nicht mehr ' \
            'Deinen Namen lernen.\n\n<b>Bitte beachte:</b> Wenn Du Dich abmeldest, werden alle ' \
@@ -59,6 +70,7 @@ def confirm(update: Update, context: CallbackContext) -> int:
     orchestra = context.bot_data[ORCHESTRA_KEY]
     orchestra.kick_member(orchestra.members[update.effective_user.id])
 
+    context.user_data[CONVERSATION_KEY] = False
     return ConversationHandler.END
 
 
@@ -79,6 +91,7 @@ def cancel_cancellation(update: Update, context: CallbackContext) -> int:
     else:
         update.effective_message.edit_text(text)
 
+    context.user_data[CONVERSATION_KEY] = False
     return ConversationHandler.END
 
 

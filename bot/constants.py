@@ -56,6 +56,12 @@ GAME_KEY = 'game_key'
 :obj:`str`: Each ``context.user_data[GAME_KEY]`` is expected to contain information to be used
 by :class:`bot.GameHandler`.
 """
+CONVERSATION_KEY = 'conversation'
+"""
+:obj:`str`: Each ``context.user_data[CONVERSATION_KEY]`` is expected to contain information about
+which conversation the user is currently in. Should contain :obj:`False`, if no conversation is
+active.
+"""
 
 # Callback Data
 REGISTRATION_PATTERN = 'requesting_registration'

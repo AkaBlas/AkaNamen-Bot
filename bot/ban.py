@@ -6,7 +6,7 @@ from telegram.error import Unauthorized
 from telegram.ext import CallbackContext, ConversationHandler, \
     CommandHandler, MessageHandler, Filters
 
-from bot import ORCHESTRA_KEY, BANNING_KEY, DENIED_USERS_KEY, ADMIN_KEY
+from bot import ORCHESTRA_KEY, BANNING_KEY, DENIED_USERS_KEY, ADMIN_KEY, CONVERSATION_KEY
 
 SELECTING_USER = 'SELECTING_USER'
 """
@@ -22,8 +22,18 @@ CONFIRMATION_TEXT = 'Hinfort! Garstiges Gesindel!'
 """
 BANNING_PATTERN = r'.*ID:(\d*)'
 """
-obj:`str`: Pattern to extract the ID to be banned in the :attr:`CONFIRMATION` state.
+:obj:`str`: Pattern to extract the ID to be banned in the :attr:`CONFIRMATION` state.
 ``context.matches.group(1)`` will be the id (as string).
+"""
+CONVERSATION_VALUE = 'banning'
+"""
+:obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a banning
+conversation.
+"""
+CONVERSATION_INTERRUPT_TEXT = 'Hey. Du bist gerade dabei einen Nutzer zu sperren. Bring das ' \
+                              'erstmal zu Ende! '
+"""
+:obj:`str`: Message to send, if the user tries to interrupt this conversation.
 """
 
 
@@ -35,6 +45,7 @@ def select_user(update: Update, context: CallbackContext) -> str:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
+    context.user_data[CONVERSATION_KEY] = CONVERSATION_VALUE
     context.bot.send_chat_action(chat_id=update.effective_user.id, action=ChatAction.TYPING)
 
     orchestra = context.bot_data[ORCHESTRA_KEY]
@@ -52,6 +63,7 @@ def select_user(update: Update, context: CallbackContext) -> str:
     if not buttons:
         update.effective_message.reply_text(
             text='Es gibt keine Mitglieder, die gebannt werden könnten.')
+        context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
 
     text = 'Wer hat sich denn daneben benommen?'
@@ -105,6 +117,7 @@ def confirm(update: Update, context: CallbackContext) -> int:
     except Unauthorized:
         pass
 
+    context.user_data[CONVERSATION_KEY] = False
     return ConversationHandler.END
 
 
@@ -119,6 +132,7 @@ def cancel_banning(update: Update, context: CallbackContext) -> int:
     text = 'Vorgang abgebrochen. Nutzer wird nicht blockiert.'
     update.effective_message.reply_text(text, reply_markup=ReplyKeyboardRemove())
 
+    context.user_data[CONVERSATION_KEY] = False
     return ConversationHandler.END
 
 
