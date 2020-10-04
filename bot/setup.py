@@ -74,10 +74,12 @@ def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
         if update.callback_query:
             contact_request_check = bool(
                 re.match(inline.REQUEST_CONTACT_PATTERN, update.callback_query.data))
+            highscore_check = 'highscore' in update.callback_query.data
         else:
             contact_request_check = False
+            highscore_check = False
 
-        if conversation_check or contact_request_check:
+        if conversation_check or contact_request_check or highscore_check:
             text = interrupt_replies[conversation]
             if update.callback_query:
                 update.callback_query.answer(text=text, show_alert=True)
@@ -207,4 +209,4 @@ def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
     # Clear conversation key
     user_data = dispatcher.user_data
     for user_id in user_data:
-        user_data[user_id].pop(CONVERSATION_KEY)
+        user_data[user_id].pop(CONVERSATION_KEY, None)
