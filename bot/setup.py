@@ -13,6 +13,7 @@ from bot import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_KEY, ADM
                  REGISTRATION_PATTERN, INLINE_HELP, CONVERSATION_KEY)
 import bot.editing as editing
 import bot.cancel_membership as cancel_membership
+import bot.backup as backup
 import bot.ban as ban
 import bot.check_user_status as check_user_status
 import bot.registration as registration
@@ -193,8 +194,9 @@ def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
     dispatcher.add_error_handler(error.handle_error)
     dispatcher.add_error_handler(clear_conversation_status)
 
-    # Schedule job deleting users who blocked the bot
+    # Schedule jobs
     check_user_status.schedule_daily_job(dispatcher)
+    backup.schedule_daily_job(dispatcher)
 
     # Set up bot_data
     bot_data = dispatcher.bot_data
