@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="components.html">Backend: Components package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Frontend: Bot package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bot.admin.html">bot.admin Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.backup.html">bot.backup Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.ban.html">bot.ban Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.cancel_membership.html">bot.cancel_membership Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.check_user_status.html">bot.check_user_status Module</a></li>
@@ -193,7 +194,7 @@
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.bot_data[ADMIN_KEY]</span></code> is expected to be the admins chat id.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -205,7 +206,7 @@
 to be banned from the bot.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -214,11 +215,11 @@ to be banned from the bot.</p>
 <dt id="bot.constants.CANCELLATION_MESSAGE_KEY">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">CANCELLATION_MESSAGE_KEY</code><em class="property"> = 'cancellation_message_key'</em><a class="headerlink" href="#bot.constants.CANCELLATION_MESSAGE_KEY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.user_data[CANCELLATION_MESSAGE_KEY]</span></code> is expected to be the last
-<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a> with an <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a> sent in the process of
+<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a> with an <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a> sent in the process of
 cancelling the members membership.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -227,11 +228,11 @@ cancelling the members membership.</p>
 <dt id="bot.constants.CONVERSATION_KEY">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">CONVERSATION_KEY</code><em class="property"> = 'conversation'</em><a class="headerlink" href="#bot.constants.CONVERSATION_KEY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.user_data[CONVERSATION_KEY]</span></code> is expected to contain information about
-which conversation the user is currently in. Should contain <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>, if no conversation is
+which conversation the user is currently in. Should contain <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>, if no conversation is
 active.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -243,7 +244,7 @@ active.</p>
 ids, which were denied registration.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -252,11 +253,11 @@ ids, which were denied registration.</p>
 <dt id="bot.constants.EDITING_MESSAGE_KEY">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">EDITING_MESSAGE_KEY</code><em class="property"> = 'editing_message_key'</em><a class="headerlink" href="#bot.constants.EDITING_MESSAGE_KEY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.user_data[EDITING_MESSAGE_KEY]</span></code> is expected to be the last
-<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a> with an <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a> sent in the process of
+<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a> with an <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a> sent in the process of
 editing the members data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -268,7 +269,7 @@ editing the members data.</p>
 edited. Only relevant for the admin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -280,7 +281,7 @@ edited. Only relevant for the admin.</p>
 by <code class="xref py py-class docutils literal notranslate"><span class="pre">bot.GameHandler</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -289,11 +290,11 @@ by <code class="xref py py-class docutils literal notranslate"><span class="pre"
 <dt id="bot.constants.GAME_MESSAGE_KEY">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">GAME_MESSAGE_KEY</code><em class="property"> = 'game_message_key'</em><a class="headerlink" href="#bot.constants.GAME_MESSAGE_KEY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.user_data[GAME_MESSAGE_KEY]</span></code> is expected to be the last
-<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a> with an <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a> sent in the process of
+<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a> with an <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a> sent in the process of
 setting up a game.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -305,7 +306,7 @@ setting up a game.</p>
 the inline mode should be displayed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -317,7 +318,7 @@ the inline mode should be displayed.</p>
 <a class="reference internal" href="components.orchestra.html#components.Orchestra" title="components.Orchestra"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Orchestra</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -326,11 +327,11 @@ the inline mode should be displayed.</p>
 <dt id="bot.constants.PENDING_REGISTRATIONS_KEY">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">PENDING_REGISTRATIONS_KEY</code><em class="property"> = 'pending_registrations'</em><a class="headerlink" href="#bot.constants.PENDING_REGISTRATIONS_KEY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Each <code class="docutils literal notranslate"><span class="pre">context.bot_data[PENDING_REGISTRATIONS_KEY]</span></code> is expected to be a dictionary of
-type Dict[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, List[<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a>]], where each entry represents a user
+type Dict[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a>, List[<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a>]], where each entry represents a user
 registration request, which needs to be processed by the admin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -338,11 +339,11 @@ registration request, which needs to be processed by the admin.</p>
 <dl class="py data">
 <dt id="bot.constants.REGISTRATION_PATTERN">
 <code class="sig-prename descclassname">bot.constants.</code><code class="sig-name descname">REGISTRATION_PATTERN</code><em class="property"> = 'requesting_registration'</em><a class="headerlink" href="#bot.constants.REGISTRATION_PATTERN" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.callbackquery.html#telegram.CallbackQuery" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.CallbackQuery</span></code></a> s with this as <code class="docutils literal notranslate"><span class="pre">callback_data</span></code> will trigger a
+<dd><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.callbackquery.html#telegram.CallbackQuery" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.CallbackQuery</span></code></a> s with this as <code class="docutils literal notranslate"><span class="pre">callback_data</span></code> will trigger a
 registration request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>

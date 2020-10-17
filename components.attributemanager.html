@@ -190,7 +190,7 @@
 <dl class="py class">
 <dt id="components.attributemanager.AttributeManager">
 <em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">AttributeManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gendered_questions</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></p>
 <p>A class to keep track on a specific attribute of <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instances and
 what questions can be asked based on it.</p>
 <div class="admonition note">
@@ -227,18 +227,18 @@ list only members with the same gender as the hint member.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
-<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
+<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p></li>
-<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <code class="docutils literal notranslate"><span class="pre">None</span></code>]]]) – <p>A callable that extracts the attribute managed by this class from
+<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]]]) – <p>A callable that extracts the attribute managed by this class from
 a <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instance. Defaults to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">member</span><span class="p">:</span> <span class="n">member</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
 </pre></div>
 </div>
 </p></li>
-<li><p><strong>gendered_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Optional. Whether questions with tis attribute as hint should try to
-list only members with the same gender as the hint member. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>.</p></li>
+<li><p><strong>gendered_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Optional. Whether questions with tis attribute as hint should try to
+list only members with the same gender as the hint member. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -248,7 +248,7 @@ list only members with the same gender as the hint member. Defaults to <a class=
 <dd><p>All the members that have the attribute managed by this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.FrozenSet" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenSet</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.FrozenSet" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrozenSet</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -257,7 +257,7 @@ list only members with the same gender as the hint member. Defaults to <a class=
 <dt id="components.attributemanager.AttributeManager.build_question_with">
 <code class="sig-name descname">build_question_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager">components.attributemanager.AttributeManager</a></span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="p">:</span> <span class="n">Literal<span class="p">[</span>False<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">exclude_members</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>Member<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Member<span class="p">, </span>AttributeType<span class="p">, </span>Union<span class="p">[</span>Any<span class="p">, </span>List<span class="p">[</span>Any<span class="p">]</span><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#components.attributemanager.AttributeManager.build_question_with" title="Permalink to this definition">¶</a></dt>
 <dt>
-<code class="sig-name descname">build_question_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager">components.attributemanager.AttributeManager</a></span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="p">:</span> <span class="n">Literal<span class="p">[</span>True<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">exclude_members</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>Member<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Member<span class="p">, </span>AttributeType<span class="p">, </span>Tuple<span class="p">[</span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a><span class="p">]</span></dt>
+<code class="sig-name descname">build_question_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager">components.attributemanager.AttributeManager</a></span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="p">:</span> <span class="n">Literal<span class="p">[</span>True<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">exclude_members</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>Member<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Member<span class="p">, </span>AttributeType<span class="p">, </span>Tuple<span class="p">[</span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></dt>
 <dd><p>Builds a question where this instance is serving as hint and <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code>
 servers as question. For multiple choice questions the output is a 4-tuple of</p>
 <ol class="arabic simple">
@@ -276,22 +276,22 @@ servers as question. For multiple choice questions the output is a 4-tuple of</p
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as question.</p></li>
-<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
-<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
 <li><p><strong>exclude_members</strong> (<em>Iterable</em><em>[</em><a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a><em>]</em>) – Optional. Members to exclude from serving as hint. Only relevant, if
 <code class="docutils literal notranslate"><span class="pre">multiple_choice</span> <span class="pre">is</span> <span class="pre">True</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is not a valid question for this instance in
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is not a valid question for this instance in
     general</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is currently not questionable for this
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is currently not questionable for this
     instance</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[Tuple[<a class="reference internal" href="components.member.html#components.Member" title="components.Member">Member</a>, AttributeType, Tuple[Any, Any, Any, Any], <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>], Tuple[<a class="reference internal" href="components.member.html#components.Member" title="components.Member">Member</a>, AttributeType, Any]]</p>
+<dd class="field-odd"><p>Union[Tuple[<a class="reference internal" href="components.member.html#components.Member" title="components.Member">Member</a>, AttributeType, Tuple[Any, Any, Any, Any], <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Tuple[<a class="reference internal" href="components.member.html#components.Member" title="components.Member">Member</a>, AttributeType, Any]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -306,7 +306,7 @@ of the distinct attribute values appearing across the members <code class="docut
 <li><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">self.members_share_attribute(member,</span> <span class="pre">m)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">attribute_manager.members_share_attribute(member,</span> <span class="pre">m)</span></code></p></li>
 </ol>
-<p>If <code class="docutils literal notranslate"><span class="pre">self.get_members_attribute(member)</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, will just return an empty set.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">self.get_members_attribute(member)</span></code> is <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, will just return an empty set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -328,16 +328,16 @@ of the distinct attribute values appearing across the members <code class="docut
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as question.</p></li>
-<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
-<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
 <li><p><strong>exclude_members</strong> (<em>Iterable</em><em>[</em><a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a><em>]</em>) – Optional. Members to exclude from serving as hint.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is not a valid question for this instance in
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is not a valid question for this instance in
     general</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is currently not questionable for this
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code> is currently not questionable for this
     instance</p></li>
 </ul>
 </dd>
@@ -357,11 +357,11 @@ of <code class="xref py py-attr docutils literal notranslate"><span class="pre">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>) – The manager describing the attribute serving as hint.</p></li>
-<li><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member that defines the correct answer.</p></li>
+<li><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member that defines the correct answer.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[~AttributeType, ~AttributeType, ~AttributeType, ~AttributeType], <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[~AttributeType, ~AttributeType, ~AttributeType, ~AttributeType], <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -372,10 +372,10 @@ of <code class="xref py py-attr docutils literal notranslate"><span class="pre">
 <dd><p>Gives the attribute of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code> that is managed by this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member.</p>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <code class="docutils literal notranslate"><span class="pre">None</span></code>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -389,13 +389,13 @@ attribute managed by <code class="xref py py-attr docutils literal notranslate">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as question.</p></li>
-<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
-<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
 <li><p><strong>exclude_members</strong> (<em>Iterable</em><em>[</em><a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a><em>]</em>) – Optional. Members to exclude from serving as hint.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -410,12 +410,12 @@ question is the attribute managed by <code class="xref py py-attr docutils liter
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>attribute_manager</strong> (<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><em>AttributeManager</em></a>) – The manager describing the attribute serving as question.</p></li>
 <li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member.</p></li>
-<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
-<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether this is a multiple choice question or not. Defaults to
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a></p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -426,10 +426,10 @@ question is the attribute managed by <code class="xref py py-attr docutils liter
 <dd><p>Kicks a member, if present.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member to kick.</p>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member to kick.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -439,7 +439,7 @@ question is the attribute managed by <code class="xref py py-attr docutils liter
 <code class="sig-name descname">members_share_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member1</span></em>, <em class="sig-param"><span class="n">member2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.members_share_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if <code class="xref py py-attr docutils literal notranslate"><span class="pre">member1</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">member2</span></code> share the attribute described by this
 instance. This usually means a check by equality except in the case, where the attribute
-is given by a list. In this case, <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> is returned, if the lists have at least one
+is given by a list. In this case, <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> is returned, if the lists have at least one
 common element.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -449,7 +449,7 @@ common element.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -465,10 +465,10 @@ Use <a class="reference internal" href="#components.attributemanager.AttributeMa
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The new member</p>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The new member</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -504,10 +504,10 @@ member. To update the information again, call this method again.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member with new information.</p>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member with new information.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -544,18 +544,18 @@ list only members with the same gender as the hint member.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
-<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
+<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p></li>
-<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <code class="docutils literal notranslate"><span class="pre">None</span></code>]]]) – <p>A callable that extracts the attribute managed by this class from
+<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]]]) – <p>A callable that extracts the attribute managed by this class from
 a <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instance. Defaults to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">member</span><span class="p">:</span> <span class="n">member</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
 </pre></div>
 </div>
 </p></li>
-<li><p><strong>gendered_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Optional. Whether questions with tis attribute as hint should try to
-list only members with the same gender as the hint member. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>.</p></li>
+<li><p><strong>gendered_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Optional. Whether questions with tis attribute as hint should try to
+list only members with the same gender as the hint member. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -584,11 +584,11 @@ manages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
-<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
+<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p></li>
-<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <code class="docutils literal notranslate"><span class="pre">None</span></code>]]]) – <p>A callable that extracts the attribute managed by this class from
+<li><p><strong>get_members_attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[~AttributeType, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[~AttributeType], <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]]]) – <p>A callable that extracts the attribute managed by this class from
 a <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instance. Defaults to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">member</span><span class="p">:</span> <span class="n">member</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
 </pre></div>
@@ -622,10 +622,10 @@ returned.</p>
 <dd><p>Kicks a member, if present.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member to kick.</p>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member to kick.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -641,10 +641,10 @@ Use <code class="xref py py-meth docutils literal notranslate"><span class="pre"
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The new member</p>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The new member</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -674,8 +674,8 @@ manages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
-<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A description of the attribute the instance manages.</p></li>
+<li><p><strong>questionable_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p></li>
 </ul>
@@ -706,10 +706,10 @@ returned.</p>
 <dd><p>Gives the attribute of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code> that is managed by this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member.</p>
+<dd class="field-odd"><p><strong>member</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.ForwardRef" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ForwardRef</span></code></a>) – The member.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>

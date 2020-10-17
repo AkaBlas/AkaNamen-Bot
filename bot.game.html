@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="components.html">Backend: Components package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Frontend: Bot package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bot.admin.html">bot.admin Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.backup.html">bot.backup Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.ban.html">bot.ban Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.cancel_membership.html">bot.cancel_membership Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.check_user_status.html">bot.check_user_status Module</a></li>
@@ -193,7 +194,7 @@
 <dd><p>Message to send, if the user tries to interrupt this conversation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -205,7 +206,7 @@
 conversation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -216,7 +217,7 @@ conversation.</p>
 <dd><p>Identifier of the state in which the questions are asked and answered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -227,15 +228,15 @@ conversation.</p>
 <dd><p>Handler for playing games.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.conversationhandler.html#telegram.ext.ConversationHandler" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.ConversationHandler</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.conversationhandler.html#telegram.ext.ConversationHandler" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.ConversationHandler</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py class">
 <dt id="bot.game.GameSettings">
-<em class="property">class </em><code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">GameSettings</code><span class="sig-paren">(</span><em class="sig-param">number_of_questions: int = 0</em>, <em class="sig-param">multiple_choice: bool = True</em>, <em class="sig-param">hint_attributes: List[str] = &lt;factory&gt;</em>, <em class="sig-param">question_attributes: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#bot.game.GameSettings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<em class="property">class </em><code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">GameSettings</code><span class="sig-paren">(</span><em class="sig-param">number_of_questions=0</em>, <em class="sig-param">multiple_choice=True</em>, <em class="sig-param">hint_attributes=&lt;factory&gt;</em>, <em class="sig-param">question_attributes=&lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#bot.game.GameSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A simple data class for storing the game settings made by a user.</p>
 <dl class="py attribute">
 <dt id="bot.game.GameSettings.hint_attributes">
@@ -245,7 +246,7 @@ conversation.</p>
 questions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -258,7 +259,7 @@ questions.</p>
 questions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -269,7 +270,7 @@ questions.</p>
 <dd><p>Number of questions to ask the user.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,7 +282,7 @@ questions.</p>
 text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -300,19 +301,19 @@ text.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>hint_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of strings, appearing either in
+<li><p><strong>hint_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of strings, appearing either in
 <a class="reference internal" href="components.question.html#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Question.SUPPORTED_ATTRIBUTES</span></code></a> or as keys in
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Orchestra.DICTS_TO_ATTRS</span></code>. These will be given as hints for the
 questions. May be empty, in which case all available attributes are allowed. Defaults
 to <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
-<li><p><strong>question_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of strings, appearing either in
+<li><p><strong>question_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of strings, appearing either in
 <a class="reference internal" href="components.question.html#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Question.SUPPORTED_ATTRIBUTES</span></code></a> or as keys in
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">components.Orchestra.DICTS_TO_ATTRS</span></code>. These will be asked for in the
 questions. May be empty, in which case all available attributes are allowed. Defaults
 to <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
-<li><p><strong>number_of_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of questions to ask the user. Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
-<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the question to be asked are multiple choice or free text.
-Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
+<li><p><strong>number_of_questions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of questions to ask the user. Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the question to be asked are multiple choice or free text.
+Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -324,7 +325,7 @@ Defaults to <a class="reference external" href="https://docs.python.org/3/librar
 <dd><p>Identifier of the state in which the hint attributes are selected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -335,7 +336,7 @@ Defaults to <a class="reference external" href="https://docs.python.org/3/librar
 <dd><p>Identifier of the state in the type of questions is selected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -346,7 +347,7 @@ Defaults to <a class="reference external" href="https://docs.python.org/3/librar
 <dd><p>Keyboard for selection the type of questions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -357,7 +358,7 @@ Defaults to <a class="reference external" href="https://docs.python.org/3/librar
 <dd><p>Identifier of the state in which the number of question attributes is selected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -368,7 +369,7 @@ Defaults to <a class="reference external" href="https://docs.python.org/3/librar
 <dd><p>Keyboard for selection the number of questions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.inlinekeyboardmarkup.html#telegram.InlineKeyboardMarkup" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.InlineKeyboardMarkup</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -379,7 +380,7 @@ Defaults to <a class="reference external" href="https://docs.python.org/3/librar
 <dd><p>Identifier of the state in which the question attributes are selected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -399,11 +400,11 @@ score.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -432,10 +433,10 @@ False: Otherwise.</p>
 <dd><p>Pops questioner of a user.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The ID of the user.</p>
+<dd class="field-odd"><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The ID of the user.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Questioner</span></code>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Questioner</span></code>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -447,12 +448,12 @@ False: Otherwise.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The ID of the user this questioner is associated with.</p></li>
+<li><p><strong>user_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The ID of the user this questioner is associated with.</p></li>
 <li><p><strong>questioner</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Questioner</span></code>) – The Questioner instance</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -461,11 +462,11 @@ False: Otherwise.</p>
 
 <dl class="py data">
 <dt id="bot.game.TEXTS">
-<code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">TEXTS</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a><span class="p">]</span></em><em class="property"> = {'HINT_ATTRIBUTES': '&lt;b&gt;2/4 - Hinweise&lt;/b&gt;\n\nOkidoki. Bitte wähle nun aus, welche Eigenschaften eines AkaBlasen als Hinweis gegeben werden können. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.', 'Multiple Choice': '&lt;b&gt;1/4 - Spielmodus&lt;/b&gt;\n\nJuhu, ein Spiel! Bitte wähle zunächst aus, ob Du Multiple-Choice- oder Freitext-Fragen bekommst.\n\n&lt;i&gt;⚠️ Hinweis:&lt;/i&gt; Den Freitext-Modus solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen dazu gibt es in den &lt;a href=&quot;https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war-was-ist-da-los&quot;&gt;FAQ&lt;/a&gt;.', 'NUMBER_QUESTIONS': '&lt;b&gt;4/4 - Anzahl der Fragen&lt;/b&gt;\n\nSupidupi. Wie viele Fragen möchtest Du insgesamt erhalten?', 'QUESTION_ATTRIBUTES': '&lt;b&gt;3/4 - Fragen&lt;/b&gt;\n\nAlaska. Bitte wähle nun aus, nach welchen Eigenschaften eines AkaBlasen Du gefragt wirst. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.'}</em><a class="headerlink" href="#bot.game.TEXTS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">bot.game.</code><code class="sig-name descname">TEXTS</code><em class="property">: Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></em><em class="property"> = {'HINT_ATTRIBUTES': '&lt;b&gt;2/4 - Hinweise&lt;/b&gt;\n\nOkidoki. Bitte wähle nun aus, welche Eigenschaften eines AkaBlasen als Hinweis gegeben werden können. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.', 'Multiple Choice': '&lt;b&gt;1/4 - Spielmodus&lt;/b&gt;\n\nJuhu, ein Spiel! Bitte wähle zunächst aus, ob Du Multiple-Choice- oder Freitext-Fragen bekommst.\n\n&lt;i&gt;⚠️ Hinweis:&lt;/i&gt; Den Freitext-Modus solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen dazu gibt es in den &lt;a href=&quot;https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war-was-ist-da-los&quot;&gt;FAQ&lt;/a&gt;.', 'NUMBER_QUESTIONS': '&lt;b&gt;4/4 - Anzahl der Fragen&lt;/b&gt;\n\nSupidupi. Wie viele Fragen möchtest Du insgesamt erhalten?', 'QUESTION_ATTRIBUTES': '&lt;b&gt;3/4 - Fragen&lt;/b&gt;\n\nAlaska. Bitte wähle nun aus, nach welchen Eigenschaften eines AkaBlasen Du gefragt wirst. Um die Auswahl zu ändern, klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf &lt;i&gt;Weiter&lt;/i&gt;.'}</em><a class="headerlink" href="#bot.game.TEXTS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Texts for the different states.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>,:obj:<cite>str</cite>]</p>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>,:obj:<cite>str</cite>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -478,11 +479,11 @@ False: Otherwise.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -496,7 +497,7 @@ corresponding response.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -517,11 +518,11 @@ corresponding response.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.8)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -537,11 +538,11 @@ If the configuration was invalid, ends the conversation.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -554,7 +555,7 @@ If the configuration was invalid, ends the conversation.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v12.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
