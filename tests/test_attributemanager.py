@@ -781,6 +781,8 @@ class TestChangingAttributeManager:
 
     def test_register_kick_update(self, member, monkeypatch):
         mock_date = dtm.date(2020, 9, 5)
+        new_date_1 = dtm.date(1996, 10, 8)
+        new_date_2 = dtm.date(1996, 3, 16)
 
         class DateTime:
 
@@ -788,15 +790,22 @@ class TestChangingAttributeManager:
             def now(cls, *args, **kwargs):
                 return mock_date
 
+        class Date:
+
+            @classmethod
+            def today(cls, *args, **kwargs):
+                return mock_date
+
         monkeypatch.setattr(dtm, 'datetime', DateTime)
+        monkeypatch.setattr(dtm, 'date', Date)
 
         am = ChangingAttributeManager('age', [])
-        member.date_of_birth = dtm.date(1996, 10, 8)
+        member.date_of_birth = new_date_1
         am.register_member(member)
 
         assert am.data == {23: {member}}
 
-        member.date_of_birth = dtm.date(1996, 3, 16)
+        member.date_of_birth = new_date_2
         am.update_member(member)
 
         assert am.data == {24: {member}}
