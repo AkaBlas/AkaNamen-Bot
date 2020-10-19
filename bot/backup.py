@@ -49,4 +49,4 @@ def schedule_daily_job(dispatcher: Dispatcher) -> None:
     Args:
         dispatcher: The :class:`telegram.ext.Dispatcher`.
     """
-    dispatcher.job_queue.run_once(back_up, dtm.time(0, 0))
+    dispatcher.job_queue.run_daily(back_up, dtm.time(0, 0))
