@@ -3,7 +3,6 @@ import pytest
 import datetime as dt
 import responses
 import pandas as pd
-from configparser import ConfigParser
 from geopy import Photon
 from components import Gender, Member, instruments, UserScore
 from telegram import User
@@ -395,12 +394,11 @@ class TestMember:
     def test_guess_member(self, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
 
-        config = ConfigParser()
-        config.read('bot.ini')
-        url = config['akadressen']['url']
+        Member.set_akadressen_credentials('https://some-domain.org/akadressen.pdf', '', '')
+
         with open(check_file_path('tests/data/akadressen.pdf'), 'rb') as akadressen:
             responses.add(responses.GET,
-                          url,
+                          'https://some-domain.org/akadressen.pdf',
                           body=akadressen.read(),
                           stream=True,
                           status=200,

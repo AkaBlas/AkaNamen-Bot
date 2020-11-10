@@ -23,10 +23,9 @@ import re
 from geopy import Photon, distance
 from geopy.exc import GeopyError
 from tempfile import NamedTemporaryFile
-from configparser import ConfigParser
 from collections import defaultdict
 from camelot import read_pdf
-from typing import Optional, Union, List, Tuple, Dict, Any
+from typing import Optional, Union, List, Tuple, Dict, Any, ClassVar
 
 from fuzzywuzzy import fuzz
 from telegram import Bot, User
@@ -71,6 +70,10 @@ class Member:
         allow_contact_sharing: Whether sharing this users contact information with others is
             allowed. Defaults to :obj:`False`.
     """
+
+    _AD_URL: ClassVar[str] = ''
+    _AD_USERNAME: ClassVar[str] = ''
+    _AD_PASSWORD: ClassVar[str] = ''
 
     def __init__(self,
                  user_id: Union[str, int],
@@ -504,8 +507,22 @@ class Member:
 
         return self.date_of_birth.strftime('%d.%m.')
 
-    @staticmethod
-    def _get_akadressen() -> pd.DataFrame:
+    @classmethod
+    def set_akadressen_credentials(cls, url: str, username: str, password: str) -> None:
+        """
+        Set the credentials needed to retrieve the AkaDRessen
+
+        Args:
+            url: The URL of the AkaDressen.
+            username: Username.
+            password: Password.
+        """
+        cls._AD_URL = url
+        cls._AD_USERNAME = username
+        cls._AD_PASSWORD = password
+
+    @classmethod
+    def _get_akadressen(cls) -> pd.DataFrame:
 
         # A bunch of helpers to parse the downloaded data
         leading_whitespace_pattern = re.compile(r'\b(?=\w)(\w) (\w)')
@@ -560,15 +577,10 @@ class Member:
         def last_name(string: str) -> str:
             return string.split(' ')[-1]
 
-        # Actually get the file
-        config = ConfigParser()
-        config.read('bot.ini')
-        url = config['akadressen']['url']
-        username = config['akadressen']['username']
-        password = config['akadressen']['password']
-
         with NamedTemporaryFile(suffix='.pdf', delete=False) as akadressen:
-            response = requests.get(url, auth=(username, password), stream=True)
+            response = requests.get(cls._AD_URL,
+                                    auth=(cls._AD_USERNAME, cls._AD_PASSWORD),
+                                    stream=True)
             if response.status_code == 200:
                 response.raw.decode_content = True
                 shutil.copyfileobj(response.raw, akadressen)

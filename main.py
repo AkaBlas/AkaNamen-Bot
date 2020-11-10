@@ -6,7 +6,7 @@ from configparser import ConfigParser
 from telegram import ParseMode
 from telegram.ext import Updater, PicklePersistence, Defaults
 
-from bot.setup import register_dispatcher
+from bot.setup import setup
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -23,6 +23,13 @@ def main() -> None:
     config.read('bot.ini')
     token = config['akanamen-bot']['token']
     admin = config['akanamen-bot']['admins_chat_id']
+    oc_url = config['owncloud']['url']
+    oc_username = config['owncloud']['username']
+    oc_password = config['owncloud']['password']
+    oc_path = config['owncloud']['path']
+    ad_url = config['akadressen']['url']
+    ad_username = config['akadressen']['username']
+    ad_password = config['akadressen']['password']
 
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
@@ -31,7 +38,17 @@ def main() -> None:
     persistence = PicklePersistence('akanamen_db', single_file=False)
     updater = Updater(token, use_context=True, persistence=persistence, defaults=defaults)
 
-    register_dispatcher(updater.dispatcher, admin=admin)
+    setup(
+        updater.dispatcher,
+        admin=admin,
+        oc_url=oc_url,
+        oc_username=oc_username,
+        oc_password=oc_password,
+        oc_path=oc_path,
+        ad_url=ad_url,
+        ad_username=ad_username,
+        ad_password=ad_password,
+    )
 
     # Start the Bot
     updater.start_polling()
