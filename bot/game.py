@@ -449,7 +449,7 @@ def number_questions(update: Update, context: CallbackContext) -> str:
         return GAME
     except ValueError:
         message.edit_text(
-            'Die gewählte Spielkonfiguration ist leider ungültig. Bitte versuche ' 'es erneut.'
+            'Die gewählte Spielkonfiguration ist leider ungültig. Bitte versuche es erneut.'
         )
         context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
@@ -464,7 +464,7 @@ def cancel(update: Update, context: CallbackContext) -> int:
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
     update.effective_message.reply_text(
-        'Spiel abgebrochen. Es geht <i>nicht</i> in den ' 'Highscore ein.'
+        'Spiel abgebrochen. Es geht <i>nicht</i> in den Highscore ein.'
     )
     try:
         context.user_data[GAME_MESSAGE_KEY].delete()

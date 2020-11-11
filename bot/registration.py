@@ -216,7 +216,7 @@ def accept_registration_request(update: Update, context: CallbackContext) -> Non
         update.effective_message.edit_text('Nutzer erfolgreich angemeldet.')
     except Unauthorized:
         update.effective_message.edit_text(
-            'Der Nutzer hat den Bot inzwischen blockiert. Er ' 'wurde nicht registriert.'
+            'Der Nutzer hat den Bot inzwischen blockiert. Er wurde nicht registriert.'
         )
     finally:
         bot_data[PENDING_REGISTRATIONS_KEY].pop(user_id, None)

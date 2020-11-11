@@ -225,7 +225,7 @@ class TestOrchestra:
 
         expected = '1. One: 4 / 8\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n2. Two: 2 / 4\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %'
         expected_overall = (
-            '1. Two: 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n' '2. Three: 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %'
+            '1. Two: 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n2. Three: 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %'
         )
 
         for score_text in [
