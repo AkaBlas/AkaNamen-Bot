@@ -5,33 +5,53 @@ from __future__ import annotations
 
 from io import BytesIO
 
-from components import Instrument, PercussionInstrument, Flute, Clarinet, Oboe, \
-    SopranoSaxophone, AltoSaxophone, TenorSaxophone, BaritoneSaxophone, Euphonium, BaritoneHorn, \
-    Baritone, Trombone, Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar, Bassoon, Tuba, \
-    Conductor
-from components.helpers import setlocale
-from .userscore import UserScore
-
 import datetime as dt
-import numpy as np
-import pandas as pd
-import vobject
-import requests
 import shutil
 import re
-
-from geopy import Photon, distance
-from geopy.exc import GeopyError
 from tempfile import NamedTemporaryFile
 from collections import defaultdict
+from typing import Optional, Union, List, Tuple, Dict, Any, ClassVar, NoReturn
+
+import requests
+import vobject
+from geopy import Photon, distance
+from geopy.exc import GeopyError
 from camelot import read_pdf
-from typing import Optional, Union, List, Tuple, Dict, Any, ClassVar
+import numpy as np
+import pandas as pd
 
 from fuzzywuzzy import fuzz
 from telegram import Bot, User
 
+from components import (
+    Instrument,
+    PercussionInstrument,
+    Flute,
+    Clarinet,
+    Oboe,
+    SopranoSaxophone,
+    AltoSaxophone,
+    TenorSaxophone,
+    BaritoneSaxophone,
+    Euphonium,
+    BaritoneHorn,
+    Baritone,
+    Trombone,
+    Trumpet,
+    Flugelhorn,
+    Horn,
+    Drums,
+    Guitar,
+    BassGuitar,
+    Bassoon,
+    Tuba,
+    Conductor,
+)
+from components.helpers import setlocale
+from .userscore import UserScore
 
-class Member:
+
+class Member:  # pylint: disable=R0902,R0913,R0904
     """
     A member of AkaBlas.
 
@@ -75,20 +95,22 @@ class Member:
     _AD_USERNAME: ClassVar[str] = ''
     _AD_PASSWORD: ClassVar[str] = ''
 
-    def __init__(self,
-                 user_id: Union[str, int],
-                 phone_number: str = None,
-                 first_name: str = None,
-                 last_name: str = None,
-                 nickname: str = None,
-                 gender: str = None,
-                 date_of_birth: dt.date = None,
-                 instruments: Union[List[Instrument], Instrument] = None,
-                 address: str = None,
-                 latitude: float = None,
-                 longitude: float = None,
-                 photo_file_id: str = None,
-                 allow_contact_sharing: Optional[bool] = False) -> None:
+    def __init__(
+        self,
+        user_id: Union[str, int],
+        phone_number: str = None,
+        first_name: str = None,
+        last_name: str = None,
+        nickname: str = None,
+        gender: str = None,
+        date_of_birth: dt.date = None,
+        instruments: Union[List[Instrument], Instrument] = None,
+        address: str = None,
+        latitude: float = None,
+        longitude: float = None,
+        photo_file_id: str = None,
+        allow_contact_sharing: Optional[bool] = False,
+    ) -> None:
         if sum([x is not None for x in [longitude, latitude]]) == 1:
             raise ValueError('Either none of longitude and latitude or both must be passed!')
         if longitude and address:
@@ -131,32 +153,38 @@ class Member:
 
     def __getitem__(self, item: str) -> Union[str, dt.date, int, List[Instrument], None, float]:
         if item not in self.SUBSCRIPTABLE:
-            raise KeyError('Member either does not have such an attribute or does not support '
-                           'subscription for it.')
+            raise KeyError(
+                'Member either does not have such an attribute or does not support '
+                'subscription for it.'
+            )
         return getattr(self, item)
 
     def __setitem__(self, item: str, value: Any) -> None:
         if item not in self.SUBSCRIPTABLE:
-            raise KeyError('Member either does not have such an attribute or does not support '
-                           'subscription for it.')
+            raise KeyError(
+                'Member either does not have such an attribute or does not support '
+                'subscription for it.'
+            )
         return setattr(self, item, value)
 
-    def to_str(self) -> str:
+    def to_str(self) -> str:  # pylint: disable=C0116
         with setlocale('de_DE.UTF-8'):
-            return (f'Name: {self.full_name or "-"}\n'
-                    f'Geschlecht: {self.gender if self.gender else "-"}\n'
-                    f'Geburtstag: '
-                    f'{self.date_of_birth.strftime("%d. %B %Y") if self.date_of_birth else "-"}\n'
-                    f'Instrument/e: {", ".join([str(i) for i in self.instruments]) or "-"}\n'
-                    f'Adresse: {self.address or "-"}\n'
-                    f'Mobil: {self.phone_number or "-"}\n'
-                    f'Foto: {"🖼" if self.photo_file_id else "-"}\n'
-                    f'Daten an AkaBlasen weitergeben: '
-                    f'{"Aktiviert" if self.allow_contact_sharing else "Deaktiviert"}')
+            return (
+                f'Name: {self.full_name or "-"}\n'
+                f'Geschlecht: {self.gender if self.gender else "-"}\n'
+                f'Geburtstag: '
+                f'{self.date_of_birth.strftime("%d. %B %Y") if self.date_of_birth else "-"}\n'
+                f'Instrument/e: {", ".join([str(i) for i in self.instruments]) or "-"}\n'
+                f'Adresse: {self.address or "-"}\n'
+                f'Mobil: {self.phone_number or "-"}\n'
+                f'Foto: {"🖼" if self.photo_file_id else "-"}\n'
+                f'Daten an AkaBlasen weitergeben: '
+                f'{"Aktiviert" if self.allow_contact_sharing else "Deaktiviert"}'
+            )
 
-    def set_address(self,
-                    address: str = None,
-                    coordinates: Tuple[float, float] = None) -> Optional[str]:
+    def set_address(
+        self, address: str = None, coordinates: Tuple[float, float] = None
+    ) -> Optional[str]:
         """
         Tries to get the missing data from the Open Street Map API. Exactly one of the optional
         parameters must be passed.
@@ -186,13 +214,17 @@ class Member:
         if location:
             if 'properties' in location.raw:
                 raw = location.raw['properties']
-                if (('street' in raw or 'name' in raw) and 'postcode' in raw and 'city' in raw
-                        and 'country' in raw):
+                if (
+                    ('street' in raw or 'name' in raw)
+                    and 'postcode' in raw
+                    and 'city' in raw
+                    and 'country' in raw
+                ):
                     raw['city'] = raw['city'].replace('Brunswick', 'Braunschweig')
                     street = raw.get('street') or raw.get('name')
                     raw['street'] = street
-                    hm = raw.get('housenumber')
-                    housenumber = f" {hm}" if hm else ''
+                    h_m = raw.get('housenumber')
+                    housenumber = f" {h_m}" if h_m else ''
                     self._address = f"{street}{housenumber}, {raw['postcode']} {raw['city']}"
                     if raw['country'] != 'Germany':
                         self._address += f" {raw['country']}"
@@ -228,7 +260,7 @@ class Member:
         """
         if not any([self.first_name, self.last_name, self.nickname]):
             return None
-        elif self.first_name is None and self.last_name is None:
+        if self.first_name is None and self.last_name is None:
             return self.nickname
         nickname: Optional[str] = None
         if self.nickname is not None:
@@ -243,7 +275,7 @@ class Member:
         return self._address
 
     @address.setter
-    def address(self, value: str) -> None:
+    def address(self, value: str) -> NoReturn:  # pylint: disable=R0201
         raise ValueError('Please use set_address to update the address!')
 
     @property
@@ -254,7 +286,7 @@ class Member:
         return self._latitude
 
     @latitude.setter
-    def latitude(self, value: float) -> None:
+    def latitude(self, value: float) -> NoReturn:  # pylint: disable=R0201
         raise ValueError('Please use set_address to update the latitude!')
 
     @property
@@ -265,7 +297,7 @@ class Member:
         return self._longitude
 
     @longitude.setter
-    def longitude(self, value: float) -> None:
+    def longitude(self, value: float) -> NoReturn:  # pylint: disable=R0201
         raise ValueError('Please use set_address to update the longitude!')
 
     @property
@@ -324,8 +356,9 @@ class Member:
             vcard.add('fn').value = self.full_name.replace('"', '')
         else:
             vcard.add('fn').value = ''
-        vcard.add('n').value = vobject.vcard.Name(family=self.last_name or '',
-                                                  given=self.first_name or '')
+        vcard.add('n').value = vobject.vcard.Name(
+            family=self.last_name or '', given=self.first_name or ''
+        )
         vcard.add('nickname').value = self.nickname or ''
         vcard.add('tel').value = self.phone_number or ''
         vcard.add('role').value = self.instruments_str or ''
@@ -339,8 +372,9 @@ class Member:
                 city=self._raw_address['city'],
                 code=self._raw_address['postcode'],
                 street=' '.join(
-                    [self._raw_address['street'],
-                     self._raw_address.get('housenumber', '')]))
+                    [self._raw_address['street'], self._raw_address.get('housenumber', '')]
+                ),
+            )
 
         if self.photo_file_id:
             photo_stream = BytesIO()
@@ -554,8 +588,7 @@ class Member:
         def extract_nickname(string: str) -> Optional[str]:
             if '(' in string:
                 return string.split('(')[0].strip(' ')
-            else:
-                return None
+            return None
 
         def remove_nickname(string: str) -> str:
             if '(' in string:
@@ -571,16 +604,15 @@ class Member:
             names = string.split(' ')
             if len(names) > 2:
                 return ' '.join(names[:-1])
-            else:
-                return names[0]
+            return names[0]
 
         def last_name(string: str) -> str:
             return string.split(' ')[-1]
 
         with NamedTemporaryFile(suffix='.pdf', delete=False) as akadressen:
-            response = requests.get(cls._AD_URL,
-                                    auth=(cls._AD_USERNAME, cls._AD_PASSWORD),
-                                    stream=True)
+            response = requests.get(
+                cls._AD_URL, auth=(cls._AD_USERNAME, cls._AD_PASSWORD), stream=True
+            )
             if response.status_code == 200:
                 response.raw.decode_content = True
                 shutil.copyfileobj(response.raw, akadressen)
@@ -589,32 +621,38 @@ class Member:
                 # Read tables from PDF
                 tables = read_pdf(akadressen.name, flavor='stream', pages='all')
                 # Convert to pandas DataFrame
-                df = pd.concat([t.df for t in tables])
+                dataframe = pd.concat([t.df for t in tables])
                 # Rename columns
-                df = df.rename(columns={
-                    0: 'name',
-                    1: 'address',
-                    2: 'phone',
-                    3: 'date_of_birth',
-                    4: 'instrument'
-                })
+                dataframe = dataframe.rename(
+                    columns={
+                        0: 'name',
+                        1: 'address',
+                        2: 'phone',
+                        3: 'date_of_birth',
+                        4: 'instrument',
+                    }
+                )
                 # Drop empty lines
-                df = df.replace(r'^\s*$', np.nan, regex=True)
-                df = df.dropna(thresh=4)
+                dataframe = dataframe.replace(r'^\s*$', np.nan, regex=True)
+                dataframe = dataframe.dropna(thresh=4)
 
                 # Parse all the data
-                df.loc[:, 'date_of_birth'] = df.loc[:, 'date_of_birth'].apply(string_to_date)
-                df.loc[:, 'instrument'] = df.loc[:, 'instrument'].apply(string_to_instrument)
-                df.loc[:, 'address'] = df.loc[:, 'address'].apply(expand_brunswick)
-                df.loc[:, 'name'] = df.loc[:, 'name'].apply(remove_whitespaces)
-                df.loc[:, 'nickname'] = df.loc[:, 'name'].apply(extract_nickname)
-                df.loc[:, 'name'] = df.loc[:, 'name'].apply(remove_nickname)
-                df.loc[:, 'first_name'] = df.loc[:, 'name'].apply(first_name)
-                df.loc[:, 'last_name'] = df.loc[:, 'name'].apply(last_name)
+                dataframe.loc[:, 'date_of_birth'] = dataframe.loc[:, 'date_of_birth'].apply(
+                    string_to_date
+                )
+                dataframe.loc[:, 'instrument'] = dataframe.loc[:, 'instrument'].apply(
+                    string_to_instrument
+                )
+                dataframe.loc[:, 'address'] = dataframe.loc[:, 'address'].apply(expand_brunswick)
+                dataframe.loc[:, 'name'] = dataframe.loc[:, 'name'].apply(remove_whitespaces)
+                dataframe.loc[:, 'nickname'] = dataframe.loc[:, 'name'].apply(extract_nickname)
+                dataframe.loc[:, 'name'] = dataframe.loc[:, 'name'].apply(remove_nickname)
+                dataframe.loc[:, 'first_name'] = dataframe.loc[:, 'name'].apply(first_name)
+                dataframe.loc[:, 'last_name'] = dataframe.loc[:, 'name'].apply(last_name)
 
-                return df
-            else:
-                raise Exception('Could not retrieve AkaDressen.')
+                return dataframe
+
+            raise Exception('Could not retrieve AkaDressen.')
 
     _AKADRESSEN: Optional[pd.DataFrame] = None
     _AKADRESSEN_CACHE_TIME: Optional[dt.date] = None
@@ -634,12 +672,18 @@ class Member:
                 return 0.0
             str1 = str1.lower().strip(' ')
             str2 = str2.lower().strip(' ')
-            return max(fuzz.ratio(str1, str2), fuzz.partial_ratio(str1, str2),
-                       fuzz.token_set_ratio(str1, str2))
+            return max(
+                fuzz.ratio(str1, str2),
+                fuzz.partial_ratio(str1, str2),
+                fuzz.token_set_ratio(str1, str2),
+            )
 
         # Refresh AkaDressen
-        if (cls._AKADRESSEN_CACHE_TIME is None or dt.date.today() > cls._AKADRESSEN_CACHE_TIME
-                or cls._AKADRESSEN is None):
+        if (
+            cls._AKADRESSEN_CACHE_TIME is None
+            or dt.date.today() > cls._AKADRESSEN_CACHE_TIME
+            or cls._AKADRESSEN is None
+        ):
             cls._AKADRESSEN = cls._get_akadressen()
             if cls._AKADRESSEN is not None:
                 cls._AKADRESSEN_CACHE_TIME = dt.date.today()
@@ -664,20 +708,37 @@ class Member:
         members = []
         for row in all_max_rankings:
             members.append(
-                Member(user_id=user.id,
-                       first_name=row.first_name,
-                       last_name=row.last_name,
-                       nickname=row.nickname,
-                       address=row.address,
-                       instruments=row.instrument,
-                       date_of_birth=row.date_of_birth))
+                Member(
+                    user_id=user.id,
+                    first_name=row.first_name,
+                    last_name=row.last_name,
+                    nickname=row.nickname,
+                    address=row.address,
+                    instruments=row.instrument,
+                    date_of_birth=row.date_of_birth,
+                )
+            )
         return members
 
-    SUBSCRIPTABLE = sorted([
-        'birthday', 'age', 'first_name', 'last_name', 'nickname', 'address', 'latitude',
-        'longitude', 'instruments', 'gender', 'phone_number', 'date_of_birth', 'full_name',
-        'photo_file_id', 'allow_contact_sharing'
-    ])
+    SUBSCRIPTABLE = sorted(
+        [
+            'birthday',
+            'age',
+            'first_name',
+            'last_name',
+            'nickname',
+            'address',
+            'latitude',
+            'longitude',
+            'instruments',
+            'gender',
+            'phone_number',
+            'date_of_birth',
+            'full_name',
+            'photo_file_id',
+            'allow_contact_sharing',
+        ]
+    )
     """List[:obj:`str`]: Attributes supported by subscription."""
 
     ALLOWED_INSTRUMENTS: List[Instrument] = [

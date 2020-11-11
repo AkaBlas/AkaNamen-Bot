@@ -21,26 +21,27 @@ def rebuild_orchestra(update: Update, context: CallbackContext) -> None:
     members = context.bot_data[ORCHESTRA_KEY].members.values()
     orchestra = Orchestra()
 
-    for m in members:
+    for member in members:
         new_member = Member(
-            m.user_id,
-            phone_number=m.phone_number,
-            first_name=m.first_name,
-            last_name=m.last_name,
-            nickname=m.nickname,
-            gender=m.gender,
-            date_of_birth=m.date_of_birth,
-            instruments=m.instruments,
+            member.user_id,
+            phone_number=member.phone_number,
+            first_name=member.first_name,
+            last_name=member.last_name,
+            nickname=member.nickname,
+            gender=member.gender,
+            date_of_birth=member.date_of_birth,
+            instruments=member.instruments,
             address=None,
-            photo_file_id=m.photo_file_id,
-            allow_contact_sharing=m.allow_contact_sharing,
+            photo_file_id=member.photo_file_id,
+            allow_contact_sharing=member.allow_contact_sharing,
         )
-        new_member.user_score = m.user_score
+        # pylint: disable=W0212
+        new_member.user_score = member.user_score
         new_member.user_score.member = new_member
-        new_member._raw_address = m._raw_address
-        new_member._address = m._address
-        new_member._longitude = m._longitude
-        new_member._latitude = m._latitude
+        new_member._raw_address = member._raw_address
+        new_member._address = member._address
+        new_member._longitude = member._longitude
+        new_member._latitude = member._latitude
         orchestra.register_member(new_member)
 
     context.bot_data[ORCHESTRA_KEY] = orchestra

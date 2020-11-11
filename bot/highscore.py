@@ -50,7 +50,7 @@ def build_keyboard(view: str = OVERALL_SCORE) -> InlineKeyboardMarkup:
             attr:`WEEKS_SCORE`, attr:`MONTHS_SCORE` and attr:`YEARS_SCORE`. The corresponding
             button will have :attr:`CURRENT` as data. Defaults to :attr:`OVERALL_SCORE`.
     """
-    data = {k: k if k != view else CURRENT for k in BUTTON_TEXTS.keys()}
+    data = {k: k if k != view else CURRENT for k in BUTTON_TEXTS}
     # yapf: disable
     return InlineKeyboardMarkup([
         [InlineKeyboardButton(BUTTON_TEXTS[OVERALL_SCORE], callback_data=data[OVERALL_SCORE])],
@@ -89,15 +89,17 @@ def show_highscore(update: Update, context: CallbackContext) -> None:
     orchestra = context.bot_data[ORCHESTRA_KEY]
 
     if update.message:
-        update.message.reply_text(text=build_text(orchestra, 'overall'),
-                                  reply_markup=build_keyboard())
+        update.message.reply_text(
+            text=build_text(orchestra, 'overall'), reply_markup=build_keyboard()
+        )
     else:
         data = update.callback_query.data
         if data != CURRENT:
             update.callback_query.answer()
-            update.effective_message.edit_text(text=build_text(orchestra,
-                                                               context.matches[0].group(1)),
-                                               reply_markup=build_keyboard(data))
+            update.effective_message.edit_text(
+                text=build_text(orchestra, context.matches[0].group(1)),
+                reply_markup=build_keyboard(data),
+            )
         else:
             update.callback_query.answer(text='Wird bereits angezeigt.', show_alert=True)
 

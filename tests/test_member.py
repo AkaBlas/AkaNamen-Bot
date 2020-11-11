@@ -24,11 +24,18 @@ def photo_file_id(bot, chat_id):
         return min_file.file_id
 
 
-@pytest.fixture(scope='class',
-                params=[
-                    'foo', 'bar', 'a very long long long string', 'AN ALL UPPERCASE STRING',
-                    '          ', 'a-b-c-d', '123456789'
-                ])
+@pytest.fixture(
+    scope='class',
+    params=[
+        'foo',
+        'bar',
+        'a very long long long string',
+        'AN ALL UPPERCASE STRING',
+        '          ',
+        'a-b-c-d',
+        '123456789',
+    ],
+)
 def test_string(request):
     return request.param
 
@@ -51,17 +58,19 @@ class TestMember:
     def test_all_args(self, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
 
-        member = Member(user_id=self.user_id,
-                        phone_number=self.phone_number,
-                        first_name=self.first_name,
-                        last_name=self.last_name,
-                        nickname=self.nickname,
-                        gender=self.gender,
-                        date_of_birth=self.date_of_birth,
-                        photo_file_id=self.photo_file_id,
-                        allow_contact_sharing=self.allow_contact_sharing,
-                        instruments=self.instruments,
-                        address=self.address)
+        member = Member(
+            user_id=self.user_id,
+            phone_number=self.phone_number,
+            first_name=self.first_name,
+            last_name=self.last_name,
+            nickname=self.nickname,
+            gender=self.gender,
+            date_of_birth=self.date_of_birth,
+            photo_file_id=self.photo_file_id,
+            allow_contact_sharing=self.allow_contact_sharing,
+            instruments=self.instruments,
+            address=self.address,
+        )
         assert member.user_id == self.user_id
         assert member.phone_number == self.phone_number
         assert member['phone_number'] == self.phone_number
@@ -128,7 +137,7 @@ class TestMember:
         member.instruments = [
             instruments.Oboe(),
             instruments.Baritone(),
-            instruments.WoodwindInstrument()
+            instruments.WoodwindInstrument(),
         ]
         assert member.instruments == [instruments.Oboe(), instruments.Baritone()]
         member.instruments = instruments.WoodwindInstrument()
@@ -136,10 +145,12 @@ class TestMember:
 
     def test_address_and_coordinates(self):
         with pytest.raises(ValueError, match='Only address'):
-            Member(self.user_id,
-                   address=self.address,
-                   latitude=self.latitude,
-                   longitude=self.longitude)
+            Member(
+                self.user_id,
+                address=self.address,
+                latitude=self.latitude,
+                longitude=self.longitude,
+            )
         with pytest.raises(ValueError, match='Either none'):
             Member(self.user_id, latitude=self.latitude)
 
@@ -229,9 +240,11 @@ class TestMember:
 
         member.nickname = self.nickname
         assert member.full_name == ' '.join(
-            [self.first_name, f'"{self.nickname}"', self.last_name])
+            [self.first_name, f'"{self.nickname}"', self.last_name]
+        )
         assert member['full_name'] == ' '.join(
-            [self.first_name, f'"{self.nickname}"', self.last_name])
+            [self.first_name, f'"{self.nickname}"', self.last_name]
+        )
 
         member.first_name = None
         assert member.full_name == ' '.join([f'"{self.nickname}"', self.last_name])
@@ -313,11 +326,13 @@ class TestMember:
         monkeypatch.setattr(Photon, 'reverse', reverse)
 
         member.set_address(coordinates=(52.2736706, 10.5296817))
-        assert member.distance_of_address_to((52.2736706, 10.5296817)) == pytest.approx(0,
-                                                                                        abs=0.02)
+        assert member.distance_of_address_to((52.2736706, 10.5296817)) == pytest.approx(
+            0, abs=0.02
+        )
 
-        assert member.distance_of_address_to((52.280073, 10.544101)) == pytest.approx(1.215,
-                                                                                      abs=0.01)
+        assert member.distance_of_address_to((52.280073, 10.544101)) == pytest.approx(
+            1.215, abs=0.01
+        )
 
     def test_compare_address_to(self, member, test_string, monkeypatch):
         with pytest.raises(ValueError, match='This member has no'):
@@ -363,14 +378,16 @@ class TestMember:
     def test_to_string(self, member, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
 
-        assert member.to_str() == ('Name: -\n'
-                                   'Geschlecht: -\n'
-                                   'Geburtstag: -\n'
-                                   'Instrument/e: -\n'
-                                   'Adresse: -\n'
-                                   'Mobil: -\n'
-                                   'Foto: -\n'
-                                   'Daten an AkaBlasen weitergeben: Deaktiviert')
+        assert member.to_str() == (
+            'Name: -\n'
+            'Geschlecht: -\n'
+            'Geburtstag: -\n'
+            'Instrument/e: -\n'
+            'Adresse: -\n'
+            'Mobil: -\n'
+            'Foto: -\n'
+            'Daten an AkaBlasen weitergeben: Deaktiviert'
+        )
         member.first_name = self.first_name
         member.nickname = self.nickname
         member.last_name = self.last_name
@@ -381,14 +398,16 @@ class TestMember:
         member.phone_number = self.phone_number
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
         member.allow_contact_sharing = True
-        assert member.to_str() == ('Name: first_name "nickname" last_name\n'
-                                   f'Geschlecht: {Gender.MALE}\n'
-                                   'Geburtstag: 10. August 1996\n'
-                                   'Instrument/e: Tuba, Trompete\n'
-                                   'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
-                                   'Mobil: phone_number\n'
-                                   'Foto: 🖼\n'
-                                   'Daten an AkaBlasen weitergeben: Aktiviert')
+        assert member.to_str() == (
+            'Name: first_name "nickname" last_name\n'
+            f'Geschlecht: {Gender.MALE}\n'
+            'Geburtstag: 10. August 1996\n'
+            'Instrument/e: Tuba, Trompete\n'
+            'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
+            'Mobil: phone_number\n'
+            'Foto: 🖼\n'
+            'Daten an AkaBlasen weitergeben: Aktiviert'
+        )
 
     @responses.activate
     def test_guess_member(self, monkeypatch):
@@ -397,12 +416,14 @@ class TestMember:
         Member.set_akadressen_credentials('https://some-domain.org/akadressen.pdf', '', '')
 
         with open(check_file_path('tests/data/akadressen.pdf'), 'rb') as akadressen:
-            responses.add(responses.GET,
-                          'https://some-domain.org/akadressen.pdf',
-                          body=akadressen.read(),
-                          stream=True,
-                          status=200,
-                          adding_headers={'Transfer-Encoding': 'chunked'})
+            responses.add(
+                responses.GET,
+                'https://some-domain.org/akadressen.pdf',
+                body=akadressen.read(),
+                stream=True,
+                status=200,
+                adding_headers={'Transfer-Encoding': 'chunked'},
+            )
 
             assert Member._AKADRESSEN_CACHE_TIME is None
             assert Member._AKADRESSEN is None

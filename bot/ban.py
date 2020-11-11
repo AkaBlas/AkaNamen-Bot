@@ -1,10 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """This module contains functions for banning users."""
-from telegram import (Update, ChatAction, ReplyKeyboardMarkup, ReplyKeyboardRemove)
+from telegram import Update, ChatAction, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.error import Unauthorized
-from telegram.ext import CallbackContext, ConversationHandler, \
-    CommandHandler, MessageHandler, Filters
+from telegram.ext import (
+    CallbackContext,
+    ConversationHandler,
+    CommandHandler,
+    MessageHandler,
+    Filters,
+)
 
 from bot import ORCHESTRA_KEY, BANNING_KEY, DENIED_USERS_KEY, ADMIN_KEY, CONVERSATION_KEY
 
@@ -30,8 +35,9 @@ CONVERSATION_VALUE = 'banning'
 :obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a banning
 conversation.
 """
-CONVERSATION_INTERRUPT_TEXT = 'Hey. Du bist gerade dabei einen Nutzer zu sperren. Bring das ' \
-                              'erstmal zu Ende! '
+CONVERSATION_INTERRUPT_TEXT = (
+    'Hey. Du bist gerade dabei einen Nutzer zu sperren. Bring das erstmal zu Ende! '
+)
 """
 :obj:`str`: Message to send, if the user tries to interrupt this conversation.
 """
@@ -62,7 +68,8 @@ def select_user(update: Update, context: CallbackContext) -> str:
 
     if not buttons:
         update.effective_message.reply_text(
-            text='Es gibt keine Mitglieder, die gebannt werden könnten.')
+            text='Es gibt keine Mitglieder, die gebannt werden könnten.'
+        )
         context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
 
@@ -82,9 +89,11 @@ def ask_for_confirmation(update: Update, context: CallbackContext) -> str:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
-    text = 'Ganz sicher? Der Nutzer wird dann dauerhaft geblockt. Ent-blocken ist zur Zeit noch ' \
-           'nicht implementiert! Wenn ja, schick mir eine Nachricht mit dem Text' \
-           f'\n\n<code>{CONFIRMATION_TEXT}</code>\n\nZum Abbrechen schick mir irgendwas.'
+    text = (
+        'Ganz sicher? Der Nutzer wird dann dauerhaft geblockt. Ent-blocken ist zur Zeit noch '
+        'nicht implementiert! Wenn ja, schick mir eine Nachricht mit dem Text'
+        f'\n\n<code>{CONFIRMATION_TEXT}</code>\n\nZum Abbrechen schick mir irgendwas.'
+    )
 
     update.effective_message.reply_text(text, reply_markup=ReplyKeyboardRemove())
 

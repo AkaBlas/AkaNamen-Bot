@@ -1,36 +1,73 @@
 #!/usr/bin/env python
 import pytest
 from components import instruments
-from components import (Instrument, WoodwindInstrument, BrassInstrument, HighBrassInstrument,
-                        LowBrassInstrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
-                        Saxophone, SopranoSaxophone, AltoSaxophone, TenorSaxophone,
-                        BaritoneSaxophone, Euphonium, BaritoneHorn, Baritone, Trombone, Tuba,
-                        Trumpet, Flugelhorn, Horn, Drums, Guitar, BassGuitar)
+from components import (
+    Instrument,
+    WoodwindInstrument,
+    BrassInstrument,
+    HighBrassInstrument,
+    LowBrassInstrument,
+    PercussionInstrument,
+    Flute,
+    Clarinet,
+    Oboe,
+    Bassoon,
+    Saxophone,
+    SopranoSaxophone,
+    AltoSaxophone,
+    TenorSaxophone,
+    BaritoneSaxophone,
+    Euphonium,
+    BaritoneHorn,
+    Baritone,
+    Trombone,
+    Tuba,
+    Trumpet,
+    Flugelhorn,
+    Horn,
+    Drums,
+    Guitar,
+    BassGuitar,
+)
 
 
 class TestInstruments:
-
-    @pytest.mark.parametrize('cls',
-                             [i for i in instruments.__dict__.values() if isinstance(i, type)])
+    @pytest.mark.parametrize(
+        'cls', [i for i in instruments.__dict__.values() if isinstance(i, type)]
+    )
     def test_instruments(self, cls):
         instrument = cls()
         assert isinstance(instrument.name, str)
         assert isinstance(str(instrument), str)
 
-    @pytest.mark.parametrize('cls',
-                             [i for i in instruments.__dict__.values() if isinstance(i, type)])
+    @pytest.mark.parametrize(
+        'cls', [i for i in instruments.__dict__.values() if isinstance(i, type)]
+    )
     def test_from_string_by_name(self, cls):
         assert Instrument.from_string(cls.name) == cls()
 
-    @pytest.mark.parametrize('abbr, expected', [('flö', Flute()), ('kla', Clarinet()),
-                                                ('obe', Oboe()), ('hlz', WoodwindInstrument()),
-                                                ('sax', Saxophone()), ('asx', AltoSaxophone()),
-                                                ('tsx', TenorSaxophone()), ('fag', Bassoon()),
-                                                ('trp', Trumpet()), ('flü', Flugelhorn()),
-                                                ('teh', BaritoneHorn()), ('hrn', Horn()),
-                                                ('pos', Trombone()), ('tub', Tuba()),
-                                                ('tpd', PercussionInstrument()), ('git', Guitar()),
-                                                ('bss', BassGuitar())])
+    @pytest.mark.parametrize(
+        'abbr, expected',
+        [
+            ('flö', Flute()),
+            ('kla', Clarinet()),
+            ('obe', Oboe()),
+            ('hlz', WoodwindInstrument()),
+            ('sax', Saxophone()),
+            ('asx', AltoSaxophone()),
+            ('tsx', TenorSaxophone()),
+            ('fag', Bassoon()),
+            ('trp', Trumpet()),
+            ('flü', Flugelhorn()),
+            ('teh', BaritoneHorn()),
+            ('hrn', Horn()),
+            ('pos', Trombone()),
+            ('tub', Tuba()),
+            ('tpd', PercussionInstrument()),
+            ('git', Guitar()),
+            ('bss', BassGuitar()),
+        ],
+    )
     def test_from_string_by_abbreviation(self, abbr, expected):
         assert Instrument.from_string(abbr) == expected
 
@@ -45,8 +82,9 @@ class TestInstruments:
         assert Instrument.from_string('tub', ['Tuba']) == Tuba()
         assert Instrument.from_string('tub', [Tuba()]) == Tuba()
 
-    @pytest.mark.parametrize('cls',
-                             [i for i in instruments.__dict__.values() if isinstance(i, type)])
+    @pytest.mark.parametrize(
+        'cls', [i for i in instruments.__dict__.values() if isinstance(i, type)]
+    )
     def test_global(self, cls):
         instrument = cls()
         assert isinstance(instrument, Instrument)
@@ -58,8 +96,9 @@ class TestInstruments:
         assert instrument == cls()
         assert hash(instrument) == hash(cls())
 
-    @pytest.mark.parametrize('cls',
-                             [i for i in instruments.__dict__.values() if isinstance(i, type)])
+    @pytest.mark.parametrize(
+        'cls', [i for i in instruments.__dict__.values() if isinstance(i, type)]
+    )
     def test_string_equality(self, cls):
         assert cls() == cls.name
         assert cls.name.lower() == cls()
@@ -107,10 +146,20 @@ class TestInstruments:
         assert hash(instrument) != hash(LowBrassInstrument())
         assert instrument == cls()
 
-    @pytest.mark.parametrize('cls', [
-        Flute, Clarinet, Oboe, Saxophone, AltoSaxophone, SopranoSaxophone, BaritoneSaxophone,
-        TenorSaxophone, Bassoon
-    ])
+    @pytest.mark.parametrize(
+        'cls',
+        [
+            Flute,
+            Clarinet,
+            Oboe,
+            Saxophone,
+            AltoSaxophone,
+            SopranoSaxophone,
+            BaritoneSaxophone,
+            TenorSaxophone,
+            Bassoon,
+        ],
+    )
     def test_wood(self, cls):
         instrument = cls()
         assert isinstance(instrument, WoodwindInstrument)
@@ -122,8 +171,9 @@ class TestInstruments:
         assert hash(instrument) != hash(WoodwindInstrument())
         assert instrument == cls()
 
-    @pytest.mark.parametrize('cls',
-                             [AltoSaxophone, SopranoSaxophone, BaritoneSaxophone, TenorSaxophone])
+    @pytest.mark.parametrize(
+        'cls', [AltoSaxophone, SopranoSaxophone, BaritoneSaxophone, TenorSaxophone]
+    )
     def test_sax(self, cls):
         instrument = cls()
         assert isinstance(instrument, Saxophone)

@@ -10,7 +10,6 @@ def us():
 
 
 class TestUserScore:
-
     def test_init(self, us):
         assert us.member == Member(123)
 
@@ -41,7 +40,6 @@ class TestUserScore:
         tomorrow = today + dt.timedelta(days=1)
 
         class MyDate:
-
             def today(*args, **kwargs):  # pylint: disable=E0211
                 return tomorrow
 

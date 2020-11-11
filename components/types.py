@@ -70,7 +70,7 @@ class UpdateType:
         Args:
             update: A :class:`telegram.Update`
         """
-        for t in cls.ALL_TYPES:
-            if getattr(update, t, None):
-                return t
+        for type_ in cls.ALL_TYPES:
+            if getattr(update, type_, None):
+                return type_
         return None

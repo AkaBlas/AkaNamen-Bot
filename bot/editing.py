@@ -6,17 +6,43 @@ import warnings
 from copy import deepcopy
 from typing import Dict, Callable, List, Union
 
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, Message, KeyboardButton, \
-    ReplyKeyboardMarkup, ReplyKeyboardRemove, ChatAction, InlineQueryResultArticle, \
-    InputTextMessageContent
+from telegram import (
+    Update,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+    KeyboardButton,
+    ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
+    ChatAction,
+    InlineQueryResultArticle,
+    InputTextMessageContent,
+)
 from telegram.error import BadRequest
-from telegram.ext import ConversationHandler, CallbackContext, CommandHandler, Filters, \
-    MessageHandler, CallbackQueryHandler, Handler, InlineQueryHandler
+from telegram.ext import (
+    ConversationHandler,
+    CallbackContext,
+    CommandHandler,
+    Filters,
+    MessageHandler,
+    CallbackQueryHandler,
+    Handler,
+    InlineQueryHandler,
+)
 from telegram.constants import MAX_INLINE_QUERY_RESULTS
 
-from bot import (ORCHESTRA_KEY, build_instruments_keyboard, parse_instruments_keyboard,
-                 EDITING_MESSAGE_KEY, EDITING_USER_KEY, DONE, SELECTED, BACK, ADMIN_KEY,
-                 CONVERSATION_KEY)
+from bot import (
+    ORCHESTRA_KEY,
+    build_instruments_keyboard,
+    parse_instruments_keyboard,
+    EDITING_MESSAGE_KEY,
+    EDITING_USER_KEY,
+    DONE,
+    SELECTED,
+    BACK,
+    ADMIN_KEY,
+    CONVERSATION_KEY,
+)
 from components import Member, Gender, Instrument
 
 # Ignore warnings from ConversationHandler
@@ -57,8 +83,10 @@ CONVERSATION_VALUE = 'editing'
 :obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a editing
 conversation.
 """
-CONVERSATION_INTERRUPT_TEXT = 'Upsi! Du bearbeitest gerade noch Deine Daten. Bitte schließe das ' \
-                              'ab. Danach kannst Du mit mir machen, was Du willst. 😏 '
+CONVERSATION_INTERRUPT_TEXT = (
+    'Upsi! Du bearbeitest gerade noch Deine Daten. Bitte schließe das '
+    'ab. Danach kannst Du mit mir machen, was Du willst. 😏 '
+)
 """
 :obj:`str`: Message to send, if the user tries to interrupt this conversation.
 """
@@ -66,54 +94,54 @@ CONVERSATION_INTERRUPT_TEXT = 'Upsi! Du bearbeitest gerade noch Deine Daten. Bit
 # Texts
 TEXTS: Dict[str, str] = {
     MENU: 'Dann lass uns mal schauen, ob Deine Daten noch aktuell sind. Bitte achte '
-          'darauf, dass Du nur korrekte Angaben machst. Deine Daten lauten aktuell:\n\n{}\n\n'
-          'Um eine Angabe zu ändern, klicke unten auf den entsprechenden Knopf.',
+    'darauf, dass Du nur korrekte Angaben machst. Deine Daten lauten aktuell:\n\n{}\n\n'
+    'Um eine Angabe zu ändern, klicke unten auf den entsprechenden Knopf.',
     FIRST_NAME: 'Aktuell habe ich gespeichert:\n\nVorname: {}\n\nUm den Namen zu ändern, '
-                'schicke mir den neuen Namen. Um den Namen so zu lassen oder zu löschen, '
-                'nutze die Knöpfe unten. ',
+    'schicke mir den neuen Namen. Um den Namen so zu lassen oder zu löschen, '
+    'nutze die Knöpfe unten. ',
     LAST_NAME: 'Der Nachname, den ich gespeichert habe lautet:\n\nNachname: {}\n\nUm '
-               'den Namen zu ändern, schicke mir den neuen Namen. Um den Namen so zu lassen oder '
-               'zu löschen, nutze die Knöpfe unten.',
+    'den Namen zu ändern, schicke mir den neuen Namen. Um den Namen so zu lassen oder '
+    'zu löschen, nutze die Knöpfe unten.',
     NICKNAME: 'Der Spitzname, den ich gespeichert habe lautet:\n\nSpitzname: {}\n\nUm '
-              'den Namen zu ändern, schicke mir den neuen Namen. Um den Namen so zu lassen oder '
-              'zu löschen, nutze die Knöpfe unten.',
+    'den Namen zu ändern, schicke mir den neuen Namen. Um den Namen so zu lassen oder '
+    'zu löschen, nutze die Knöpfe unten.',
     GENDER: 'Das Geschlecht, das ich gespeichert habe ist:\n\nGeschlecht: {}\n\nUm '
-            'Dein Geschlecht zu ändern, es so zu lassen oder zu löschen, nutze die Knöpfe unten.',
+    'Dein Geschlecht zu ändern, es so zu lassen oder zu löschen, nutze die Knöpfe unten.',
     DATE_OF_BIRTH: 'Das Geburtsdatum, das ich gespeichert habe ist:\n\nGeburtsdatum: '
-                   '{}\n\nUm das Datum zu ändern, schicke mir das neue Datum im Format '
-                   '<i>DD.MM.JJJJ</i>. Um das Datum so zu lassen oder zu löschen, nutze die Knöpfe'
-                   ' unten.',
+    '{}\n\nUm das Datum zu ändern, schicke mir das neue Datum im Format '
+    '<i>DD.MM.JJJJ</i>. Um das Datum so zu lassen oder zu löschen, nutze die Knöpfe'
+    ' unten.',
     ADDRESS: 'Die Adresse, die ich gespeichert habe lautet:\n\nAdresse: {}\n\nUm '
-             'die Adresse zu ändern, schicke mir entweder die Adresse als Text oder schicke mir '
-             'einen Standort. Um die Adresse so zu lassen oder zu löschen, nutze die Knöpfe '
-             'unten.',
+    'die Adresse zu ändern, schicke mir entweder die Adresse als Text oder schicke mir '
+    'einen Standort. Um die Adresse so zu lassen oder zu löschen, nutze die Knöpfe '
+    'unten.',
     ADDRESS_CONFIRMATION: 'Okay, ich habe die folgende Adresse erkannt:\n\n{}\n\nWenn das '
-                          'richtig war, klicke bitte auf <i>Richtig</i>. Wenn das nicht richtig '
-                          'war, versuch bitte, die Adresse genauer aufzuschreiben oder den '
-                          'Standort genauer zu wählen. Du kannst mir auch direkt die richtigen '
-                          'Koordinaten schicken. Mehr Infos dazu stehen in den <a '
-                          'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#der-bot'
-                          '-nimmt-meine-adresse-nicht-an-ist-der-blod">FAQ</a>. 🤓',
+    'richtig war, klicke bitte auf <i>Richtig</i>. Wenn das nicht richtig '
+    'war, versuch bitte, die Adresse genauer aufzuschreiben oder den '
+    'Standort genauer zu wählen. Du kannst mir auch direkt die richtigen '
+    'Koordinaten schicken. Mehr Infos dazu stehen in den <a '
+    'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#der-bot'
+    '-nimmt-meine-adresse-nicht-an-ist-der-blod">FAQ</a>. 🤓',
     PHOTO: {  # type: ignore
         True: 'Dies ist das Foto, das ich aktuell gespeichert habe. Um Dein Foto '
-              'zu ändern, schicke mir das neue Foto. Bitte achte darauf, dass man Dich darauf '
-              'gut erkennen kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe '
-              'unten. Du kannst auch Dein aktuellen Telegram-Profilbild übernehmen.',
+        'zu ändern, schicke mir das neue Foto. Bitte achte darauf, dass man Dich darauf '
+        'gut erkennen kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe '
+        'unten. Du kannst auch Dein aktuellen Telegram-Profilbild übernehmen.',
         False: 'Aktuell habe ich kein Foto von Dir. Um ein Foto zu hinterlegen, '
-               'schicke mir das Foto. Bitte achte darauf, dass man Dich darauf gut erkennen '
-               'kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe unten. Du '
-               'kannst auch Dein aktuellen Telegram-Profilbild übernehmen.',
+        'schicke mir das Foto. Bitte achte darauf, dass man Dich darauf gut erkennen '
+        'kann. Um das Foto so zu lassen oder zu löschen, nutze die Knöpfe unten. Du '
+        'kannst auch Dein aktuellen Telegram-Profilbild übernehmen.',
     },
     INSTRUMENTS: 'Die Instrumente, die Du aktuell spielst, sind unten markiert. Um '
-                 'die Auswahl zu ändern, klicke auf die Instrumente.\n\nDu kannst auch mehrere '
-                 'Instrumente auswählen. Bitte mach das nur, wenn Du sie auch alle regelmäßig '
-                 'bei AkaBlas spielst. 😉\n\nWenn Du fertig bist, klicke unten auf <i>Weiter</i>.',
+    'die Auswahl zu ändern, klicke auf die Instrumente.\n\nDu kannst auch mehrere '
+    'Instrumente auswählen. Bitte mach das nur, wenn Du sie auch alle regelmäßig '
+    'bei AkaBlas spielst. 😉\n\nWenn Du fertig bist, klicke unten auf <i>Weiter</i>.',
     ALLOW_CONTACT_SHARING: 'Du kannst entscheiden, '
-                           'ob andere AkaBlasen, die auch den AkaNamen-Bot nutzen, Deine Daten '
-                           'über diesen abrufen dürfen. Deine aktuelle Einstellung ist: {}. '
-                           'Bitte nutze die Knöpfe unten für die Antwort.',
+    'ob andere AkaBlasen, die auch den AkaNamen-Bot nutzen, Deine Daten '
+    'über diesen abrufen dürfen. Deine aktuelle Einstellung ist: {}. '
+    'Bitte nutze die Knöpfe unten für die Antwort.',
     PHONE_NUMBER: 'Die Handynummer, die ich gespeichert habe lautet:\n\nHandynummer: {}\n\nUm '
-                  'die Nummer zu ändern, so zu lassen oder zu löschen, nutze die Knöpfe unten.',
+    'die Nummer zu ändern, so zu lassen oder zu löschen, nutze die Knöpfe unten.',
 }
 """Dict[:obj:`str`,:obj:`str`]: Texts for the different states."""
 
@@ -129,16 +157,20 @@ CORRECT = 'Richtig'
 TG_PROFILE_PICTURE = 'TG_PROFILE_PICTURE'
 """obj:`str`: Callback data indicating that the profile picture of a user should be used as
  picture. """
-BACK_OR_DELETE_KEYBOARD = InlineKeyboardMarkup.from_row([
-    InlineKeyboardButton(text=BACK, callback_data=BACK),
-    InlineKeyboardButton(text='Löschen', callback_data=DELETE)
-])
+BACK_OR_DELETE_KEYBOARD = InlineKeyboardMarkup.from_row(
+    [
+        InlineKeyboardButton(text=BACK, callback_data=BACK),
+        InlineKeyboardButton(text='Löschen', callback_data=DELETE),
+    ]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for either leaving the setting as is or
 deleting its current value."""
-YES_NO_KEYBOARD = InlineKeyboardMarkup.from_row([
-    InlineKeyboardButton(text=YES, callback_data=YES),
-    InlineKeyboardButton(text=NO, callback_data=NO)
-])
+YES_NO_KEYBOARD = InlineKeyboardMarkup.from_row(
+    [
+        InlineKeyboardButton(text=YES, callback_data=YES),
+        InlineKeyboardButton(text=NO, callback_data=NO),
+    ]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for a yes or no choice."""
 # yapf: disable
 GENDER_KEYBOARD = InlineKeyboardMarkup([[
@@ -201,8 +233,7 @@ def get_member(update: Update, context: CallbackContext) -> Member:
     if user_id == admin_id:
         edit_id = context.user_data.get(EDITING_USER_KEY, admin_id)
         return orchestra.members[edit_id]
-    else:
-        return orchestra.members[user_id]
+    return orchestra.members[user_id]
 
 
 def delete_keyboard(context: CallbackContext) -> None:
@@ -240,15 +271,16 @@ def reply_photo_state(update: Update, member: Member) -> Message:
 
     if profile_photos.total_count >= 1:
         keyboard.inline_keyboard.insert(
-            0, [InlineKeyboardButton('Profilbild übernehmen', callback_data=TG_PROFILE_PICTURE)])
+            0, [InlineKeyboardButton('Profilbild übernehmen', callback_data=TG_PROFILE_PICTURE)]
+        )
 
     update.callback_query.answer()
 
     if member.photo_file_id:
         update.effective_message.delete()
-        message = update.effective_message.reply_photo(caption=text,
-                                                       photo=member.photo_file_id,
-                                                       reply_markup=keyboard)
+        message = update.effective_message.reply_photo(
+            caption=text, photo=member.photo_file_id, reply_markup=keyboard
+        )
     else:
         message = update.effective_message.edit_text(text=text, reply_markup=keyboard)
 
@@ -270,7 +302,9 @@ def start_admin_editing(update: Update, context: CallbackContext) -> str:
     update.effective_message.reply_text(
         'Okay, such Dir jemanden aus',
         reply_markup=InlineKeyboardMarkup.from_button(
-            InlineKeyboardButton(text='Klick', switch_inline_query_current_chat='')))
+            InlineKeyboardButton(text='Klick', switch_inline_query_current_chat='')
+        ),
+    )
     return CHOOSING_MEMBER
 
 
@@ -299,15 +333,19 @@ def choose_member(update: Update, context: CallbackContext) -> str:
     # Telegram only likes up to 50 results
     if len(members) > (offset + 1) * MAX_INLINE_QUERY_RESULTS:
         next_offset = offset + 1
-        members = members[offset * MAX_INLINE_QUERY_RESULTS:offset * MAX_INLINE_QUERY_RESULTS
-                          + MAX_INLINE_QUERY_RESULTS]
+        members = members[
+            offset * MAX_INLINE_QUERY_RESULTS : offset * MAX_INLINE_QUERY_RESULTS  # noqa: E203
+            + MAX_INLINE_QUERY_RESULTS
+        ]
     else:
-        members = members[offset * MAX_INLINE_QUERY_RESULTS:]
+        members = members[offset * MAX_INLINE_QUERY_RESULTS :]  # noqa: E203
 
     results = [
-        InlineQueryResultArticle(id=m.user_id,
-                                 title=m.full_name,
-                                 input_message_content=InputTextMessageContent(m.user_id))
+        InlineQueryResultArticle(
+            id=m.user_id,
+            title=m.full_name,
+            input_message_content=InputTextMessageContent(m.user_id),
+        )
         for m in members
     ]
 
@@ -379,10 +417,12 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
     member = get_member(update, context)
 
     if data == DONE:
-        text = f'Hervorragend 🙆‍♂️. Deine Daten lauten nun wie folgt:\n\n{member.to_str()}' \
-               f'\n\n<b>Übrigens:</b> Der Vorstand freut sich ' \
-               f'sicherlich auch über Deine neuen Daten 😉. Schreib ihm doch eine Mail an ' \
-               f'vorstand@akablas.de. ✉️ '
+        text = (
+            f'Hervorragend 🙆‍♂️. Deine Daten lauten nun wie folgt:\n\n{member.to_str()}'
+            f'\n\n<b>Übrigens:</b> Der Vorstand freut sich '
+            f'sicherlich auch über Deine neuen Daten 😉. Schreib ihm doch eine Mail an '
+            f'vorstand@akablas.de. ✉️ '
+        )
         message.edit_text(text=text)
 
         # Only relevant for admin
@@ -390,7 +430,8 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
 
         context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
-    elif data == PHOTO:
+
+    if data == PHOTO:
         msg = reply_photo_state(update, member)
     else:
         reply_markup = BACK_OR_DELETE_KEYBOARD
@@ -402,7 +443,8 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
             text = TEXTS[data].format(member.instruments_str or '-')
         elif data == DATE_OF_BIRTH:
             text = TEXTS[DATE_OF_BIRTH].format(
-                member.date_of_birth.strftime('%d.%m.%Y') if member.date_of_birth else "-")
+                member.date_of_birth.strftime('%d.%m.%Y') if member.date_of_birth else "-"
+            )
         elif data == GENDER:
             reply_markup = GENDER_KEYBOARD
         elif data == PHONE_NUMBER:
@@ -410,7 +452,8 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
         elif data == ALLOW_CONTACT_SHARING:
             reply_markup = YES_NO_KEYBOARD
             text = TEXTS[data].format(
-                'Erlaubt' if member.allow_contact_sharing else 'Nicht erlaubt')
+                'Erlaubt' if member.allow_contact_sharing else 'Nicht erlaubt'
+            )
 
         msg = message.edit_text(text=text, reply_markup=reply_markup)
 
@@ -474,7 +517,7 @@ def simple_handler_factory(attr: str, message_handler: bool = True) -> List[Hand
     if message_handler:
         return [
             MessageHandler(Filters.text & ~Filters.command, callback),
-            CallbackQueryHandler(callback)
+            CallbackQueryHandler(callback),
         ]
     return [CallbackQueryHandler(callback)]
 
@@ -501,18 +544,22 @@ def date_of_birth(update: Update, context: CallbackContext) -> str:
             datetime_of_birth = dtm.datetime.strptime(date_str, '%d.%m.%Y')
             dt_of_birth = datetime_of_birth.date()
             member.date_of_birth = dt_of_birth
-            msg = update.effective_message.reply_text(text=TEXTS[MENU].format(member.to_str()),
-                                                      reply_markup=SELECTION_KEYBOARD)
+            msg = update.effective_message.reply_text(
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            )
         except ValueError:
-            update.message.reply_text('Das habe ich nicht verstanden. Bitte gib das Datum im '
-                                      'Format <i>DD.MM.JJJJ</i> ein.')
+            update.message.reply_text(
+                'Das habe ich nicht verstanden. Bitte gib das Datum im '
+                'Format <i>DD.MM.JJJJ</i> ein.'
+            )
             return DATE_OF_BIRTH
     else:
         if update.callback_query.data == DELETE:
             member.date_of_birth = None
         update.callback_query.answer()
-        msg = update.callback_query.edit_message_text(text=TEXTS[MENU].format(member.to_str()),
-                                                      reply_markup=SELECTION_KEYBOARD)
+        msg = update.callback_query.edit_message_text(
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+        )
 
     context.user_data[EDITING_MESSAGE_KEY] = msg
     orchestra.update_member(member)
@@ -561,19 +608,20 @@ def address(update: Update, context: CallbackContext) -> str:
         orchestra.update_member(member)
 
         return ADDRESS_CONFIRMATION
-    else:
-        update.callback_query.answer()
 
-        if update.callback_query.data == DELETE:
-            member.clear_address()
+    update.callback_query.answer()
 
-        msg = update.effective_message.edit_text(text=TEXTS[MENU].format(member.to_str()),
-                                                 reply_markup=SELECTION_KEYBOARD)
+    if update.callback_query.data == DELETE:
+        member.clear_address()
 
-        context.user_data[EDITING_MESSAGE_KEY] = msg
-        orchestra.update_member(member)
+    msg = update.effective_message.edit_text(
+        text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+    )
 
-        return MENU
+    context.user_data[EDITING_MESSAGE_KEY] = msg
+    orchestra.update_member(member)
+
+    return MENU
 
 
 def photo(update: Update, context: CallbackContext) -> str:
@@ -601,20 +649,26 @@ def photo(update: Update, context: CallbackContext) -> str:
                 msg = message.reply_text(
                     'Ich kann leider keine Fotos im Querformat annehmen. 😕 '
                     'Bitte  schick mir ein anderes Foto.',
-                    reply_markup=BACK_OR_DELETE_KEYBOARD)
+                    reply_markup=BACK_OR_DELETE_KEYBOARD,
+                )
                 context.user_data[EDITING_MESSAGE_KEY] = msg
                 return PHOTO
 
             file_id = photo_size.file_id
             member.photo_file_id = file_id
 
-            msg = message.reply_text(text=TEXTS[MENU].format(member.to_str()),
-                                     reply_markup=SELECTION_KEYBOARD)
+            msg = message.reply_text(
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            )
             context.user_data[EDITING_MESSAGE_KEY] = msg
         else:
-            msg = message.reply_text(text=('Bitte sende mir das Bild als Foto anstatt als Datei, '
-                                           'd.h. <i>nicht</i> über die Büroklammer.'),
-                                     reply_markup=BACK_OR_DELETE_KEYBOARD)
+            msg = message.reply_text(
+                text=(
+                    'Bitte sende mir das Bild als Foto anstatt als Datei, '
+                    'd.h. <i>nicht</i> über die Büroklammer.'
+                ),
+                reply_markup=BACK_OR_DELETE_KEYBOARD,
+            )
             context.user_data[EDITING_MESSAGE_KEY] = msg
             return PHOTO
     else:
@@ -630,12 +684,14 @@ def photo(update: Update, context: CallbackContext) -> str:
         if message.photo:
             message.delete()
 
-            msg = message.reply_text(text=TEXTS[MENU].format(member.to_str()),
-                                     reply_markup=SELECTION_KEYBOARD)
+            msg = message.reply_text(
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            )
             context.user_data[EDITING_MESSAGE_KEY] = msg
         else:
-            message.edit_text(text=TEXTS[MENU].format(member.to_str()),
-                              reply_markup=SELECTION_KEYBOARD)
+            message.edit_text(
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            )
 
     orchestra.update_member(member)
 
@@ -662,22 +718,23 @@ def instruments(update: Update, context: CallbackContext) -> str:
     update.callback_query.answer()
 
     if data == DONE:
-        message.edit_text(text=TEXTS[MENU].format(member.to_str()),
-                          reply_markup=SELECTION_KEYBOARD)
+        message.edit_text(
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+        )
         return MENU
-    else:
-        current_selection = parse_instruments_keyboard(message.reply_markup)
-        instrument, selection = data.split(' ')
-        key = Instrument.from_string(instrument, allowed=Member.ALLOWED_INSTRUMENTS)
-        if key is not None:
-            current_selection[key] = not (selection == SELECTED)
-        member.instruments = [i for i, s in current_selection.items() if s]
 
-        orchestra.update_member(member)
+    current_selection = parse_instruments_keyboard(message.reply_markup)
+    instrument, selection = data.split(' ')
+    key = Instrument.from_string(instrument, allowed=Member.ALLOWED_INSTRUMENTS)
+    if key is not None:
+        current_selection[key] = not selection == SELECTED
+    member.instruments = [i for i, s in current_selection.items() if s]
 
-        message.edit_reply_markup(reply_markup=build_instruments_keyboard(current_selection))
+    orchestra.update_member(member)
 
-        return INSTRUMENTS
+    message.edit_reply_markup(reply_markup=build_instruments_keyboard(current_selection))
+
+    return INSTRUMENTS
 
 
 def phone_number(update: Update, context: CallbackContext) -> str:
@@ -705,33 +762,39 @@ def phone_number(update: Update, context: CallbackContext) -> str:
 
         msg = message.reply_text('Danke!', reply_markup=ReplyKeyboardRemove())
         msg.delete()
-        message.reply_text(text=TEXTS[MENU].format(member.to_str()),
-                           reply_markup=SELECTION_KEYBOARD)
+        message.reply_text(
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+        )
 
         return MENU
-    else:
-        update.callback_query.answer()
-        data = update.callback_query.data
-        if data == DELETE:
-            member.phone_number = None
-            orchestra.update_member(member)
-            message.edit_text(text=TEXTS[MENU].format(member.to_str()),
-                              reply_markup=SELECTION_KEYBOARD)
 
-            return MENU
-        elif data == BACK:
-            message.edit_text(text=TEXTS[MENU].format(member.to_str()),
-                              reply_markup=SELECTION_KEYBOARD)
+    update.callback_query.answer()
+    data = update.callback_query.data
 
-            return MENU
-        else:
-            delete_keyboard(context)
-            text = 'Bitte nutze den Knopf unten, um mir Deine Nummer als Kontakt zu senden.'
-            markup = ReplyKeyboardMarkup.from_button(
-                KeyboardButton('Kontakt senden', request_contact=True))
-            message.reply_text(text=text, reply_markup=markup)
+    if data == DELETE:
+        member.phone_number = None
+        orchestra.update_member(member)
+        message.edit_text(
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+        )
 
-            return PHONE_NUMBER
+        return MENU
+
+    if data == BACK:
+        message.edit_text(
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+        )
+
+        return MENU
+
+    delete_keyboard(context)
+    text = 'Bitte nutze den Knopf unten, um mir Deine Nummer als Kontakt zu senden.'
+    markup = ReplyKeyboardMarkup.from_button(
+        KeyboardButton('Kontakt senden', request_contact=True)
+    )
+    message.reply_text(text=text, reply_markup=markup)
+
+    return PHONE_NUMBER
 
 
 def allow_contact_sharing(update: Update, context: CallbackContext) -> str:
@@ -761,7 +824,8 @@ def allow_contact_sharing(update: Update, context: CallbackContext) -> str:
 
 
 ADDRESS_FILTER = (
-    (Filters.regex(COORDINATES_PATTERN) | Filters.text) & ~Filters.command) | Filters.location
+    (Filters.regex(COORDINATES_PATTERN) | Filters.text) & ~Filters.command
+) | Filters.location
 
 
 def build_editing_handler(admin: int) -> ConversationHandler:
@@ -774,12 +838,12 @@ def build_editing_handler(admin: int) -> ConversationHandler:
     return ConversationHandler(
         entry_points=[
             CommandHandler('daten_bearbeiten', menu),
-            CommandHandler('edit_member', start_admin_editing, filters=Filters.user(admin))
+            CommandHandler('edit_member', start_admin_editing, filters=Filters.user(admin)),
         ],
         states={
             CHOOSING_MEMBER: [
                 InlineQueryHandler(choose_member),
-                MessageHandler(Filters.text & ~Filters.command, admin_menu)
+                MessageHandler(Filters.text & ~Filters.command, admin_menu),
             ],
             MENU: [CallbackQueryHandler(parse_selection)],
             FIRST_NAME: simple_handler_factory(FIRST_NAME),
@@ -788,24 +852,24 @@ def build_editing_handler(admin: int) -> ConversationHandler:
             GENDER: simple_handler_factory(GENDER, message_handler=False),
             DATE_OF_BIRTH: [
                 MessageHandler((Filters.text & ~Filters.command), date_of_birth),
-                CallbackQueryHandler(date_of_birth)
+                CallbackQueryHandler(date_of_birth),
             ],
-            ADDRESS: [MessageHandler(ADDRESS_FILTER, address),
-                      CallbackQueryHandler(address)],
+            ADDRESS: [MessageHandler(ADDRESS_FILTER, address), CallbackQueryHandler(address)],
             ADDRESS_CONFIRMATION: [
                 MessageHandler(ADDRESS_FILTER, address),
-                CallbackQueryHandler(address)
+                CallbackQueryHandler(address),
             ],
             PHOTO: [
                 MessageHandler(Filters.photo | Filters.document.image, photo),
-                CallbackQueryHandler(photo)
+                CallbackQueryHandler(photo),
             ],
             INSTRUMENTS: [CallbackQueryHandler(instruments)],
             PHONE_NUMBER: [
                 MessageHandler(Filters.contact, phone_number),
-                CallbackQueryHandler(phone_number)
+                CallbackQueryHandler(phone_number),
             ],
             ALLOW_CONTACT_SHARING: [CallbackQueryHandler(allow_contact_sharing)],
         },
         fallbacks=[],
-        per_chat=False)
+        per_chat=False,
+    )

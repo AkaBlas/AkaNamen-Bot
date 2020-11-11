@@ -1,9 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """This module contains functions for canceling the membership."""
-from telegram import (Update, InlineKeyboardMarkup, InlineKeyboardButton)
-from telegram.ext import CallbackContext, CallbackQueryHandler, ConversationHandler, \
-    CommandHandler, MessageHandler, Filters
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import (
+    CallbackContext,
+    CallbackQueryHandler,
+    ConversationHandler,
+    CommandHandler,
+    MessageHandler,
+    Filters,
+)
 
 from bot import ORCHESTRA_KEY, CANCELLATION_MESSAGE_KEY, CONVERSATION_KEY
 
@@ -20,8 +26,10 @@ CONVERSATION_VALUE = 'cancelling_membership'
 :obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a membership
 cancellation conversation.
 """
-CONVERSATION_INTERRUPT_TEXT = 'Hey! Entscheid Dich erst einmal, ob Du noch angemeldet bleiben ' \
-                              'möchtest, bevor Du etwas anderes versuchst. 🙄 '
+CONVERSATION_INTERRUPT_TEXT = (
+    'Hey! Entscheid Dich erst einmal, ob Du noch angemeldet bleiben '
+    'möchtest, bevor Du etwas anderes versuchst. 🙄 '
+)
 """
 :obj:`str`: Message to send, if the user tries to interrupt this conversation.
 """
@@ -37,17 +45,22 @@ def ask_for_confirmation(update: Update, context: CallbackContext) -> str:
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
     context.user_data[CONVERSATION_KEY] = CONVERSATION_VALUE
-    text = 'Bist Du Dir <i>ganz</i> sicher, dass Du das möchtest? 🥺 Wenn Du Dich abmeldest, ' \
-           'kannst Du den AkaNamen-Bot nicht mehr nutzen und andere AkaBlasen können nicht mehr ' \
-           'Deinen Namen lernen.\n\n<b>Bitte beachte:</b> Wenn Du Dich abmeldest, werden alle ' \
-           'Deine Daten vom AkaNamen-Bot gelöscht.Ob/wann sie von den Telegram-Servern gelöscht ' \
-           'werden, kann der AkaNamen-Bot nicht beeinflussen.\n\nWenn Du Dich <i>wirklich</i> ' \
-           'abmelden möchtest, sende mir eine Nachricht mit dem Text ' \
-           f'\n\n<code>{CONFIRMATION_TEXT}</code>\n\n Wenn Du doch lieber bleiben möchtest, ' \
-           'nutze den Knopf unten.'
+    text = (
+        'Bist Du Dir <i>ganz</i> sicher, dass Du das möchtest? 🥺 Wenn Du Dich abmeldest, '
+        'kannst Du den AkaNamen-Bot nicht mehr nutzen und andere AkaBlasen können nicht mehr '
+        'Deinen Namen lernen.\n\n<b>Bitte beachte:</b> Wenn Du Dich abmeldest, werden alle '
+        'Deine Daten vom AkaNamen-Bot gelöscht.Ob/wann sie von den Telegram-Servern gelöscht '
+        'werden, kann der AkaNamen-Bot nicht beeinflussen.\n\nWenn Du Dich <i>wirklich</i> '
+        'abmelden möchtest, sende mir eine Nachricht mit dem Text '
+        f'\n\n<code>{CONFIRMATION_TEXT}</code>\n\n Wenn Du doch lieber bleiben möchtest, '
+        'nutze den Knopf unten.'
+    )
     reply_markup = InlineKeyboardMarkup.from_button(
-        InlineKeyboardButton(text='Nein, nein, das war ein Versehen! Abbruch! 😱',
-                             callback_data='cancel_cancellation'))
+        InlineKeyboardButton(
+            text='Nein, nein, das war ein Versehen! Abbruch! 😱',
+            callback_data='cancel_cancellation',
+        )
+    )
     msg = update.effective_message.reply_text(text, reply_markup=reply_markup)
     context.user_data[CANCELLATION_MESSAGE_KEY] = msg
 
@@ -62,8 +75,10 @@ def confirm(update: Update, context: CallbackContext) -> int:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
-    text = 'Schade, dass Du gehst. Natürlich kannst Du jederzeit zurückkommen! Sende dafür ' \
-           'einfach den /start Befehl. 😎 '
+    text = (
+        'Schade, dass Du gehst. Natürlich kannst Du jederzeit zurückkommen! Sende dafür '
+        'einfach den /start Befehl. 😎 '
+    )
 
     update.effective_message.reply_text(text)
 
@@ -101,9 +116,10 @@ CANCEL_MEMBERSHIP_HANDLER = ConversationHandler(
         CONFIRMATION: [
             MessageHandler(Filters.text(CONFIRMATION_TEXT) & ~Filters.command, confirm),
             MessageHandler(~Filters.command, cancel_cancellation),
-            CallbackQueryHandler(cancel_cancellation)
+            CallbackQueryHandler(cancel_cancellation),
         ]
     },
-    fallbacks=[])
+    fallbacks=[],
+)
 """:class:`telegram.ext.ConversationHandler`: Handler used to allow users to cancel their
 membership. """

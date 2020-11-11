@@ -2,13 +2,11 @@
 # -*- coding: utf-8 -*-
 """This module contains the Question class."""
 import re
-
-from components import MessageType, UpdateType
+from typing import TYPE_CHECKING, Union, List
 
 from telegram import Poll, Update
 
-from typing import TYPE_CHECKING, Union, List
-
+from components import MessageType, UpdateType
 from components.helpers import COORDINATES_PATTERN
 
 if TYPE_CHECKING:
@@ -35,17 +33,15 @@ class Question:
          :obj:`True` .
     """
 
-    def __init__(self,
-                 member: 'Member',
-                 attribute: str,
-                 multiple_choice: bool = True,
-                 poll: Poll = None) -> None:
+    def __init__(
+        self, member: 'Member', attribute: str, multiple_choice: bool = True, poll: Poll = None
+    ) -> None:
         if attribute not in self.SUPPORTED_ATTRIBUTES:
             raise ValueError('Attribute not supported.')
 
         if multiple_choice ^ bool(poll):
             raise ValueError('Pass a poll if and only if multiple_choice is True.')
-        elif multiple_choice:
+        if multiple_choice:
             if poll is None or poll.correct_option_id is None:
                 raise ValueError('The poll must be a quiz poll with an correct_option_id.')
 
@@ -69,30 +65,36 @@ class Question:
             update: The :class:`telegram.Update` to be tested.
         """
         if self.multiple_choice:
-            return (UpdateType.relevant_type(update) == UpdateType.POLL_ANSWER
-                    and update.poll_answer.poll_id == self.poll.id)  # type: ignore
-        else:
-            if self.attribute in [
-                    self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.BIRTHDAY, self.AGE,
-                    self.INSTRUMENT, self.FULL_NAME
-            ]:
-                return MessageType.relevant_type(update) == MessageType.TEXT
-            # self.attribute == self.ADDRESS:
-            else:
-                return MessageType.relevant_type(update) in [
-                    MessageType.TEXT, MessageType.LOCATION
-                ]
+            return (
+                UpdateType.relevant_type(update) == UpdateType.POLL_ANSWER
+                and update.poll_answer.poll_id == self.poll.id  # type: ignore
+            )
+        if self.attribute in [
+            self.FIRST_NAME,
+            self.LAST_NAME,
+            self.NICKNAME,
+            self.BIRTHDAY,
+            self.AGE,
+            self.INSTRUMENT,
+            self.FULL_NAME,
+        ]:
+            return MessageType.relevant_type(update) == MessageType.TEXT
+        # self.attribute == self.ADDRESS:
+        return MessageType.relevant_type(update) in [
+            MessageType.TEXT,
+            MessageType.LOCATION,
+        ]
 
     @property
     def correct_answer(self) -> Union[str, List[str]]:
         """The correct answer for this question."""
         if self.multiple_choice and self.poll:
             return self.poll.options[self.poll.correct_option_id]
-        else:
-            attribute = self.member[self.attribute]
-            if isinstance(attribute, list):
-                return ', '.join(str(a) for a in attribute)
-            return str(attribute)
+
+        attribute = self.member[self.attribute]
+        if isinstance(attribute, list):
+            return ', '.join(str(a) for a in attribute)
+        return str(attribute)
 
     def check_answer(self, update: Update) -> bool:
         """
@@ -105,37 +107,38 @@ class Question:
             poll_answer = update.poll_answer
 
             return poll_answer.option_ids[0] == self.poll.correct_option_id  # type: ignore
-        else:
-            if update.message and update.message.text:
-                answer = update.message.text.strip(' ').strip('\n')
-            else:
-                answer = None
 
-            if self.attribute in [self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.FULL_NAME]:
-                accuracy = getattr(self.member, f'compare_{self.attribute}_to')(answer)
-                return accuracy >= 0.90
-            elif self.attribute == self.BIRTHDAY:
-                bd_string = self.member.birthday.replace('0', '').replace('.', '')  # type: ignore
-                answer = answer.replace('.', '').replace(',', '').replace(';', '')
-                answer = answer.replace('0', '').replace(' ', '')
-                return answer == bd_string
-            elif self.attribute == self.AGE:
-                return answer == str(self.member.age)
-            elif self.attribute == self.INSTRUMENT:
-                return self.member.compare_instruments_to(answer) >= 0.85
-            # self.attribute == self.ADDRESS:
-            else:
-                if answer:
-                    match = re.search(COORDINATES_PATTERN, answer)
-                    if match:
-                        return self.member.distance_of_address_to(
-                            (float(match.group(1)), float(match.group(2)))) <= 0.2
-                    else:
-                        return self.member.compare_address_to(answer) >= 0.90
-                else:
-                    location = update.message.location
-                    return self.member.distance_of_address_to(
-                        (location.latitude, location.longitude)) <= 0.2
+        if update.message and update.message.text:
+            answer = update.message.text.strip(' ').strip('\n')
+        else:
+            answer = None
+
+        if self.attribute in [self.FIRST_NAME, self.LAST_NAME, self.NICKNAME, self.FULL_NAME]:
+            accuracy = getattr(self.member, f'compare_{self.attribute}_to')(answer)
+            return accuracy >= 0.90
+        if self.attribute == self.BIRTHDAY:
+            bd_string = self.member.birthday.replace('0', '').replace('.', '')  # type: ignore
+            answer = answer.replace('.', '').replace(',', '').replace(';', '')
+            answer = answer.replace('0', '').replace(' ', '')
+            return answer == bd_string
+        if self.attribute == self.AGE:
+            return answer == str(self.member.age)
+        if self.attribute == self.INSTRUMENT:
+            return self.member.compare_instruments_to(answer) >= 0.85
+        # self.attribute == self.ADDRESS:
+        if answer:
+            match = re.search(COORDINATES_PATTERN, answer)
+            if match:
+                return (
+                    self.member.distance_of_address_to(
+                        (float(match.group(1)), float(match.group(2)))
+                    )
+                    <= 0.2
+                )
+            return self.member.compare_address_to(answer) >= 0.90
+
+        location = update.message.location
+        return self.member.distance_of_address_to((location.latitude, location.longitude)) <= 0.2
 
     FIRST_NAME: str = 'first_name'
     """:obj:`str`: First name of an AkaBlas member"""
@@ -156,6 +159,14 @@ class Question:
     PHOTO: str = 'photo_file_id'
     """:obj:`str`: Foto of an AkaBlas member"""
     SUPPORTED_ATTRIBUTES = [
-        FIRST_NAME, LAST_NAME, NICKNAME, BIRTHDAY, AGE, INSTRUMENT, ADDRESS, FULL_NAME, PHOTO
+        FIRST_NAME,
+        LAST_NAME,
+        NICKNAME,
+        BIRTHDAY,
+        AGE,
+        INSTRUMENT,
+        ADDRESS,
+        FULL_NAME,
+        PHOTO,
     ]
     """List[:obj:`str`]: Attributes usable for questions"""

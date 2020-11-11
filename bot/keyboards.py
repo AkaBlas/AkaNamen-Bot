@@ -2,30 +2,58 @@
 # -*- coding: utf-8 -*-
 """This module contains functions for generating often needed keyboards."""
 
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-from components import (Instrument, PercussionInstrument, Flute, Clarinet, Oboe, Bassoon,
-                        SopranoSaxophone, AltoSaxophone, TenorSaxophone, BaritoneSaxophone,
-                        Euphonium, BaritoneHorn, Baritone, Trombone, Tuba, Trumpet, Flugelhorn,
-                        Horn, Drums, Guitar, BassGuitar, Conductor, Orchestra, Member)
-from bot import REGISTRATION_PATTERN
 from typing import Dict, Optional, List, Iterable
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+from components import (
+    Instrument,
+    PercussionInstrument,
+    Flute,
+    Clarinet,
+    Oboe,
+    Bassoon,
+    SopranoSaxophone,
+    AltoSaxophone,
+    TenorSaxophone,
+    BaritoneSaxophone,
+    Euphonium,
+    BaritoneHorn,
+    Baritone,
+    Trombone,
+    Tuba,
+    Trumpet,
+    Flugelhorn,
+    Horn,
+    Drums,
+    Guitar,
+    BassGuitar,
+    Conductor,
+    Orchestra,
+    Member,
+)
+from bot import REGISTRATION_PATTERN
 
 SELECTED = '✔️'
 """:obj:`str`: Emoji to use to mark selected options."""
 DESELECTED = '❌'
 """:obj:`str`: Emoji to use to mark deselected options."""
 REGISTRATION_KEYBOARD = InlineKeyboardMarkup.from_button(
-    InlineKeyboardButton(text='Anmeldungs-Anfrage senden ✉️', callback_data=REGISTRATION_PATTERN))
+    InlineKeyboardButton(text='Anmeldungs-Anfrage senden ✉️', callback_data=REGISTRATION_PATTERN)
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard that triggers the registration process."""
 DOCS_KEYBOARD = InlineKeyboardMarkup.from_button(
-    InlineKeyboardButton(text='Benutzerhandbuch 📖',
-                         url='https://bibo-joshi.github.io/AkaNamen-Bot/'))
+    InlineKeyboardButton(
+        text='Benutzerhandbuch 📖', url='https://bibo-joshi.github.io/AkaNamen-Bot/'
+    )
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the docs."""
-CHANNEL_KEYBOARD = InlineKeyboardMarkup.from_column([
-    InlineKeyboardButton(text='Info-Kanal 📣', url='https://t.me/AkaNamenInfo'),
-    InlineKeyboardButton(text='Benutzerhandbuch 📖',
-                         url='https://bibo-joshi.github.io/AkaNamen-Bot/')
-])
+CHANNEL_KEYBOARD = InlineKeyboardMarkup.from_column(
+    [
+        InlineKeyboardButton(text='Info-Kanal 📣', url='https://t.me/AkaNamenInfo'),
+        InlineKeyboardButton(
+            text='Benutzerhandbuch 📖', url='https://bibo-joshi.github.io/AkaNamen-Bot/'
+        ),
+    ]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the info channel and the docs."""
 BACK = 'Zurück'
 """:obj:`str`: Text indicating a 'back' action. Use as text or callback data."""
@@ -62,7 +90,8 @@ QUESTION_HINT_KEYBOARD: List[List[str]] = [
 
 
 def build_instruments_keyboard(
-        current_selection: Optional[Dict[Instrument, bool]] = None) -> InlineKeyboardMarkup:
+    current_selection: Optional[Dict[Instrument, bool]] = None
+) -> InlineKeyboardMarkup:
     """
     Builds a :class:`telegram.InlineKeyboardMarkup` listing all instruments that are up for
     selection. The callback data for each button will equal its text.
@@ -83,8 +112,9 @@ def build_instruments_keyboard(
     for row in INSTRUMENT_KEYBOARD:
         button_row = []
         for instrument in row:
-            text = (f'{instrument} '
-                    f'{SELECTED if current_selection.get(instrument) else DESELECTED}')
+            text = (
+                f'{instrument} ' f'{SELECTED if current_selection.get(instrument) else DESELECTED}'
+            )
             button = InlineKeyboardButton(text=text, callback_data=text)
             button_row.append(button)
         buttons.append(button_row)
@@ -113,13 +143,14 @@ def parse_instruments_keyboard(keyboard: InlineKeyboardMarkup) -> Dict[Instrumen
 
 
 def build_questions_hints_keyboard(
-        orchestra: Orchestra,
-        question: bool = False,
-        hint: bool = False,
-        current_selection: Optional[Dict[str, bool]] = None,
-        multiple_choice: bool = True,
-        allowed_hints: List[str] = None,
-        exclude_members: Iterable[Member] = None) -> InlineKeyboardMarkup:
+    orchestra: Orchestra,
+    question: bool = False,
+    hint: bool = False,
+    current_selection: Optional[Dict[str, bool]] = None,
+    multiple_choice: bool = True,
+    allowed_hints: List[str] = None,
+    exclude_members: Iterable[Member] = None,
+) -> InlineKeyboardMarkup:
     """
     Builds a :class:`telegram.InlineKeyboardMarkup` listing all questions that are up for
     selection for the given orchestra. The callback data for each button will equal its text.
@@ -154,8 +185,9 @@ def build_questions_hints_keyboard(
 
     current_selection = current_selection or dict()
 
-    questionable = orchestra.questionable(multiple_choice=multiple_choice,
-                                          exclude_members=exclude_members)
+    questionable = orchestra.questionable(
+        multiple_choice=multiple_choice, exclude_members=exclude_members
+    )
     if not questionable:
         raise RuntimeError('Orchestra currently has no questionable attributes.')
     hints = [q[0].description for q in questionable]
@@ -173,8 +205,10 @@ def build_questions_hints_keyboard(
             if (hint and option not in hints) or (question and option not in questions):
                 continue
 
-            text = (f'{Orchestra.TO_HR[option]} '
-                    f'{SELECTED if current_selection.get(option) else DESELECTED}')
+            text = (
+                f'{Orchestra.TO_HR[option]} '
+                f'{SELECTED if current_selection.get(option) else DESELECTED}'
+            )
             callback_data = f'{option} {SELECTED if current_selection.get(option) else DESELECTED}'
             button = InlineKeyboardButton(text=text, callback_data=callback_data)
             button_row.append(button)
@@ -184,10 +218,12 @@ def build_questions_hints_keyboard(
         if row:
             buttons.append(button_row)
     if any_selected:
-        buttons.append([
-            InlineKeyboardButton(text=ALL, callback_data=ALL),
-            InlineKeyboardButton(text=DONE, callback_data=DONE)
-        ])
+        buttons.append(
+            [
+                InlineKeyboardButton(text=ALL, callback_data=ALL),
+                InlineKeyboardButton(text=DONE, callback_data=DONE),
+            ]
+        )
     else:
         buttons.append([InlineKeyboardButton(text=ALL, callback_data=DONE)])
     return InlineKeyboardMarkup(buttons)

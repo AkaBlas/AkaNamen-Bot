@@ -5,7 +5,6 @@ from components.helpers import setlocale
 
 
 class TestHelpers:
-
     def test_set_locale(self):
         date = dt.date(2020, 3, 13)
         current_locale = locale.getlocale()

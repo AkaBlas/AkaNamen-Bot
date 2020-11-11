@@ -4,7 +4,7 @@
 from emoji import emojize
 
 
-class Gender:
+class Gender:  # pylint: disable=R0903
     """
     This object represents the available genders. The genders are string objects containing emojis,
     making symbolic representation in text easy.

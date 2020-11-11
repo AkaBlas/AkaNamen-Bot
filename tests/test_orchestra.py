@@ -51,7 +51,6 @@ def score_orchestra_anonymous(date):
 
 
 class TestOrchestra:
-
     def test_init_and_subscriptable(self, orchestra):
         assert isinstance(orchestra.members, dict)
         for dict_ in orchestra.SUBSCRIPTABLE:
@@ -85,7 +84,7 @@ class TestOrchestra:
         }
         assert orchestra.attribute_managers['instruments'].data == {
             instruments.Tuba(): {member},
-            instruments.Trumpet(): {member}
+            instruments.Trumpet(): {member},
         }
         assert orchestra.attribute_managers['address'].data == {
             'Universitätsplatz 2, 38106 Braunschweig': {member}
@@ -172,30 +171,42 @@ class TestOrchestra:
         expected = 'Noch keine Einträge vorhanden.'
 
         for score_text in [
-                todays_score_text, weeks_score_text, months_score_text, years_score_text,
-                overall_score_text
+            todays_score_text,
+            weeks_score_text,
+            months_score_text,
+            years_score_text,
+            overall_score_text,
         ]:
             assert score_text.startswith(expected)
 
     def test_score_texts(self, today):
         todays_score_text = score_orchestra(today).todays_score_text()
-        weeks_score_text = score_orchestra(today - dt.timedelta(
-            days=today.weekday())).weeks_score_text()
-        months_score_text = score_orchestra(today - dt.timedelta(days=today.day
-                                                                 - 1)).months_score_text()
+        weeks_score_text = score_orchestra(
+            today - dt.timedelta(days=today.weekday())
+        ).weeks_score_text()
+        months_score_text = score_orchestra(
+            today - dt.timedelta(days=today.day - 1)
+        ).months_score_text()
         years_score_text = score_orchestra(dt.date(today.year, 1, 1)).years_score_text()
         overall_score_text = score_orchestra(today).overall_score_text()
 
-        expected = ('1. One: 4 / 8\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n2. Two: 2 / 4\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %'
-                    '\n3. Three: 1 / 3\n   ▬▬▬▭▭▭▭▭▭▭  33.33 %\n4. Four: 1 / 4\n   ▬▬▭▭▭▭▭▭▭▭  '
-                    '25.00 %')
-        expected_overall = ('1. Two: 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n'
-                            '2. Three: 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %\n'
-                            '3. Four: 11 / 14\n   ▬▬▬▬▬▬▬▭▭▭  78.57 %\n'
-                            '4. One: 14 / 18\n   ▬▬▬▬▬▬▬▭▭▭  77.78 %')
+        expected = (
+            '1. One: 4 / 8\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n2. Two: 2 / 4\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %'
+            '\n3. Three: 1 / 3\n   ▬▬▬▭▭▭▭▭▭▭  33.33 %\n4. Four: 1 / 4\n   ▬▬▭▭▭▭▭▭▭▭  '
+            '25.00 %'
+        )
+        expected_overall = (
+            '1. Two: 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n'
+            '2. Three: 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %\n'
+            '3. Four: 11 / 14\n   ▬▬▬▬▬▬▬▭▭▭  78.57 %\n'
+            '4. One: 14 / 18\n   ▬▬▬▬▬▬▬▭▭▭  77.78 %'
+        )
 
         for score_text in [
-                todays_score_text, weeks_score_text, months_score_text, years_score_text
+            todays_score_text,
+            weeks_score_text,
+            months_score_text,
+            years_score_text,
         ]:
             assert score_text == expected
 
@@ -203,21 +214,25 @@ class TestOrchestra:
 
     def test_score_texts_length(self, today):
         todays_score_text = score_orchestra(today).todays_score_text(length=2)
-        weeks_score_text = score_orchestra(today
-                                           - dt.timedelta(days=today.weekday())).weeks_score_text(
-                                               length=2)
-        months_score_text = score_orchestra(today
-                                            - dt.timedelta(days=today.day - 1)).months_score_text(
-                                                length=2)
+        weeks_score_text = score_orchestra(
+            today - dt.timedelta(days=today.weekday())
+        ).weeks_score_text(length=2)
+        months_score_text = score_orchestra(
+            today - dt.timedelta(days=today.day - 1)
+        ).months_score_text(length=2)
         years_score_text = score_orchestra(dt.date(today.year, 1, 1)).years_score_text(length=2)
         overall_score_text = score_orchestra(today).overall_score_text(length=2)
 
         expected = '1. One: 4 / 8\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n2. Two: 2 / 4\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %'
-        expected_overall = ('1. Two: 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n'
-                            '2. Three: 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %')
+        expected_overall = (
+            '1. Two: 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n' '2. Three: 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %'
+        )
 
         for score_text in [
-                todays_score_text, weeks_score_text, months_score_text, years_score_text
+            todays_score_text,
+            weeks_score_text,
+            months_score_text,
+            years_score_text,
         ]:
             assert score_text == expected
 
@@ -225,26 +240,33 @@ class TestOrchestra:
 
     def test_score_texts_html(self, today):
         todays_score_text = score_orchestra(today).todays_score_text(html=True)
-        weeks_score_text = score_orchestra(today
-                                           - dt.timedelta(days=today.weekday())).weeks_score_text(
-                                               html=True)
-        months_score_text = score_orchestra(today
-                                            - dt.timedelta(days=today.day - 1)).months_score_text(
-                                                html=True)
+        weeks_score_text = score_orchestra(
+            today - dt.timedelta(days=today.weekday())
+        ).weeks_score_text(html=True)
+        months_score_text = score_orchestra(
+            today - dt.timedelta(days=today.day - 1)
+        ).months_score_text(html=True)
         years_score_text = score_orchestra(dt.date(today.year, 1, 1)).years_score_text(html=True)
         overall_score_text = score_orchestra(today).overall_score_text(html=True)
 
-        expected = ('1. <b>One:</b> 4 / 8\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n'
-                    '2. <b>Two:</b> 2 / 4\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n'
-                    '3. <b>Three:</b> 1 / 3\n   ▬▬▬▭▭▭▭▭▭▭  33.33 %\n'
-                    '4. <b>Four:</b> 1 / 4\n   ▬▬▭▭▭▭▭▭▭▭  25.00 %')
-        expected_overall = ('1. <b>Two:</b> 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n'
-                            '2. <b>Three:</b> 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %\n'
-                            '3. <b>Four:</b> 11 / 14\n   ▬▬▬▬▬▬▬▭▭▭  78.57 %\n'
-                            '4. <b>One:</b> 14 / 18\n   ▬▬▬▬▬▬▬▭▭▭  77.78 %')
+        expected = (
+            '1. <b>One:</b> 4 / 8\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n'
+            '2. <b>Two:</b> 2 / 4\n   ▬▬▬▬▬▭▭▭▭▭  50.00 %\n'
+            '3. <b>Three:</b> 1 / 3\n   ▬▬▬▭▭▭▭▭▭▭  33.33 %\n'
+            '4. <b>Four:</b> 1 / 4\n   ▬▬▭▭▭▭▭▭▭▭  25.00 %'
+        )
+        expected_overall = (
+            '1. <b>Two:</b> 12 / 14\n   ▬▬▬▬▬▬▬▬▭▭  85.71 %\n'
+            '2. <b>Three:</b> 11 / 13\n   ▬▬▬▬▬▬▬▬▭▭  84.62 %\n'
+            '3. <b>Four:</b> 11 / 14\n   ▬▬▬▬▬▬▬▭▭▭  78.57 %\n'
+            '4. <b>One:</b> 14 / 18\n   ▬▬▬▬▬▬▬▭▭▭  77.78 %'
+        )
 
         for score_text in [
-                todays_score_text, weeks_score_text, months_score_text, years_score_text
+            todays_score_text,
+            weeks_score_text,
+            months_score_text,
+            years_score_text,
         ]:
             assert score_text == expected
 
@@ -264,16 +286,21 @@ class TestOrchestra:
 
     def test_score_text_anonymous_member(self, today):
         todays_score_text = score_orchestra_anonymous(today).todays_score_text()
-        weeks_score_text = score_orchestra_anonymous(today - dt.timedelta(
-            days=today.weekday())).weeks_score_text()
-        months_score_text = score_orchestra_anonymous(today - dt.timedelta(
-            days=today.day - 1)).months_score_text()
+        weeks_score_text = score_orchestra_anonymous(
+            today - dt.timedelta(days=today.weekday())
+        ).weeks_score_text()
+        months_score_text = score_orchestra_anonymous(
+            today - dt.timedelta(days=today.day - 1)
+        ).months_score_text()
         years_score_text = score_orchestra_anonymous(dt.date(today.year, 1, 1)).years_score_text()
         overall_score_text = score_orchestra_anonymous(today).overall_score_text()
 
         for score_text in [
-                todays_score_text, weeks_score_text, months_score_text, years_score_text,
-                overall_score_text
+            todays_score_text,
+            weeks_score_text,
+            months_score_text,
+            years_score_text,
+            overall_score_text,
         ]:
             assert 'Anonym' in score_text
 
@@ -290,7 +317,8 @@ class TestOrchestra:
         orchestra.register_member(Member(8, first_name='Joe', gender=Gender.MALE))
         assert orchestra.questionable() == []
         orchestra.register_member(
-            Member(9, first_name='Dong', last_name='Silver', gender=Gender.MALE))
+            Member(9, first_name='Dong', last_name='Silver', gender=Gender.MALE)
+        )
         assert orchestra.questionable() == [('last_name', 'first_name')]
         assert orchestra.questionable(exclude_members=[Member(9)]) == []
 
@@ -312,5 +340,7 @@ class TestOrchestra:
         orchestra.register_member(Member(7, first_name='Marc', photo_file_id=str(uuid4())))
         orchestra.register_member(Member(8, first_name='Joe', photo_file_id=str(uuid4())))
         assert orchestra.questionable() == []
-        assert orchestra.questionable(multiple_choice=False) == [('photo_file_id', 'first_name'),
-                                                                 ('photo_file_id', 'full_name')]
+        assert orchestra.questionable(multiple_choice=False) == [
+            ('photo_file_id', 'first_name'),
+            ('photo_file_id', 'full_name'),
+        ]
