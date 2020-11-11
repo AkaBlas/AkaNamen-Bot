@@ -2,11 +2,15 @@
 # -*- coding: utf-8 -*-
 """This module contains functions for backing up the pickle files."""
 import datetime as dtm
-from configparser import ConfigParser
 
 from telegram.ext import CallbackContext, Dispatcher
 
 import owncloud
+
+URL = ''
+USERNAME = ''
+PASSWORD = ''
+PATH = ''
 
 
 def back_up(context: CallbackContext) -> None:
@@ -20,24 +24,17 @@ def back_up(context: CallbackContext) -> None:
     context.dispatcher.update_persistence()
     context.dispatcher.persistence.flush()
 
-    config = ConfigParser()
-    config.read('bot.ini')
-    url = config['owncloud']['url']
-    username = config['owncloud']['username']
-    password = config['owncloud']['password']
-    path = config['owncloud']['path']
-
-    client = owncloud.Client(url)
-    client.login(username, password)
+    client = owncloud.Client(URL)
+    client.login(USERNAME, PASSWORD)
     try:
-        client.mkdir(path)
+        client.mkdir(PATH)
     except owncloud.HTTPResponseError:
         pass
 
     base = 'akanamen_db_{}_data'
     for extension in ['bot', 'chat', 'user']:
         file_name = base.format(extension)
-        client.put_file(f'{path}/{dtm.datetime.now().isoformat()}_{file_name}', file_name)
+        client.put_file(f'{PATH}/{dtm.datetime.now().isoformat()}_{file_name}', file_name)
 
     client.logout()
 

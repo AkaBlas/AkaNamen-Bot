@@ -24,7 +24,7 @@ import bot.error as error
 import bot.game as game
 import bot.admin
 
-from components import Orchestra
+from components import Orchestra, Member
 
 BOT_COMMANDS: List[BotCommand] = [
     BotCommand('spiel_starten', 'Startet ein neues Spiel'),
@@ -40,7 +40,17 @@ BOT_COMMANDS: List[BotCommand] = [
 """List[:class:`telegram.BotCommand`]: A list of commands of the bot."""
 
 
-def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
+def setup(
+        dispatcher: Dispatcher,
+        admin: Union[int, str],
+        oc_url: str,
+        oc_username: str,
+        oc_password: str,
+        oc_path: str,
+        ad_url: str,
+        ad_username: str,
+        ad_password: str,
+) -> None:
     """
     * Adds handlers. Convenience method to avoid doing that all in the main script.
     * Sets the bot commands and makes sure ``dispatcher.bot_data`` is set up correctly.
@@ -51,6 +61,13 @@ def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
     Args:
         dispatcher: The :class:`telegram.ext.Dispatcher`.
         admin: The admins chat id.
+        oc_url: URL of the OwnCloud Instance.
+        oc_username: Username for the OwnCloud Instance.
+        oc_password: Password of the OwnCloud Instance.
+        oc_path: Remote path on the OwnCloud Instance.
+        ad_url: URL of the AkaDressen file.
+        ad_username: Username for the AkaDressen.
+        ad_password: Password for the AkaDressen.
     """
 
     def check_conversation_status(update: Update, context: CallbackContext) -> None:
@@ -196,7 +213,14 @@ def register_dispatcher(dispatcher: Dispatcher, admin: Union[int, str]) -> None:
 
     # Schedule jobs
     check_user_status.schedule_daily_job(dispatcher)
+    backup.PATH = oc_path
+    backup.URL = oc_url
+    backup.USERNAME = oc_username
+    backup.PASSWORD = oc_password
     backup.schedule_daily_job(dispatcher)
+
+    # Set up AkaDressen credentials
+    Member.set_akadressen_credentials(ad_url, ad_username, ad_password)
 
     # Set up bot_data
     bot_data = dispatcher.bot_data
