@@ -7,11 +7,26 @@ from typing import Optional, List, cast, Dict, Union
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
-from telegram.ext import ConversationHandler, CallbackContext, Handler, \
-    CommandHandler, CallbackQueryHandler, Filters
+from telegram.ext import (
+    ConversationHandler,
+    CallbackContext,
+    Handler,
+    CommandHandler,
+    CallbackQueryHandler,
+    Filters,
+)
 
-from bot import ORCHESTRA_KEY, GAME_KEY, parse_questions_hints_keyboard, \
-    build_questions_hints_keyboard, SELECTED, DONE, ALL, GAME_MESSAGE_KEY, CONVERSATION_KEY
+from bot import (
+    ORCHESTRA_KEY,
+    GAME_KEY,
+    parse_questions_hints_keyboard,
+    build_questions_hints_keyboard,
+    SELECTED,
+    DONE,
+    ALL,
+    GAME_MESSAGE_KEY,
+    CONVERSATION_KEY,
+)
 from components import Questioner, Member
 
 # States of the conversation
@@ -31,10 +46,12 @@ CONVERSATION_VALUE = 'game'
 :obj:`str`: The value of ``context.user_data[CONVERSATION_KEY]`` if the user is in a game
 conversation.
 """
-CONVERSATION_INTERRUPT_TEXT = ('Du spielst gerade ein Spiel. 🧐 Bitte antworte nur auf '
-                               'die Fragen und mach keine anderen Eingaben. Wenn Du das '
-                               'Spiel abbrechen möchtest, nutze den Befehl '
-                               '/spiel_abbrechen.')
+CONVERSATION_INTERRUPT_TEXT = (
+    'Du spielst gerade ein Spiel. 🧐 Bitte antworte nur auf '
+    'die Fragen und mach keine anderen Eingaben. Wenn Du das '
+    'Spiel abbrechen möchtest, nutze den Befehl '
+    '/spiel_abbrechen.'
+)
 """
 :obj:`str`: Message to send, if the user tries to interrupt this conversation.
 """
@@ -42,37 +59,40 @@ CONVERSATION_INTERRUPT_TEXT = ('Du spielst gerade ein Spiel. 🧐 Bitte antworte
 # Texts
 TEXTS: Dict[str, str] = {
     MULTIPLE_CHOICE: '<b>1/4 - Spielmodus</b>\n\n'
-                     'Juhu, ein Spiel! Bitte wähle zunächst aus, ob Du Multiple-Choice- oder '
-                     'Freitext-Fragen bekommst.\n\n<i>⚠️ Hinweis:</i> Den Freitext-Modus '
-                     'solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, '
-                     'dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen '
-                     'dazu gibt es in den <a '
-                     'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext'
-                     '-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war'
-                     '-was-ist-da-los">FAQ</a>.',
+    'Juhu, ein Spiel! Bitte wähle zunächst aus, ob Du Multiple-Choice- oder '
+    'Freitext-Fragen bekommst.\n\n<i>⚠️ Hinweis:</i> Den Freitext-Modus '
+    'solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, '
+    'dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen '
+    'dazu gibt es in den <a '
+    'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext'
+    '-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war'
+    '-was-ist-da-los">FAQ</a>.',
     HINT_ATTRIBUTES: '<b>2/4 - Hinweise</b>\n\n'
-                     'Okidoki. Bitte wähle nun aus, welche Eigenschaften eines '
-                     'AkaBlasen als Hinweis gegeben werden können. Um die Auswahl zu ändern, '
-                     'klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf '
-                     '<i>Weiter</i>.',
+    'Okidoki. Bitte wähle nun aus, welche Eigenschaften eines '
+    'AkaBlasen als Hinweis gegeben werden können. Um die Auswahl zu ändern, '
+    'klicke auf die Felder.\n\nWenn Du fertig bist, klicke unten auf '
+    '<i>Weiter</i>.',
     QUESTION_ATTRIBUTES: '<b>3/4 - Fragen</b>\n\n'
-                         'Alaska. Bitte wähle nun aus, nach welchen Eigenschaften eines '
-                         'AkaBlasen Du gefragt wirst. Um die Auswahl zu ändern, klicke auf die '
-                         'Felder.\n\nWenn Du fertig bist, klicke unten auf <i>Weiter</i>.',
+    'Alaska. Bitte wähle nun aus, nach welchen Eigenschaften eines '
+    'AkaBlasen Du gefragt wirst. Um die Auswahl zu ändern, klicke auf die '
+    'Felder.\n\nWenn Du fertig bist, klicke unten auf <i>Weiter</i>.',
     NUMBER_QUESTIONS: '<b>4/4 - Anzahl der Fragen</b>\n\n'
-                      'Supidupi. Wie viele Fragen möchtest Du insgesamt erhalten?',
+    'Supidupi. Wie viele Fragen möchtest Du insgesamt erhalten?',
 }
 """Dict[:obj:`str`,:obj:`str`]: Texts for the different states."""
 
 # Keyboards
 FREE_TEXT = 'Freitext'
 NUMBER_QUESTIONS_KEYBOARD = InlineKeyboardMarkup.from_column(
-    [InlineKeyboardButton(text=i, callback_data=str(i)) for i in [10, 25, 50, 100]])
+    [InlineKeyboardButton(text=i, callback_data=str(i)) for i in [10, 25, 50, 100]]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for selection the number of questions."""
-MULTIPLE_CHOICE_KEYBOARD = InlineKeyboardMarkup.from_row([
-    InlineKeyboardButton(text=MULTIPLE_CHOICE, callback_data=str(True)),
-    InlineKeyboardButton(text=FREE_TEXT, callback_data=str(False)),
-])
+MULTIPLE_CHOICE_KEYBOARD = InlineKeyboardMarkup.from_row(
+    [
+        InlineKeyboardButton(text=MULTIPLE_CHOICE, callback_data=str(True)),
+        InlineKeyboardButton(text=FREE_TEXT, callback_data=str(False)),
+    ]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for selection the type of questions."""
 
 # ----------------------------------------------------------------------------------------------- #
@@ -111,6 +131,7 @@ class GameSettings:
             Defaults to :obj:`True`.
 
     """
+
     number_of_questions: int = 0
     multiple_choice: bool = True
     hint_attributes: List[str] = field(default_factory=list)
@@ -185,18 +206,18 @@ class QuestionHandler(Handler):
             if questioner.number_of_questions_asked < questioner.number_of_questions:
                 questioner.ask_question()
                 return GAME
-            else:
-                correct = questioner.score.correct
-                total = questioner.score.answers
-                text = f'Das Spiel ist vorbei! {correct} von {total} Antworten waren richtig.'
-                update.effective_user.send_message(text=text)
 
-                orchestra = context.bot_data[ORCHESTRA_KEY]
-                member = cast(Member, orchestra.members[user_id])
-                member.user_score.add_to_score(total, correct)
+            correct = questioner.score.correct
+            total = questioner.score.answers
+            text = f'Das Spiel ist vorbei! {correct} von {total} Antworten waren richtig.'
+            update.effective_user.send_message(text=text)
 
-                context.user_data[CONVERSATION_KEY] = False
-                return ConversationHandler.END
+            orchestra = context.bot_data[ORCHESTRA_KEY]
+            member = cast(Member, orchestra.members[user_id])
+            member.user_score.add_to_score(total, correct)
+
+            context.user_data[CONVERSATION_KEY] = False
+            return ConversationHandler.END
 
 
 # ----------------------------------------------------------------------------------------------- #
@@ -231,17 +252,21 @@ def multiple_choice(update: Update, context: CallbackContext) -> Union[str, int]
                     hint=True,
                     multiple_choice=game_settings.multiple_choice,
                     exclude_members=[orchestra.members[update.effective_user.id]],
-                    current_selection={h: True for h in game_settings.hint_attributes}))
+                    current_selection={h: True for h in game_settings.hint_attributes},
+                ),
+            )
             return HINT_ATTRIBUTES
-        except RuntimeError as e:
-            if 'Orchestra currently has no questionable attributes.' == str(e):
-                message.reply_text('Es sind leider noch nicht genug AkaBlasen angemeldet, um ein '
-                                   'Spiel starten zu können. 😕 Bitte versuche es später erneut.')
+        except RuntimeError as exc:
+            if str(exc) == 'Orchestra currently has no questionable attributes.':
+                message.reply_text(
+                    'Es sind leider noch nicht genug AkaBlasen angemeldet, um ein '
+                    'Spiel starten zu können. 😕 Bitte versuche es später erneut.'
+                )
                 message.delete()
                 context.user_data[CONVERSATION_KEY] = False
                 return ConversationHandler.END
-            else:
-                raise e
+
+            raise exc
     else:
         msg = message.reply_text(TEXTS[MULTIPLE_CHOICE], reply_markup=MULTIPLE_CHOICE_KEYBOARD)
         context.user_data[GAME_MESSAGE_KEY] = msg
@@ -282,37 +307,46 @@ def hint_attributes(update: Update, context: CallbackContext) -> Union[str, int]
                 multiple_choice=game_settings.multiple_choice,
                 allowed_hints=game_settings.hint_attributes,
                 exclude_members=exclude_members,
-                current_selection={q: True for q in game_settings.question_attributes}))
+                current_selection={q: True for q in game_settings.question_attributes},
+            ),
+        )
         return QUESTION_ATTRIBUTES
-    elif data == ALL:
+
+    if data == ALL:
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
         current_value = all(current_selection.values())
         for entry in current_selection:
             current_selection[entry] = not current_value
 
-        message.edit_reply_markup(reply_markup=build_questions_hints_keyboard(
+        message.edit_reply_markup(
+            reply_markup=build_questions_hints_keyboard(
+                orchestra=orchestra,
+                hint=True,
+                current_selection=current_selection,
+                multiple_choice=game_settings.multiple_choice,
+                allowed_hints=game_settings.hint_attributes,
+                exclude_members=exclude_members,
+            )
+        )
+
+        return HINT_ATTRIBUTES
+
+    current_selection = parse_questions_hints_keyboard(message.reply_markup)
+    attr, selection = data.split(' ')
+    current_selection[attr] = not selection == SELECTED
+
+    message.edit_reply_markup(
+        reply_markup=build_questions_hints_keyboard(
             orchestra=orchestra,
             hint=True,
             current_selection=current_selection,
             multiple_choice=game_settings.multiple_choice,
             allowed_hints=game_settings.hint_attributes,
-            exclude_members=exclude_members))
+            exclude_members=exclude_members,
+        )
+    )
 
-        return HINT_ATTRIBUTES
-    else:
-        current_selection = parse_questions_hints_keyboard(message.reply_markup)
-        attr, selection = data.split(' ')
-        current_selection[attr] = not (selection == SELECTED)
-
-        message.edit_reply_markup(reply_markup=build_questions_hints_keyboard(
-            orchestra=orchestra,
-            hint=True,
-            current_selection=current_selection,
-            multiple_choice=game_settings.multiple_choice,
-            allowed_hints=game_settings.hint_attributes,
-            exclude_members=exclude_members))
-
-        return HINT_ATTRIBUTES
+    return HINT_ATTRIBUTES
 
 
 def question_attributes(update: Update, context: CallbackContext) -> str:
@@ -340,35 +374,42 @@ def question_attributes(update: Update, context: CallbackContext) -> str:
 
         message.edit_text(text=TEXTS[NUMBER_QUESTIONS], reply_markup=NUMBER_QUESTIONS_KEYBOARD)
         return NUMBER_QUESTIONS
-    elif data == ALL:
+
+    if data == ALL:
         current_selection = parse_questions_hints_keyboard(message.reply_markup)
         current_value = all(current_selection.values())
         for entry in current_selection:
             current_selection[entry] = not current_value
 
-        message.edit_reply_markup(reply_markup=build_questions_hints_keyboard(
+        message.edit_reply_markup(
+            reply_markup=build_questions_hints_keyboard(
+                orchestra=orchestra,
+                question=True,
+                current_selection=current_selection,
+                multiple_choice=game_settings.multiple_choice,
+                allowed_hints=game_settings.hint_attributes,
+                exclude_members=exclude_members,
+            )
+        )
+
+        return QUESTION_ATTRIBUTES
+
+    current_selection = parse_questions_hints_keyboard(message.reply_markup)
+    attr, selection = data.split(' ')
+    current_selection[attr] = not selection == SELECTED
+
+    message.edit_reply_markup(
+        reply_markup=build_questions_hints_keyboard(
             orchestra=orchestra,
             question=True,
             current_selection=current_selection,
             multiple_choice=game_settings.multiple_choice,
             allowed_hints=game_settings.hint_attributes,
-            exclude_members=exclude_members))
+            exclude_members=exclude_members,
+        )
+    )
 
-        return QUESTION_ATTRIBUTES
-    else:
-        current_selection = parse_questions_hints_keyboard(message.reply_markup)
-        attr, selection = data.split(' ')
-        current_selection[attr] = not (selection == SELECTED)
-
-        message.edit_reply_markup(reply_markup=build_questions_hints_keyboard(
-            orchestra=orchestra,
-            question=True,
-            current_selection=current_selection,
-            multiple_choice=game_settings.multiple_choice,
-            allowed_hints=game_settings.hint_attributes,
-            exclude_members=exclude_members))
-
-        return QUESTION_ATTRIBUTES
+    return QUESTION_ATTRIBUTES
 
 
 def number_questions(update: Update, context: CallbackContext) -> str:
@@ -391,13 +432,15 @@ def number_questions(update: Update, context: CallbackContext) -> str:
     game_settings.number_of_questions = int(data)
 
     try:
-        questioner = Questioner(user_id=user_id,
-                                orchestra=context.bot_data[ORCHESTRA_KEY],
-                                hint_attributes=game_settings.hint_attributes,
-                                question_attributes=game_settings.question_attributes,
-                                number_of_questions=game_settings.number_of_questions,
-                                bot=context.bot,
-                                multiple_choice=game_settings.multiple_choice)
+        questioner = Questioner(
+            user_id=user_id,
+            orchestra=context.bot_data[ORCHESTRA_KEY],
+            hint_attributes=game_settings.hint_attributes,
+            question_attributes=game_settings.question_attributes,
+            number_of_questions=game_settings.number_of_questions,
+            bot=context.bot,
+            multiple_choice=game_settings.multiple_choice,
+        )
         QUESTION_HANDLER.set_questioner(user_id, questioner)
         message.delete()
 
@@ -405,8 +448,9 @@ def number_questions(update: Update, context: CallbackContext) -> str:
 
         return GAME
     except ValueError:
-        message.edit_text('Die gewählte Spielkonfiguration ist leider ungültig. Bitte versuche '
-                          'es erneut.')
+        message.edit_text(
+            'Die gewählte Spielkonfiguration ist leider ungültig. Bitte versuche es erneut.'
+        )
         context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
 
@@ -419,8 +463,9 @@ def cancel(update: Update, context: CallbackContext) -> int:
         update: The update.
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
-    update.effective_message.reply_text('Spiel abgebrochen. Es geht <i>nicht</i> in den '
-                                        'Highscore ein.')
+    update.effective_message.reply_text(
+        'Spiel abgebrochen. Es geht <i>nicht</i> in den Highscore ein.'
+    )
     try:
         context.user_data[GAME_MESSAGE_KEY].delete()
     except BadRequest:
@@ -436,9 +481,10 @@ GAME_HANDLER = ConversationHandler(
         HINT_ATTRIBUTES: [CallbackQueryHandler(hint_attributes)],
         QUESTION_ATTRIBUTES: [CallbackQueryHandler(question_attributes)],
         NUMBER_QUESTIONS: [CallbackQueryHandler(number_questions)],
-        GAME: [QUESTION_HANDLER]
+        GAME: [QUESTION_HANDLER],
     },
     fallbacks=[CommandHandler('spiel_abbrechen', cancel)],
     # We need to set per_chat to False in order to be able to handle PollAnswer updates
-    per_chat=False)
+    per_chat=False,
+)
 """:class:`telegram.ext.ConversationHandler`: Handler for playing games."""

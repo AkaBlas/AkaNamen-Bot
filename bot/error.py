@@ -32,7 +32,8 @@ def handle_error(update: Update, context: CallbackContext) -> None:
     if update and update.effective_message:
         text = emojize(
             'Huch, da ist etwas schief gelaufen :worried:. Ich melde es dem Hirsch :nerd_face:.',
-            use_aliases=True)
+            use_aliases=True,
+        )
         update.effective_message.reply_text(text)
 
     # Get traceback
@@ -44,20 +45,25 @@ def handle_error(update: Update, context: CallbackContext) -> None:
     if update:
         if update.effective_user:
             payload += ' with the user {}'.format(
-                mention_html(update.effective_user.id, update.effective_user.first_name))
+                mention_html(update.effective_user.id, update.effective_user.first_name)
+            )
         if update.effective_chat and update.effective_chat.username:
             payload += f' (@{html.escape(update.effective_chat.username)})'
         if update.poll:
             payload += f' with the poll id {update.poll.id}.'
-    text = f'Hey.\nThe error <code>{html.escape(str(context.error))}</code> happened' \
-           f'{payload}. The full traceback:\n\n<code>{html.escape(trace)}</code>'
+    text = (
+        f'Hey.\nThe error <code>{html.escape(str(context.error))}</code> happened'
+        f'{payload}. The full traceback:\n\n<code>{html.escape(trace)}</code>'
+    )
 
     # Send to admin
     try:
         context.bot.send_message(context.bot_data[ADMIN_KEY], text)
-    except BadRequest as e:
-        if 'Message is too long' in str(e):
-            text = f'Hey.\nThe error <code>{html.escape(str(context.error))}</code> happened' \
-                   f'{payload}. The traceback is too long to send, but it was written to the log' \
-                   f' file.'
+    except BadRequest as ecx:
+        if 'Message is too long' in str(ecx):
+            text = (
+                f'Hey.\nThe error <code>{html.escape(str(context.error))}</code> happened'
+                f'{payload}. The traceback is too long to send, but it was written to the log'
+                f' file.'
+            )
             context.bot.send_message(context.bot_data[ADMIN_KEY], text)

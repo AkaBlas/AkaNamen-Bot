@@ -9,9 +9,9 @@ from tempfile import NamedTemporaryFile
 
 
 class TestPicklableBase:
-
-    @pytest.mark.skipif(os.name == 'nt',
-                        reason="Not worth the struggle stetting this up for windows.")
+    @pytest.mark.skipif(
+        os.name == 'nt', reason="Not worth the struggle stetting this up for windows."
+    )
     def test_pickle(self):
         base = PicklableBase()
         base._one_lock = Lock()

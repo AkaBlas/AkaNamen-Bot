@@ -56,9 +56,11 @@ def bot_info():
 
 
 def make_bot(bot_info, **kwargs):
-    return Bot(bot_info['token'],
-               **kwargs,
-               defaults=Defaults(parse_mode=ParseMode.HTML, disable_notification=True))
+    return Bot(
+        bot_info['token'],
+        **kwargs,
+        defaults=Defaults(parse_mode=ParseMode.HTML, disable_notification=True),
+    )
 
 
 @pytest.fixture(scope='session')

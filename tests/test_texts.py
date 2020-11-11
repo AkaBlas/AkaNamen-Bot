@@ -10,19 +10,20 @@ from tests.addresses import get_address_from_cache
 @pytest.fixture
 def member(monkeypatch):
     monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
-    return Member(1,
-                  first_name='first',
-                  last_name='last',
-                  nickname='nickname',
-                  photo_file_id='file_id',
-                  gender=Gender.MALE,
-                  date_of_birth=dt.date(dt.date.today().year - 21, 12, 31),
-                  instruments=instruments.AltoSaxophone(),
-                  address='Universitätsplatz 2, 38106 Braunschweig')
+    return Member(
+        1,
+        first_name='first',
+        last_name='last',
+        nickname='nickname',
+        photo_file_id='file_id',
+        gender=Gender.MALE,
+        date_of_birth=dt.date(dt.date.today().year - 21, 12, 31),
+        instruments=instruments.AltoSaxophone(),
+        address='Universitätsplatz 2, 38106 Braunschweig',
+    )
 
 
 class TestTexts:
-
     def test_all_but_photo(self, member):
         for q in [a for a in Question.SUPPORTED_ATTRIBUTES if a != Question.PHOTO]:
             for h in Question.SUPPORTED_ATTRIBUTES:
@@ -45,11 +46,13 @@ class TestTexts:
                         assert '}' not in text
 
     def test_hint_value(self, member):
-        text = question_text(member,
-                             Question.FULL_NAME,
-                             Question.INSTRUMENT,
-                             multiple_choice=False,
-                             hint_value='foo')
+        text = question_text(
+            member,
+            Question.FULL_NAME,
+            Question.INSTRUMENT,
+            multiple_choice=False,
+            hint_value='foo',
+        )
         assert 'foo' in text
         assert member.instruments_str not in text
 

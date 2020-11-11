@@ -4,7 +4,6 @@ from components import Member, Score
 
 
 class TestScore:
-
     def test_init(self):
         score = Score()
         assert score.answers == 0

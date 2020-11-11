@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 """This module contains functions for generating often needed texts."""
 import random
-from components import Question
 from typing import Optional, TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
+
+from components import Question  # pylint: disable=C0413
 
 MULTIPLE_CHOICE_QUESTIONS = {
     Question.FIRST_NAME: {
@@ -22,16 +23,16 @@ MULTIPLE_CHOICE_QUESTIONS = {
     Question.LAST_NAME: {
         Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas mit Nachnamen {hint}?',
         Question.BIRTHDAY: 'An welchem Tag hat ein Mitglied von AkaBlas mit Nachnamen {hint} '
-                           'Geburtstag?',
+        'Geburtstag?',
         Question.AGE: 'Wie alt ist ein Mitglied von AkaBlas mit Nachnamen {hint}?',
         Question.INSTRUMENT: 'Welches dieser Instrumente spielt ein Mitglied von AkaBlas mit '
-                             'Nachnamen {hint} (ggf. unter anderem)?',
+        'Nachnamen {hint} (ggf. unter anderem)?',
         Question.FIRST_NAME: 'Wie lautet der Vorname eines Mitglieds von AkaBlas mit '
-                             'Nachnamen {hint}?',
+        'Nachnamen {hint}?',
         Question.NICKNAME: 'Wie lautet der Spitzname eines Mitglieds von AkaBlas mit Nachnamen {'
-                           'hint}?',
+        'hint}?',
         Question.FULL_NAME: 'Wie lautet der volle Name eines Mitglieds von AkaBlas mit Nachnamen '
-                            '{hint}?',
+        '{hint}?',
         Question.PHOTO: 'Welches Bild zeigt ein Mitglied von AkaBlas mit Nachnamen {hint}?',
     },
     Question.NICKNAME: {
@@ -60,8 +61,10 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.NICKNAME: 'Wer hat am {hint} Geburtstag?',
         Question.FULL_NAME: 'Wer hat am {hint} Geburtstag?',
         Question.AGE: 'Wie alt ist das Mitglied von AkaBlas, das am {hint} Geburtstag hat?',
-        Question.INSTRUMENT: ('Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
-                              'das am {hint} Geburtstag hat?'),
+        Question.INSTRUMENT: (
+            'Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
+            'das am {hint} Geburtstag hat?'
+        ),
         Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das am {hint} Geburtstag hat?',
         Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, das am {hint} Geburtstag hat?',
     },
@@ -70,67 +73,74 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.LAST_NAME: 'Wer ist {hint} Jahre alt?',
         Question.NICKNAME: 'Wer ist {hint} Jahre alt?',
         Question.FULL_NAME: 'Wer ist {hint} Jahre alt?',
-        Question.BIRTHDAY: ('Wann hat das Mitglied von AkaBlas Geburtstag, das jetzt {hint} Jahre '
-                            'alt ist?'),
-        Question.INSTRUMENT: ('Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
-                              'das jetzt {hint} Jahre alt ist?'),
+        Question.BIRTHDAY: (
+            'Wann hat das Mitglied von AkaBlas Geburtstag, das jetzt {hint} Jahre alt ist?'
+        ),
+        Question.INSTRUMENT: (
+            'Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
+            'das jetzt {hint} Jahre alt ist?'
+        ),
         Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das jetzt {hint} Jahre alt ist?',
         Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, das {hint} Jahre alt ist?',
     },
     Question.INSTRUMENT: {
-        Question.FIRST_NAME:
-            'Wer spielt (ggf. unter anderem) {hint}?',
-        Question.LAST_NAME:
-            'Wer spielt (ggf. unter anderem) {hint}?',
-        Question.NICKNAME:
-            'Wer spielt (ggf. unter anderem) {hint}?',
-        Question.FULL_NAME:
-            'Wer spielt (ggf. unter anderem) {hint}?',
-        Question.BIRTHDAY: ('Wann hat das Mitglied von AkaBlas Geburtstag, das (ggf. unter '
-                            'unter anderem) {hint} spielt?'),
-        Question.AGE: ('Wie alt is ein Mitglied von AkaBlas, das (ggf. unter anderem) '
-                       '{hint} spielt?'),
-        Question.ADDRESS: ('Wo wohnt ein Mitglied von AkaBlas, das (ggf. unter anderem) {hint} '
-                           'spielt?'),
-        Question.PHOTO: ('Welches Bild zeigt das Akablas-Mitglied, das (ggf. unter anderem) '
-                         '{hint} spielt?'),
+        Question.FIRST_NAME: 'Wer spielt (ggf. unter anderem) {hint}?',
+        Question.LAST_NAME: 'Wer spielt (ggf. unter anderem) {hint}?',
+        Question.NICKNAME: 'Wer spielt (ggf. unter anderem) {hint}?',
+        Question.FULL_NAME: 'Wer spielt (ggf. unter anderem) {hint}?',
+        Question.BIRTHDAY: (
+            'Wann hat das Mitglied von AkaBlas Geburtstag, das (ggf. unter '
+            'unter anderem) {hint} spielt?'
+        ),
+        Question.AGE: (
+            'Wie alt is ein Mitglied von AkaBlas, das (ggf. unter anderem) {hint} spielt?'
+        ),
+        Question.ADDRESS: (
+            'Wo wohnt ein Mitglied von AkaBlas, das (ggf. unter anderem) {hint} spielt?'
+        ),
+        Question.PHOTO: (
+            'Welches Bild zeigt das Akablas-Mitglied, das (ggf. unter anderem) {hint} spielt?'
+        ),
     },
     Question.ADDRESS: {
-        Question.FIRST_NAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
-        Question.LAST_NAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
-        Question.NICKNAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
-        Question.FULL_NAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
-        Question.BIRTHDAY: ('Wann hat das Mitglied von AkaBlas Geburtstag, das bei dieser Adresse '
-                            'wohnt: {hint}?'),
-        Question.AGE: ('Wie alt ist das Mitglied von AkaBlas, das bei dieser Adresse wohnt: '
-                       '{hint}?'),
-        Question.INSTRUMENT: ('Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
-                              'das bei dieser Adresse wohnt: {hint}?'),
-        Question.PHOTO:
-            'Welches Bild zeigt das AkaBlas-Mitglied, dass Du bei dieser Adresse triffst: {hint}?',
+        Question.FIRST_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
+        Question.LAST_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
+        Question.NICKNAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
+        Question.FULL_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
+        Question.BIRTHDAY: (
+            'Wann hat das Mitglied von AkaBlas Geburtstag, das bei dieser Adresse '
+            'wohnt: {hint}?'
+        ),
+        Question.AGE: (
+            'Wie alt ist das Mitglied von AkaBlas, das bei dieser Adresse wohnt: {hint}?'
+        ),
+        Question.INSTRUMENT: (
+            'Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
+            'das bei dieser Adresse wohnt: {hint}?'
+        ),
+        Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, dass Du bei dieser Adresse '
+        'triffst: {hint}?',
     },
     Question.PHOTO: {
         Question.ADDRESS: 'Wo wohnt dieses AkaBlas-Mitglied?',
         Question.BIRTHDAY: 'An welchem Tag hat dieses AkaBlas-Mitglied Geburtstag?',
         Question.AGE: 'Wie alt ist dieses AkaBlas-Mitglied?',
-        Question.INSTRUMENT: ('Welches dieser Instrumente spielt dieses AkaBlas-Mitglied '
-                              '(ggf. unter anderem)?'),
+        Question.INSTRUMENT: (
+            'Welches dieser Instrumente spielt dieses AkaBlas-Mitglied (ggf. unter anderem)?'
+        ),
         Question.FIRST_NAME: 'Wie lautet der Vorname dieses AkaBlas-Mitglieds?',
         Question.LAST_NAME: 'Wie lautet der Nachname dieses AkaBlas-Mitglieds?',
         Question.NICKNAME: 'Wie lautet der Spitzname dieses AkaBlas-Mitglieds?',
         Question.FULL_NAME: 'Wie lautet der volle Name dieses AkaBlas-Mitglieds?',
-    }
+    },
 }
 
 FREE_TEXT_QUESTIONS = {
     Question.FIRST_NAME: {
         Question.ADDRESS: 'Wo wohnt {hint}?',
-        Question.BIRTHDAY: ('An welchem Tag hat {hint} Geburtstag? Bitte gib das Datum im Format '
-                            '"TT.MM." ein.'),
+        Question.BIRTHDAY: (
+            'An welchem Tag hat {hint} Geburtstag? Bitte gib das Datum im Format "TT.MM." ein.'
+        ),
         Question.AGE: 'Wie alt ist {hint}?',
         Question.INSTRUMENT: 'Welches Instrument spielt {hint} (ggf. unter anderem)?',
         Question.LAST_NAME: 'Wie lautet der Nachname von {hint}?',
@@ -139,22 +149,25 @@ FREE_TEXT_QUESTIONS = {
     },
     Question.LAST_NAME: {
         Question.ADDRESS: 'Wo wohnt das Mitglied von AkaBlas mit Nachnamen {hint}?',
-        Question.BIRTHDAY: ('An welchem Tag hat das Mitglied von AkaBlas mit Nachnamen {hint} '
-                            'Geburtstag? Bitte gib das Datum im Format "TT.MM." ein.'),
+        Question.BIRTHDAY: (
+            'An welchem Tag hat das Mitglied von AkaBlas mit Nachnamen {hint} '
+            'Geburtstag? Bitte gib das Datum im Format "TT.MM." ein.'
+        ),
         Question.AGE: 'Wie alt ist das Mitglied von AkaBlas mit Nachnamen {hint}?',
         Question.INSTRUMENT: 'Welches Instrument spielt das Mitglied von AkaBlas mit Nachnamen {'
-                             'hint} (ggf. unter anderem)?',
+        'hint} (ggf. unter anderem)?',
         Question.FIRST_NAME: 'Wie lautet der Vorname des Mitglieds von AkaBlas mit Nachnamen {'
-                             'hint}?',
+        'hint}?',
         Question.NICKNAME: 'Wie lautet der Spitzname des Mitglieds von AkaBlas mit Nachnamen {'
-                           'hint}?',
+        'hint}?',
         Question.FULL_NAME: 'Wie lautet der volle Name des Mitglieds von AkaBlas mit Nachnamen {'
-                            'hint}?',
+        'hint}?',
     },
     Question.NICKNAME: {
         Question.ADDRESS: 'Wo wohnt {hint}?',
-        Question.BIRTHDAY: ('An welchem Tag hat {hint} Geburtstag? Bitte gib das Datum im Format '
-                            '"TT.MM." ein.'),
+        Question.BIRTHDAY: (
+            'An welchem Tag hat {hint} Geburtstag? Bitte gib das Datum im Format "TT.MM." ein.'
+        ),
         Question.AGE: 'Wie alt ist {hint}?',
         Question.INSTRUMENT: 'Welches Instrument spielt {hint} (ggf. unter anderem)?',
         Question.FIRST_NAME: 'Wie lautet der Vorname von {hint}?',
@@ -166,8 +179,9 @@ FREE_TEXT_QUESTIONS = {
         Question.LAST_NAME: 'Wie lautet der Nachname von {hint}?',
         Question.NICKNAME: 'Wie lautet der Spitzname von {hint}?',
         Question.ADDRESS: 'Wo wohnt {hint}?',
-        Question.BIRTHDAY: ('An welchem Tag hat {hint} Geburtstag? Bitte gib das Datum im Format '
-                            '"TT.MM." ein.'),
+        Question.BIRTHDAY: (
+            'An welchem Tag hat {hint} Geburtstag? Bitte gib das Datum im Format "TT.MM." ein.'
+        ),
         Question.AGE: 'Wie alt ist {hint}?',
         Question.INSTRUMENT: 'Welches Instrument spielt {hint} (ggf. unter anderem)?',
     },
@@ -177,75 +191,90 @@ FREE_TEXT_QUESTIONS = {
         Question.NICKNAME: 'Wer hat am {hint} Geburtstag? (Spitzname)',
         Question.FULL_NAME: 'Wer hat am {hint} Geburtstag? (Ganzer Name)',
         Question.AGE: 'Wie alt ist das Mitglied von AkaBlas, das am {hint} Geburtstag hat?',
-        Question.INSTRUMENT: ('Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
-                              'das am {hint} Geburtstag hat?'),
-        Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das am {hint} Geburtstag hat?'
+        Question.INSTRUMENT: (
+            'Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
+            'das am {hint} Geburtstag hat?'
+        ),
+        Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das am {hint} Geburtstag hat?',
     },
     Question.AGE: {
         Question.FIRST_NAME: 'Wer ist {hint} Jahre alt? (Vorname)',
         Question.LAST_NAME: 'Wer ist {hint} Jahre alt? (Nachname)',
         Question.NICKNAME: 'Wer ist {hint} Jahre alt? (Spitzname)',
         Question.FULL_NAME: 'Wer ist {hint} Jahre alt? (Ganzer Name)',
-        Question.BIRTHDAY: ('Wann hat das Mitglied von AkaBlas Geburtstag, das jetzt {hint} Jahre '
-                            'alt ist? Bitte gib das Datum im Format "TT.MM." ein.'),
-        Question.INSTRUMENT: ('Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
-                              'das jetzt {hint} Jahre alt ist?'),
-        Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das jetzt {hint} Jahre alt ist?'
+        Question.BIRTHDAY: (
+            'Wann hat das Mitglied von AkaBlas Geburtstag, das jetzt {hint} Jahre '
+            'alt ist? Bitte gib das Datum im Format "TT.MM." ein.'
+        ),
+        Question.INSTRUMENT: (
+            'Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
+            'das jetzt {hint} Jahre alt ist?'
+        ),
+        Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das jetzt {hint} Jahre alt ist?',
     },
     Question.INSTRUMENT: {
-        Question.FIRST_NAME:
-            'Wer spielt (ggf. unter anderem) {hint}? (Vorname)',
-        Question.LAST_NAME:
-            'Wer spielt (ggf. unter anderem) {hint}? (Nachname)',
-        Question.NICKNAME:
-            'Wer spielt (ggf. unter anderem) {hint}? (Spitzname)',
-        Question.FULL_NAME:
-            'Wer spielt (ggf. unter anderem) {hint}? (Ganzer Name)',
-        Question.BIRTHDAY: ('Wann hat das Mitglied von AkaBlas Geburtstag, das (ggf. unter '
-                            'unter anderem) {hint} spielt?  Bitte gib das Datum im Format '
-                            '"TT.MM." ein.'),
-        Question.AGE: ('Wie alt ist das Mitglied von AkaBlas, das (ggf. unter anderem) '
-                       '{hint} spielt?'),
-        Question.ADDRESS: ('Wo wohnt ein Mitglied von AkaBlas, das (ggf. unter anderem) {hint} '
-                           'spielt?')
+        Question.FIRST_NAME: 'Wer spielt (ggf. unter anderem) {hint}? (Vorname)',
+        Question.LAST_NAME: 'Wer spielt (ggf. unter anderem) {hint}? (Nachname)',
+        Question.NICKNAME: 'Wer spielt (ggf. unter anderem) {hint}? (Spitzname)',
+        Question.FULL_NAME: 'Wer spielt (ggf. unter anderem) {hint}? (Ganzer Name)',
+        Question.BIRTHDAY: (
+            'Wann hat das Mitglied von AkaBlas Geburtstag, das (ggf. unter '
+            'unter anderem) {hint} spielt?  Bitte gib das Datum im Format '
+            '"TT.MM." ein.'
+        ),
+        Question.AGE: (
+            'Wie alt ist das Mitglied von AkaBlas, das (ggf. unter anderem) {hint} spielt?'
+        ),
+        Question.ADDRESS: (
+            'Wo wohnt ein Mitglied von AkaBlas, das (ggf. unter anderem) {hint} spielt?'
+        ),
     },
     Question.ADDRESS: {
-        Question.FIRST_NAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}? (Vorname)',
-        Question.LAST_NAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}? (Nachname)',
-        Question.NICKNAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}? (Spitzname)',
-        Question.FULL_NAME:
-            'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}? (Ganzer Name)',
-        Question.BIRTHDAY: ('Wann hat das Mitglied von AkaBlas Geburtstag, das bei dieser Adresse '
-                            'wohnt: {hint}? Bitte gib das Datum im Format "TT.MM." ein.'),
-        Question.AGE: ('Wie alt ist das Mitglied von AkaBlas, das bei dieser Adresse wohnt: '
-                       '{hint}?'),
-        Question.INSTRUMENT: ('Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
-                              'das bei dieser Adresse wohnt: {hint}?')
+        Question.FIRST_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {'
+        'hint}? (Vorname)',
+        Question.LAST_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}? '
+        '(Nachname)',
+        Question.NICKNAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}? '
+        '(Spitzname)',
+        Question.FULL_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}? '
+        '(Ganzer Name)',
+        Question.BIRTHDAY: (
+            'Wann hat das Mitglied von AkaBlas Geburtstag, das bei dieser Adresse '
+            'wohnt: {hint}? Bitte gib das Datum im Format "TT.MM." ein.'
+        ),
+        Question.AGE: (
+            'Wie alt ist das Mitglied von AkaBlas, das bei dieser Adresse wohnt: {hint}?'
+        ),
+        Question.INSTRUMENT: (
+            'Welches Instrument wird von einem Mitglied von AkaBlas gespielt, '
+            'das bei dieser Adresse wohnt: {hint}?'
+        ),
     },
     Question.PHOTO: {
         Question.ADDRESS: 'Wo wohnt dieses AkaBlas-Mitglied?',
-        Question.BIRTHDAY:
-            ('An welchem Tag hat dieses AkaBlas-Mitglied Geburtstag?  Bitte gib das '
-             'Datum im Format "TT.MM." ein.'),
+        Question.BIRTHDAY: (
+            'An welchem Tag hat dieses AkaBlas-Mitglied Geburtstag?  Bitte gib das '
+            'Datum im Format "TT.MM." ein.'
+        ),
         Question.AGE: 'Wie alt ist dieses AkaBlas-Mitglied?',
-        Question.INSTRUMENT: ('Welches Instrument spielt dieses AkaBlas-Mitglied '
-                              '(ggf. unter anderem)?'),
+        Question.INSTRUMENT: (
+            'Welches Instrument spielt dieses AkaBlas-Mitglied (ggf. unter anderem)?'
+        ),
         Question.FIRST_NAME: 'Wie lautet der Vorname dieses AkaBlas-Mitglieds?',
         Question.LAST_NAME: 'Wie lautet der Nachname dieses AkaBlas-Mitglieds?',
         Question.NICKNAME: 'Wie lautet der Spitzname dieses AkaBlas-Mitglieds?',
         Question.FULL_NAME: 'Wie lautet der volle Name dieses AkaBlas-Mitglieds?',
-    }
+    },
 }
 
 
-def question_text(member: 'Member',
-                  question_attribute: str,
-                  hint_attribute: str,
-                  multiple_choice: Optional[bool] = True,
-                  hint_value: Any = None) -> str:
+def question_text(
+    member: 'Member',
+    question_attribute: str,
+    hint_attribute: str,
+    multiple_choice: Optional[bool] = True,
+    hint_value: Any = None,
+) -> str:
     """
     Gives the question text for the question specified by the parameters.
 
@@ -274,11 +303,11 @@ def question_text(member: 'Member',
         hint_value = hint
 
     if multiple_choice:
-        q = MULTIPLE_CHOICE_QUESTIONS[hint_attribute][question_attribute]
+        question = MULTIPLE_CHOICE_QUESTIONS[hint_attribute][question_attribute]
     else:
-        q = FREE_TEXT_QUESTIONS[hint_attribute][question_attribute]
+        question = FREE_TEXT_QUESTIONS[hint_attribute][question_attribute]
 
-    return q.format(hint=hint_value)
+    return question.format(hint=hint_value)
 
 
 PHOTO_OPTIONS = ['Oben links', 'Oben rechts', 'Unten links', 'Unten rechts']

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """This module contains the Score class."""
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from components import Member  # noqa: F401
 

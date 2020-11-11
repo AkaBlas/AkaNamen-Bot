@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the Question class."""
-from components import Question, Orchestra, question_text, PHOTO_OPTIONS, Score, \
-    AttributeManager
-
 import random
-from telegram import Update, Bot, Poll, InputMediaPhoto
 from typing import List, Optional, Tuple
+from telegram import Update, Bot, Poll, InputMediaPhoto
+from components import Question, Orchestra, question_text, PHOTO_OPTIONS, Score, AttributeManager
 
 
 class Questioner:
@@ -50,14 +48,16 @@ class Questioner:
             :attr:`question_attributes`.
     """
 
-    def __init__(self,
-                 user_id: int,
-                 orchestra: Orchestra,
-                 hint_attributes: List[str],
-                 question_attributes: List[str],
-                 number_of_questions: int,
-                 bot: Bot,
-                 multiple_choice: bool = True) -> None:
+    def __init__(
+        self,
+        user_id: int,
+        orchestra: Orchestra,
+        hint_attributes: List[str],
+        question_attributes: List[str],
+        number_of_questions: int,
+        bot: Bot,
+        multiple_choice: bool = True,
+    ) -> None:
 
         self.bot = bot
         self.multiple_choice = multiple_choice
@@ -69,50 +69,54 @@ class Questioner:
 
         if number_of_questions <= 0:
             raise ValueError('Number of questions must be greater than zero. Joke Cookie.')
-        else:
-            self.number_of_questions = number_of_questions
+        self.number_of_questions = number_of_questions
         self.number_of_questions_asked = 0
 
         # Filter stupid input
-        if (len(hint_attributes) == 1 and len(question_attributes) == 1
-                and hint_attributes == question_attributes):
-            raise ValueError('Allowing the same single attribute for both hints and questions '
-                             'wont be very interesting.')
+        if (
+            len(hint_attributes) == 1
+            and len(question_attributes) == 1
+            and hint_attributes == question_attributes
+        ):
+            raise ValueError(
+                'Allowing the same single attribute for both hints and questions '
+                'wont be very interesting.'
+            )
 
         # Filter generally unsupported input
-        for index, ha in enumerate(hint_attributes):
-            if ha in Question.SUPPORTED_ATTRIBUTES:
-                hint_attributes[index] = ha
+        for index, h_a in enumerate(hint_attributes):
+            if h_a in Question.SUPPORTED_ATTRIBUTES:
+                hint_attributes[index] = h_a
             else:
-                raise ValueError(f'Unsupported hint attribute {ha}.')
-        for index, qa in enumerate(question_attributes):
-            if qa in Question.SUPPORTED_ATTRIBUTES:
-                question_attributes[index] = qa
+                raise ValueError(f'Unsupported hint attribute {h_a}.')
+        for index, q_a in enumerate(question_attributes):
+            if q_a in Question.SUPPORTED_ATTRIBUTES:
+                question_attributes[index] = q_a
             else:
-                raise ValueError(f'Unsupported question attribute {qa}.')
+                raise ValueError(f'Unsupported question attribute {q_a}.')
 
         # Filter input unsupported for the orchestras state
-        questionable = self.orchestra.questionable(self.multiple_choice,
-                                                   exclude_members=[self.member])
+        questionable = self.orchestra.questionable(
+            self.multiple_choice, exclude_members=[self.member]
+        )
 
         available_hints = [q[0] for q in questionable]
         available_questions = [q[1] for q in questionable]
-        for ha in hint_attributes:
-            if ha not in available_hints:
-                raise ValueError(f'Attribute {ha} not available as hint for this orchestra.')
-        for qa in question_attributes:
-            if qa not in available_questions:
-                raise ValueError(f'Attribute {qa} not available as question for this orchestra.')
+        for h_a in hint_attributes:
+            if h_a not in available_hints:
+                raise ValueError(f'Attribute {h_a} not available as hint for this orchestra.')
+        for q_a in question_attributes:
+            if q_a not in available_questions:
+                raise ValueError(f'Attribute {q_a} not available as question for this orchestra.')
 
         if not hint_attributes:
             hint_attributes = list(q[0].description for q in questionable)
         if not question_attributes:
             question_attributes = list(q[1].description for q in questionable)
 
-        # yapf: disable
         if not any(
-                (ha, qa) in questionable for ha in hint_attributes for qa in question_attributes):
-            # yapf: enable
+            (ha, qa) in questionable for ha in hint_attributes for qa in question_attributes
+        ):
             raise ValueError('No valid hint-question combination available.')
 
         self.hint_attributes = hint_attributes
@@ -154,8 +158,10 @@ class Questioner:
             if is_correct:
                 text = 'Das war richtig! 👍'
             else:
-                text = (f'Das war leider nicht korrekt. 😕 '
-                        f'Die richtige Antwort lautet »{question.correct_answer}«')
+                text = (
+                    f'Das war leider nicht korrekt. 😕 '
+                    f'Die richtige Antwort lautet »{question.correct_answer}«'
+                )
             update.message.reply_text(text=text)
 
     def questionable(self) -> List[Tuple[AttributeManager, AttributeManager]]:
@@ -164,10 +170,13 @@ class Questioner:
         a pair of hint attribute and question attribute, which is questionable for
         :attr:`orchestra` *and* is allowed for this questioner instance.
         """
-        return [(h, q)
-                for (h, q) in self.orchestra.questionable(self.multiple_choice,
-                                                          exclude_members=[self.member])
-                if h in self.hint_attributes and q in self.question_attributes]
+        return [
+            (h, q)
+            for (h, q) in self.orchestra.questionable(
+                self.multiple_choice, exclude_members=[self.member]
+            )
+            if h in self.hint_attributes and q in self.question_attributes
+        ]
 
     def ask_question(self) -> None:
         """
@@ -192,59 +201,58 @@ class Questioner:
 
         if multiple_choice:
             member, hint, opts, index = hint_manager.build_question_with(
-                question_manager, multiple_choice=True, exclude_members=[self.member])
-            question = question_text(member,
-                                     question_attribute,
-                                     hint_attribute,
-                                     multiple_choice=True)
+                question_manager, multiple_choice=True, exclude_members=[self.member]
+            )
+            question = question_text(
+                member, question_attribute, hint_attribute, multiple_choice=True
+            )
             options = list(str(o) for o in opts)
 
             # Truncate long options
-            for idx, o in enumerate(options):
-                if len(o) > 100:
-                    options[idx] = o[:96] + ' ...'
+            for idx, opt in enumerate(options):
+                if len(opt) > 100:
+                    options[idx] = opt[:96] + ' ...'
 
             # Send photos if needed
             if photo_question:
                 self.bot.send_media_group(
                     chat_id=self.member.user_id,
-                    media=[InputMediaPhoto(options[0]),
-                           InputMediaPhoto(options[1])])
+                    media=[InputMediaPhoto(options[0]), InputMediaPhoto(options[1])],
+                )
                 self.bot.send_media_group(
                     chat_id=self.member.user_id,
-                    media=[InputMediaPhoto(options[2]),
-                           InputMediaPhoto(options[3])])
+                    media=[InputMediaPhoto(options[2]), InputMediaPhoto(options[3])],
+                )
             if hint_attribute == Question.PHOTO:
                 self.bot.send_photo(chat_id=self.member.user_id, photo=hint)
 
             # Send the question
-            poll = self.bot.send_poll(chat_id=self.member.user_id,
-                                      question=question,
-                                      options=(PHOTO_OPTIONS if photo_question else options),
-                                      is_anonymous=False,
-                                      type=Poll.QUIZ,
-                                      correct_option_id=index).poll
-            self.current_question = Question(member,
-                                             question_attribute,
-                                             poll=poll,
-                                             multiple_choice=multiple_choice)
+            poll = self.bot.send_poll(
+                chat_id=self.member.user_id,
+                question=question,
+                options=(PHOTO_OPTIONS if photo_question else options),
+                is_anonymous=False,
+                type=Poll.QUIZ,
+                correct_option_id=index,
+            ).poll
+            self.current_question = Question(
+                member, question_attribute, poll=poll, multiple_choice=multiple_choice
+            )
         else:
-            member, hint, _ = hint_manager.build_question_with(question_manager,
-                                                               multiple_choice=False,
-                                                               exclude_members=[self.member])
-            question = question_text(member,
-                                     question_attribute,
-                                     hint_attribute,
-                                     multiple_choice=False,
-                                     hint_value=hint)
+            member, hint, _ = hint_manager.build_question_with(
+                question_manager, multiple_choice=False, exclude_members=[self.member]
+            )
+            question = question_text(
+                member, question_attribute, hint_attribute, multiple_choice=False, hint_value=hint
+            )
             if hint_attribute == Question.PHOTO:
-                self.bot.send_photo(chat_id=self.member.user_id,
-                                    photo=member.photo_file_id,
-                                    caption=question)
+                self.bot.send_photo(
+                    chat_id=self.member.user_id, photo=member.photo_file_id, caption=question
+                )
             else:
                 self.bot.send_message(chat_id=self.member.user_id, text=question)
-            self.current_question = Question(member,
-                                             question_attribute,
-                                             multiple_choice=multiple_choice)
+            self.current_question = Question(
+                member, question_attribute, multiple_choice=multiple_choice
+            )
 
         self.number_of_questions_asked += 1

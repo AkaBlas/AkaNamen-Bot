@@ -3,8 +3,14 @@
 """This module contains functions for the inline mode."""
 from typing import Union
 
-from telegram import (Update, InlineQueryResultArticle, InputTextMessageContent,
-                      InlineKeyboardMarkup, InlineKeyboardButton, ChatAction)
+from telegram import (
+    Update,
+    InlineQueryResultArticle,
+    InputTextMessageContent,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+    ChatAction,
+)
 from telegram.ext import CallbackContext, CallbackQueryHandler
 
 from bot import ORCHESTRA_KEY, INLINE_HELP, ADMIN_KEY
@@ -43,7 +49,8 @@ def search_users(update: Update, context: CallbackContext) -> None:
     next_offset: Union[str, int] = ''
 
     members = [
-        m for uid, m in orchestra.members.items()
+        m
+        for uid, m in orchestra.members.items()
         if (m.allow_contact_sharing and uid != user_id) or user_id == admin_id
     ]
 
@@ -55,25 +62,32 @@ def search_users(update: Update, context: CallbackContext) -> None:
     # Telegram only likes up to 50 results
     if len(sorted_members) > (offset + 1) * MEMBERS_PER_PAGE:
         next_offset = offset + 1
-        sorted_members = sorted_members[offset * MEMBERS_PER_PAGE:offset * MEMBERS_PER_PAGE
-                                        + MEMBERS_PER_PAGE]
+        sorted_members = sorted_members[
+            offset * MEMBERS_PER_PAGE : offset * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE  # noqa: E203
+        ]
     else:
-        sorted_members = sorted_members[offset * MEMBERS_PER_PAGE:]
+        sorted_members = sorted_members[offset * MEMBERS_PER_PAGE :]  # noqa: E203
 
     results = [
-        InlineQueryResultArticle(id=m.user_id,
-                                 title=m.full_name,
-                                 input_message_content=InputTextMessageContent(m.to_str()),
-                                 reply_markup=InlineKeyboardMarkup.from_button(
-                                     InlineKeyboardButton(text='vCard-Datei anfordern 📇',
-                                                          callback_data=REQUEST_CONTACT.format(
-                                                              m.user_id)))) for m in sorted_members
+        InlineQueryResultArticle(
+            id=m.user_id,
+            title=m.full_name,
+            input_message_content=InputTextMessageContent(m.to_str()),
+            reply_markup=InlineKeyboardMarkup.from_button(
+                InlineKeyboardButton(
+                    text='vCard-Datei anfordern 📇', callback_data=REQUEST_CONTACT.format(m.user_id)
+                )
+            ),
+        )
+        for m in sorted_members
     ]
 
-    inline_query.answer(results=results,
-                        next_offset=next_offset,
-                        switch_pm_text='Hilfe',
-                        switch_pm_parameter=INLINE_HELP)
+    inline_query.answer(
+        results=results,
+        next_offset=next_offset,
+        switch_pm_text='Hilfe',
+        switch_pm_parameter=INLINE_HELP,
+    )
 
 
 def send_vcard(update: Update, context: CallbackContext) -> None:
@@ -94,10 +108,12 @@ def send_vcard(update: Update, context: CallbackContext) -> None:
 
     update.callback_query.answer()
     update.callback_query.edit_message_reply_markup(reply_markup=None)
-    context.bot.send_document(chat_id=update.effective_user.id,
-                              document=vcard,
-                              filename=member.vcard_filename,
-                              caption=member.full_name)
+    context.bot.send_document(
+        chat_id=update.effective_user.id,
+        document=vcard,
+        filename=member.vcard_filename,
+        caption=member.full_name,
+    )
     vcard.close()
 
 

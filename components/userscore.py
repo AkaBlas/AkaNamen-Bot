@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """This module contains the UserScore class."""
-from components import PicklableBase
-from components import Score
 
 import datetime as dt
-
 from threading import Lock
 from typing import Dict, TYPE_CHECKING
 from collections import defaultdict
+
+from components import PicklableBase
+from components import Score
 
 # We don't like circular imports
 if TYPE_CHECKING:

@@ -11,14 +11,49 @@ def value_or_none(value):
 
 def first_name(gender):
     male_names = [
-        'Santiago', 'Mateo', 'Matías', 'Diego', 'Sebastián', 'Nicolás', 'Miguel', 'Ángel', 'Iker',
-        'Alejandro', 'Samuel', 'Liam', 'Noah', 'William', 'James', 'Logan', 'Benjamin', 'Mason',
-        'Elijah', 'Oliver', 'Jacob'
+        'Santiago',
+        'Mateo',
+        'Matías',
+        'Diego',
+        'Sebastián',
+        'Nicolás',
+        'Miguel',
+        'Ángel',
+        'Iker',
+        'Alejandro',
+        'Samuel',
+        'Liam',
+        'Noah',
+        'William',
+        'James',
+        'Logan',
+        'Benjamin',
+        'Mason',
+        'Elijah',
+        'Oliver',
+        'Jacob',
     ]
     female_names = [
-        'Emma', 'Olivia', 'Ava', 'Isabella', 'Sophia', 'Taylor', 'Charlotte', 'Amelia', 'Evelyn',
-        'Abigail', 'Mary', 'Patricia', 'Linda', 'Barbara', 'Elizabeth', 'Jennifer', 'Maria',
-        'Susan', 'Margaret', 'Dorothy'
+        'Emma',
+        'Olivia',
+        'Ava',
+        'Isabella',
+        'Sophia',
+        'Taylor',
+        'Charlotte',
+        'Amelia',
+        'Evelyn',
+        'Abigail',
+        'Mary',
+        'Patricia',
+        'Linda',
+        'Barbara',
+        'Elizabeth',
+        'Jennifer',
+        'Maria',
+        'Susan',
+        'Margaret',
+        'Dorothy',
     ]
 
     if gender == Gender.MALE:
@@ -29,27 +64,116 @@ def first_name(gender):
 
 
 def last_name():
-    name = random.choice([
-        'Gruber', 'Huber', 'Bauer', 'Wagner', 'Müller', 'Pichler', 'Steiner', 'Moser', 'Mayer',
-        'Hofer', 'Leitner', 'Berger', 'Fuchs', 'Eder', 'Fischer', 'Schmid', 'Winkler', 'Weber',
-        'Schwarz', 'Maier', 'Schneider', 'Reiter', 'Mayr', 'Schmidt', 'Wimmer', 'Egger', 'Brunner',
-        'Lang', 'Baumgartner', 'Auer', 'Binder', 'Lechner', 'Wolf', 'Wallner', 'Aigner', 'Ebner',
-        'Koller', 'Lehner', 'Haas', 'Schuster'
-    ])
+    name = random.choice(
+        [
+            'Gruber',
+            'Huber',
+            'Bauer',
+            'Wagner',
+            'Müller',
+            'Pichler',
+            'Steiner',
+            'Moser',
+            'Mayer',
+            'Hofer',
+            'Leitner',
+            'Berger',
+            'Fuchs',
+            'Eder',
+            'Fischer',
+            'Schmid',
+            'Winkler',
+            'Weber',
+            'Schwarz',
+            'Maier',
+            'Schneider',
+            'Reiter',
+            'Mayr',
+            'Schmidt',
+            'Wimmer',
+            'Egger',
+            'Brunner',
+            'Lang',
+            'Baumgartner',
+            'Auer',
+            'Binder',
+            'Lechner',
+            'Wolf',
+            'Wallner',
+            'Aigner',
+            'Ebner',
+            'Koller',
+            'Lehner',
+            'Haas',
+            'Schuster',
+        ]
+    )
     return value_or_none(name)
 
 
 def nickname():
-    name = random.choice([
-        'Bama', 'Rock', 'Boner', 'No. 3', 'Big Boy', 'Conan the Republican', 'Jazzman', 'Pablo',
-        'Pedro', 'Hogan', 'Big George', 'Freddy Boy', 'Freddo', 'Congressman Kickass', 'Nellie',
-        'Benny', 'Benator', 'Ellis', 'Ali', 'Frazier', 'Sabertooth', 'Red', 'Big Time', 'Vice',
-        'Rummy', 'Izzy', 'Altoid Boy', 'Boy Genius', 'Turd Blossom', 'The Architect', 'Condi',
-        'Guru', 'The World\'s Greatest Hero', 'Big O', 'Pablo', 'Fredo', 'Barty', 'Bart',
-        'Danny Boy', 'Captain Dan', 'Dan the Man', 'Ari-Bob', 'High Prophet', 'Hurricane Karen',
-        'The Blade', 'My Man Mitch', 'Big Country', 'Brownie', 'Brother George', 'Tree Man',
-        'La Margarita', 'Tangent Man', 'Tiny', 'Light Bulb', 'Bullets', 'M&M', 'Horny', 'Scrote'
-    ])
+    name = random.choice(
+        [
+            'Bama',
+            'Rock',
+            'Boner',
+            'No. 3',
+            'Big Boy',
+            'Conan the Republican',
+            'Jazzman',
+            'Pablo',
+            'Pedro',
+            'Hogan',
+            'Big George',
+            'Freddy Boy',
+            'Freddo',
+            'Congressman Kickass',
+            'Nellie',
+            'Benny',
+            'Benator',
+            'Ellis',
+            'Ali',
+            'Frazier',
+            'Sabertooth',
+            'Red',
+            'Big Time',
+            'Vice',
+            'Rummy',
+            'Izzy',
+            'Altoid Boy',
+            'Boy Genius',
+            'Turd Blossom',
+            'The Architect',
+            'Condi',
+            'Guru',
+            'The World\'s Greatest Hero',
+            'Big O',
+            'Pablo',
+            'Fredo',
+            'Barty',
+            'Bart',
+            'Danny Boy',
+            'Captain Dan',
+            'Dan the Man',
+            'Ari-Bob',
+            'High Prophet',
+            'Hurricane Karen',
+            'The Blade',
+            'My Man Mitch',
+            'Big Country',
+            'Brownie',
+            'Brother George',
+            'Tree Man',
+            'La Margarita',
+            'Tangent Man',
+            'Tiny',
+            'Light Bulb',
+            'Bullets',
+            'M&M',
+            'Horny',
+            'Scrote',
+        ]
+    )
     return value_or_none(name)
 
 
@@ -66,7 +190,8 @@ def date_of_birth():
 def instrument():
     number = random.randint(1, 3)
     instruments_ = random.sample(
-        [i() for i in instruments.__dict__.values() if isinstance(i, type)], number)
+        [i() for i in instruments.__dict__.values() if isinstance(i, type)], number
+    )
     return value_or_none(instruments_)
 
 
@@ -190,7 +315,6 @@ def address():
 
 
 class PhotoFileID:
-
     @classmethod
     def photo_file_id(cls, bot, chat_id):
         return str(random.randint(5, 555))
@@ -210,8 +334,9 @@ def orchestra(members, bot, chat_id, skip=None):
         date_of_birth_ = date_of_birth() if 'date_of_birth' not in skip else None
         instruments_ = instrument() if 'instruments' not in skip else None
         address_ = address() if 'address' not in skip else None
-        photo_file_id_ = (PhotoFileID.photo_file_id(bot, chat_id)
-                          if 'photo_file_id' not in skip else None)
+        photo_file_id_ = (
+            PhotoFileID.photo_file_id(bot, chat_id) if 'photo_file_id' not in skip else None
+        )
         orchestra_.register_member(
             Member(
                 user_id=i,
@@ -224,5 +349,6 @@ def orchestra(members, bot, chat_id, skip=None):
                 instruments=instruments_,
                 address=address_,
                 photo_file_id=photo_file_id_,
-            ))
+            )
+        )
     return orchestra_

@@ -4,10 +4,17 @@
 from copy import deepcopy
 from threading import Lock
 
-from components import Member, PicklableBase, Score, AttributeManager, ChangingAttributeManager, \
-    NameManager, PhotoManager
+from typing import Dict, List, Optional, Tuple, Any, Set, Iterable, NoReturn
 
-from typing import Dict, List, Optional, Tuple, Any, Set, Iterable
+from components import (
+    Member,
+    PicklableBase,
+    Score,
+    AttributeManager,
+    ChangingAttributeManager,
+    NameManager,
+    PhotoManager,
+)
 
 
 class Orchestra(PicklableBase):
@@ -27,43 +34,46 @@ class Orchestra(PicklableBase):
         self._members: Dict[int, Member] = dict()
         self._members_lock = Lock()
         self.attribute_managers: Dict[str, AttributeManager] = {
-            'address':
-                AttributeManager('address', list(self.ATTRIBUTE_MANAGERS.difference(['address']))),
-            'age':
-                ChangingAttributeManager(
-                    'age', list(self.ATTRIBUTE_MANAGERS.difference(['age', 'birthday']))),
-            'birthday':
-                AttributeManager('birthday',
-                                 list(self.ATTRIBUTE_MANAGERS.difference(['birthday', 'age']))),
-            'first_name':
-                NameManager('first_name',
-                            list(self.ATTRIBUTE_MANAGERS.difference(['first_name', 'full_name']))),
-            'full_name':
-                NameManager(
-                    'full_name',
-                    list(
-                        self.ATTRIBUTE_MANAGERS.difference(
-                            ['full_name', 'first_name', 'last_name', 'nickname']))),
-            'instruments':
-                AttributeManager('instruments',
-                                 list(self.ATTRIBUTE_MANAGERS.difference(['instruments']))),
-            'last_name':
-                AttributeManager(
-                    'last_name',
-                    list(self.ATTRIBUTE_MANAGERS.difference(['last_name', 'full_name']))),
-            'nickname':
-                AttributeManager(
-                    'nickname', list(self.ATTRIBUTE_MANAGERS.difference(['nickname',
-                                                                         'full_name']))),
-            'photo_file_id':
-                PhotoManager('photo_file_id',
-                             list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id']))),
+            'address': AttributeManager(
+                'address', list(self.ATTRIBUTE_MANAGERS.difference(['address']))
+            ),
+            'age': ChangingAttributeManager(
+                'age', list(self.ATTRIBUTE_MANAGERS.difference(['age', 'birthday']))
+            ),
+            'birthday': AttributeManager(
+                'birthday', list(self.ATTRIBUTE_MANAGERS.difference(['birthday', 'age']))
+            ),
+            'first_name': NameManager(
+                'first_name', list(self.ATTRIBUTE_MANAGERS.difference(['first_name', 'full_name']))
+            ),
+            'full_name': NameManager(
+                'full_name',
+                list(
+                    self.ATTRIBUTE_MANAGERS.difference(
+                        ['full_name', 'first_name', 'last_name', 'nickname']
+                    )
+                ),
+            ),
+            'instruments': AttributeManager(
+                'instruments', list(self.ATTRIBUTE_MANAGERS.difference(['instruments']))
+            ),
+            'last_name': AttributeManager(
+                'last_name', list(self.ATTRIBUTE_MANAGERS.difference(['last_name', 'full_name']))
+            ),
+            'nickname': AttributeManager(
+                'nickname', list(self.ATTRIBUTE_MANAGERS.difference(['nickname', 'full_name']))
+            ),
+            'photo_file_id': PhotoManager(
+                'photo_file_id', list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id']))
+            ),
         }
 
     def __getitem__(self, item: str) -> Any:
         if item not in self.SUBSCRIPTABLE:
-            raise KeyError('Orchestra either does not have such an attribute or does not support '
-                           'subscription for it.')
+            raise KeyError(
+                'Orchestra either does not have such an attribute or does not support '
+                'subscription for it.'
+            )
         if item == 'addresses':
             item = 'address'
         elif item not in ['instruments', 'address']:
@@ -80,7 +90,7 @@ class Orchestra(PicklableBase):
             return self._members
 
     @members.setter
-    def members(self, value: Set[Member]) -> None:
+    def members(self, value: Set[Member]) -> NoReturn:  # pylint: disable=R0201
         raise ValueError('This attribute can\'t be overridden!')
 
     def register_member(self, member: Member) -> None:
@@ -101,8 +111,8 @@ class Orchestra(PicklableBase):
             raise ValueError('This member is already registered.')
 
         self.members[member.user_id] = deepcopy(member)
-        for am in self.attribute_managers.values():
-            am.register_member(member)
+        for a_m in self.attribute_managers.values():
+            a_m.register_member(member)
 
     def kick_member(self, member: Member) -> None:
         """
@@ -118,8 +128,8 @@ class Orchestra(PicklableBase):
             raise ValueError('This member is not registered.')
 
         self.members.pop(member.user_id)
-        for am in self.attribute_managers.values():
-            am.kick_member(member)
+        for a_m in self.attribute_managers.values():
+            a_m.kick_member(member)
 
     def update_member(self, member: Member) -> None:
         """
@@ -150,22 +160,22 @@ class Orchestra(PicklableBase):
             exclude_members: Optional. Members to exclude from serving as hint.
         """
         out = []
-        for am in self.attribute_managers.values():
-            for bm in self.attribute_managers.values():
-                if bm.description == 'photo_file_id':
-                    if am.is_hintable_with(bm,
-                                           multiple_choice=True,
-                                           exclude_members=exclude_members):
-                        out.append((am, bm))
-                elif am.is_hintable_with(bm,
-                                         multiple_choice=multiple_choice,
-                                         exclude_members=exclude_members):
-                    out.append((am, bm))
+        for a_m in self.attribute_managers.values():
+            for b_m in self.attribute_managers.values():
+                if b_m.description == 'photo_file_id':
+                    if a_m.is_hintable_with(b_m,
+                                            multiple_choice=True,
+                                            exclude_members=exclude_members):
+                        out.append((a_m, b_m))
+                elif a_m.is_hintable_with(b_m,
+                                          multiple_choice=multiple_choice,
+                                          exclude_members=exclude_members):
+                    out.append((a_m, b_m))
         return out
 
     def _score(self, attr: str) -> List[Score]:
         if attr == 'overall':
-            attr = f'overall_score'
+            attr = 'overall_score'
         else:
             attr = f'{attr}s_score'
 

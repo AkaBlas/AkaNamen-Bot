@@ -3,8 +3,22 @@ import random
 import datetime as dtm
 import pytest
 
-from components import Member, AttributeManager, NameManager, Gender, Tuba, Trombone, \
-    Trumpet, Drums, Bassoon, Clarinet, Horn, Flute, ChangingAttributeManager, PhotoManager
+from components import (
+    Member,
+    AttributeManager,
+    NameManager,
+    Gender,
+    Tuba,
+    Trombone,
+    Trumpet,
+    Drums,
+    Bassoon,
+    Clarinet,
+    Horn,
+    Flute,
+    ChangingAttributeManager,
+    PhotoManager,
+)
 
 
 @pytest.fixture(scope='function')
@@ -29,7 +43,6 @@ class TestAttributeManager:
         assert am.get_members_attribute(member) == 'test'
 
     def test_init_custom_gma(self, member, dummy_am):
-
         def gma(m: Member):
             return '5'
 
@@ -65,14 +78,19 @@ class TestAttributeManager:
         am = AttributeManager('instruments', [])
         assert not am.members_share_attribute(Member(1), Member(2))
         assert not am.members_share_attribute(Member(1, instruments=Tuba()), Member(2))
-        assert not am.members_share_attribute(Member(1), Member(
-            2, instruments=[Tuba(), Trombone()]))
-        assert not am.members_share_attribute(Member(
-            1, instruments=Tuba()), Member(2, instruments=[Trumpet(), Trombone()]))
-        assert am.members_share_attribute(Member(1, instruments=Tuba()),
-                                          Member(2, instruments=Tuba()))
-        assert am.members_share_attribute(Member(1, instruments=[Trumpet(), Trombone()]),
-                                          Member(2, instruments=[Tuba(), Trombone()]))
+        assert not am.members_share_attribute(
+            Member(1), Member(2, instruments=[Tuba(), Trombone()])
+        )
+        assert not am.members_share_attribute(
+            Member(1, instruments=Tuba()), Member(2, instruments=[Trumpet(), Trombone()])
+        )
+        assert am.members_share_attribute(
+            Member(1, instruments=Tuba()), Member(2, instruments=Tuba())
+        )
+        assert am.members_share_attribute(
+            Member(1, instruments=[Trumpet(), Trombone()]),
+            Member(2, instruments=[Tuba(), Trombone()]),
+        )
 
     def test_register_member_without_attribute(self, member):
         am = AttributeManager(self.description, [])
@@ -145,27 +163,36 @@ class TestAttributeManager:
         for i in range(10):
             am.register_member(Member(i, first_name='a', last_name='b'))
 
-        assert am.distinct_values_for_member(bm, Member(100, first_name='a',
-                                                        last_name='b')) == set()
-        assert am.distinct_values_for_member(bm, Member(100, first_name='c',
-                                                        last_name='b')) == set()
+        assert (
+            am.distinct_values_for_member(bm, Member(100, first_name='a', last_name='b')) == set()
+        )
+        assert (
+            am.distinct_values_for_member(bm, Member(100, first_name='c', last_name='b')) == set()
+        )
 
         for i in range(5):
             am.register_member(Member(i + 10, first_name=str(i), last_name='b'))
 
-        assert am.distinct_values_for_member(bm, Member(100, first_name='a',
-                                                        last_name='b')) == set()
-        assert am.distinct_values_for_member(bm, Member(100, first_name='c',
-                                                        last_name='b')) == set()
+        assert (
+            am.distinct_values_for_member(bm, Member(100, first_name='a', last_name='b')) == set()
+        )
+        assert (
+            am.distinct_values_for_member(bm, Member(100, first_name='c', last_name='b')) == set()
+        )
 
         for i in range(5):
             am.register_member(Member(i + 20, first_name='a', last_name=str(i)))
 
-        assert am.distinct_values_for_member(bm, Member(100, first_name='a',
-                                                        last_name='b')) == set()
-        assert am.distinct_values_for_member(bm,
-                                             Member(100, first_name='c',
-                                                    last_name='b')) == {'0', '1', '2', '3', '4'}
+        assert (
+            am.distinct_values_for_member(bm, Member(100, first_name='a', last_name='b')) == set()
+        )
+        assert am.distinct_values_for_member(bm, Member(100, first_name='c', last_name='b')) == {
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+        }
 
     def test_unique_attributes_of(self, member):
         member.instruments = [Tuba(), Trombone()]
@@ -216,7 +243,8 @@ class TestAttributeManager:
             bm.register_member(Member(i, first_name='a', last_name='b'))
 
         assert not bm.is_hintable_with_member(
-            am, Member(100, first_name='a', last_name='b'), multiple_choice=False)
+            am, Member(100, first_name='a', last_name='b'), multiple_choice=False
+        )
 
         member = Member(100, first_name='c', last_name='b')
         am.register_member(member)
@@ -260,7 +288,8 @@ class TestAttributeManager:
 
         assert am.is_hintable_with(bm, multiple_choice=multiple_choice)
         assert not am.is_hintable_with(
-            bm, multiple_choice=multiple_choice, exclude_members=[Member(100)])
+            bm, multiple_choice=multiple_choice, exclude_members=[Member(100)]
+        )
 
     def test_draw_hint_member_errors(self, dummy_am):
         am = AttributeManager(self.description, [])
@@ -268,7 +297,7 @@ class TestAttributeManager:
             am.draw_hint_member(dummy_am)
 
         am = AttributeManager(self.description, [dummy_am])
-        with pytest.raises(RuntimeError, match=f'currently not hintable for dummy'):
+        with pytest.raises(RuntimeError, match='currently not hintable for dummy'):
             am.draw_hint_member(dummy_am)
 
     @pytest.mark.parametrize('runs', list(range(10)))
@@ -328,8 +357,9 @@ class TestAttributeManager:
     def test_draw_question_attributes_error(self):
         am = AttributeManager(self.description, [])
         bm = AttributeManager(self.description, [])
-        with pytest.raises(RuntimeError,
-                           match=f'Given member has no attribute {self.description}'):
+        with pytest.raises(
+            RuntimeError, match=f'Given member has no attribute {self.description}'
+        ):
             am.draw_question_attributes(bm, Member(1))
 
     def test_draw_question_attributes(self):
@@ -338,17 +368,22 @@ class TestAttributeManager:
 
         for i in range(100):
             am.register_member(
-                Member(i,
-                       first_name=random.choice(['1', '2', '3', '4', '5']),
-                       last_name=random.choice(['a', 'b', 'c', 'd', 'e'])))
+                Member(
+                    i,
+                    first_name=random.choice(['1', '2', '3', '4', '5']),
+                    last_name=random.choice(['a', 'b', 'c', 'd', 'e']),
+                )
+            )
 
         for i, name in enumerate(['a', 'b', 'c', 'd', 'e']):
             with pytest.raises(RuntimeError, match='is not hintable for attribute'):
                 attrs, idx = am.draw_question_attributes(
-                    bm, Member(1000, first_name=str(i + 1), last_name=name))
+                    bm, Member(1000, first_name=str(i + 1), last_name=name)
+                )
         for i, name in enumerate(['a', 'b', 'c', 'd', 'e']):
             attrs, idx = am.draw_question_attributes(
-                bm, Member(1000, first_name=str(i + 10), last_name=name))
+                bm, Member(1000, first_name=str(i + 10), last_name=name)
+            )
             assert len(set(attrs)) == 4
             assert attrs[idx] == name
             for a in attrs:
@@ -360,7 +395,7 @@ class TestAttributeManager:
             am.build_question_with(dummy_am)
 
         am = AttributeManager(self.description, [dummy_am])
-        with pytest.raises(RuntimeError, match=f'currently not hintable for dummy'):
+        with pytest.raises(RuntimeError, match='currently not hintable for dummy'):
             am.build_question_with(dummy_am)
 
     @pytest.mark.parametrize('runs', list(range(10)))
@@ -373,13 +408,15 @@ class TestAttributeManager:
             am.register_member(member)
             bm.register_member(member)
 
-        with pytest.raises(RuntimeError, match=f'currently not hintable for first_name'):
+        with pytest.raises(RuntimeError, match='currently not hintable for first_name'):
             am.build_question_with(bm)
 
         for i in range(250):
-            member = Member(i + 10,
-                            first_name=random.choice(['1', '2', '3', '4', '5']),
-                            last_name=random.choice(['a', 'b', 'c', 'd', 'e']))
+            member = Member(
+                i + 10,
+                first_name=random.choice(['1', '2', '3', '4', '5']),
+                last_name=random.choice(['a', 'b', 'c', 'd', 'e']),
+            )
             am.register_member(member)
             bm.register_member(member)
 
@@ -391,7 +428,8 @@ class TestAttributeManager:
         for first_name in set(opts).difference({opts[idx]}):
             assert not any(
                 am.get_members_attribute(m) == attr and bm.get_members_attribute(m) == first_name
-                for m in bm.available_members)
+                for m in bm.available_members
+            )
         assert attr == 'B'
         assert len(set(opts)) == 4
 
@@ -404,7 +442,7 @@ class TestAttributeManager:
             am.register_member(member)
             bm.register_member(member)
 
-        with pytest.raises(RuntimeError, match=f'currently not hintable for first_name'):
+        with pytest.raises(RuntimeError, match='currently not hintable for first_name'):
             am.build_question_with(bm, multiple_choice=False)
 
         member = Member(100, first_name='100', last_name='200')
@@ -430,13 +468,15 @@ class TestAttributeManager:
             am.register_member(member)
             bm.register_member(member)
 
-        with pytest.raises(RuntimeError, match=f'currently not hintable for first_name'):
+        with pytest.raises(RuntimeError, match='currently not hintable for first_name'):
             am.build_question_with(bm)
 
         for i in range(100):
-            member = Member(i + 10,
-                            first_name=random.choice(['1', '2', '3', '4', '5']),
-                            instruments=random.sample(allowed, random.randint(1, 4)))
+            member = Member(
+                i + 10,
+                first_name=random.choice(['1', '2', '3', '4', '5']),
+                instruments=random.sample(allowed, random.randint(1, 4)),
+            )
             am.register_member(member)
             bm.register_member(member)
 
@@ -449,7 +489,8 @@ class TestAttributeManager:
         for first_name in set(opts).difference({opts[idx]}):
             assert not any(
                 attr in am.get_members_attribute(m) and bm.get_members_attribute(m) == first_name
-                for m in bm.available_members)
+                for m in bm.available_members
+            )
 
     def test_build_question_list_as_question(self):
         am = AttributeManager('first_name', ['instruments'])
@@ -462,13 +503,15 @@ class TestAttributeManager:
             am.register_member(member)
             bm.register_member(member)
 
-        with pytest.raises(RuntimeError, match=f'currently not hintable for instruments'):
+        with pytest.raises(RuntimeError, match='currently not hintable for instruments'):
             am.build_question_with(bm)
 
         for i in range(100):
-            member = Member(i + 10,
-                            first_name=random.choice(['1', '2', '3', '4', '5']),
-                            instruments=random.sample(allowed, random.randint(1, 4)))
+            member = Member(
+                i + 10,
+                first_name=random.choice(['1', '2', '3', '4', '5']),
+                instruments=random.sample(allowed, random.randint(1, 4)),
+            )
             am.register_member(member)
             bm.register_member(member)
 
@@ -481,7 +524,8 @@ class TestAttributeManager:
         for instrument in set(opts).difference({opts[idx]}):
             assert not any(
                 attr == am.get_members_attribute(m) and instrument in bm.get_members_attribute(m)
-                for m in bm.available_members)
+                for m in bm.available_members
+            )
 
 
 class TestNameManager:
@@ -586,8 +630,9 @@ class TestNameManager:
 
         assert am.distinct_values_for_member(bm, Member(1)) == set()
 
-    @pytest.mark.parametrize('gender,other_gender', [(Gender.MALE, Gender.FEMALE),
-                                                     (Gender.FEMALE, Gender.MALE)])
+    @pytest.mark.parametrize(
+        'gender,other_gender', [(Gender.MALE, Gender.FEMALE), (Gender.FEMALE, Gender.MALE)]
+    )
     def test_distinct_values_for_member(self, member, gender, other_gender):
         am = NameManager(self.description, [])
         bm = AttributeManager('last_name', [], gendered_questions=True)
@@ -596,35 +641,64 @@ class TestNameManager:
             am.register_member(Member(i, last_name='a', first_name='b', gender=gender))
 
         for g in [None, gender, other_gender]:
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='a', first_name='b', gender=g)) == set()
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='c', first_name='b', gender=g)) == set()
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='a', first_name='b', gender=g)
+                )
+                == set()
+            )
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='c', first_name='b', gender=g)
+                )
+                == set()
+            )
 
         for i in range(5):
             am.register_member(Member(i + 10, last_name=str(i), first_name='b', gender=gender))
 
         for g in [None, gender, other_gender]:
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='a', first_name='b', gender=g)) == set()
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='c', first_name='b', gender=g)) == set()
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='a', first_name='b', gender=g)
+                )
+                == set()
+            )
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='c', first_name='b', gender=g)
+                )
+                == set()
+            )
 
         for i in range(5):
             am.register_member(Member(i + 20, last_name='a', first_name=str(i), gender=gender))
 
+        assert (
+            am.distinct_values_for_member(
+                bm, Member(100, last_name='a', first_name='b', gender=gender)
+            )
+            == set()
+        )
         assert am.distinct_values_for_member(
-            bm, Member(100, last_name='a', first_name='b', gender=gender)) == set()
-        assert am.distinct_values_for_member(
-            bm, Member(100, last_name='c', first_name='b',
-                       gender=gender)) == {'0', '1', '2', '3', '4'}
-        assert am.distinct_values_for_member(
-            bm, Member(100, last_name='a', first_name='b', gender=other_gender)) == set()
-        assert am.distinct_values_for_member(
-            bm, Member(100, last_name='c', first_name='b', gender=other_gender)) == set()
+            bm, Member(100, last_name='c', first_name='b', gender=gender)
+        ) == {'0', '1', '2', '3', '4'}
+        assert (
+            am.distinct_values_for_member(
+                bm, Member(100, last_name='a', first_name='b', gender=other_gender)
+            )
+            == set()
+        )
+        assert (
+            am.distinct_values_for_member(
+                bm, Member(100, last_name='c', first_name='b', gender=other_gender)
+            )
+            == set()
+        )
 
-    @pytest.mark.parametrize('gender,other_gender', [(Gender.MALE, Gender.FEMALE),
-                                                     (Gender.FEMALE, Gender.MALE)])
+    @pytest.mark.parametrize(
+        'gender,other_gender', [(Gender.MALE, Gender.FEMALE), (Gender.FEMALE, Gender.MALE)]
+    )
     def test_distinct_values_for_member_full_name(self, member, gender, other_gender):
         am = NameManager('full_name', [])
         bm = AttributeManager('instruments', [], gendered_questions=True)
@@ -633,17 +707,29 @@ class TestNameManager:
             am.register_member(Member(i, last_name='a', instruments=[Tuba()]))
 
         for g in [None, gender, other_gender]:
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='a', instruments=[Tuba()], gender=g)) == set()
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='c', instruments=[Tuba()], gender=g)) == set()
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='a', instruments=[Tuba()], gender=g)
+                )
+                == set()
+            )
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='c', instruments=[Tuba()], gender=g)
+                )
+                == set()
+            )
 
         am.register_member(Member(200, last_name='A', instruments=[Trumpet()]))
+        assert (
+            am.distinct_values_for_member(
+                bm, Member(200, last_name='A', instruments=[Trumpet()], gender=gender)
+            )
+            == set()
+        )
         assert am.distinct_values_for_member(
-            bm, Member(200, last_name='A', instruments=[Trumpet()], gender=gender)) == set()
-        assert am.distinct_values_for_member(bm, Member(200,
-                                                        last_name='A',
-                                                        instruments=[Trumpet()])) == {'a'}
+            bm, Member(200, last_name='A', instruments=[Trumpet()])
+        ) == {'a'}
 
     def test_unique_attributes_of(self, member):
         member.first_name = 'test'
@@ -672,21 +758,25 @@ class TestNameManager:
             am.register_member(member)
             bm.register_member(member)
 
-        with pytest.raises(RuntimeError, match=f'currently not hintable for first_name'):
+        with pytest.raises(RuntimeError, match='currently not hintable for first_name'):
             am.build_question_with(bm)
 
         for i in range(100):
-            member = Member(i + 10,
-                            first_name=random.choice(['1', '2', '3', '4', '5']),
-                            last_name=random.choice(['a', 'b', 'c', 'd', 'e']),
-                            gender=Gender.MALE)
+            member = Member(
+                i + 10,
+                first_name=random.choice(['1', '2', '3', '4', '5']),
+                last_name=random.choice(['a', 'b', 'c', 'd', 'e']),
+                gender=Gender.MALE,
+            )
             am.register_member(member)
             bm.register_member(member)
         for i in range(100):
-            member = Member(i + 120,
-                            first_name=random.choice(['6', '7', '8', '9', '10']),
-                            last_name=random.choice(['f', 'g', 'h', 'i', 'j']),
-                            gender=Gender.FEMALE)
+            member = Member(
+                i + 120,
+                first_name=random.choice(['6', '7', '8', '9', '10']),
+                last_name=random.choice(['f', 'g', 'h', 'i', 'j']),
+                gender=Gender.FEMALE,
+            )
             am.register_member(member)
             bm.register_member(member)
 
@@ -697,7 +787,8 @@ class TestNameManager:
         for last_name in set(opts).difference({opts[idx]}):
             assert not any(
                 am.get_members_attribute(m) == attr and bm.get_members_attribute(m) == last_name
-                for m in bm.available_members)
+                for m in bm.available_members
+            )
         assert attr == 'A'
         assert len(set(opts)) == 4
         for o in opts:
@@ -716,7 +807,7 @@ class TestNameManager:
             am.register_member(member)
             bm.register_member(member)
 
-        with pytest.raises(RuntimeError, match=f'currently not hintable for last_name'):
+        with pytest.raises(RuntimeError, match='currently not hintable for last_name'):
             bm.build_question_with(am, multiple_choice=False)
 
         member = Member(100, first_name='100', last_name='200', gender=gender)
@@ -735,8 +826,9 @@ class TestNameManager:
 class TestPhotoAttributeManager:
     description = 'photo_file_id'
 
-    @pytest.mark.parametrize('gender,other_gender', [(Gender.MALE, Gender.FEMALE),
-                                                     (Gender.FEMALE, Gender.MALE)])
+    @pytest.mark.parametrize(
+        'gender,other_gender', [(Gender.MALE, Gender.FEMALE), (Gender.FEMALE, Gender.MALE)]
+    )
     def test_distinct_values_for_member(self, member, gender, other_gender):
         am = PhotoManager(self.description, [])
         bm = AttributeManager('last_name', [], gendered_questions=True)
@@ -745,36 +837,63 @@ class TestPhotoAttributeManager:
             am.register_member(Member(i, last_name='a', photo_file_id='b', gender=gender))
 
         for g in [None, gender, other_gender]:
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='a', photo_file_id='b', gender=g)) == set()
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='c', photo_file_id='b', gender=g)) == set()
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='a', photo_file_id='b', gender=g)
+                )
+                == set()
+            )
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='c', photo_file_id='b', gender=g)
+                )
+                == set()
+            )
 
         for i in range(5):
             am.register_member(Member(i + 10, last_name=str(i), photo_file_id='b', gender=gender))
 
         for g in [None, gender, other_gender]:
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='a', photo_file_id='b', gender=g)) == set()
-            assert am.distinct_values_for_member(
-                bm, Member(100, last_name='c', photo_file_id='b', gender=g)) == set()
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='a', photo_file_id='b', gender=g)
+                )
+                == set()
+            )
+            assert (
+                am.distinct_values_for_member(
+                    bm, Member(100, last_name='c', photo_file_id='b', gender=g)
+                )
+                == set()
+            )
 
         for i in range(5):
             am.register_member(Member(i + 20, last_name='a', photo_file_id=str(i), gender=gender))
 
+        assert (
+            am.distinct_values_for_member(
+                bm, Member(100, last_name='a', photo_file_id='b', gender=gender)
+            )
+            == set()
+        )
         assert am.distinct_values_for_member(
-            bm, Member(100, last_name='a', photo_file_id='b', gender=gender)) == set()
-        assert am.distinct_values_for_member(
-            bm, Member(100, last_name='c', photo_file_id='b',
-                       gender=gender)) == {'0', '1', '2', '3', '4'}
-        assert am.distinct_values_for_member(
-            bm, Member(100, last_name='a', photo_file_id='b', gender=other_gender)) == set()
-        assert am.distinct_values_for_member(
-            bm, Member(100, last_name='c', photo_file_id='b', gender=other_gender)) == set()
+            bm, Member(100, last_name='c', photo_file_id='b', gender=gender)
+        ) == {'0', '1', '2', '3', '4'}
+        assert (
+            am.distinct_values_for_member(
+                bm, Member(100, last_name='a', photo_file_id='b', gender=other_gender)
+            )
+            == set()
+        )
+        assert (
+            am.distinct_values_for_member(
+                bm, Member(100, last_name='c', photo_file_id='b', gender=other_gender)
+            )
+            == set()
+        )
 
 
 class TestChangingAttributeManager:
-
     def test_init(self):
         am = ChangingAttributeManager('age', [])
         assert am.data == {}
@@ -785,13 +904,11 @@ class TestChangingAttributeManager:
         new_date_2 = dtm.date(1996, 3, 16)
 
         class DateTime:
-
             @classmethod
             def now(cls, *args, **kwargs):
                 return mock_date
 
         class Date:
-
             @classmethod
             def today(cls, *args, **kwargs):
                 return mock_date
@@ -820,7 +937,6 @@ class TestChangingAttributeManager:
         member.date_of_birth = dtm.date(1996, 10, 8)
 
         class Date:
-
             @classmethod
             def today(cls, *args, **kwargs):
                 return mock_date
@@ -833,7 +949,6 @@ class TestChangingAttributeManager:
         assert am.data == {23: {member}}
 
         class Date2:
-
             @classmethod
             def today(cls, *args, **kwargs):
                 return mock_date_2

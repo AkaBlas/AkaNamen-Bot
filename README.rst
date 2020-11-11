@@ -25,6 +25,10 @@ AkaNamen Bot
    :target: https://codecov.io/gh/Bibo-Joshi/AkaNamen-Bot
    :alt: Code coverage
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+    :alt: Code Style Balck
+
 Deutsch
 -------
 Ein Telegram-Bot, der den Mitgliedern der »Akademische Bläservereinigung an der TU Braunschweig« helfen soll, sich gegenseitig besser kennenzulernen.

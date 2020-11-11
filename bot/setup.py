@@ -5,12 +5,28 @@ import re
 from typing import List, Union, Dict
 
 from telegram import BotCommand, Update
-from telegram.ext import Dispatcher, TypeHandler, CommandHandler, CallbackQueryHandler, \
-    InlineQueryHandler, Filters, CallbackContext, DispatcherHandlerStop, ConversationHandler
+from telegram.ext import (
+    Dispatcher,
+    TypeHandler,
+    CommandHandler,
+    CallbackQueryHandler,
+    InlineQueryHandler,
+    Filters,
+    CallbackContext,
+    DispatcherHandlerStop,
+    ConversationHandler,
+)
 from ptbstats import set_dispatcher, register_stats, SimpleStats
 
-from bot import (ORCHESTRA_KEY, PENDING_REGISTRATIONS_KEY, DENIED_USERS_KEY, ADMIN_KEY,
-                 REGISTRATION_PATTERN, INLINE_HELP, CONVERSATION_KEY)
+from bot import (
+    ORCHESTRA_KEY,
+    PENDING_REGISTRATIONS_KEY,
+    DENIED_USERS_KEY,
+    ADMIN_KEY,
+    REGISTRATION_PATTERN,
+    INLINE_HELP,
+    CONVERSATION_KEY,
+)
 import bot.editing as editing
 import bot.cancel_membership as cancel_membership
 import bot.backup as backup
@@ -40,16 +56,16 @@ BOT_COMMANDS: List[BotCommand] = [
 """List[:class:`telegram.BotCommand`]: A list of commands of the bot."""
 
 
-def setup(
-        dispatcher: Dispatcher,
-        admin: Union[int, str],
-        oc_url: str,
-        oc_username: str,
-        oc_password: str,
-        oc_path: str,
-        ad_url: str,
-        ad_username: str,
-        ad_password: str,
+def setup(  # pylint: disable=R0913,R0914,R0915
+    dispatcher: Dispatcher,
+    admin: Union[int, str],
+    oc_url: str,
+    oc_username: str,
+    oc_password: str,
+    oc_path: str,
+    ad_url: str,
+    ad_username: str,
+    ad_password: str,
 ) -> None:
     """
     * Adds handlers. Convenience method to avoid doing that all in the main script.
@@ -91,7 +107,8 @@ def setup(
         # Make sure that the callback queries for vcard requests are not processed
         if update.callback_query:
             contact_request_check = bool(
-                re.match(inline.REQUEST_CONTACT_PATTERN, update.callback_query.data))
+                re.match(inline.REQUEST_CONTACT_PATTERN, update.callback_query.data)
+            )
             highscore_check = 'highscore' in update.callback_query.data
         else:
             contact_request_check = False
@@ -123,15 +140,17 @@ def setup(
     # Count total number of updates
     register_stats(SimpleStats('stats', lambda u: bool(u.effective_user)), admin_id=int(admin))
     # Count number of started games
-    register_stats(SimpleStats('game_stats',
-                               lambda u: bool(u.message) and Filters.text('/spiel_starten')(u)),
-                   admin_id=int(admin))
+    register_stats(
+        SimpleStats('game_stats', lambda u: bool(u.message) and Filters.text('/spiel_starten')(u)),
+        admin_id=int(admin),
+    )
     # Count number of requested contacts
     register_stats(
         admin_id=int(admin),
         stats=SimpleStats(
             'contact_stats',
-            lambda u: bool(u.callback_query and 'contact_request' in u.callback_query.data)),
+            lambda u: bool(u.callback_query and 'contact_request' in u.callback_query.data),
+        ),
     )
 
     # Handlers
@@ -145,13 +164,13 @@ def setup(
         game.CONVERSATION_VALUE: game_handler,
         editing.CONVERSATION_VALUE: editing_conversation,
         cancel_membership.CONVERSATION_VALUE: canceling_conversation,
-        ban.CONVERSATION_VALUE: banning_conversation
+        ban.CONVERSATION_VALUE: banning_conversation,
     }
     interrupt_replies: Dict[str, str] = {
         game.CONVERSATION_VALUE: game.CONVERSATION_INTERRUPT_TEXT,
         editing.CONVERSATION_VALUE: editing.CONVERSATION_INTERRUPT_TEXT,
         cancel_membership.CONVERSATION_VALUE: cancel_membership.CONVERSATION_INTERRUPT_TEXT,
-        ban.CONVERSATION_VALUE: ban.CONVERSATION_INTERRUPT_TEXT
+        ban.CONVERSATION_VALUE: ban.CONVERSATION_INTERRUPT_TEXT,
     }
 
     # Registration status
@@ -168,9 +187,11 @@ def setup(
     # We need the filter here in order to not catch /start with deep linking parameter used for
     # inline help
     dispatcher.add_handler(
-        CommandHandler('start', registration.start, filters=Filters.text('/start')))
+        CommandHandler('start', registration.start, filters=Filters.text('/start'))
+    )
     dispatcher.add_handler(
-        CallbackQueryHandler(registration.request_registration, pattern=REGISTRATION_PATTERN))
+        CallbackQueryHandler(registration.request_registration, pattern=REGISTRATION_PATTERN)
+    )
     dispatcher.add_handler(registration.ACCEPT_REGISTRATION_HANDLER)
     dispatcher.add_handler(registration.DENY_REGISTRATION_HANDLER)
 
@@ -188,9 +209,10 @@ def setup(
     dispatcher.add_handler(CommandHandler('daten_anzeigen', commands.show_data))
     dispatcher.add_handler(CommandHandler('kontakt_abrufen', commands.start_inline))
     dispatcher.add_handler(
-        CommandHandler('start',
-                       commands.start_inline,
-                       filters=Filters.text(f'/start {INLINE_HELP}')))
+        CommandHandler(
+            'start', commands.start_inline, filters=Filters.text(f'/start {INLINE_HELP}')
+        )
+    )
 
     # Inline Mode
     dispatcher.add_handler(InlineQueryHandler(inline.search_users))
@@ -205,7 +227,8 @@ def setup(
 
     # Admin stuff
     dispatcher.add_handler(
-        CommandHandler('rebuild', bot.admin.rebuild_orchestra, filters=Filters.user(int(admin))))
+        CommandHandler('rebuild', bot.admin.rebuild_orchestra, filters=Filters.user(int(admin)))
+    )
 
     # Error Handler
     dispatcher.add_error_handler(error.handle_error)

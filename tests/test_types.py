@@ -4,7 +4,6 @@ from telegram import Update, Message, CallbackQuery
 
 
 class TestMessageType:
-
     def test_types(self):
         for attr_name in MessageType.__dict__:
             attr = getattr(MessageType, attr_name)
@@ -33,21 +32,17 @@ class TestMessageType:
         assert MessageType.relevant_type(message) is None
         assert MessageType.relevant_type(update) is None
 
-        update = Update(1,
-                        callback_query=CallbackQuery(2,
-                                                     None,
-                                                     None,
-                                                     message=Message(1,
-                                                                     None,
-                                                                     None,
-                                                                     None,
-                                                                     text='test')))
+        update = Update(
+            1,
+            callback_query=CallbackQuery(
+                2, None, None, message=Message(1, None, None, None, text='test')
+            ),
+        )
         assert update.effective_message is not None
         assert MessageType.relevant_type(update) is None
 
 
 class TestUpdateType:
-
     def test_types(self):
         for attr_name in UpdateType.__dict__:
             attr = getattr(UpdateType, attr_name)
