@@ -20,6 +20,7 @@ def member(monkeypatch):
         photo_file_id='file_id',
         gender=Gender.MALE,
         date_of_birth=dt.date(dt.date.today().year - 21, 12, 31),
+        joined=2000,
         instruments=[instruments.AltoSaxophone(), instruments.Trumpet()],
         address='Universitätsplatz 2, 38106 Braunschweig',
     )
@@ -227,6 +228,24 @@ class TestQuestion:
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
         assert q.correct_answer == str(member.age)
+
+    @pytest.mark.parametrize(
+        'answer, result',
+        [
+            ('2000', True),
+            ('  2000', True),
+            ('2001', False),
+            ('2000  ', True),
+            ('19900', False),
+            (' 3000', False),
+            ('some very wrong answer', False),
+        ],
+    )
+    def test_check_answer_free_text_joined(self, answer, result, member):
+        q = Question(member, Question.JOINED, multiple_choice=False)
+        update = Update(1, message=Message(1, None, None, None, text=answer))
+        assert q.check_answer(update) is result
+        assert q.correct_answer == str(member.joined)
 
     @pytest.mark.parametrize(
         'answer, result',

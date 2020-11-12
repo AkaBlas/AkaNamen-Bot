@@ -3,6 +3,7 @@
 """This module contains the Member class."""
 from __future__ import annotations
 
+import copy
 from io import BytesIO
 
 import datetime as dt
@@ -67,6 +68,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         nickname (:obj:`str`): Optional. Nickname.
         gender (:obj:`str`): Optional. Gender.
         date_of_birth (:class:`datetime.date`): Optional. : Date of birth.
+        joined (:obj:`int`): Optional. The year this member joined AkaBlas.
         photo_file_id (:obj:`str`): Optional. Telegram file ID of the user photo
         allow_contact_sharing (:obj:`bool`): Whether sharing this members contact information with
             others is allowed.
@@ -79,6 +81,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         last_name: Last name.
         nickname: Nickname.
         gender: Gender.
+        joined: The year this member joined AkaBlas as for digit number.
         date_of_birth: Date of birth.
         instruments: Instrument(s) this member plays.
         address: Address. Only address `or`` latitude and longitude may be passed.
@@ -92,8 +95,12 @@ class Member:  # pylint: disable=R0902,R0913,R0904
     """
 
     _AD_URL: ClassVar[str] = ''
+    _AD_URL_ACTIVE: ClassVar[str] = ''
     _AD_USERNAME: ClassVar[str] = ''
     _AD_PASSWORD: ClassVar[str] = ''
+    _AKADRESSEN: ClassVar[Optional[pd.DataFrame]] = None
+    _AKADRESSEN_ACTIVE: ClassVar[Optional[pd.DataFrame]] = None
+    _AKADRESSEN_CACHE_TIME: ClassVar[Optional[dt.date]] = None
 
     def __init__(
         self,
@@ -110,6 +117,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         longitude: float = None,
         photo_file_id: str = None,
         allow_contact_sharing: Optional[bool] = False,
+        joined: int = None,
     ) -> None:
         if sum([x is not None for x in [longitude, latitude]]) == 1:
             raise ValueError('Either none of longitude and latitude or both must be passed!')
@@ -122,6 +130,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         self.last_name = last_name
         self.nickname = nickname
         self.gender = gender
+        self.joined = joined
         self.date_of_birth = date_of_birth
         self.photo_file_id = photo_file_id
         self.allow_contact_sharing = allow_contact_sharing
@@ -175,6 +184,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
                 f'Geburtstag: '
                 f'{self.date_of_birth.strftime("%d. %B %Y") if self.date_of_birth else "-"}\n'
                 f'Instrument/e: {", ".join([str(i) for i in self.instruments]) or "-"}\n'
+                f'Dabei seit: {self.joined or "-"}\n'
                 f'Adresse: {self.address or "-"}\n'
                 f'Mobil: {self.phone_number or "-"}\n'
                 f'Foto: {"🖼" if self.photo_file_id else "-"}\n'
@@ -542,21 +552,31 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         return self.date_of_birth.strftime('%d.%m.')
 
     @classmethod
-    def set_akadressen_credentials(cls, url: str, username: str, password: str) -> None:
+    def set_akadressen_credentials(
+        cls, url: str, url_active: str, username: str, password: str
+    ) -> None:
         """
         Set the credentials needed to retrieve the AkaDRessen
 
         Args:
             url: The URL of the AkaDressen.
+            url_active: The URL of the AkaDressen containing only the active members.
             username: Username.
             password: Password.
         """
         cls._AD_URL = url
+        cls._AD_URL_ACTIVE = url_active
         cls._AD_USERNAME = username
         cls._AD_PASSWORD = password
 
+    def copy(self) -> 'Member':
+        """
+        Returns: A (deep) copy of this member.
+        """
+        return copy.deepcopy(self)
+
     @classmethod
-    def _get_akadressen(cls) -> pd.DataFrame:
+    def _get_akadressen(cls, active: bool = False) -> pd.DataFrame:  # pylint: disable=R0915
 
         # A bunch of helpers to parse the downloaded data
         leading_whitespace_pattern = re.compile(r'\b(?=\w)(\w) (\w)')
@@ -575,6 +595,14 @@ class Member:  # pylint: disable=R0902,R0913,R0904
                     out = out.replace(year=out.year - 100)
             return out
 
+        def year_to_int(string: Union[str, np.nan]) -> Optional[int]:
+            if string is np.nan:
+                return None
+            out = dt.datetime.strptime(string, '%y').date()
+            if out.year >= dt.datetime.now().year:
+                out = out.replace(year=out.year - 100)
+            return out.year
+
         def string_to_instrument(string: str) -> Optional[Instrument]:
             try:
                 return Instrument.from_string(string)
@@ -587,7 +615,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
 
         def extract_nickname(string: str) -> Optional[str]:
             if '(' in string:
-                return string.split('(')[0].strip(' ')
+                return string.split('(')[0].strip()
             return None
 
         def remove_nickname(string: str) -> str:
@@ -611,7 +639,9 @@ class Member:  # pylint: disable=R0902,R0913,R0904
 
         with NamedTemporaryFile(suffix='.pdf', delete=False) as akadressen:
             response = requests.get(
-                cls._AD_URL, auth=(cls._AD_USERNAME, cls._AD_PASSWORD), stream=True
+                cls._AD_URL_ACTIVE if active else cls._AD_URL,
+                auth=(cls._AD_USERNAME, cls._AD_PASSWORD),
+                stream=True,
             )
             if response.status_code == 200:
                 response.raw.decode_content = True
@@ -621,41 +651,52 @@ class Member:  # pylint: disable=R0902,R0913,R0904
                 # Read tables from PDF
                 tables = read_pdf(akadressen.name, flavor='stream', pages='all')
                 # Convert to pandas DataFrame
-                dataframe = pd.concat([t.df for t in tables])
+                d_f = pd.concat([t.df for t in tables])
                 # Rename columns
-                dataframe = dataframe.rename(
-                    columns={
-                        0: 'name',
-                        1: 'address',
-                        2: 'phone',
-                        3: 'date_of_birth',
-                        4: 'instrument',
-                    }
-                )
+                if active:
+                    d_f = d_f.rename(
+                        columns={
+                            0: 'name',
+                            1: 'date_of_birth',
+                            2: 'address',
+                            3: 'phone',
+                            4: 'instrument',
+                            5: 'joined',
+                        }
+                    )
+                else:
+                    d_f = d_f.rename(
+                        columns={
+                            0: 'name',
+                            1: 'address',
+                            2: 'phone',
+                            3: 'date_of_birth',
+                            4: 'instrument',
+                        }
+                    )
+
                 # Drop empty lines
-                dataframe = dataframe.replace(r'^\s*$', np.nan, regex=True)
-                dataframe = dataframe.dropna(thresh=4)
+                d_f = d_f.replace(r'^\s*$', np.nan, regex=True)
+                d_f = d_f.dropna(thresh=4)
 
                 # Parse all the data
-                dataframe.loc[:, 'date_of_birth'] = dataframe.loc[:, 'date_of_birth'].apply(
-                    string_to_date
-                )
-                dataframe.loc[:, 'instrument'] = dataframe.loc[:, 'instrument'].apply(
-                    string_to_instrument
-                )
-                dataframe.loc[:, 'address'] = dataframe.loc[:, 'address'].apply(expand_brunswick)
-                dataframe.loc[:, 'name'] = dataframe.loc[:, 'name'].apply(remove_whitespaces)
-                dataframe.loc[:, 'nickname'] = dataframe.loc[:, 'name'].apply(extract_nickname)
-                dataframe.loc[:, 'name'] = dataframe.loc[:, 'name'].apply(remove_nickname)
-                dataframe.loc[:, 'first_name'] = dataframe.loc[:, 'name'].apply(first_name)
-                dataframe.loc[:, 'last_name'] = dataframe.loc[:, 'name'].apply(last_name)
+                if active:
+                    d_f.loc[:, 'joined'] = d_f.loc[:, 'joined'].apply(year_to_int)
+                    d_f.loc[:, 'fullname'] = d_f.loc[:, 'name'].apply(remove_whitespaces)
+                else:
+                    d_f.loc[:, 'date_of_birth'] = d_f.loc[:, 'date_of_birth'].apply(string_to_date)
+                    d_f.loc[:, 'instrument'] = d_f.loc[:, 'instrument'].apply(string_to_instrument)
+                    d_f.loc[:, 'address'] = d_f.loc[:, 'address'].apply(expand_brunswick)
+                    d_f.loc[:, 'fullname'] = d_f.loc[:, 'name'].apply(remove_whitespaces)
+                    d_f.loc[:, 'name'] = d_f.loc[:, 'name'].apply(remove_whitespaces)
+                    d_f.loc[:, 'nickname'] = d_f.loc[:, 'name'].apply(extract_nickname)
+                    d_f.loc[:, 'name'] = d_f.loc[:, 'name'].apply(remove_nickname)
+                    d_f.loc[:, 'first_name'] = d_f.loc[:, 'name'].apply(first_name)
+                    d_f.loc[:, 'last_name'] = d_f.loc[:, 'name'].apply(last_name)
 
-                return dataframe
+                return d_f
 
             raise Exception('Could not retrieve AkaDressen.')
-
-    _AKADRESSEN: Optional[pd.DataFrame] = None
-    _AKADRESSEN_CACHE_TIME: Optional[dt.date] = None
 
     @classmethod
     def guess_member(cls, user: User) -> Optional[List['Member']]:
@@ -670,8 +711,8 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         def generous_ratio(str1: Optional[str], str2: Optional[str]) -> float:
             if str1 is None or str2 is None:
                 return 0.0
-            str1 = str1.lower().strip(' ')
-            str2 = str2.lower().strip(' ')
+            str1 = str1.lower().strip()
+            str2 = str2.lower().strip()
             return max(
                 fuzz.ratio(str1, str2),
                 fuzz.partial_ratio(str1, str2),
@@ -681,10 +722,12 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         # Refresh AkaDressen
         if (
             cls._AKADRESSEN_CACHE_TIME is None
+            or cls._AKADRESSEN_ACTIVE is None
             or dt.date.today() > cls._AKADRESSEN_CACHE_TIME
             or cls._AKADRESSEN is None
         ):
             cls._AKADRESSEN = cls._get_akadressen()
+            cls._AKADRESSEN_ACTIVE = cls._get_akadressen(active=True)
             if cls._AKADRESSEN is not None:
                 cls._AKADRESSEN_CACHE_TIME = dt.date.today()
 
@@ -707,6 +750,13 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         all_max_rankings = [list_df[idx] for idx in ranking if ranking[idx] == max_ranking]
         members = []
         for row in all_max_rankings:
+            potential_joined = cls._AKADRESSEN_ACTIVE.loc[
+                cls._AKADRESSEN_ACTIVE['fullname'] == row.fullname  # pylint: disable=E1136
+            ]
+            if len(potential_joined) == 1:
+                joined = potential_joined.iloc[0].joined
+            else:
+                joined = None
             members.append(
                 Member(
                     user_id=user.id,
@@ -716,6 +766,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
                     address=row.address,
                     instruments=row.instrument,
                     date_of_birth=row.date_of_birth,
+                    joined=joined,
                 )
             )
         return members
@@ -735,6 +786,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
             'phone_number',
             'date_of_birth',
             'full_name',
+            'joined',
             'photo_file_id',
             'allow_contact_sharing',
         ]

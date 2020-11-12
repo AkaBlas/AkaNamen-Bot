@@ -64,6 +64,7 @@ def setup(  # pylint: disable=R0913,R0914,R0915
     oc_password: str,
     oc_path: str,
     ad_url: str,
+    ad_url_active: str,
     ad_username: str,
     ad_password: str,
 ) -> None:
@@ -82,6 +83,7 @@ def setup(  # pylint: disable=R0913,R0914,R0915
         oc_password: Password of the OwnCloud Instance.
         oc_path: Remote path on the OwnCloud Instance.
         ad_url: URL of the AkaDressen file.
+        ad_url_active: URL of the AkaDressen file containing only the active members.
         ad_username: Username for the AkaDressen.
         ad_password: Password for the AkaDressen.
     """
@@ -118,7 +120,7 @@ def setup(  # pylint: disable=R0913,R0914,R0915
             text = interrupt_replies[conversation]
             if update.callback_query:
                 update.callback_query.answer(text=text, show_alert=True)
-            else:
+            elif update.effective_message:
                 update.effective_message.reply_text(text)
             raise DispatcherHandlerStop()
 
@@ -243,7 +245,7 @@ def setup(  # pylint: disable=R0913,R0914,R0915
     backup.schedule_daily_job(dispatcher)
 
     # Set up AkaDressen credentials
-    Member.set_akadressen_credentials(ad_url, ad_username, ad_password)
+    Member.set_akadressen_credentials(ad_url, ad_url_active, ad_username, ad_password)
 
     # Set up bot_data
     bot_data = dispatcher.bot_data

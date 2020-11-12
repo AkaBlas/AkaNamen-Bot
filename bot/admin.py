@@ -5,7 +5,7 @@ from telegram import Update
 from telegram.ext import CallbackContext
 
 from bot import ORCHESTRA_KEY
-from components import Orchestra, Member
+from components import Orchestra
 
 
 def rebuild_orchestra(update: Update, context: CallbackContext) -> None:
@@ -22,27 +22,7 @@ def rebuild_orchestra(update: Update, context: CallbackContext) -> None:
     orchestra = Orchestra()
 
     for member in members:
-        new_member = Member(
-            member.user_id,
-            phone_number=member.phone_number,
-            first_name=member.first_name,
-            last_name=member.last_name,
-            nickname=member.nickname,
-            gender=member.gender,
-            date_of_birth=member.date_of_birth,
-            instruments=member.instruments,
-            address=None,
-            photo_file_id=member.photo_file_id,
-            allow_contact_sharing=member.allow_contact_sharing,
-        )
-        # pylint: disable=W0212
-        new_member.user_score = member.user_score
-        new_member.user_score.member = new_member
-        new_member._raw_address = member._raw_address
-        new_member._address = member._address
-        new_member._longitude = member._longitude
-        new_member._latitude = member._latitude
-        orchestra.register_member(new_member)
+        orchestra.register_member(member.copy())
 
     context.bot_data[ORCHESTRA_KEY] = orchestra
     update.message.reply_text('Orchester neu besetzt.')

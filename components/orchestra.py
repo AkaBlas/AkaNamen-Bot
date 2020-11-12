@@ -66,6 +66,9 @@ class Orchestra(PicklableBase):
             'photo_file_id': PhotoManager(
                 'photo_file_id', list(self.ATTRIBUTE_MANAGERS.difference(['photo_file_id']))
             ),
+            'joined': AttributeManager(
+                'joined', list(self.ATTRIBUTE_MANAGERS.difference(['joined', 'age', 'birthday']))
+            ),
         }
 
     def __getitem__(self, item: str) -> Any:
@@ -342,6 +345,7 @@ class Orchestra(PicklableBase):
         'address': 'Adresse',
         'ages': 'Alter',
         'age': 'Alter',
+        'joined': 'Beitrittsjahr',
         'birthdays': 'Geburtstag',
         'birthday': 'Geburtstag',
         'photo_file_ids': 'Foto',
@@ -353,10 +357,10 @@ class Orchestra(PicklableBase):
     SUBSCRIPTABLE = [
         'address', 'addresses', 'age', 'ages', 'birthday', 'birthdays', 'first_name',
         'first_names', 'full_name', 'full_names', 'instruments', 'last_name', 'last_names',
-        'nickname', 'nicknames', 'photo_file_id', 'photo_file_ids'
+        'nickname', 'nicknames', 'photo_file_id', 'photo_file_ids', 'joined'
     ]
     """List[:obj:`str`]: Attribute managers supported by subscription."""
     ATTRIBUTE_MANAGERS = {
         'address', 'age', 'birthday', 'first_name', 'full_name', 'instruments', 'last_name',
-        'nickname', 'photo_file_id'
+        'nickname', 'photo_file_id', 'joined'
     }
