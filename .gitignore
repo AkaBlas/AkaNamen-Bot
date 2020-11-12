@@ -38,3 +38,6 @@ venv/
 
 # PyCharm
 /.idea/
+
+# Other
+*.accdb

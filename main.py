@@ -28,6 +28,7 @@ def main() -> None:
     oc_password = config['owncloud']['password']
     oc_path = config['owncloud']['path']
     ad_url = config['akadressen']['url']
+    ad_url_active = config['akadressen']['url_active']
     ad_username = config['akadressen']['username']
     ad_password = config['akadressen']['password']
 
@@ -46,6 +47,7 @@ def main() -> None:
         oc_password=oc_password,
         oc_path=oc_path,
         ad_url=ad_url,
+        ad_url_active=ad_url_active,
         ad_username=ad_username,
         ad_password=ad_password,
     )

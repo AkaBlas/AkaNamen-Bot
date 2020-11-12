@@ -82,7 +82,7 @@ QUESTION_HINT_KEYBOARD: List[List[str]] = [
     ['first_name', 'last_name'],
     ['full_name', 'nickname'],
     ['age', 'birthday'],
-    ['instruments'],
+    ['instruments', 'joined'],
     ['address', 'photo_file_id']
 ]
 
@@ -112,9 +112,7 @@ def build_instruments_keyboard(
     for row in INSTRUMENT_KEYBOARD:
         button_row = []
         for instrument in row:
-            text = (
-                f'{instrument} ' f'{SELECTED if current_selection.get(instrument) else DESELECTED}'
-            )
+            text = f'{instrument} {SELECTED if current_selection.get(instrument) else DESELECTED}'
             button = InlineKeyboardButton(text=text, callback_data=text)
             button_row.append(button)
         buttons.append(button_row)

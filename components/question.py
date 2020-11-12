@@ -77,6 +77,7 @@ class Question:
             self.AGE,
             self.INSTRUMENT,
             self.FULL_NAME,
+            self.JOINED,
         ]:
             return MessageType.relevant_type(update) == MessageType.TEXT
         # self.attribute == self.ADDRESS:
@@ -109,7 +110,7 @@ class Question:
             return poll_answer.option_ids[0] == self.poll.correct_option_id  # type: ignore
 
         if update.message and update.message.text:
-            answer = update.message.text.strip(' ').strip('\n')
+            answer = update.message.text.strip().strip('\n')
         else:
             answer = None
 
@@ -123,6 +124,8 @@ class Question:
             return answer == bd_string
         if self.attribute == self.AGE:
             return answer == str(self.member.age)
+        if self.attribute == self.JOINED:
+            return answer == str(self.member.joined)
         if self.attribute == self.INSTRUMENT:
             return self.member.compare_instruments_to(answer) >= 0.85
         # self.attribute == self.ADDRESS:
@@ -152,6 +155,8 @@ class Question:
     """:obj:`str`: Birthday of an AkaBlas member"""
     AGE: str = 'age'
     """:obj:`str`: Age of an AkaBlas member"""
+    JOINED: str = 'joined'
+    """:obj:`str`: Year an AkaBlas member joined"""
     INSTRUMENT: str = 'instruments'
     """:obj:`str`: Instrument of an AkaBlas member"""
     ADDRESS: str = 'address'
@@ -168,5 +173,6 @@ class Question:
         ADDRESS,
         FULL_NAME,
         PHOTO,
+        JOINED,
     ]
     """List[:obj:`str`]: Attributes usable for questions"""

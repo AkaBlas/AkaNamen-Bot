@@ -91,7 +91,7 @@ class Instrument:
 
             raise ValueError('Unknown instrument description.')
 
-        string = string.lower().strip(' ')
+        string = string.lower().strip()
         instrument = _from_string(string)
 
         if allowed is not None:

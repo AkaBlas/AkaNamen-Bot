@@ -28,6 +28,7 @@ from telegram.ext import (
     CallbackQueryHandler,
     Handler,
     InlineQueryHandler,
+    BaseFilter,
 )
 from telegram.constants import MAX_INLINE_QUERY_RESULTS
 
@@ -64,6 +65,8 @@ GENDER = 'gender'
 """:obj:`str`: Identifier of the state in which the gender is changed."""
 DATE_OF_BIRTH = 'date_of_birth'
 """:obj:`str`: Identifier of the state in which the date of birth is changed."""
+JOINED = 'joined'
+""":obj:`str`: Identifier of the state in which the year of joining AkaBlas is changed."""
 ADDRESS = 'address'
 """:obj:`str`: Identifier of the state in which the address is changed."""
 ADDRESS_CONFIRMATION = 'ADDRESS_CONFIRMATION'
@@ -111,6 +114,9 @@ TEXTS: Dict[str, str] = {
     '{}\n\nUm das Datum zu ändern, schicke mir das neue Datum im Format '
     '<i>DD.MM.JJJJ</i>. Um das Datum so zu lassen oder zu löschen, nutze die Knöpfe'
     ' unten.',
+    JOINED: 'Das Beitrittsjahr, das ich gespeichert habe ist:\n\n{}\n\nUm das Beitrittsjahr zu '
+    'ändern, schicke mir das neue Jahr im Format <i>JJJJ</i>. Um das Jahr so zu lassen oder zu '
+    'löschen, nutze die Knöpfe unten.',
     ADDRESS: 'Die Adresse, die ich gespeichert habe lautet:\n\nAdresse: {}\n\nUm '
     'die Adresse zu ändern, schicke mir entweder die Adresse als Text oder schicke mir '
     'einen Standort. Um die Adresse so zu lassen oder zu löschen, nutze die Knöpfe '
@@ -207,7 +213,9 @@ SELECTION_KEYBOARD = InlineKeyboardMarkup([[
     InlineKeyboardButton('Instrumente', callback_data=INSTRUMENTS)
 ], [
     InlineKeyboardButton('Handynummer', callback_data=PHONE_NUMBER),
-    InlineKeyboardButton('Datennutzung', callback_data=ALLOW_CONTACT_SHARING)
+    InlineKeyboardButton('Beitrittsjahr', callback_data=JOINED)
+], [
+    InlineKeyboardButton('Datennutzung', callback_data=ALLOW_CONTACT_SHARING),
 ], [
     InlineKeyboardButton(DONE, callback_data=DONE)
 ]])
@@ -500,7 +508,11 @@ def simple_callback_factory(attr: str) -> Callable[[Update, CallbackContext], st
     return callback
 
 
-def simple_handler_factory(attr: str, message_handler: bool = True) -> List[Handler]:
+def simple_handler_factory(
+    attr: str,
+    message_handler: bool = True,
+    filters: BaseFilter = None,
+) -> List[Handler]:
     """
     Creates handlers for the simple to handle attributes. The returned list consists of
 
@@ -512,11 +524,18 @@ def simple_handler_factory(attr: str, message_handler: bool = True) -> List[Hand
         attr: The attribute to :meth:`simple_callback_factory`
         message_handler: Whether to include a :class:`telegram.ext.MessageHandler`. Defaults
             :obj:`True`
+        filters: Optional additional filters for the message handler. Will be used as
+            ``(Filters.text & ~Filters.command) & filters``
     """
     callback = simple_callback_factory(attr)
+    if filters:
+        filters = (Filters.text & ~Filters.command) & filters
+    else:
+        filters = Filters.text & ~Filters.command
+
     if message_handler:
         return [
-            MessageHandler(Filters.text & ~Filters.command, callback),
+            MessageHandler(filters, callback),
             CallbackQueryHandler(callback),
         ]
     return [CallbackQueryHandler(callback)]
@@ -849,6 +868,7 @@ def build_editing_handler(admin: int) -> ConversationHandler:
             FIRST_NAME: simple_handler_factory(FIRST_NAME),
             LAST_NAME: simple_handler_factory(LAST_NAME),
             NICKNAME: simple_handler_factory(NICKNAME),
+            JOINED: simple_handler_factory(JOINED, filters=Filters.regex(r'^\d{4}$')),
             GENDER: simple_handler_factory(GENDER, message_handler=False),
             DATE_OF_BIRTH: [
                 MessageHandler((Filters.text & ~Filters.command), date_of_birth),
