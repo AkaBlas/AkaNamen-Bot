@@ -34,6 +34,11 @@ EDITING_USER_KEY = 'editing_user_key'
 :obj:`str`: Each ``context.user_data[EDITING_USER_KEY]`` is expected to be the id of a user to be
 edited. Only relevant for the admin.
 """
+EDITING_ADMIN_KEY = 'editing_admin_key'
+"""
+:obj:`str`: Each ``context.user_data[EDITING_ADMIN_KEY]`` is expected to be a bool stating of it's
+the admin editing a user or not.
+"""
 GAME_MESSAGE_KEY = 'game_message_key'
 """
 :obj:`str`: Each ``context.user_data[GAME_MESSAGE_KEY]`` is expected to be the last

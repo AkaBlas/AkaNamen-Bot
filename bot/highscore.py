@@ -51,18 +51,19 @@ def build_keyboard(view: str = OVERALL_SCORE) -> InlineKeyboardMarkup:
             button will have :attr:`CURRENT` as data. Defaults to :attr:`OVERALL_SCORE`.
     """
     data = {k: k if k != view else CURRENT for k in BUTTON_TEXTS}
-    # yapf: disable
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton(BUTTON_TEXTS[OVERALL_SCORE], callback_data=data[OVERALL_SCORE])],
+    return InlineKeyboardMarkup(
         [
-            InlineKeyboardButton(BUTTON_TEXTS[TODAYS_SCORE], callback_data=data[TODAYS_SCORE]),
-            InlineKeyboardButton(BUTTON_TEXTS[WEEKS_SCORE], callback_data=data[WEEKS_SCORE])
-        ],
-        [
-            InlineKeyboardButton(BUTTON_TEXTS[MONTHS_SCORE], callback_data=data[MONTHS_SCORE]),
-            InlineKeyboardButton(BUTTON_TEXTS[YEARS_SCORE], callback_data=data[YEARS_SCORE])
-        ]])
-    # yapf: enable
+            [InlineKeyboardButton(BUTTON_TEXTS[OVERALL_SCORE], callback_data=data[OVERALL_SCORE])],
+            [
+                InlineKeyboardButton(BUTTON_TEXTS[TODAYS_SCORE], callback_data=data[TODAYS_SCORE]),
+                InlineKeyboardButton(BUTTON_TEXTS[WEEKS_SCORE], callback_data=data[WEEKS_SCORE]),
+            ],
+            [
+                InlineKeyboardButton(BUTTON_TEXTS[MONTHS_SCORE], callback_data=data[MONTHS_SCORE]),
+                InlineKeyboardButton(BUTTON_TEXTS[YEARS_SCORE], callback_data=data[YEARS_SCORE]),
+            ],
+        ]
+    )
 
 
 def build_text(orchestra: Orchestra, interval: str) -> str:

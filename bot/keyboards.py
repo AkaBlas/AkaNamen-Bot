@@ -62,7 +62,6 @@ DONE = 'Fertig'
 ALL = 'Alles'
 """:obj:`str`: Text indicating to select all. Use as text or callback data."""
 
-# yapf: disable
 INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
     [Flute(), Clarinet()],
     [Oboe(), Bassoon()],
@@ -83,10 +82,9 @@ QUESTION_HINT_KEYBOARD: List[List[str]] = [
     ['full_name', 'nickname'],
     ['age', 'birthday'],
     ['instruments', 'joined'],
-    ['address', 'photo_file_id']
+    ['address', 'photo_file_id'],
+    ['functions'],
 ]
-
-# yapf: enable
 
 
 def build_instruments_keyboard(

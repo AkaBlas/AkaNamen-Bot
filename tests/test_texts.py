@@ -20,6 +20,7 @@ def member(monkeypatch):
         date_of_birth=dt.date(dt.date.today().year - 21, 12, 31),
         instruments=instruments.AltoSaxophone(),
         address='Universitätsplatz 2, 38106 Braunschweig',
+        functions='Lappenwart',
     )
 
 
