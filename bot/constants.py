@@ -21,6 +21,10 @@ ADMIN_KEY = 'admin_key'
 """
 :obj:`str`: Each ``context.bot_data[ADMIN_KEY]`` is expected to be the admins chat id.
 """
+YOURLS_KEY = 'yourls_key'
+"""
+:obj:`str`: Each ``context.bot_data[YOURLS_KEY]`` is expected to be the YOURLS client.
+"""
 
 # User data keys
 EDITING_MESSAGE_KEY = 'editing_message_key'

@@ -31,6 +31,8 @@ def main() -> None:
     ad_url_active = config['akadressen']['url_active']
     ad_username = config['akadressen']['username']
     ad_password = config['akadressen']['password']
+    yourls_url = config['yourls']['url']
+    yourls_signature = config['yourls']['signature']
 
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
@@ -50,6 +52,8 @@ def main() -> None:
         ad_url_active=ad_url_active,
         ad_username=ad_username,
         ad_password=ad_password,
+        yourls_url=yourls_url,
+        yourls_signature=yourls_signature,
     )
 
     # Start the Bot
