@@ -9,3 +9,4 @@ numpy
 pandas
 git+https://gitlab.com/HirschHeissIch/ptbstats.git@v1.2
 pyocclient==0.6
+git+https://github.com/Bibo-Joshi/yourls-python.git@extensions

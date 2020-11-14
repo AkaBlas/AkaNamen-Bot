@@ -41,6 +41,8 @@ import bot.game as game
 import bot.admin
 
 from components import Orchestra, Member
+from .constants import YOURLS_KEY
+from .yourls import YOURLSClient
 
 BOT_COMMANDS: List[BotCommand] = [
     BotCommand('spiel_starten', 'Startet ein neues Spiel'),
@@ -67,6 +69,8 @@ def setup(  # pylint: disable=R0913,R0914,R0915
     ad_url_active: str,
     ad_username: str,
     ad_password: str,
+    yourls_url: str,
+    yourls_signature: str,
 ) -> None:
     """
     * Adds handlers. Convenience method to avoid doing that all in the main script.
@@ -86,6 +90,8 @@ def setup(  # pylint: disable=R0913,R0914,R0915
         ad_url_active: URL of the AkaDressen file containing only the active members.
         ad_username: Username for the AkaDressen.
         ad_password: Password for the AkaDressen.
+        yourls_url: URL of the YOURLS instance.
+        yourls_signature: Signature for the YOURLS instance.
     """
 
     def check_conversation_status(update: Update, context: CallbackContext) -> None:
@@ -256,6 +262,9 @@ def setup(  # pylint: disable=R0913,R0914,R0915
     if not bot_data.get(DENIED_USERS_KEY):
         bot_data[DENIED_USERS_KEY] = list()
     bot_data[ADMIN_KEY] = int(admin)
+
+    yourls_client = YOURLSClient(yourls_url, signature=yourls_signature, nonce_life=True)
+    bot_data[YOURLS_KEY] = yourls_client
 
     # Clear conversation key
     user_data = dispatcher.user_data

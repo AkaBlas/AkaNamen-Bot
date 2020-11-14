@@ -44,6 +44,8 @@ from bot import (
     ADMIN_KEY,
     CONVERSATION_KEY,
 )
+from bot.constants import YOURLS_KEY
+from bot.yourls import generate_mail_link
 from bot.constants import EDITING_ADMIN_KEY
 from components import Member, Gender, Instrument
 
@@ -466,13 +468,18 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
     member = get_member(update, context)
 
     if data == DONE:
+        url = generate_mail_link(member, context.bot_data[YOURLS_KEY])
         text = (
             f'Hervorragend 🙆‍♂️. Deine Daten lauten nun wie folgt:\n\n{member.to_str()}'
             f'\n\n<b>Übrigens:</b> Der Vorstand freut sich '
-            f'sicherlich auch über Deine neuen Daten 😉. Schreib ihm doch eine Mail an '
-            f'vorstand@akablas.de. ✉️ '
+            f'sicherlich auch über Deine neuen Daten 😉. Schreib ihm doch eine Mail:'
         )
-        message.edit_text(text=text)
+        message.edit_text(
+            text=text,
+            reply_markup=InlineKeyboardMarkup.from_button(
+                InlineKeyboardButton(text='✉️', url=url)
+            ),
+        )
 
         # Only relevant for admin
         context.user_data.pop(EDITING_USER_KEY, None)

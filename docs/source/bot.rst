@@ -17,3 +17,4 @@ Frontend: Bot package
     bot.game
     bot.registration
     bot.setup
+    bot.yourls
