@@ -26,7 +26,6 @@ from components import (
     Drums,
     Guitar,
     BassGuitar,
-    Conductor,
     Orchestra,
     Member,
 )
@@ -74,7 +73,6 @@ INSTRUMENT_KEYBOARD: List[List[Instrument]] = [
     [Tuba()],
     [Guitar(), BassGuitar()],
     [PercussionInstrument(), Drums()],
-    [Conductor()],
 ]
 
 QUESTION_HINT_KEYBOARD: List[List[str]] = [
