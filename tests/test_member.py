@@ -50,6 +50,7 @@ class TestMember:
     date_of_birth = dt.date(1996, 8, 10)
     joined = 2000
     photo_file_id = 'photo_file_id'
+    functions = ['Lappenwart', 'Pärchenwart']
     allow_contact_sharing = True
     instruments = [instruments.Tuba(), instruments.Trumpet()]
     address = 'Universitätsplatz 2, 38106 Braunschweig'
@@ -72,6 +73,7 @@ class TestMember:
             instruments=self.instruments,
             address=self.address,
             joined=self.joined,
+            functions=self.functions,
         )
         assert member.user_id == self.user_id
         assert member.phone_number == self.phone_number
@@ -93,6 +95,8 @@ class TestMember:
         assert member.allow_contact_sharing == self.allow_contact_sharing
         assert member.instruments == self.instruments
         assert member['instruments'] == self.instruments
+        assert member.functions == self.functions
+        assert member['functions'] == self.functions
         assert isinstance(member.user_score, UserScore)
         assert member.user_score.member == member
 
@@ -142,10 +146,20 @@ class TestMember:
             instruments.Oboe(),
             instruments.Baritone(),
             instruments.WoodwindInstrument(),
+            instruments.Conductor(),
         ]
         assert member.instruments == [instruments.Oboe(), instruments.Baritone()]
         member.instruments = instruments.WoodwindInstrument()
         assert member.instruments == []
+
+    def test_functions_property(self, member):
+        assert member.functions == []
+        member.functions = None
+        assert member.functions == []
+        member.functions = 'Wart'
+        assert member.functions == ['Wart']
+        member.functions = ['Wart1', 'Wart2']
+        assert member.functions == ['Wart1', 'Wart2']
 
     def test_address_and_coordinates(self):
         with pytest.raises(ValueError, match='Only address'):
@@ -264,6 +278,16 @@ class TestMember:
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
         assert member.instruments_str == 'Tuba, Trompete'
 
+    def test_functions_str(self, member):
+        member.functions = None
+        assert member.functions_str is None
+
+        member.functions = 'Wart'
+        assert member.functions_str == 'Wart'
+
+        member.functions = ['Wart1', 'Wart2']
+        assert member.functions_str == 'Wart1, Wart2'
+
     def test_vcard_filename(self, member):
         member.first_name = self.first_name
         member.last_name = self.last_name
@@ -305,6 +329,21 @@ class TestMember:
         with member.vcard(bot) as vcard:
             vcard_string = vcard.read().decode('utf-8')
             assert 'PHOTO;ENCODING=B;' in vcard_string
+
+        member.instruments = self.instruments
+        with member.vcard(bot) as vcard:
+            vcard_string = vcard.read().decode('utf-8')
+            assert 'ORG:AkaBlas e.V.;Tuba\, Trompete' in vcard_string
+
+        member.gender = Gender.MALE
+        with member.vcard(bot) as vcard:
+            vcard_string = vcard.read().decode('utf-8')
+            assert 'GENDER:M' in vcard_string
+
+        member.functions = self.functions
+        with member.vcard(bot) as vcard:
+            vcard_string = vcard.read().decode('utf-8')
+            assert 'TITLE:Lappenwart\, Pärchenwart' in vcard_string
 
     def test_age(self, member, today):
         assert member.age is None
@@ -375,9 +414,38 @@ class TestMember:
         with pytest.raises(ValueError, match='This member has no'):
             member.compare_instruments_to(test_string)
 
-        member.instruments = instruments.Tuba()
+        member.instruments = self.instruments
         assert 0 <= member.compare_instruments_to(test_string) <= 1
         assert member.compare_instruments_to(member.instruments_str) == pytest.approx(1)
+        assert member.compare_instruments_to('Tuba') == pytest.approx(1)
+
+    def test_compare_functions_to(self, member, test_string):
+        with pytest.raises(ValueError, match='This member holds no'):
+            member.compare_functions_to(test_string)
+
+        member.functions = self.functions
+        assert 0 <= member.compare_functions_to(test_string) <= 1
+        assert member.compare_functions_to('Lappenwart') == pytest.approx(1)
+        assert member.compare_functions_to('Wart') < 1
+
+    def test_compare_functions_to_gendering(self, member):
+        member.functions = 'Pärchenwart'
+        member.gender = None
+
+        assert member.compare_functions_to('Männerwart') < 1
+        assert member.compare_functions_to('Frauenwart') < 1
+
+        member.gender = Gender.MALE
+
+        assert member.compare_functions_to('Männerwart') < 1
+        assert member.compare_functions_to('Frauenwart') == pytest.approx(1)
+
+        member.gender = Gender.FEMALE
+
+        assert member.compare_functions_to('Männerwart') == pytest.approx(1)
+        assert member.compare_functions_to('Frauenwart') < 1
+
+        assert member.functions == ['Pärchenwart']
 
     def test_copy(self, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
@@ -395,6 +463,7 @@ class TestMember:
             instruments=self.instruments,
             address=self.address,
             joined=self.joined,
+            functions=self.functions,
         )
         new_member = member.copy()
 
@@ -415,6 +484,16 @@ class TestMember:
         assert new_member._longitude == member._longitude
         assert new_member._latitude == member._latitude
         assert new_member.joined == member.joined
+        assert new_member.functions == member.functions
+
+    def test_copy_backwards_compat(self):
+        member = Member(1)
+        del member._functions
+        del member.joined
+
+        new_member = member.copy()
+        assert new_member.functions == []
+        assert new_member.joined is None
 
     def test_to_string(self, member, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
@@ -425,6 +504,7 @@ class TestMember:
             'Geburtstag: -\n'
             'Instrument/e: -\n'
             'Dabei seit: -\n'
+            'Ämter: -\n'
             'Adresse: -\n'
             'Mobil: -\n'
             'Foto: -\n'
@@ -437,6 +517,7 @@ class TestMember:
         member.set_address(self.address)
         member.date_of_birth = self.date_of_birth
         member.joined = self.joined
+        member.functions = self.functions
         member.photo_file_id = self.photo_file_id
         member.phone_number = self.phone_number
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
@@ -447,6 +528,7 @@ class TestMember:
             'Geburtstag: 10. August 1996\n'
             'Instrument/e: Tuba, Trompete\n'
             'Dabei seit: 2000\n'
+            'Ämter: Lappenwart, Pärchenwart\n'
             'Adresse: Universitätsplatz 2, 38106 Braunschweig\n'
             'Mobil: phone_number\n'
             'Foto: 🖼\n'

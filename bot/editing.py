@@ -44,6 +44,7 @@ from bot import (
     ADMIN_KEY,
     CONVERSATION_KEY,
 )
+from bot.constants import EDITING_ADMIN_KEY
 from components import Member, Gender, Instrument
 
 # Ignore warnings from ConversationHandler
@@ -67,6 +68,8 @@ DATE_OF_BIRTH = 'date_of_birth'
 """:obj:`str`: Identifier of the state in which the date of birth is changed."""
 JOINED = 'joined'
 """:obj:`str`: Identifier of the state in which the year of joining AkaBlas is changed."""
+FUNCTIONS = 'functions'
+""":obj:`str`: Identifier of the state in functions are changed."""
 ADDRESS = 'address'
 """:obj:`str`: Identifier of the state in which the address is changed."""
 ADDRESS_CONFIRMATION = 'ADDRESS_CONFIRMATION'
@@ -148,6 +151,9 @@ TEXTS: Dict[str, str] = {
     'Bitte nutze die Knöpfe unten für die Antwort.',
     PHONE_NUMBER: 'Die Handynummer, die ich gespeichert habe lautet:\n\nHandynummer: {}\n\nUm '
     'die Nummer zu ändern, so zu lassen oder zu löschen, nutze die Knöpfe unten.',
+    FUNCTIONS: 'Die Ämter, die ich gespeichert habe lauten:\n\nÄmter: {}\n\nUm die Ämter zu '
+    'ändern, schicke sie mir als Komma-getrennte Liste. Um die Ämter so zu lassen '
+    'oder zu löschen, nutze die Knöpfe unten.',
 }
 """Dict[:obj:`str`,:obj:`str`]: Texts for the different states."""
 
@@ -178,51 +184,84 @@ YES_NO_KEYBOARD = InlineKeyboardMarkup.from_row(
     ]
 )
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for a yes or no choice."""
-# yapf: disable
-GENDER_KEYBOARD = InlineKeyboardMarkup([[
-    InlineKeyboardButton(text=Gender.MALE, callback_data=Gender.MALE),
-    InlineKeyboardButton(text=Gender.FEMALE, callback_data=Gender.FEMALE)
-], [
-    InlineKeyboardButton(text=BACK, callback_data=BACK),
-    InlineKeyboardButton(text='Löschen', callback_data=DELETE)
-]])
+GENDER_KEYBOARD = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(text=Gender.MALE, callback_data=Gender.MALE),
+            InlineKeyboardButton(text=Gender.FEMALE, callback_data=Gender.FEMALE),
+        ],
+        [
+            InlineKeyboardButton(text=BACK, callback_data=BACK),
+            InlineKeyboardButton(text='Löschen', callback_data=DELETE),
+        ],
+    ]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for selecting a gender."""
-PHONE_NUMBER_KEYBOARD = InlineKeyboardMarkup([[
-    InlineKeyboardButton(text='Nummer ändern', callback_data=PHONE_NUMBER)
-], [
-    InlineKeyboardButton(text=BACK, callback_data=BACK),
-    InlineKeyboardButton(text='Löschen', callback_data=DELETE)
-]])
+PHONE_NUMBER_KEYBOARD = InlineKeyboardMarkup(
+    [
+        [InlineKeyboardButton(text='Nummer ändern', callback_data=PHONE_NUMBER)],
+        [
+            InlineKeyboardButton(text=BACK, callback_data=BACK),
+            InlineKeyboardButton(text='Löschen', callback_data=DELETE),
+        ],
+    ]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for selecting a gender."""
-ADDRESS_CONFIRMATION_KEYBOARD = InlineKeyboardMarkup.from_row([
-    InlineKeyboardButton(text=CORRECT, callback_data=CORRECT),
-    InlineKeyboardButton(text='Löschen', callback_data=DELETE)
-])
+ADDRESS_CONFIRMATION_KEYBOARD = InlineKeyboardMarkup.from_row(
+    [
+        InlineKeyboardButton(text=CORRECT, callback_data=CORRECT),
+        InlineKeyboardButton(text='Löschen', callback_data=DELETE),
+    ]
+)
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard for confirming the address."""
-SELECTION_KEYBOARD = InlineKeyboardMarkup([[
-    InlineKeyboardButton('Vorname', callback_data=FIRST_NAME),
-    InlineKeyboardButton('Nachname', callback_data=LAST_NAME)
-], [
-    InlineKeyboardButton('Spitzname', callback_data=NICKNAME),
-    InlineKeyboardButton('Geschlecht', callback_data=GENDER)
-], [
-    InlineKeyboardButton('Geburtsdatum', callback_data=DATE_OF_BIRTH),
-    InlineKeyboardButton('Adresse', callback_data=ADDRESS)
-], [
-    InlineKeyboardButton('Bild', callback_data=PHOTO),
-    InlineKeyboardButton('Instrumente', callback_data=INSTRUMENTS)
-], [
-    InlineKeyboardButton('Handynummer', callback_data=PHONE_NUMBER),
-    InlineKeyboardButton('Beitrittsjahr', callback_data=JOINED)
-], [
-    InlineKeyboardButton('Datennutzung', callback_data=ALLOW_CONTACT_SHARING),
-], [
-    InlineKeyboardButton(DONE, callback_data=DONE)
-]])
-""":class:`telegram.InlineKeyboardMarkup`: Keyboard for confirming the address."""
+SELECTION_KEYBOARD = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton('Vorname', callback_data=FIRST_NAME),
+            InlineKeyboardButton('Nachname', callback_data=LAST_NAME),
+        ],
+        [
+            InlineKeyboardButton('Spitzname', callback_data=NICKNAME),
+            InlineKeyboardButton('Geschlecht', callback_data=GENDER),
+        ],
+        [
+            InlineKeyboardButton('Geburtsdatum', callback_data=DATE_OF_BIRTH),
+            InlineKeyboardButton('Adresse', callback_data=ADDRESS),
+        ],
+        [
+            InlineKeyboardButton('Bild', callback_data=PHOTO),
+            InlineKeyboardButton('Instrumente', callback_data=INSTRUMENTS),
+        ],
+        [
+            InlineKeyboardButton('Handynummer', callback_data=PHONE_NUMBER),
+            InlineKeyboardButton('Beitrittsjahr', callback_data=JOINED),
+        ],
+        [
+            InlineKeyboardButton('Datennutzung', callback_data=ALLOW_CONTACT_SHARING),
+        ],
+        [InlineKeyboardButton(DONE, callback_data=DONE)],
+    ]
+)
 
 
-# yapf: enable
+def selection_keyboard(context: CallbackContext) -> InlineKeyboardMarkup:
+    """
+    Function building the selection keyboard.
+
+    Args:
+        admin: Whether it's the admin changing the user or not.
+
+    Returns: The keyboard.
+
+    """
+    admin = context.user_data.get(EDITING_ADMIN_KEY, False)
+
+    if not admin:
+        return SELECTION_KEYBOARD
+
+    keyboard = deepcopy(SELECTION_KEYBOARD)
+    keyboard.inline_keyboard[-2].append(InlineKeyboardButton('Ämter', callback_data=FUNCTIONS))
+    return keyboard
 
 
 def get_member(update: Update, context: CallbackContext) -> Member:
@@ -375,10 +414,11 @@ def admin_menu(update: Update, context: CallbackContext) -> str:
     """
     user_id = int(update.message.text)
     context.user_data[EDITING_USER_KEY] = user_id
+    context.user_data[EDITING_ADMIN_KEY] = True
     member = get_member(update, context)
     text = TEXTS[MENU].format(member.to_str())
 
-    msg = update.effective_message.reply_text(text=text, reply_markup=SELECTION_KEYBOARD)
+    msg = update.effective_message.reply_text(text=text, reply_markup=selection_keyboard(context))
     context.user_data[EDITING_MESSAGE_KEY] = msg
 
     return MENU
@@ -396,10 +436,11 @@ def menu(update: Update, context: CallbackContext) -> str:
         :attr:`MENU`
     """
     context.user_data[CONVERSATION_KEY] = CONVERSATION_VALUE
+    context.user_data[EDITING_ADMIN_KEY] = False
     member = get_member(update, context)
     text = TEXTS[MENU].format(member.to_str())
 
-    msg = update.effective_message.reply_text(text=text, reply_markup=SELECTION_KEYBOARD)
+    msg = update.effective_message.reply_text(text=text, reply_markup=selection_keyboard(context))
     context.user_data[EDITING_MESSAGE_KEY] = msg
 
     return MENU
@@ -435,6 +476,7 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
 
         # Only relevant for admin
         context.user_data.pop(EDITING_USER_KEY, None)
+        context.user_data.pop(EDITING_ADMIN_KEY, None)
 
         context.user_data[CONVERSATION_KEY] = False
         return ConversationHandler.END
@@ -453,6 +495,8 @@ def parse_selection(update: Update, context: CallbackContext) -> str:
             text = TEXTS[DATE_OF_BIRTH].format(
                 member.date_of_birth.strftime('%d.%m.%Y') if member.date_of_birth else "-"
             )
+        elif data == FUNCTIONS:
+            text = TEXTS[FUNCTIONS].format(member.functions_str or '-')
         elif data == GENDER:
             reply_markup = GENDER_KEYBOARD
         elif data == PHONE_NUMBER:
@@ -481,7 +525,7 @@ def simple_callback_factory(attr: str) -> Callable[[Update, CallbackContext], st
     def callback(update: Update, context: CallbackContext) -> str:
         orchestra = context.bot_data[ORCHESTRA_KEY]
         member = get_member(update, context)
-        reply_markup = SELECTION_KEYBOARD
+        reply_markup = selection_keyboard(context)
 
         if update.message:
             delete_keyboard(context)
@@ -564,7 +608,7 @@ def date_of_birth(update: Update, context: CallbackContext) -> str:
             dt_of_birth = datetime_of_birth.date()
             member.date_of_birth = dt_of_birth
             msg = update.effective_message.reply_text(
-                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
             )
         except ValueError:
             update.message.reply_text(
@@ -577,7 +621,7 @@ def date_of_birth(update: Update, context: CallbackContext) -> str:
             member.date_of_birth = None
         update.callback_query.answer()
         msg = update.callback_query.edit_message_text(
-            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
         )
 
     context.user_data[EDITING_MESSAGE_KEY] = msg
@@ -634,7 +678,7 @@ def address(update: Update, context: CallbackContext) -> str:
         member.clear_address()
 
     msg = update.effective_message.edit_text(
-        text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+        text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
     )
 
     context.user_data[EDITING_MESSAGE_KEY] = msg
@@ -677,7 +721,7 @@ def photo(update: Update, context: CallbackContext) -> str:
             member.photo_file_id = file_id
 
             msg = message.reply_text(
-                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
             )
             context.user_data[EDITING_MESSAGE_KEY] = msg
         else:
@@ -704,12 +748,12 @@ def photo(update: Update, context: CallbackContext) -> str:
             message.delete()
 
             msg = message.reply_text(
-                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
             )
             context.user_data[EDITING_MESSAGE_KEY] = msg
         else:
             message.edit_text(
-                text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+                text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
             )
 
     orchestra.update_member(member)
@@ -738,7 +782,7 @@ def instruments(update: Update, context: CallbackContext) -> str:
 
     if data == DONE:
         message.edit_text(
-            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
         )
         return MENU
 
@@ -782,7 +826,7 @@ def phone_number(update: Update, context: CallbackContext) -> str:
         msg = message.reply_text('Danke!', reply_markup=ReplyKeyboardRemove())
         msg.delete()
         message.reply_text(
-            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
         )
 
         return MENU
@@ -794,14 +838,14 @@ def phone_number(update: Update, context: CallbackContext) -> str:
         member.phone_number = None
         orchestra.update_member(member)
         message.edit_text(
-            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
         )
 
         return MENU
 
     if data == BACK:
         message.edit_text(
-            text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD
+            text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
         )
 
         return MENU
@@ -837,7 +881,45 @@ def allow_contact_sharing(update: Update, context: CallbackContext) -> str:
     member.allow_contact_sharing = data == YES
     orchestra.update_member(member)
 
-    message.edit_text(text=TEXTS[MENU].format(member.to_str()), reply_markup=SELECTION_KEYBOARD)
+    message.edit_text(
+        text=TEXTS[MENU].format(member.to_str()), reply_markup=selection_keyboard(context)
+    )
+
+    return MENU
+
+
+def functions(update: Update, context: CallbackContext) -> str:
+    """
+    Parses the reply for the functions.
+
+    Args:
+        update: The update.
+        context: The context as provided by the :class:`telegram.ext.Dispatcher`.
+
+    Returns:
+        :attr:`MENU`
+    """
+    orchestra = context.bot_data[ORCHESTRA_KEY]
+    member = get_member(update, context)
+    reply_markup = selection_keyboard(context)
+
+    if update.message:
+        delete_keyboard(context)
+        member.functions = update.message.text.replace(' ', '').split(',')
+
+        text = TEXTS[MENU].format(member.to_str())
+        msg = update.message.reply_text(text=text, reply_markup=reply_markup)
+    else:
+        data = update.callback_query.data
+        if data == DELETE:
+            member.functions = None  # type: ignore
+        update.callback_query.answer()
+
+        text = TEXTS[MENU].format(member.to_str())
+        msg = update.callback_query.edit_message_text(text=text, reply_markup=reply_markup)
+
+    orchestra.update_member(member)
+    context.user_data[EDITING_MESSAGE_KEY] = msg
 
     return MENU
 
@@ -869,6 +951,10 @@ def build_editing_handler(admin: int) -> ConversationHandler:
             LAST_NAME: simple_handler_factory(LAST_NAME),
             NICKNAME: simple_handler_factory(NICKNAME),
             JOINED: simple_handler_factory(JOINED, filters=Filters.regex(r'^\d{4}$')),
+            FUNCTIONS: [
+                MessageHandler((Filters.text & ~Filters.command), functions),
+                CallbackQueryHandler(functions),
+            ],
             GENDER: simple_handler_factory(GENDER, message_handler=False),
             DATE_OF_BIRTH: [
                 MessageHandler((Filters.text & ~Filters.command), date_of_birth),

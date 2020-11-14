@@ -4,6 +4,7 @@
 """This module contains the instrument classes."""
 import sys
 import inspect
+import warnings
 from typing import Union, Optional, Sequence
 
 
@@ -172,6 +173,13 @@ class Conductor(Instrument):
     """
 
     name = 'Anzähler'
+
+    def __init__(self) -> None:
+        super().__init__()
+
+        warnings.warn(
+            'Conductor is deprecated. Set it as function of a member instead.', DeprecationWarning
+        )
 
 
 class Flute(WoodwindInstrument):

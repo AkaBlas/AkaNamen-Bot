@@ -78,6 +78,7 @@ class Question:
             self.INSTRUMENT,
             self.FULL_NAME,
             self.JOINED,
+            self.FUNCTIONS,
         ]:
             return MessageType.relevant_type(update) == MessageType.TEXT
         # self.attribute == self.ADDRESS:
@@ -126,6 +127,8 @@ class Question:
             return answer == str(self.member.age)
         if self.attribute == self.JOINED:
             return answer == str(self.member.joined)
+        if self.attribute == self.FUNCTIONS:
+            return self.member.compare_functions_to(answer) >= 0.85
         if self.attribute == self.INSTRUMENT:
             return self.member.compare_instruments_to(answer) >= 0.85
         # self.attribute == self.ADDRESS:
@@ -157,6 +160,8 @@ class Question:
     """:obj:`str`: Age of an AkaBlas member"""
     JOINED: str = 'joined'
     """:obj:`str`: Year an AkaBlas member joined"""
+    FUNCTIONS: str = 'functions'
+    """:obj:`str`: Functions of an AkaBlas member"""
     INSTRUMENT: str = 'instruments'
     """:obj:`str`: Instrument of an AkaBlas member"""
     ADDRESS: str = 'address'
@@ -174,5 +179,6 @@ class Question:
         FULL_NAME,
         PHOTO,
         JOINED,
+        FUNCTIONS,
     ]
     """List[:obj:`str`]: Attributes usable for questions"""

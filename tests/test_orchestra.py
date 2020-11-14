@@ -75,6 +75,7 @@ class TestOrchestra:
         member.gender = Gender.MALE
         member.date_of_birth = dt.date(1999, 12, 31)
         member.joined = 2000
+        member.functions = ['Lappenwart', 'Pärchenwart']
         member.instruments = [instruments.Tuba(), instruments.Trumpet()]
         member.set_address(address='Universitätsplatz 2, 38106 Braunschweig')
 
@@ -97,7 +98,11 @@ class TestOrchestra:
         }
         assert orchestra.attribute_managers['age'].data == {today.year - 2000: {member}}
         assert orchestra.attribute_managers['birthday'].data == {'31.12.': {member}}
-        assert orchestra['joined'].data == {2000: {member}}
+        assert orchestra.attribute_managers['joined'].data == {2000: {member}}
+        assert orchestra.attribute_managers['functions'].data == {
+            'Lappenwart': {member},
+            'Pärchenwart': {member},
+        }
         assert orchestra.attribute_managers['photo_file_id'].data == {'photo_file_id': {member}}
 
         with pytest.raises(ValueError, match='already'):
@@ -110,6 +115,7 @@ class TestOrchestra:
         member.gender = Gender.FEMALE
         member.date_of_birth = dt.date(2000, 12, 31)
         member.joined = 2002
+        member.functions = 'AkaNamenWart'
         member.instruments = instruments.Oboe()
         member.set_address(address='Universitätsplatz 1, 38106 Braunschweig')
 
@@ -126,7 +132,8 @@ class TestOrchestra:
         }
         assert orchestra.attribute_managers['age'].data == {today.year - 2001: {member}}
         assert orchestra.attribute_managers['birthday'].data == {'31.12.': {member}}
-        assert orchestra['joined'].data == {2002: {member}}
+        assert orchestra.attribute_managers['joined'].data == {2002: {member}}
+        assert orchestra.attribute_managers['functions'].data == {'AkaNamenWart': {member}}
         assert orchestra.attribute_managers['photo_file_id'].data == {'Photo_File_ID': {member}}
 
     def test_kick_member(self, orchestra, member):

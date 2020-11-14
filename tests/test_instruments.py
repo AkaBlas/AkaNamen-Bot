@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import pytest
-from components import instruments
+from components import instruments, Conductor
 from components import (
     Instrument,
     WoodwindInstrument,
@@ -206,3 +206,8 @@ class TestInstruments:
         assert not instrument > Guitar()
         assert hash(instrument) != hash(Guitar())
         assert instrument == BassGuitar()
+
+    def test_conductor_warning(self, recwarn):
+        Conductor()
+        assert len(recwarn) == 1
+        assert 'Conductor is deprecated.' in str(recwarn[0].message)

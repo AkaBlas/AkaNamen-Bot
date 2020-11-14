@@ -20,6 +20,7 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.FULL_NAME: 'Wie lautet der volle Name von {hint}?',
         Question.PHOTO: 'Welches Bild zeigt {hint}?',
         Question.JOINED: 'Seit welchem Jahr ist {hint} bei AkaBlas?',
+        Question.FUNCTIONS: 'Welches Amt hat {hint} (ggf. unter anderem) inne?',
     },
     Question.LAST_NAME: {
         Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas mit Nachnamen {hint}?',
@@ -37,6 +38,8 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.PHOTO: 'Welches Bild zeigt ein Mitglied von AkaBlas mit Nachnamen {hint}?',
         Question.JOINED: 'Seit welchem Jahr ist ein Mitglied von AkaBlas mit Nachnamen {hint} '
         'bei AkaBlas?',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied von AkaBlas mit Nachnamen {hint} (ggf. '
+        'unter anderem) inne?',
     },
     Question.NICKNAME: {
         Question.ADDRESS: 'Wo wohnt {hint}?',
@@ -48,6 +51,7 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.FULL_NAME: 'Wie lautet der volle Name von {hint}?',
         Question.PHOTO: 'Welches Bild zeigt {hint}?',
         Question.JOINED: 'Seit welchem Jahr ist {hint} bei AkaBlas?',
+        Question.FUNCTIONS: 'Welches Amt hat {hint} (ggf. unter anderem) inne?',
     },
     Question.FULL_NAME: {
         Question.FIRST_NAME: 'Wie lautet der Vorname von {hint}?',
@@ -59,6 +63,7 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.INSTRUMENT: 'Welches dieser Instrumente spielt {hint} (ggf. unter anderem)?',
         Question.PHOTO: 'Welches Bild zeigt {hint}?',
         Question.JOINED: 'Seit welchem Jahr ist {hint} bei AkaBlas?',
+        Question.FUNCTIONS: 'Welches Amt hat {hint} (ggf. unter anderem) inne?',
     },
     Question.BIRTHDAY: {
         Question.FIRST_NAME: 'Wer hat am {hint} Geburtstag?',
@@ -74,6 +79,8 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, das am {hint} Geburtstag hat?',
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das am {hint} '
         'Geburtstag hat?',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das am {hint} Geburtstag hat?',
     },
     Question.AGE: {
         Question.FIRST_NAME: 'Wer ist {hint} Jahre alt?',
@@ -91,6 +98,8 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, das {hint} Jahre alt ist?',
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das {hint} '
         'Jahre alt ist?',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das {hint} Jahre alt hat?',
     },
     Question.INSTRUMENT: {
         Question.FIRST_NAME: 'Wer spielt (ggf. unter anderem) {hint}?',
@@ -112,6 +121,8 @@ MULTIPLE_CHOICE_QUESTIONS = {
         ),
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das '
         '(ggf. unter anderem) {hint} spielt?',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das (ggf. unter anderem) {hint} spielt?',
     },
     Question.ADDRESS: {
         Question.FIRST_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {hint}?',
@@ -133,6 +144,8 @@ MULTIPLE_CHOICE_QUESTIONS = {
         'triffst: {hint}?',
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das Du bei '
         'dieser Adresse triffst: {hint}?',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das Du bei dieser Adresse triffst: {hint}?',
     },
     Question.PHOTO: {
         Question.ADDRESS: 'Wo wohnt dieses AkaBlas-Mitglied?',
@@ -146,6 +159,7 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.NICKNAME: 'Wie lautet der Spitzname dieses AkaBlas-Mitglieds?',
         Question.FULL_NAME: 'Wie lautet der volle Name dieses AkaBlas-Mitglieds?',
         Question.JOINED: 'Seit welchem Jahr ist dieses AkaBlas-Mitglied bei AkaBlas?',
+        Question.FUNCTIONS: 'Welches Amt dieses Mitglied ven AkaBlas (ggf. unter anderem) inne?',
     },
     Question.JOINED: {
         Question.ADDRESS: 'Wo wohnt ein AkaBlas-Mitglied, das seit {hint} bei AkaBlas ist?',
@@ -166,6 +180,30 @@ MULTIPLE_CHOICE_QUESTIONS = {
         'bei AkaBlas ist?',
         Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, '
         'das seit {hint} bei AkaBlas ist?',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das seit {hint} bei AkaBlas ist?',
+    },
+    Question.FUNCTIONS: {
+        Question.ADDRESS: 'Wo wohnt ein AkaBlas-Mitglied, das (ggf. unter anderem) {hint} ist?',
+        Question.BIRTHDAY: 'An welchem Tag hat ein AkaBlas-Mitglied Geburtstag, das (ggf. unter '
+        'anderem) {hint} ist?',
+        Question.AGE: 'Wie alt ist ein AkaBlas-Mitglied, das (ggf. unter anderem) {hint} ist?',
+        Question.INSTRUMENT: (
+            'Welches dieser Instrumente spielt ein AkaBlas-Mitglied (ggf. unter anderem), '
+            'das (ggf. unter anderem) {hint} ist? '
+        ),
+        Question.FIRST_NAME: 'Wie lautet der Vorname eines AkaBlas-Mitglieds, das (ggf. unter '
+        'anderem) {hint} ist? ',
+        Question.LAST_NAME: 'Wie lautet der Nachname eines AkaBlas-Mitglieds, das (ggf. unter '
+        'anderem) {hint} ist? ',
+        Question.NICKNAME: 'Wie lautet der Spitzname eines AkaBlas-Mitglieds, das (ggf. unter '
+        'anderem) {hint} ist? ',
+        Question.FULL_NAME: 'Wie lautet der volle Name eines AkaBlas-Mitglieds, das (ggf. unter '
+        'anderem) {hint} ist? ',
+        Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, '
+        'das (gg. unter anderem) {hint} ist?',
+        Question.JOINED: 'Seit wann ist ein Mitglied von AkaBlas bei AkaBlas, das (ggf. unter '
+        'anderem) {hint} ist?',
     },
 }
 
@@ -182,6 +220,7 @@ FREE_TEXT_QUESTIONS = {
         Question.FULL_NAME: 'Wie lautet der volle Name von {hint}?',
         Question.JOINED: 'Seit welchem Jahr ist {hint} bei AkaBlas? Bitte gib das Jahr im Format '
         '"JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat {hint} (ggf. unter anderem) inne?',
     },
     Question.LAST_NAME: {
         Question.ADDRESS: 'Wo wohnt das Mitglied von AkaBlas mit Nachnamen {hint}?',
@@ -200,6 +239,7 @@ FREE_TEXT_QUESTIONS = {
         'hint}?',
         Question.JOINED: 'Seit welchem Jahr ist {hint} bei AkaBlas? Bitte gib das Jahr im Format '
         '"JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat {hint} (ggf. unter anderem) inne?',
     },
     Question.NICKNAME: {
         Question.ADDRESS: 'Wo wohnt {hint}?',
@@ -213,6 +253,7 @@ FREE_TEXT_QUESTIONS = {
         Question.FULL_NAME: 'Wie lautet der volle Name von {hint}?',
         Question.JOINED: 'Seit welchem Jahr ist {hint} bei AkaBlas? Bitte gib das Jahr im Format '
         '"JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat {hint} (ggf. unter anderem) inne?',
     },
     Question.FULL_NAME: {
         Question.FIRST_NAME: 'Wie lautet der Vorname von {hint}?',
@@ -226,6 +267,7 @@ FREE_TEXT_QUESTIONS = {
         Question.INSTRUMENT: 'Welches Instrument spielt {hint} (ggf. unter anderem)?',
         Question.JOINED: 'Seit welchem Jahr ist {hint} bei AkaBlas? Bitte gib das Jahr im Format '
         '"JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat {hint} (ggf. unter anderem) inne?',
     },
     Question.BIRTHDAY: {
         Question.FIRST_NAME: 'Wer hat am {hint} Geburtstag? (Vorname)',
@@ -240,6 +282,8 @@ FREE_TEXT_QUESTIONS = {
         Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das am {hint} Geburtstag hat?',
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das am {hint} '
         'Geburtstag hat? Bitte gib das Jahr im Format "JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das am {hint} Geburtstag hat?',
     },
     Question.AGE: {
         Question.FIRST_NAME: 'Wer ist {hint} Jahre alt? (Vorname)',
@@ -257,6 +301,8 @@ FREE_TEXT_QUESTIONS = {
         Question.ADDRESS: 'Wo wohnt ein Mitglied von AkaBlas, das jetzt {hint} Jahre alt ist?',
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das {hint} '
         'Jahre alt ist? Bitte gib das Jahr im Format "JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das {hint} Jahre alt hat?',
     },
     Question.INSTRUMENT: {
         Question.FIRST_NAME: 'Wer spielt (ggf. unter anderem) {hint}? (Vorname)',
@@ -276,6 +322,8 @@ FREE_TEXT_QUESTIONS = {
         ),
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das '
         '(ggf. unter anderem) {hint} spielt? Bitte gib das Jahr im Format "JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das (ggf. unter anderem) {hint} spielt?',
     },
     Question.ADDRESS: {
         Question.FIRST_NAME: 'Welches Mitglied von AkaBlas triffst Du bei dieser Adresse: {'
@@ -299,6 +347,8 @@ FREE_TEXT_QUESTIONS = {
         ),
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das Du bei '
         'dieser Adresse triffst: {hint}? Bitte gib das Jahr im Format "JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das Du bei dieser Adresse triffst: {hint}?',
     },
     Question.PHOTO: {
         Question.ADDRESS: 'Wo wohnt dieses AkaBlas-Mitglied?',
@@ -316,6 +366,7 @@ FREE_TEXT_QUESTIONS = {
         Question.FULL_NAME: 'Wie lautet der volle Name dieses AkaBlas-Mitglieds?',
         Question.JOINED: 'Seit welchem Jahr ist dieses AkaBlas-Mitglied bei AkaBlas? Bitte gib '
         'das Jahr im Format "JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt dieses Mitglied ven AkaBlas (ggf. unter anderem) inne?',
     },
     Question.JOINED: {
         Question.ADDRESS: 'Wo wohnt ein AkaBlas-Mitglied, das seit {hint} bei AkaBlas ist?',
@@ -336,6 +387,30 @@ FREE_TEXT_QUESTIONS = {
         'bei AkaBlas ist?',
         Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, das seit {hint} bei AkaBlas '
         'ist? Bitte gib das Jahr im Format "JJJJ" ein.',
+        Question.FUNCTIONS: 'Welches Amt hat ein Mitglied ven AkaBlas (ggf. unter anderem) inne, '
+        'das seit {hint} bei AkaBlas ist?',
+    },
+    Question.FUNCTIONS: {
+        Question.ADDRESS: 'Wo wohnt ein AkaBlas-Mitglied, das seit {hint} bei AkaBlas ist?',
+        Question.BIRTHDAY: 'An welchem Tag hat ein AkaBlas-Mitglied Geburtstag, das seit {hint} '
+        'bei AkaBlas ist? Bitte gib das Datum im Format "TT.MM." ein.',
+        Question.AGE: 'Wie alt ist ein AkaBlas-Mitglied, das seit {hint} bei AkaBlas ist?',
+        Question.INSTRUMENT: (
+            'Welches Instrument spielt ein AkaBlas-Mitglied (ggf. unter anderem), '
+            'das seit {hint} bei AkaBlas ist? '
+        ),
+        Question.FIRST_NAME: 'Wie lautet der Vorname eines AkaBlas-Mitglieds, das seit {hint} '
+        'bei AkaBlas ist?',
+        Question.LAST_NAME: 'Wie lautet der Nachname eines AkaBlas-Mitglieds, das seit {hint} '
+        'bei AkaBlas ist?',
+        Question.NICKNAME: 'Wie lautet der Spitzname eines AkaBlas-Mitglieds, das seit {hint} '
+        'bei AkaBlas ist?',
+        Question.FULL_NAME: 'Wie lautet der volle Name eines AkaBlas-Mitglieds, das seit {hint} '
+        'bei AkaBlas ist?',
+        Question.PHOTO: 'Welches Bild zeigt das AkaBlas-Mitglied, das seit {hint} bei AkaBlas '
+        'ist? Bitte gib das Jahr im Format "JJJJ" ein.',
+        Question.JOINED: 'Seit wann ist ein Mitglied von AkaBlas bei AkaBlas, das (ggf. unter '
+        'anderem) {hint} ist? Bitte gib das Jahr im Format "JJJJ" ein.',
     },
 }
 

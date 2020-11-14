@@ -23,6 +23,7 @@ def member(monkeypatch):
         joined=2000,
         instruments=[instruments.AltoSaxophone(), instruments.Trumpet()],
         address='Universitätsplatz 2, 38106 Braunschweig',
+        functions=['Lappenwart', 'Chefbeleuchter'],
     )
 
 
@@ -263,6 +264,23 @@ class TestQuestion:
         update = Update(1, message=Message(1, None, None, None, text=answer))
         assert q.check_answer(update) is result
         assert q.correct_answer == member.instruments_str
+
+    @pytest.mark.parametrize(
+        'answer, result',
+        [
+            ('Lappenwart', True),
+            ('Chefbeleuchter', True),
+            ('Lapenwart ', True),
+            ('  chefelechter', True),
+            ('wart', False),
+            ('Pärchenwart', False),
+        ],
+    )
+    def test_check_answer_free_text_functions(self, answer, result, member):
+        q = Question(member, Question.FUNCTIONS, multiple_choice=False)
+        update = Update(1, message=Message(1, None, None, None, text=answer))
+        assert q.check_answer(update) is result
+        assert q.correct_answer == member.functions_str
 
     @pytest.mark.parametrize(
         'answer, result',

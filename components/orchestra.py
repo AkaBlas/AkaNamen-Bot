@@ -69,6 +69,12 @@ class Orchestra(PicklableBase):
             'joined': AttributeManager(
                 'joined', list(self.ATTRIBUTE_MANAGERS.difference(['joined', 'age', 'birthday']))
             ),
+            'functions': AttributeManager(
+                'functions',
+                list(
+                    self.ATTRIBUTE_MANAGERS.difference(['functions', 'age', 'birthday', 'joined'])
+                ),
+            ),
         }
 
     def __getitem__(self, item: str) -> Any:
@@ -79,7 +85,7 @@ class Orchestra(PicklableBase):
             )
         if item == 'addresses':
             item = 'address'
-        elif item not in ['instruments', 'address']:
+        elif item not in ['instruments', 'address', 'functions']:
             item = item.rstrip('s')
         return self.attribute_managers[item]
 
@@ -145,13 +151,11 @@ class Orchestra(PicklableBase):
         self.kick_member(member)
         self.register_member(member)
 
-    # yapf: disable
     def questionable(
         self,
         multiple_choice: bool = True,
         exclude_members: Iterable[Member] = None,
     ) -> List[Tuple[AttributeManager, AttributeManager]]:
-        # yapf: enable
         """
         Gives a list of tuples of :class:`components.AttributeManager` instances, each representing
         a pair of hint attribute and question attribute, which have enough different values for the
@@ -166,13 +170,13 @@ class Orchestra(PicklableBase):
         for a_m in self.attribute_managers.values():
             for b_m in self.attribute_managers.values():
                 if b_m.description == 'photo_file_id':
-                    if a_m.is_hintable_with(b_m,
-                                            multiple_choice=True,
-                                            exclude_members=exclude_members):
+                    if a_m.is_hintable_with(
+                        b_m, multiple_choice=True, exclude_members=exclude_members
+                    ):
                         out.append((a_m, b_m))
-                elif a_m.is_hintable_with(b_m,
-                                          multiple_choice=multiple_choice,
-                                          exclude_members=exclude_members):
+                elif a_m.is_hintable_with(
+                    b_m, multiple_choice=multiple_choice, exclude_members=exclude_members
+                ):
                     out.append((a_m, b_m))
         return out
 
@@ -182,12 +186,14 @@ class Orchestra(PicklableBase):
         else:
             attr = f'{attr}s_score'
 
-        return sorted([
-            getattr(m.user_score, attr)
-            for m in self.members.values()
-            if getattr(m.user_score, attr).answers > 0
-        ],
-                      reverse=True)  # noqa: E126
+        return sorted(
+            [
+                getattr(m.user_score, attr)
+                for m in self.members.values()
+                if getattr(m.user_score, attr).answers > 0
+            ],
+            reverse=True,
+        )  # noqa: E126
 
     def _score_text(self, attr: str, length: int = None, html: Optional[bool] = False) -> str:
         sorted_scores = self._score(attr)
@@ -204,11 +210,14 @@ class Orchestra(PicklableBase):
                     name = 'Anonym'
 
                 if html:
-                    name_line = (f'{i + 1:{left_offset - 2}}. <b>{name}:</b> '
-                                 f'{score.correct} / {score.answers}')
+                    name_line = (
+                        f'{i + 1:{left_offset - 2}}. <b>{name}:</b> '
+                        f'{score.correct} / {score.answers}'
+                    )
                 else:
-                    name_line = (f'{i + 1:{left_offset - 2}}. {name}: '
-                                 f'{score.correct} / {score.answers}')
+                    name_line = (
+                        f'{i + 1:{left_offset - 2}}. {name}: ' f'{score.correct} / {score.answers}'
+                    )
 
                 full_bars = int(score.ratio // 10)
                 empty_bars = 10 - full_bars
@@ -221,8 +230,10 @@ class Orchestra(PicklableBase):
                 text += f'{name_line}\n{ratio_line}'
 
         if not text:
-            text = 'Noch keine Einträge vorhanden. Schnell ein /spiel_starten, dann bist Du auf ' \
-                   'Platz 1! 😎 '
+            text = (
+                'Noch keine Einträge vorhanden. Schnell ein /spiel_starten, dann bist Du auf '
+                'Platz 1! 😎 '
+            )
 
         return text
 
@@ -349,6 +360,7 @@ class Orchestra(PicklableBase):
         'ages': 'Alter',
         'age': 'Alter',
         'joined': 'Beitrittsjahr',
+        'functions': 'Ämter',
         'birthdays': 'Geburtstag',
         'birthday': 'Geburtstag',
         'photo_file_ids': 'Foto',
@@ -358,12 +370,37 @@ class Orchestra(PicklableBase):
     class to the human readable strings."""
 
     SUBSCRIPTABLE = [
-        'address', 'addresses', 'age', 'ages', 'birthday', 'birthdays', 'first_name',
-        'first_names', 'full_name', 'full_names', 'instruments', 'last_name', 'last_names',
-        'nickname', 'nicknames', 'photo_file_id', 'photo_file_ids', 'joined'
+        'address',
+        'addresses',
+        'age',
+        'ages',
+        'birthday',
+        'birthdays',
+        'first_name',
+        'first_names',
+        'full_name',
+        'full_names',
+        'instruments',
+        'last_name',
+        'last_names',
+        'nickname',
+        'nicknames',
+        'photo_file_id',
+        'photo_file_ids',
+        'joined',
+        'functions',
     ]
     """List[:obj:`str`]: Attribute managers supported by subscription."""
     ATTRIBUTE_MANAGERS = {
-        'address', 'age', 'birthday', 'first_name', 'full_name', 'instruments', 'last_name',
-        'nickname', 'photo_file_id', 'joined'
+        'address',
+        'age',
+        'birthday',
+        'first_name',
+        'full_name',
+        'instruments',
+        'last_name',
+        'nickname',
+        'photo_file_id',
+        'joined',
+        'functions',
     }
