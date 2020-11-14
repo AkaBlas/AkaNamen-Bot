@@ -428,6 +428,25 @@ class TestMember:
         assert member.compare_functions_to('Lappenwart') == pytest.approx(1)
         assert member.compare_functions_to('Wart') < 1
 
+    def test_compare_functions_to_gendering(self, member):
+        member.functions = 'Pärchenwart'
+        member.gender = None
+
+        assert member.compare_functions_to('Männerwart') < 1
+        assert member.compare_functions_to('Frauenwart') < 1
+
+        member.gender = Gender.MALE
+
+        assert member.compare_functions_to('Männerwart') < 1
+        assert member.compare_functions_to('Frauenwart') == pytest.approx(1)
+
+        member.gender = Gender.FEMALE
+
+        assert member.compare_functions_to('Männerwart') == pytest.approx(1)
+        assert member.compare_functions_to('Frauenwart') < 1
+
+        assert member.functions == ['Pärchenwart']
+
     def test_copy(self, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
 
@@ -466,6 +485,15 @@ class TestMember:
         assert new_member._latitude == member._latitude
         assert new_member.joined == member.joined
         assert new_member.functions == member.functions
+
+    def test_copy_backwards_compat(self):
+        member = Member(1)
+        del member._functions
+        del member.joined
+
+        new_member = member.copy()
+        assert new_member.functions == []
+        assert new_member.joined is None
 
     def test_to_string(self, member, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)

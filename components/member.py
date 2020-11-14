@@ -481,7 +481,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         """
         if not self.functions_str:
             raise ValueError('This member holds no functions.')
-        functions = self.functions
+        functions = copy.deepcopy(self.functions)
         if 'Pärchenwart' in self.functions:
             if self.gender == Gender.FEMALE:
                 functions.append('Männerwart')
