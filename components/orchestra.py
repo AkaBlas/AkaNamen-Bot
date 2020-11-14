@@ -331,6 +331,9 @@ class Orchestra(PicklableBase):
         """
         return self._score_text('overall', length=length, html=html)
 
+    def __eq__(self, other: object) -> bool:
+        return False
+
     TO_HR: Dict[str, str] = {
         'first_names': 'Vorname',
         'first_name': 'Vorname',

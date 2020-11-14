@@ -60,6 +60,11 @@ class TestOrchestra:
         with pytest.raises(KeyError, match='Orchestra either'):
             orchestra['foo']
 
+    def test_equality(self, orchestra):
+        assert not orchestra == orchestra
+        assert not orchestra == 'abc'
+        assert not orchestra == Member(1)
+
     def test_register_and_update_member(self, orchestra, member, today, monkeypatch):
         monkeypatch.setattr(Photon, 'geocode', get_address_from_cache)
 
