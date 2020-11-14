@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bot.backup Module &mdash; AkaNamen Bot  documentation</title>
+  <title>bot.yourls Module &mdash; AkaNamen Bot  documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="bot.ban Module" href="bot.ban.html" />
-    <link rel="prev" title="bot.admin Module" href="bot.admin.html" /> 
+    <link rel="next" title="How To Contribute" href="contributing.html" />
+    <link rel="prev" title="bot.setup Module" href="bot.setup.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -98,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="components.html">Backend: Components package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Frontend: Bot package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bot.admin.html">bot.admin Module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">bot.backup Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.backup.html">bot.backup Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.ban.html">bot.ban Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.cancel_membership.html">bot.cancel_membership Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.check_user_status.html">bot.check_user_status Module</a></li>
@@ -111,7 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="bot.game.html">bot.game Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.registration.html">bot.registration Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.setup.html">bot.setup Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bot.yourls.html">bot.yourls Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bot.yourls Module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
@@ -165,14 +165,14 @@
         
           <li><a href="bot.html">Frontend: Bot package</a> &raquo;</li>
         
-      <li>bot.backup Module</li>
+      <li>bot.yourls Module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
             
-              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/bot.backup.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/bot.yourls.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -186,34 +186,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bot.backup">
-<span id="bot-backup-module"></span><h1>bot.backup Module<a class="headerlink" href="#module-bot.backup" title="Permalink to this headline">¶</a></h1>
-<p>This module contains functions for backing up the pickle files.</p>
-<dl class="py function">
-<dt id="bot.backup.back_up">
-<code class="sig-prename descclassname">bot.backup.</code><code class="sig-name descname">back_up</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.backup.back_up" title="Permalink to this definition">¶</a></dt>
-<dd><p>Flushes the data to pickle file and uploads them to the OwnCloud/NextCloud instance as
-specified in the config file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
-</dd>
-</dl>
+  <div class="section" id="module-bot.yourls">
+<span id="bot-yourls-module"></span><h1>bot.yourls Module<a class="headerlink" href="#module-bot.yourls" title="Permalink to this headline">¶</a></h1>
+<p>This module contains a custom YOURLS client.</p>
+<dl class="py class">
+<dt id="bot.yourls.YOURLSClient">
+<em class="property">class </em><code class="sig-prename descclassname">bot.yourls.</code><code class="sig-name descname">YOURLSClient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">apiurl</span></em>, <em class="sig-param"><span class="n">username</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">password</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">signature</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nonce_life</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.yourls.YOURLSClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">yourls.core.YOURLSClientBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">yourls.core.YOURLSAPIMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">yourls.extensions.YOURLSEditUrlMixin</span></code></p>
+<p>A custom YOURLS client with edit functionality.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bot.backup.schedule_daily_job">
-<code class="sig-prename descclassname">bot.backup.</code><code class="sig-name descname">schedule_daily_job</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dispatcher</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.backup.schedule_daily_job" title="Permalink to this definition">¶</a></dt>
-<dd><p>Schedules a job running daily at 2AM UTC which run <code class="xref py py-meth docutils literal notranslate"><span class="pre">check_users()</span></code>.</p>
+<dt id="bot.yourls.generate_mail_link">
+<code class="sig-prename descclassname">bot.yourls.</code><code class="sig-name descname">generate_mail_link</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em>, <em class="sig-param"><span class="n">client</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.yourls.generate_mail_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a member, generates a short link that allows the member to send a pre filled mail to the
+board informing them that their details changed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dispatcher</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dispatcher</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>member</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>) – The member.</p></li>
+<li><p><strong>client</strong> (<a class="reference internal" href="#bot.yourls.YOURLSClient" title="bot.yourls.YOURLSClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">YOURLSClient</span></code></a>) – The YOURLS client.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dl>
+<p>Returns: The link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -228,10 +227,10 @@ specified in the config file.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bot.ban.html" class="btn btn-neutral float-right" title="bot.ban Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="How To Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="bot.admin.html" class="btn btn-neutral float-left" title="bot.admin Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="bot.setup.html" class="btn btn-neutral float-left" title="bot.setup Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

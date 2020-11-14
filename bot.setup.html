@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="How To Contribute" href="contributing.html" />
+    <link rel="next" title="bot.yourls Module" href="bot.yourls.html" />
     <link rel="prev" title="bot.registration Module" href="bot.registration.html" /> 
 </head>
 
@@ -111,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="bot.game.html">bot.game Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bot.registration.html">bot.registration Module</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">bot.setup Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bot.yourls.html">bot.yourls Module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How To Contribute</a></li>
@@ -201,7 +202,7 @@
 
 <dl class="py function">
 <dt id="bot.setup.setup">
-<code class="sig-prename descclassname">bot.setup.</code><code class="sig-name descname">setup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dispatcher</span></em>, <em class="sig-param"><span class="n">admin</span></em>, <em class="sig-param"><span class="n">oc_url</span></em>, <em class="sig-param"><span class="n">oc_username</span></em>, <em class="sig-param"><span class="n">oc_password</span></em>, <em class="sig-param"><span class="n">oc_path</span></em>, <em class="sig-param"><span class="n">ad_url</span></em>, <em class="sig-param"><span class="n">ad_url_active</span></em>, <em class="sig-param"><span class="n">ad_username</span></em>, <em class="sig-param"><span class="n">ad_password</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.setup.setup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">bot.setup.</code><code class="sig-name descname">setup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dispatcher</span></em>, <em class="sig-param"><span class="n">admin</span></em>, <em class="sig-param"><span class="n">oc_url</span></em>, <em class="sig-param"><span class="n">oc_username</span></em>, <em class="sig-param"><span class="n">oc_password</span></em>, <em class="sig-param"><span class="n">oc_path</span></em>, <em class="sig-param"><span class="n">ad_url</span></em>, <em class="sig-param"><span class="n">ad_url_active</span></em>, <em class="sig-param"><span class="n">ad_username</span></em>, <em class="sig-param"><span class="n">ad_password</span></em>, <em class="sig-param"><span class="n">yourls_url</span></em>, <em class="sig-param"><span class="n">yourls_signature</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.setup.setup" title="Permalink to this definition">¶</a></dt>
 <dd><ul class="simple">
 <li><p>Adds handlers. Convenience method to avoid doing that all in the main script.</p></li>
 <li><p>Sets the bot commands and makes sure <code class="docutils literal notranslate"><span class="pre">dispatcher.bot_data</span></code> is set up correctly.</p></li>
@@ -222,6 +223,8 @@ interrupted</p></li>
 <li><p><strong>ad_url_active</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the AkaDressen file containing only the active members.</p></li>
 <li><p><strong>ad_username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Username for the AkaDressen.</p></li>
 <li><p><strong>ad_password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Password for the AkaDressen.</p></li>
+<li><p><strong>yourls_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the YOURLS instance.</p></li>
+<li><p><strong>yourls_signature</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Signature for the YOURLS instance.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -240,7 +243,7 @@ interrupted</p></li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="contributing.html" class="btn btn-neutral float-right" title="How To Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bot.yourls.html" class="btn btn-neutral float-right" title="bot.yourls Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="bot.registration.html" class="btn btn-neutral float-left" title="bot.registration Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
