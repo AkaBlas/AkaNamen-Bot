@@ -188,7 +188,7 @@
 <h1>components.Member<a class="headerlink" href="#components-member" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="components.Member">
-<em class="property">class </em><code class="sig-prename descclassname">components.</code><code class="sig-name descname">Member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span></em>, <em class="sig-param"><span class="n">phone_number</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">first_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">last_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nickname</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gender</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">date_of_birth</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">instruments</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">address</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">latitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">longitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">photo_file_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">allow_contact_sharing</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">joined</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Member" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">components.</code><code class="sig-name descname">Member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_id</span></em>, <em class="sig-param"><span class="n">phone_number</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">first_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">last_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nickname</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gender</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">date_of_birth</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">instruments</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">address</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">latitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">longitude</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">photo_file_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">allow_contact_sharing</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">joined</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">functions</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A member of AkaBlas.</p>
 <div class="admonition note">
@@ -336,6 +336,7 @@ be passed.</p></li>
 <li><p><strong>longitude</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – Longitude of address. Only address <cite>or`</cite> latitude and longitude may
 be passed.</p></li>
 <li><p><strong>photo_file_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Telegram file ID of the user photo</p></li>
+<li><p><strong>functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – Function(s) this member holds.</p></li>
 <li><p><strong>allow_contact_sharing</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]) – Whether sharing this users contact information with others is
 allowed. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>.</p></li>
 </ul>
@@ -343,7 +344,7 @@ allowed. Defaults to <a class="reference external" href="https://docs.python.org
 </dl>
 <dl class="py attribute">
 <dt id="components.Member.ALLOWED_INSTRUMENTS">
-<code class="sig-name descname">ALLOWED_INSTRUMENTS</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="components.instruments.html#components.instruments.Instrument" title="components.instruments.Instrument">components.instruments.Instrument</a><span class="p">]</span></em><em class="property"> = [Percussion, Querflöte, Klarinette, Oboe, Fagott, Sopransaxophon, Altsaxophon, Tenorsaxophon, Baritonsaxophon, Euphonium, Tenorhorn, Bariton, Posaune, Tuba, Trompete, Flügelhorn, Horn, Schlagzeug, Gitarre, Bass-Gitarre, Anzähler]</em><a class="headerlink" href="#components.Member.ALLOWED_INSTRUMENTS" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">ALLOWED_INSTRUMENTS</code><em class="property">: List<span class="p">[</span><a class="reference internal" href="components.instruments.html#components.instruments.Instrument" title="components.instruments.Instrument">components.instruments.Instrument</a><span class="p">]</span></em><em class="property"> = [Percussion, Querflöte, Klarinette, Oboe, Fagott, Sopransaxophon, Altsaxophon, Tenorsaxophon, Baritonsaxophon, Euphonium, Tenorhorn, Bariton, Posaune, Tuba, Trompete, Flügelhorn, Horn, Schlagzeug, Gitarre, Bass-Gitarre]</em><a class="headerlink" href="#components.Member.ALLOWED_INSTRUMENTS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instruments that members are allowed to play.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -354,7 +355,7 @@ allowed. Defaults to <a class="reference external" href="https://docs.python.org
 
 <dl class="py attribute">
 <dt id="components.Member.SUBSCRIPTABLE">
-<code class="sig-name descname">SUBSCRIPTABLE</code><em class="property"> = ['address', 'age', 'allow_contact_sharing', 'birthday', 'date_of_birth', 'first_name', 'full_name', 'gender', 'instruments', 'joined', 'last_name', 'latitude', 'longitude', 'nickname', 'phone_number', 'photo_file_id']</em><a class="headerlink" href="#components.Member.SUBSCRIPTABLE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">SUBSCRIPTABLE</code><em class="property"> = ['address', 'age', 'allow_contact_sharing', 'birthday', 'date_of_birth', 'first_name', 'full_name', 'functions', 'gender', 'instruments', 'joined', 'last_name', 'latitude', 'longitude', 'nickname', 'phone_number', 'photo_file_id']</em><a class="headerlink" href="#components.Member.SUBSCRIPTABLE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attributes supported by subscription.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -469,6 +470,26 @@ is not set.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="components.Member.compare_functions_to">
+<code class="sig-name descname">compare_functions_to</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Member.compare_functions_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the members functions to the given string. The comparison is case insensitive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The string to compare to.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Similarity in percentage.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If the member holds no functions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="components.Member.compare_instruments_to">
 <code class="sig-name descname">compare_instruments_to</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Member.compare_instruments_to" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the members instruments to the given string. The comparison is case insensitive.</p>
@@ -563,6 +584,28 @@ is not set.</p>
 <dt id="components.Member.full_name">
 <em class="property">property </em><code class="sig-name descname">full_name</code><a class="headerlink" href="#components.Member.full_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Full name of the member. May be <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Member.functions">
+<em class="property">property </em><code class="sig-name descname">functions</code><a class="headerlink" href="#components.Member.functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function(s) this member holds. List may be empty</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="components.Member.functions_str">
+<em class="property">property </em><code class="sig-name descname">functions_str</code><a class="headerlink" href="#components.Member.functions_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stringified list of the function(s) the member holds. May be empty.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
