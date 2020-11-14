@@ -2,6 +2,54 @@
 Changelog
 =========
 
+Version 1.2
+===========
+*Released 2020-11-14*
+
+*New features:*
+
+- Add ``Member.functions`` for functions within AkaBlas (`#99`_)
+- Add ``Member.joined`` for when a member joined AkaBlas (`#96`_)
+- Autogenerate Mail to AkaBlas Board after Details Editing (`#101`_)
+
+*Changes and bug fixes for the user experience:*
+
+- End Conversations Safely (`#86`_, `#87`_)
+- Increase Difficulty for Address and Names in Free Text Mode (`#85`_)
+- Read Correct Year of Birth from AkaDressen (`#84`_)
+- Accept Only Portrait Pictures (`#83`_)
+- Fine tune hint/question selection (`#77`_, `#78`_)
+
+*Changes and bug fixes for the admin experience:*
+
+- Improve Code Quality (`#95`_)
+- Refactor Handling of Config Data (`#94`_)
+- Back Up Data Nightly (`#90`_, `#91`_)
+- Allow admin to edit any member (`#76`_)
+
+*Changes fixes and bugfixes to the backend:*
+
+- Fix Tests for ``ChangingAttributeManager`` (`#92`_)
+- Compare ``Orchestras`` as False (`#100`_)
+
+.. _`#99`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/99
+.. _`#96`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/96
+.. _`#101`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/101
+.. _`#86`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/86
+.. _`#87`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/87
+.. _`#85`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/85
+.. _`#84`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/84
+.. _`#83`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/83
+.. _`#77`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/77
+.. _`#78`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/78
+.. _`#95`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/95
+.. _`#94`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/94
+.. _`#90`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/90
+.. _`#91`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/91
+.. _`#76`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/76
+.. _`#92`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/92
+.. _`#100`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/100
+
 Version 1.1.1
 =============
 *Released 2020-09-18*
