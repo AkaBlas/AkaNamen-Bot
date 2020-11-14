@@ -55,6 +55,11 @@ Wenn Du möchtest, dass andere AkaBlasen Deinen Vornamen lernen können, Du Dich
 * das Geschlecht angeben, das andere *wahrscheinlich* mit Deinem Vornamen assoziieren oder
 * eine Münze werfen.
 
+Warum bin ich als "Pärchenwart" gelistet und nicht als Männer-/Frauenwart?
+-------------------------------------------------------------------------
+
+Das Problem ist das gleiche wie beim Geschlecht: Die Fragen würden teils sehr einfach. Aber keine Angst, im Freitextmodus werden »Männerwart« und »Frauenwart« natürlich trotzdem akzeptiert!
+
 Der Bot nimmt meine Adresse nicht an. Ist der blöd?
 ---------------------------------------------------
 
