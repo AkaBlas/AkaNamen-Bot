@@ -159,7 +159,8 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.NICKNAME: 'Wie lautet der Spitzname dieses AkaBlas-Mitglieds?',
         Question.FULL_NAME: 'Wie lautet der volle Name dieses AkaBlas-Mitglieds?',
         Question.JOINED: 'Seit welchem Jahr ist dieses AkaBlas-Mitglied bei AkaBlas?',
-        Question.FUNCTIONS: 'Welches Amt dieses Mitglied von AkaBlas (ggf. unter anderem) inne?',
+        Question.FUNCTIONS: 'Welches Amt hat dieses Mitglied von AkaBlas (ggf. unter anderem) '
+        'inne?',
     },
     Question.JOINED: {
         Question.ADDRESS: 'Wo wohnt ein AkaBlas-Mitglied, das seit {hint} bei AkaBlas ist?',
@@ -366,7 +367,8 @@ FREE_TEXT_QUESTIONS = {
         Question.FULL_NAME: 'Wie lautet der volle Name dieses AkaBlas-Mitglieds?',
         Question.JOINED: 'Seit welchem Jahr ist dieses AkaBlas-Mitglied bei AkaBlas? Bitte gib '
         'das Jahr im Format "JJJJ" ein.',
-        Question.FUNCTIONS: 'Welches Amt dieses Mitglied von AkaBlas (ggf. unter anderem) inne?',
+        Question.FUNCTIONS: 'Welches Amt hat dieses Mitglied von AkaBlas (ggf. unter anderem) '
+        'inne?',
     },
     Question.JOINED: {
         Question.ADDRESS: 'Wo wohnt ein AkaBlas-Mitglied, das seit {hint} bei AkaBlas ist?',
