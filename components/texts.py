@@ -99,7 +99,7 @@ MULTIPLE_CHOICE_QUESTIONS = {
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das {hint} '
         'Jahre alt ist?',
         Question.FUNCTIONS: 'Welches Amt hat ein Mitglied von AkaBlas (ggf. unter anderem) inne, '
-        'das {hint} Jahre alt hat?',
+        'das {hint} Jahre alt ist?',
     },
     Question.INSTRUMENT: {
         Question.FIRST_NAME: 'Wer spielt (ggf. unter anderem) {hint}?',
@@ -303,7 +303,7 @@ FREE_TEXT_QUESTIONS = {
         Question.JOINED: 'Seit welchem Jahr ist ein AkaBlas-Mitglied bei AkaBlas, das {hint} '
         'Jahre alt ist? Bitte gib das Jahr im Format "JJJJ" ein.',
         Question.FUNCTIONS: 'Welches Amt hat ein Mitglied von AkaBlas (ggf. unter anderem) inne, '
-        'das {hint} Jahre alt hat?',
+        'das {hint} Jahre alt ist?',
     },
     Question.INSTRUMENT: {
         Question.FIRST_NAME: 'Wer spielt (ggf. unter anderem) {hint}? (Vorname)',
