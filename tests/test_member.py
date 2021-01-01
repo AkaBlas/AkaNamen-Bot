@@ -98,7 +98,6 @@ class TestMember:
         assert member.functions == self.functions
         assert member['functions'] == self.functions
         assert isinstance(member.user_score, UserScore)
-        assert member.user_score.member == member
 
         assert member.address == 'Universitätsplatz 2, 38106 Braunschweig'
         assert member['address'] == 'Universitätsplatz 2, 38106 Braunschweig'

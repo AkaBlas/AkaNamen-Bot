@@ -136,7 +136,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         self.date_of_birth = date_of_birth
         self.photo_file_id = photo_file_id
         self.allow_contact_sharing = allow_contact_sharing
-        self.user_score = UserScore(self)
+        self.user_score = UserScore()
 
         # See https://github.com/python/mypy/issues/3004
         self._instruments: List[Instrument] = []
@@ -638,15 +638,22 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         """
         Returns: A (deep) copy of this member.
         """
+        # for backwards compatibility
+        if not hasattr(self, '_functions'):
+            self._functions = []  # pylint: disable=W0212  # type: ignore
+        if hasattr(self.user_score, 'member'):
+            del self.user_score.member  # type: ignore  # pylint: disable=E1101
+        for score in self.user_score._high_score.values():  # pylint: disable=W0212  # type: ignore
+            if hasattr(score, 'member'):
+                del score.member
+
         new_member = copy.deepcopy(self)
-        # for backwards compatibility@
-        if not hasattr(new_member, '_functions'):
-            new_member._functions = []  # pylint: disable=W0212  # type: ignore
         if not hasattr(new_member, 'joined'):
             new_member.joined = None
         new_member.instruments = [
             i for i in new_member.instruments if i in self.ALLOWED_INSTRUMENTS
         ]
+
         return new_member
 
     @classmethod

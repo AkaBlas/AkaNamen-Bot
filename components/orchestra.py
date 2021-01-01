@@ -186,14 +186,16 @@ class Orchestra(PicklableBase):
         else:
             attr = f'{attr}s_score'
 
-        return sorted(
-            [
-                getattr(m.user_score, attr)
-                for m in self.members.values()
-                if getattr(m.user_score, attr).answers > 0
-            ],
-            reverse=True,
-        )  # noqa: E126
+        scores = {
+            member: getattr(member.user_score, attr)
+            for member in self.members.values()
+            if getattr(member.user_score, attr).answers > 0
+        }
+        membered_scores = []
+        for member, score in scores.items():
+            score.member = member
+            membered_scores.append(score)
+        return []
 
     def _score_text(self, attr: str, length: int = None, html: Optional[bool] = False) -> str:
         sorted_scores = self._score(attr)
@@ -341,6 +343,17 @@ class Orchestra(PicklableBase):
 
         """
         return self._score_text('overall', length=length, html=html)
+
+    def copy(self) -> 'Orchestra':
+        """
+        Returns a (deep) copy of this orchestra.
+        """
+        new_orchestra = self.__class__()
+
+        for member in self.members.values():
+            new_orchestra.register_member(member.copy())
+
+        return new_orchestra
 
     def __eq__(self, other: object) -> bool:
         return False

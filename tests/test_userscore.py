@@ -1,22 +1,18 @@
 #!/usr/bin/env python
 import pytest
 import datetime as dt
-from components import Score, UserScore, Member
+from components import Score, UserScore
 
 
 @pytest.fixture(scope='function')
 def us():
-    return UserScore(Member(123))
+    return UserScore()
 
 
 class TestUserScore:
-    def test_init(self, us):
-        assert us.member == Member(123)
-
     def test_subscriptable(self, us, today):
         score = us[today]
         assert isinstance(score, Score)
-        assert score.member == Member(123)
 
         score.answers = 7
         score.correct = 5
@@ -59,7 +55,6 @@ class TestUserScore:
 
         assert score.answers == 5
         assert score.correct == 3
-        assert score.member == us.member
 
     def test_weeks_score(self, us, today):
         us.add_to_score(answers=4, correct=3, date=today - dt.timedelta(days=10))
@@ -69,7 +64,6 @@ class TestUserScore:
         assert us.weeks_score
         assert us.weeks_score.answers == 8
         assert us.weeks_score.correct == 4
-        assert us.weeks_score.member == us.member
 
     def test_months_score(self, us, today):
         us.add_to_score(answers=5, correct=3, date=today - dt.timedelta(weeks=6))
@@ -79,7 +73,6 @@ class TestUserScore:
         assert us.months_score
         assert us.months_score.answers == 8
         assert us.months_score.correct == 4
-        assert us.months_score.member == us.member
 
     def test_years_score(self, us, today):
         us.add_to_score(answers=5, correct=3, date=today - dt.timedelta(weeks=53))
@@ -89,11 +82,9 @@ class TestUserScore:
         assert us.years_score
         assert us.years_score.answers == 8
         assert us.years_score.correct == 4
-        assert us.years_score.member == us.member
 
     def test_overall_score(self, us, today):
         us.add_to_score(answers=5, correct=3, date=today - dt.timedelta(weeks=53))
         assert us.overall_score
         assert us.overall_score.answers == 5
         assert us.overall_score.correct == 3
-        assert us.years_score.member == us.member

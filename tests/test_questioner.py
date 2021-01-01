@@ -18,10 +18,10 @@ def empty_orchestra():
 
 def fake_poll():
     return Message(
-        123,
-        None,
-        None,
-        None,
+        message_id=123,
+        from_user=None,
+        chat=None,
+        date=None,
         poll=Poll(
             random.randint(100, 500),
             'question',
@@ -304,10 +304,10 @@ class TestQuestioner:
             update = Update(
                 123,
                 message=Message(
-                    123,
-                    User(123, 'foo', False),
-                    None,
-                    Chat(123, Chat.PRIVATE),
+                    message_id=123,
+                    from_user=User(123, 'foo', False),
+                    chat=Chat(123, Chat.PRIVATE),
+                    date=None,
                     text='some very false answer',
                     bot=bot,
                 ),
@@ -328,10 +328,10 @@ class TestQuestioner:
             update = Update(
                 123,
                 message=Message(
-                    123,
-                    User(chat_id, 'foo', False),
-                    None,
-                    Chat(chat_id, Chat.PRIVATE),
+                    message_id=123,
+                    from_user=User(chat_id, 'foo', False),
+                    date=None,
+                    chat=Chat(chat_id, Chat.PRIVATE),
                     text='some very false answer',
                     bot=bot,
                 ),
@@ -362,10 +362,10 @@ class TestQuestioner:
             update = Update(
                 123,
                 message=Message(
-                    123,
-                    User(chat_id, 'foo', False),
-                    None,
-                    Chat(chat_id, Chat.PRIVATE),
+                    message_id=123,
+                    from_user=User(chat_id, 'foo', False),
+                    date=None,
+                    chat=Chat(chat_id, Chat.PRIVATE),
                     text=text,
                     bot=bot,
                 ),
@@ -421,10 +421,10 @@ class TestQuestioner:
         update = Update(
             123,
             message=Message(
-                123,
-                User(123, 'foo', False),
-                None,
-                Chat(123, Chat.PRIVATE),
+                message_id=123,
+                from_user=User(123, 'foo', False),
+                date=None,
+                chat=Chat(123, Chat.PRIVATE),
                 location=Location(27.988191, 86.924518),
                 bot=bot,
             ),
@@ -435,10 +435,10 @@ class TestQuestioner:
         update = Update(
             123,
             message=Message(
-                123,
-                User(chat_id, 'foo', False),
-                None,
-                Chat(chat_id, Chat.PRIVATE),
+                message_id=123,
+                from_user=User(chat_id, 'foo', False),
+                date=None,
+                chat=Chat(chat_id, Chat.PRIVATE),
                 location=Location(27.988191, 86.924518),
                 bot=bot,
             ),
@@ -456,10 +456,10 @@ class TestQuestioner:
         update = Update(
             123,
             message=Message(
-                123,
-                User(chat_id, 'foo', False),
-                None,
-                Chat(chat_id, Chat.PRIVATE),
+                message_id=123,
+                from_user=User(chat_id, 'foo', False),
+                date=None,
+                chat=Chat(chat_id, Chat.PRIVATE),
                 location=Location(longitude, latitude),
                 bot=bot,
             ),
