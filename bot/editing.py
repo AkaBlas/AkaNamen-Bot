@@ -4,7 +4,7 @@
 import datetime as dtm
 import warnings
 from copy import deepcopy
-from typing import Dict, Callable, List, Union
+from typing import Dict, Callable, List
 
 from telegram import (
     Update,
@@ -30,7 +30,6 @@ from telegram.ext import (
     InlineQueryHandler,
     BaseFilter,
 )
-from telegram.constants import MAX_INLINE_QUERY_RESULTS
 
 from bot import (
     ORCHESTRA_KEY,
@@ -371,34 +370,17 @@ def choose_member(update: Update, context: CallbackContext) -> str:
     inline_query = update.inline_query
     orchestra = context.bot_data[ORCHESTRA_KEY]
 
-    if inline_query.offset:
-        offset = int(inline_query.offset)
-    else:
-        offset = 0
-    next_offset: Union[str, int] = ''
-
     members = sorted(list(orchestra.members.values()), key=lambda member: member.full_name)
-
-    # Telegram only likes up to 50 results
-    if len(members) > (offset + 1) * MAX_INLINE_QUERY_RESULTS:
-        next_offset = offset + 1
-        members = members[
-            offset * MAX_INLINE_QUERY_RESULTS : offset * MAX_INLINE_QUERY_RESULTS  # noqa: E203
-            + MAX_INLINE_QUERY_RESULTS
-        ]
-    else:
-        members = members[offset * MAX_INLINE_QUERY_RESULTS :]  # noqa: E203
-
     results = [
         InlineQueryResultArticle(
-            id=m.user_id,
+            id=f'edit {m.user_id}',
             title=m.full_name,
             input_message_content=InputTextMessageContent(m.user_id),
         )
         for m in members
     ]
 
-    inline_query.answer(results=results, next_offset=next_offset)
+    inline_query.answer(results=results, auto_pagination=True)
 
     return CHOOSING_MEMBER
 
