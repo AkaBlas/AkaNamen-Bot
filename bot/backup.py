@@ -41,9 +41,9 @@ def back_up(context: CallbackContext) -> None:
 
 def schedule_daily_job(dispatcher: Dispatcher) -> None:
     """
-    Schedules a job running daily at 2AM UTC which run :meth:`check_users`.
+    Schedules a job running daily at 2AM which runs :meth:`back_up`.
 
     Args:
         dispatcher: The :class:`telegram.ext.Dispatcher`.
     """
-    dispatcher.job_queue.run_daily(back_up, dtm.time(0, 0))
+    dispatcher.job_queue.run_daily(back_up, dtm.time(2, 0))

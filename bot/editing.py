@@ -967,9 +967,12 @@ def build_editing_handler(admin: int) -> ConversationHandler:
                 MessageHandler((Filters.text & ~Filters.command), date_of_birth),
                 CallbackQueryHandler(date_of_birth),
             ],
-            ADDRESS: [MessageHandler(ADDRESS_FILTER, address), CallbackQueryHandler(address)],
+            ADDRESS: [
+                MessageHandler(ADDRESS_FILTER, address, run_async=True),
+                CallbackQueryHandler(address),
+            ],
             ADDRESS_CONFIRMATION: [
-                MessageHandler(ADDRESS_FILTER, address),
+                MessageHandler(ADDRESS_FILTER, address, run_async=True),
                 CallbackQueryHandler(address),
             ],
             PHOTO: [
