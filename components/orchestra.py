@@ -195,7 +195,7 @@ class Orchestra(PicklableBase):
         for member, score in scores.items():
             score.member = member
             membered_scores.append(score)
-        return []
+        return sorted(membered_scores, reverse=True)
 
     def _score_text(self, attr: str, length: int = None, html: Optional[bool] = False) -> str:
         sorted_scores = self._score(attr)
