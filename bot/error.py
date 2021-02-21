@@ -16,7 +16,7 @@ from bot import ADMIN_KEY
 logger = logging.getLogger(__name__)
 
 
-def handle_error(update: Update, context: CallbackContext) -> None:
+def handle_error(update: object, context: CallbackContext) -> None:
     """
     Informs the originator of the update that an error occurred and forwards the traceback to the
     admin.
@@ -29,7 +29,7 @@ def handle_error(update: Update, context: CallbackContext) -> None:
     logger.error(msg="Exception while handling an update:", exc_info=context.error)
 
     # Inform sender of update, that something went wrong
-    if update and update.effective_message:
+    if isinstance(update, Update) and update.effective_message:
         text = emojize(
             'Huch, da ist etwas schief gelaufen :worried:. Ich melde es dem Hirsch :nerd_face:.',
             use_aliases=True,
@@ -42,7 +42,7 @@ def handle_error(update: Update, context: CallbackContext) -> None:
 
     # Gather information from the update
     payload = ''
-    if update:
+    if isinstance(update, Update):
         if update.effective_user:
             payload += ' with the user {}'.format(
                 mention_html(update.effective_user.id, update.effective_user.first_name)

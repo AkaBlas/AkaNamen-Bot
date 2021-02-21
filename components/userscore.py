@@ -4,15 +4,11 @@
 
 import datetime as dt
 from threading import Lock
-from typing import Dict, TYPE_CHECKING
+from typing import Dict
 from collections import defaultdict
 
 from components import PicklableBase
 from components import Score
-
-# We don't like circular imports
-if TYPE_CHECKING:
-    from components import Member
 
 
 class UserScore(PicklableBase):
@@ -21,22 +17,16 @@ class UserScore(PicklableBase):
     instances are subscriptable: For each date ``day``, ``score[day]`` is a
     :class:`components.Score` instance with the number of answers and correct answers given by the
     user on that day. To add values, :meth:`add_to_score` should be the preferred method.
-
-    Attributes:
-        member (:class:`components.Member`): The member, this high score is associated with.
-
-    Args:
-        member: The member, this high score is associated with.
     """
 
-    def __init__(self, member: 'Member') -> None:
-        self.member = member
-
+    def __init__(self) -> None:
         self._high_score_lock = Lock()
-        self._high_score: Dict[dt.date, Score] = defaultdict(self._default_factory)
+        self._high_score: Dict[dt.date, Score] = defaultdict(Score)
 
-    def _default_factory(self: 'UserScore') -> Score:
-        return Score(member=self.member)
+    @staticmethod
+    def _default_factory() -> Score:
+        # needed for backwards compatibility only. Can be dropped in future versions
+        return Score()  # pragma: no cover
 
     def __getitem__(self, date: dt.date) -> Score:
         with self._high_score_lock:
@@ -72,7 +62,7 @@ class UserScore(PicklableBase):
         return self[dt.date.today()]
 
     def _cumulative_score(self, start: dt.date = None) -> Score:
-        c_score = Score(member=self.member)
+        c_score = Score()
 
         with self._high_score_lock:
             for date, score in self._high_score.items():

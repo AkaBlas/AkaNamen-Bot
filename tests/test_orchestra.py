@@ -82,7 +82,6 @@ class TestOrchestra:
         orchestra.register_member(member)
         assert orchestra.members == {123456: member}
         assert orchestra.members[123456] is not member
-        assert orchestra.members[123456].user_score.member is not member
         assert orchestra.attribute_managers['first_name'].male_data == {'first_name': {member}}
         assert orchestra.attribute_managers['last_name'].data == {'last_name': {member}}
         assert orchestra.attribute_managers['nickname'].data == {'nickname': {member}}
@@ -122,7 +121,6 @@ class TestOrchestra:
         orchestra.update_member(member)
         assert orchestra.members == {123456: member}
         assert orchestra.members[123456] is not member
-        assert orchestra.members[123456].user_score.member is not member
         assert orchestra.attribute_managers['first_name'].female_data == {'First_name': {member}}
         assert orchestra.attribute_managers['last_name'].data == {'Last_name': {member}}
         assert orchestra.attribute_managers['nickname'].data == {'Nickname': {member}}
@@ -159,22 +157,14 @@ class TestOrchestra:
         overall_score = score_orchestra(today).overall_score
 
         for score in [todays_score, weeks_score, months_score, years_score]:
-            assert score[0].member == Member(1)
             assert score[0] == Score(8, 4)
-            assert score[1].member == Member(2)
             assert score[1] == Score(4, 2)
-            assert score[2].member == Member(3)
             assert score[2] == Score(3, 1)
-            assert score[3].member == Member(4)
             assert score[3] == Score(4, 1)
 
-        assert overall_score[0].member == Member(2)
         assert overall_score[0] == Score(14, 12)
-        assert overall_score[1].member == Member(3)
         assert overall_score[1] == Score(13, 11)
-        assert overall_score[2].member == Member(4)
         assert overall_score[2] == Score(14, 11)
-        assert overall_score[3].member == Member(1)
         assert overall_score[3] == Score(18, 14)
 
     def test_score_texts_empty(self, today, orchestra):

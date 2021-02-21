@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """This module contains functions for the inline mode."""
-from typing import Union
 
 from telegram import (
     Update,
@@ -42,12 +41,6 @@ def search_users(update: Update, context: CallbackContext) -> None:
     admin_id = context.bot_data[ADMIN_KEY]
     user_id = update.effective_user.id
 
-    if inline_query.offset:
-        offset = int(inline_query.offset)
-    else:
-        offset = 0
-    next_offset: Union[str, int] = ''
-
     members = [
         m
         for uid, m in orchestra.members.items()
@@ -58,15 +51,6 @@ def search_users(update: Update, context: CallbackContext) -> None:
         sorted_members = sorted(members, key=lambda m: m.full_name)
     else:
         sorted_members = sorted(members, key=lambda m: m.compare_full_name_to(query), reverse=True)
-
-    # Telegram only likes up to 50 results
-    if len(sorted_members) > (offset + 1) * MEMBERS_PER_PAGE:
-        next_offset = offset + 1
-        sorted_members = sorted_members[
-            offset * MEMBERS_PER_PAGE : offset * MEMBERS_PER_PAGE + MEMBERS_PER_PAGE  # noqa: E203
-        ]
-    else:
-        sorted_members = sorted_members[offset * MEMBERS_PER_PAGE :]  # noqa: E203
 
     results = [
         InlineQueryResultArticle(
@@ -84,9 +68,9 @@ def search_users(update: Update, context: CallbackContext) -> None:
 
     inline_query.answer(
         results=results,
-        next_offset=next_offset,
         switch_pm_text='Hilfe',
         switch_pm_parameter=INLINE_HELP,
+        auto_pagination=True,
     )
 
 

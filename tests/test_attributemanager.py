@@ -104,19 +104,16 @@ class TestAttributeManager:
         am.register_member(member)
         assert am.data == {'test1': {member}}
         assert all(member is not m for m in am.data['test1'])
-        assert all(member.user_score.member is not m.user_score.member for m in am.data['test1'])
 
         member2 = Member(2, last_name='test2')
         am.register_member(member2)
         assert am.data == {'test1': {member}, 'test2': {member2}}
         assert all(member2 is not m for m in am.data['test2'])
-        assert all(member2.user_score.member is not m.user_score.member for m in am.data['test1'])
 
         member3 = Member(4, last_name='test1')
         am.register_member(member3)
         assert am.data == {'test1': {member, member3}, 'test2': {member2}}
         assert all(member3 is not m for m in am.data['test1'])
-        assert all(member3.user_score.member is not m.user_score.member for m in am.data['test1'])
 
     def test_double_register(self, member):
         member.last_name = 'test'

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """This module contains functions for setting up to bot at start up."""
 import re
+import warnings
 from typing import List, Union, Dict
 
 from telegram import BotCommand, Update
@@ -56,6 +57,10 @@ BOT_COMMANDS: List[BotCommand] = [
     BotCommand('abmelden', 'Vom Bot abmelden und alle Daten löschen'),
 ]
 """List[:class:`telegram.BotCommand`]: A list of commands of the bot."""
+
+warnings.filterwarnings(
+    'ignore', message="BasePersistence.", module='telegram.ext.basepersistence'
+)
 
 
 def setup(  # pylint: disable=R0913,R0914,R0915
@@ -198,7 +203,9 @@ def setup(  # pylint: disable=R0913,R0914,R0915
         CommandHandler('start', registration.start, filters=Filters.text('/start'))
     )
     dispatcher.add_handler(
-        CallbackQueryHandler(registration.request_registration, pattern=REGISTRATION_PATTERN)
+        CallbackQueryHandler(
+            registration.request_registration, pattern=REGISTRATION_PATTERN, run_async=True
+        )
     )
     dispatcher.add_handler(registration.ACCEPT_REGISTRATION_HANDLER)
     dispatcher.add_handler(registration.DENY_REGISTRATION_HANDLER)
@@ -257,6 +264,11 @@ def setup(  # pylint: disable=R0913,R0914,R0915
     bot_data = dispatcher.bot_data
     if not bot_data.get(ORCHESTRA_KEY):
         bot_data[ORCHESTRA_KEY] = Orchestra()
+    else:
+        # We rebuild the orchestra on start up to make sure code changes are applied
+        old_orchestra = bot_data.pop(ORCHESTRA_KEY)
+        new_orchestra = old_orchestra.copy()
+        bot_data[ORCHESTRA_KEY] = new_orchestra
     if not bot_data.get(PENDING_REGISTRATIONS_KEY):
         bot_data[PENDING_REGISTRATIONS_KEY] = dict()
     if not bot_data.get(DENIED_USERS_KEY):

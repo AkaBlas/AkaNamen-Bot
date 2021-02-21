@@ -3,6 +3,8 @@
 """The script that runs the bot."""
 import logging
 from configparser import ConfigParser
+
+import pytz
 from telegram import ParseMode
 from telegram.ext import Updater, PicklePersistence, Defaults
 
@@ -37,7 +39,11 @@ def main() -> None:
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    defaults = Defaults(parse_mode=ParseMode.HTML, disable_notification=True)
+    defaults = Defaults(
+        parse_mode=ParseMode.HTML,
+        disable_notification=True,
+        tzinfo=pytz.timezone('Europe/Berlin')
+    )
     persistence = PicklePersistence('akanamen_db', single_file=False)
     updater = Updater(token, use_context=True, persistence=persistence, defaults=defaults)
 
