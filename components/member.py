@@ -644,7 +644,7 @@ class Member:  # pylint: disable=R0902,R0913,R0904
         if hasattr(self.user_score, 'member'):
             del self.user_score.member  # type: ignore  # pylint: disable=E1101 # pragma: no cover
         for score in self.user_score._high_score.values():  # pylint: disable=W0212  # type: ignore
-            if hasattr(score, 'member'):
+            if hasattr(score, 'member'):  # pragma: no cover
                 del score.member  # pragma: no cover
 
         new_member = copy.deepcopy(self)
