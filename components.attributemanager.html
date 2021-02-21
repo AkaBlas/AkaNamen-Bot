@@ -31,7 +31,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -189,8 +188,8 @@
 <p>This module contains the classes for attributes.</p>
 <dl class="py class">
 <dt id="components.attributemanager.AttributeManager">
-<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">AttributeManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gendered_questions</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generic" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">components.attributemanager.</span></code><code class="sig-name descname"><span class="pre">AttributeManager</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questionable_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_members_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gendered_questions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">components.attributemanager.AttributeType</span></code>]</p>
 <p>A class to keep track on a specific attribute of <a class="reference internal" href="components.member.html#components.Member" title="components.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.Member</span></code></a> instances and
 what questions can be asked based on it.</p>
 <div class="admonition note">
@@ -205,13 +204,13 @@ but instead as the member having multiple values for this attribute.</p>
 </div>
 <dl class="py attribute">
 <dt id="components.attributemanager.AttributeManager.description">
-<code class="sig-name descname">description</code><a class="headerlink" href="#components.attributemanager.AttributeManager.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><a class="headerlink" href="#components.attributemanager.AttributeManager.description" title="Permalink to this definition">¶</a></dt>
 <dd><p>A description of the attribute the instance manages.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="components.attributemanager.AttributeManager.questionable_attributes">
-<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.AttributeManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">questionable_attributes</span></code><a class="headerlink" href="#components.attributemanager.AttributeManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p>
@@ -219,7 +218,7 @@ manages.</p>
 
 <dl class="py attribute">
 <dt id="components.attributemanager.AttributeManager.gendered_questions">
-<code class="sig-name descname">gendered_questions</code><a class="headerlink" href="#components.attributemanager.AttributeManager.gendered_questions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">gendered_questions</span></code><a class="headerlink" href="#components.attributemanager.AttributeManager.gendered_questions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether questions with tis attribute as hint should try to
 list only members with the same gender as the hint member.</p>
 </dd></dl>
@@ -244,7 +243,7 @@ list only members with the same gender as the hint member. Defaults to <a class=
 </dl>
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.available_members">
-<em class="property">property </em><code class="sig-name descname">available_members</code><a class="headerlink" href="#components.attributemanager.AttributeManager.available_members" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">available_members</span></code><a class="headerlink" href="#components.attributemanager.AttributeManager.available_members" title="Permalink to this definition">¶</a></dt>
 <dd><p>All the members that have the attribute managed by this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -255,9 +254,9 @@ list only members with the same gender as the hint member. Defaults to <a class=
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.build_question_with">
-<code class="sig-name descname">build_question_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager">components.attributemanager.AttributeManager</a></span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="p">:</span> <span class="n">Literal<span class="p">[</span>False<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">exclude_members</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>Member<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Member<span class="p">, </span>AttributeType<span class="p">, </span>Union<span class="p">[</span>Any<span class="p">, </span>List<span class="p">[</span>Any<span class="p">]</span><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#components.attributemanager.AttributeManager.build_question_with" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">build_question_with</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><span class="pre">components.attributemanager.AttributeManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiple_choice</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="pre">False</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_members</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Member</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Member</span><span class="p"><span class="pre">,</span> </span><span class="pre">AttributeType</span><span class="p"><span class="pre">,</span> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#components.attributemanager.AttributeManager.build_question_with" title="Permalink to this definition">¶</a></dt>
 <dt>
-<code class="sig-name descname">build_question_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager">components.attributemanager.AttributeManager</a></span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="p">:</span> <span class="n">Literal<span class="p">[</span>True<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">exclude_members</span><span class="p">:</span> <span class="n">Iterable<span class="p">[</span>Member<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>Member<span class="p">, </span>AttributeType<span class="p">, </span>Tuple<span class="p">[</span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">, </span>Any<span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></dt>
+<code class="sig-name descname"><span class="pre">build_question_with</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><span class="pre">components.attributemanager.AttributeManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiple_choice</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="pre">True</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_members</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">Member</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Member</span><span class="p"><span class="pre">,</span> </span><span class="pre">AttributeType</span><span class="p"><span class="pre">,</span> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></dt>
 <dd><p>Builds a question where this instance is serving as hint and <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code>
 servers as question. For multiple choice questions the output is a 4-tuple of</p>
 <ol class="arabic simple">
@@ -298,7 +297,7 @@ servers as question. For multiple choice questions the output is a 4-tuple of</p
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.distinct_values_for_member">
-<code class="sig-name descname">distinct_values_for_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">distinct_values_for_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given an attribute manager and a member from it’s available members, this returns a set
 of the distinct attribute values appearing across the members <code class="docutils literal notranslate"><span class="pre">m</span></code> in
 <a class="reference internal" href="#components.attributemanager.AttributeManager.available_members" title="components.attributemanager.AttributeManager.available_members"><code class="xref py py-attr docutils literal notranslate"><span class="pre">available_members</span></code></a> who satisfy:</p>
@@ -322,7 +321,7 @@ of the distinct attribute values appearing across the members <code class="docut
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.draw_hint_member">
-<code class="sig-name descname">draw_hint_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">exclude_members</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.draw_hint_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">draw_hint_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiple_choice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.draw_hint_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws a member to build a question for.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -349,7 +348,7 @@ of the distinct attribute values appearing across the members <code class="docut
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.draw_question_attributes">
-<code class="sig-name descname">draw_question_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.draw_question_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">draw_question_attributes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.draw_question_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws question attributes for the given member. The first output is a 4-tuple of the
 drawn options. The second output is the index of the correct answer, i.e. the attribute
 of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code>.</p>
@@ -368,7 +367,7 @@ of <code class="xref py py-attr docutils literal notranslate"><span class="pre">
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.get_members_attribute">
-<code class="sig-name descname">get_members_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.get_members_attribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_members_attribute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.get_members_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gives the attribute of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code> that is managed by this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -382,7 +381,7 @@ of <code class="xref py py-attr docutils literal notranslate"><span class="pre">
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.is_hintable_with">
-<code class="sig-name descname">is_hintable_with</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">exclude_members</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.is_hintable_with" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">is_hintable_with</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiple_choice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_members</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.is_hintable_with" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the attribute managed by this instance can be used as hint where the question is the
 attribute managed by <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code>.</p>
 <dl class="field-list simple">
@@ -402,7 +401,7 @@ attribute managed by <code class="xref py py-attr docutils literal notranslate">
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.is_hintable_with_member">
-<code class="sig-name descname">is_hintable_with_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em>, <em class="sig-param"><span class="n">multiple_choice</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.is_hintable_with_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">is_hintable_with_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiple_choice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.is_hintable_with_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the given members attribute managed by this instance can be used as hint where the
 question is the attribute managed by <code class="xref py py-attr docutils literal notranslate"><span class="pre">attribute_manager</span></code>.</p>
 <dl class="field-list simple">
@@ -422,7 +421,7 @@ question is the attribute managed by <code class="xref py py-attr docutils liter
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.kick_member">
-<code class="sig-name descname">kick_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.kick_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">kick_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.kick_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kicks a member, if present.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -436,7 +435,7 @@ question is the attribute managed by <code class="xref py py-attr docutils liter
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.members_share_attribute">
-<code class="sig-name descname">members_share_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member1</span></em>, <em class="sig-param"><span class="n">member2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.members_share_attribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">members_share_attribute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.members_share_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if <code class="xref py py-attr docutils literal notranslate"><span class="pre">member1</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">member2</span></code> share the attribute described by this
 instance. This usually means a check by equality except in the case, where the attribute
 is given by a list. In this case, <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> is returned, if the lists have at least one
@@ -456,7 +455,7 @@ common element.</p>
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.register_member">
-<code class="sig-name descname">register_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.register_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">register_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.register_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers a new member.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -475,7 +474,7 @@ Use <a class="reference internal" href="#components.attributemanager.AttributeMa
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.unique_attributes_of">
-<code class="sig-name descname">unique_attributes_of</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.unique_attributes_of" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">unique_attributes_of</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.unique_attributes_of" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a member this returns a list of attribute values managed by this instance that only
 appear for that member, making it the unique correct answer for it.</p>
 <div class="admonition note">
@@ -495,7 +494,7 @@ may decide to return something different from <a class="reference internal" href
 
 <dl class="py method">
 <dt id="components.attributemanager.AttributeManager.update_member">
-<code class="sig-name descname">update_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.update_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">update_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.AttributeManager.update_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the information of a member.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -516,19 +515,19 @@ member. To update the information again, call this method again.</p>
 
 <dl class="py class">
 <dt id="components.attributemanager.ChangingAttributeManager">
-<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">ChangingAttributeManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">gendered_questions</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.attributemanager.AttributeManager</span></code></a></p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">components.attributemanager.</span></code><code class="sig-name descname"><span class="pre">ChangingAttributeManager</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questionable_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_members_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gendered_questions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">components.attributemanager.AttributeType</span></code>]</p>
 <p>Subclass of <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a> that updates it’s members attributes once a day. This is
 needed, for attributes like age, which can change on a daily basis.</p>
 <dl class="py attribute">
 <dt id="components.attributemanager.ChangingAttributeManager.description">
-<code class="sig-name descname">description</code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.description" title="Permalink to this definition">¶</a></dt>
 <dd><p>A description of the attribute the instance manages.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="components.attributemanager.ChangingAttributeManager.questionable_attributes">
-<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">questionable_attributes</span></code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p>
@@ -536,7 +535,7 @@ manages.</p>
 
 <dl class="py attribute">
 <dt id="components.attributemanager.ChangingAttributeManager.gendered_questions">
-<code class="sig-name descname">gendered_questions</code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.gendered_questions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">gendered_questions</span></code><a class="headerlink" href="#components.attributemanager.ChangingAttributeManager.gendered_questions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Whether questions with tis attribute as hint should try to
 list only members with the same gender as the hint member.</p>
 </dd></dl>
@@ -563,19 +562,19 @@ list only members with the same gender as the hint member. Defaults to <a class=
 
 <dl class="py class">
 <dt id="components.attributemanager.NameManager">
-<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">NameManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em>, <em class="sig-param"><span class="n">get_members_attribute</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.attributemanager.AttributeManager</span></code></a></p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">components.attributemanager.</span></code><code class="sig-name descname"><span class="pre">NameManager</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questionable_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_members_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">components.attributemanager.AttributeType</span></code>]</p>
 <p>Subclass of <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a> for first and full names. This is needed, as the gender
 of a member needs to be taken into account.</p>
 <dl class="py attribute">
 <dt id="components.attributemanager.NameManager.description">
-<code class="sig-name descname">description</code><a class="headerlink" href="#components.attributemanager.NameManager.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><a class="headerlink" href="#components.attributemanager.NameManager.description" title="Permalink to this definition">¶</a></dt>
 <dd><p>A description of the attribute the instance manages.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="components.attributemanager.NameManager.questionable_attributes">
-<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.NameManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">questionable_attributes</span></code><a class="headerlink" href="#components.attributemanager.NameManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p>
@@ -599,7 +598,7 @@ a <a class="reference internal" href="components.member.html#components.Member" 
 </dl>
 <dl class="py method">
 <dt id="components.attributemanager.NameManager.distinct_values_for_member">
-<code class="sig-name descname">distinct_values_for_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">distinct_values_for_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the member has a gender, this acts just like
 <a class="reference internal" href="#components.attributemanager.AttributeManager.distinct_values_for_member" title="components.attributemanager.AttributeManager.distinct_values_for_member"><code class="xref py py-meth docutils literal notranslate"><span class="pre">AttributeManager.distinct_values_for_member()</span></code></a>. If it does not, an empty set is
 returned.</p>
@@ -618,7 +617,7 @@ returned.</p>
 
 <dl class="py method">
 <dt id="components.attributemanager.NameManager.kick_member">
-<code class="sig-name descname">kick_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager.kick_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">kick_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager.kick_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kicks a member, if present.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -632,7 +631,7 @@ returned.</p>
 
 <dl class="py method">
 <dt id="components.attributemanager.NameManager.register_member">
-<code class="sig-name descname">register_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager.register_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">register_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.NameManager.register_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers a new member.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -653,19 +652,19 @@ Use <code class="xref py py-meth docutils literal notranslate"><span class="pre"
 
 <dl class="py class">
 <dt id="components.attributemanager.PhotoManager">
-<em class="property">class </em><code class="sig-prename descclassname">components.attributemanager.</code><code class="sig-name descname">PhotoManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span></em>, <em class="sig-param"><span class="n">questionable_attributes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#components.attributemanager.NameManager" title="components.attributemanager.NameManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">components.attributemanager.NameManager</span></code></a></p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">components.attributemanager.</span></code><code class="sig-name descname"><span class="pre">PhotoManager</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">questionable_attributes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">components.picklablebase.PicklableBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">components.attributemanager.AttributeType</span></code>]</p>
 <p>Subclass of <a class="reference internal" href="#components.attributemanager.AttributeManager" title="components.attributemanager.AttributeManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">AttributeManager</span></code></a> for photo file IDs. This is needed, as the gender
 of a member needs to be taken into account.</p>
 <dl class="py attribute">
 <dt id="components.attributemanager.PhotoManager.description">
-<code class="sig-name descname">description</code><a class="headerlink" href="#components.attributemanager.PhotoManager.description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">description</span></code><a class="headerlink" href="#components.attributemanager.PhotoManager.description" title="Permalink to this definition">¶</a></dt>
 <dd><p>A description of the attribute the instance manages.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="components.attributemanager.PhotoManager.questionable_attributes">
-<code class="sig-name descname">questionable_attributes</code><a class="headerlink" href="#components.attributemanager.PhotoManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">questionable_attributes</span></code><a class="headerlink" href="#components.attributemanager.PhotoManager.questionable_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of <code class="xref py py-class docutils literal notranslate"><span class="pre">components.AttributeManager</span></code> instances that
 manages attributes, which are available as questions for the attribute this instance
 manages.</p>
@@ -683,7 +682,7 @@ manages.</p></li>
 </dl>
 <dl class="py method">
 <dt id="components.attributemanager.PhotoManager.distinct_values_for_member">
-<code class="sig-name descname">distinct_values_for_member</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_manager</span></em>, <em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">distinct_values_for_member</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute_manager</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager.distinct_values_for_member" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the member has a gender, this acts just like
 <a class="reference internal" href="#components.attributemanager.AttributeManager.distinct_values_for_member" title="components.attributemanager.AttributeManager.distinct_values_for_member"><code class="xref py py-meth docutils literal notranslate"><span class="pre">AttributeManager.distinct_values_for_member()</span></code></a>. If it does not, an empty set is
 returned.</p>
@@ -702,7 +701,7 @@ returned.</p>
 
 <dl class="py method">
 <dt id="components.attributemanager.PhotoManager.get_members_attribute">
-<em class="property">static </em><code class="sig-name descname">get_members_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">member</span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager.get_members_attribute" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">get_members_attribute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.attributemanager.PhotoManager.get_members_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gives the attribute of <code class="xref py py-attr docutils literal notranslate"><span class="pre">member</span></code> that is managed by this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

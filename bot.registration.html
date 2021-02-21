@@ -31,7 +31,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -191,7 +190,7 @@
 <p>This module contains functions for registering users.</p>
 <dl class="py data">
 <dt id="bot.registration.ACCEPT_REGISTRATION">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">ACCEPT_REGISTRATION</code><em class="property"> = 'accept_registration {} {}'</em><a class="headerlink" href="#bot.registration.ACCEPT_REGISTRATION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">ACCEPT_REGISTRATION</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'accept_registration</span> <span class="pre">{}</span> <span class="pre">{}'</span></em><a class="headerlink" href="#bot.registration.ACCEPT_REGISTRATION" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback data for accepting a registration request with a suggested members data.
 Use as <code class="docutils literal notranslate"><span class="pre">ACCEPT_REGISTRATION_MEMBER.format(chat_id,</span> <span class="pre">data_index)</span></code>. Use <code class="docutils literal notranslate"><span class="pre">''</span></code> for data_index, if no
 given data is to be accepted.</p>
@@ -204,19 +203,19 @@ given data is to be accepted.</p>
 
 <dl class="py data">
 <dt id="bot.registration.ACCEPT_REGISTRATION_HANDLER">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">ACCEPT_REGISTRATION_HANDLER</code><em class="property"> = &lt;telegram.ext.callbackqueryhandler.CallbackQueryHandler object&gt;</em><a class="headerlink" href="#bot.registration.ACCEPT_REGISTRATION_HANDLER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">ACCEPT_REGISTRATION_HANDLER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;telegram.ext.callbackqueryhandler.CallbackQueryHandler</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#bot.registration.ACCEPT_REGISTRATION_HANDLER" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handler used to parse the acceptance of a
 registration request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.callbackqueryhandler.html#telegram.ext.CallbackQueryHandler" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.CallbackQueryHandler</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.callbackqueryhandler.html#telegram.ext.CallbackQueryHandler" title="(in Python Telegram Bot v13.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.CallbackQueryHandler</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py data">
 <dt id="bot.registration.ACCEPT_REGISTRATION_PATTERN">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">ACCEPT_REGISTRATION_PATTERN</code><em class="property"> = 'accept_registration (\\d*)(?: (\\d*))?'</em><a class="headerlink" href="#bot.registration.ACCEPT_REGISTRATION_PATTERN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">ACCEPT_REGISTRATION_PATTERN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'accept_registration</span> <span class="pre">(\\d*)(?:</span> <span class="pre">(\\d*))?'</span></em><a class="headerlink" href="#bot.registration.ACCEPT_REGISTRATION_PATTERN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback data  pattern for accepting a registration request with a suggested members
 data. <code class="docutils literal notranslate"><span class="pre">context.match.group(1)</span></code> will be users id and <code class="docutils literal notranslate"><span class="pre">context.match.group(2)</span></code> the index of the
 accepted member date or <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
@@ -229,7 +228,7 @@ accepted member date or <a class="reference external" href="https://docs.python.
 
 <dl class="py data">
 <dt id="bot.registration.DENY_REGISTRATION">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">DENY_REGISTRATION</code><em class="property"> = 'deny_registration {}'</em><a class="headerlink" href="#bot.registration.DENY_REGISTRATION" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">DENY_REGISTRATION</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'deny_registration</span> <span class="pre">{}'</span></em><a class="headerlink" href="#bot.registration.DENY_REGISTRATION" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback data for denying a registration request.
 Use as <code class="docutils literal notranslate"><span class="pre">DENY_REGISTRATION.format(chat_id)</span></code>.</p>
 <dl class="field-list simple">
@@ -241,19 +240,19 @@ Use as <code class="docutils literal notranslate"><span class="pre">DENY_REGISTR
 
 <dl class="py data">
 <dt id="bot.registration.DENY_REGISTRATION_HANDLER">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">DENY_REGISTRATION_HANDLER</code><em class="property"> = &lt;telegram.ext.callbackqueryhandler.CallbackQueryHandler object&gt;</em><a class="headerlink" href="#bot.registration.DENY_REGISTRATION_HANDLER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">DENY_REGISTRATION_HANDLER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;telegram.ext.callbackqueryhandler.CallbackQueryHandler</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#bot.registration.DENY_REGISTRATION_HANDLER" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handler used to parse the denial of a
 registration request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.callbackqueryhandler.html#telegram.ext.CallbackQueryHandler" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.CallbackQueryHandler</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.callbackqueryhandler.html#telegram.ext.CallbackQueryHandler" title="(in Python Telegram Bot v13.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.CallbackQueryHandler</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py data">
 <dt id="bot.registration.DENY_REGISTRATION_PATTERN">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">DENY_REGISTRATION_PATTERN</code><em class="property"> = 'deny_registration (\\d*)'</em><a class="headerlink" href="#bot.registration.DENY_REGISTRATION_PATTERN" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">DENY_REGISTRATION_PATTERN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'deny_registration</span> <span class="pre">(\\d*)'</span></em><a class="headerlink" href="#bot.registration.DENY_REGISTRATION_PATTERN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback data  pattern for accepting a registration request with a suggested members
 data. <code class="docutils literal notranslate"><span class="pre">context.match.group(1)</span></code> will be users id.</p>
 <dl class="field-list simple">
@@ -265,13 +264,13 @@ data. <code class="docutils literal notranslate"><span class="pre">context.match
 
 <dl class="py function">
 <dt id="bot.registration.accept_registration_request">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">accept_registration_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.accept_registration_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">accept_registration_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.accept_registration_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses the admins response to a registration request and answers the user correspondingly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -282,7 +281,7 @@ data. <code class="docutils literal notranslate"><span class="pre">context.match
 
 <dl class="py function">
 <dt id="bot.registration.check_registration_status">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">check_registration_status</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.check_registration_status" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">check_registration_status</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.check_registration_status" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the registration of the user. This can have four outcomes:</p>
 <ol class="arabic simple">
 <li><p>The user is not yet registered. In this case only the <code class="docutils literal notranslate"><span class="pre">/start</span></code> command is accepted. Other
@@ -298,11 +297,11 @@ further.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcherhandlerstop.html#telegram.ext.DispatcherHandlerStop" title="(in Python Telegram Bot v13.0)"><strong>telegram.ext.DispatcherHandlerStop</strong></a> – In case the update is not to be handled by any
+<dd class="field-even"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcherhandlerstop.html#telegram.ext.DispatcherHandlerStop" title="(in Python Telegram Bot v13.3)"><strong>telegram.ext.DispatcherHandlerStop</strong></a> – In case the update is not to be handled by any
     other handlers.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
@@ -313,13 +312,13 @@ further.</p></li>
 
 <dl class="py function">
 <dt id="bot.registration.deny_registration_request">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">deny_registration_request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.deny_registration_request" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">deny_registration_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.deny_registration_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parses the admins response to a registration request and answers the user correspondingly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -330,13 +329,13 @@ further.</p></li>
 
 <dl class="py function">
 <dt id="bot.registration.request_registration">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">request_registration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.request_registration" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">request_registration</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.request_registration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triggers the registration process by sending the admin a message.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -347,13 +346,13 @@ further.</p></li>
 
 <dl class="py function">
 <dt id="bot.registration.start">
-<code class="sig-prename descclassname">bot.registration.</code><code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">update</span></em>, <em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.start" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bot.registration.</span></code><code class="sig-name descname"><span class="pre">start</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.registration.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Greets the new user and asks them to register.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The update.</p></li>
-<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>context</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackContext</span></code>) – The context as provided by the <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in Python Telegram Bot v13.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
