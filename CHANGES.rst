@@ -2,6 +2,25 @@
 Changelog
 =========
 
+Version 1.2.1
+=============
+*Released 2021-02-21*
+
+*Changes and bug fixes for the user experience:*
+
+- Remove ``Conductor`` from ``Instruments`` Keyboard (#102)
+- Fix Typos (#103, #104, #105)
+
+*Changes and bug fixes for the admin experience:*
+
+- Update PTB to v13.3 (#106)
+
+.. _`#102`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/102
+.. _`#103`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/103
+.. _`#104`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/104
+.. _`#105`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/105
+.. _`#106`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/106
+
 Version 1.2
 ===========
 *Released 2020-11-14*
