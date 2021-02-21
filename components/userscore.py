@@ -26,7 +26,7 @@ class UserScore(PicklableBase):
     @staticmethod
     def _default_factory() -> Score:
         # needed for backwards compatibility only. Can be dropped in future versions
-        return Score()
+        return Score()  # pragma: no cover
 
     def __getitem__(self, date: dt.date) -> Score:
         with self._high_score_lock:
