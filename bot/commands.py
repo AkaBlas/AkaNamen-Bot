@@ -39,7 +39,7 @@ def help_message(update: Update, context: CallbackContext) -> None:
         'nützlich:\n\n• Eine Übersicht der verfügbaren Befehle siehst Du, wenn Du unten '
         'rechts auf das »<code>/</code>« Symbol klickst.\n\n• Eine ausführliche Erklärung '
         'meiner Funktionen findest Du im Benutzerhandbuch (s. unten)\n\n• Dort findest Du auch'
-        ' viele Antworten z.B. bezüglich Verwendung der Daten.\n\n• Neuigkeiten zum'
+        ' viele Antworten, z.B. bezüglich Verwendung der Daten.\n\n• Neuigkeiten zum'
         ' AkaNamen-Bot werden über den Channel (s. unten) bekanntgegeben. Tritt gerne bei!\n\n'
         '• Im Zweifel lieber noch ein bisschen mehr Gurkenwasser an den Labskaus geben.\n\n• '
         'Wenn der Schnee gelb ist, solltest Du ihn lieber nicht essen.\n\n• Ein bisschen Hello'
@@ -57,7 +57,7 @@ def start_inline(update: Update, context: CallbackContext) -> None:
         context: The context as provided by the :class:`telegram.ext.Dispatcher`.
     """
     text = (
-        'Über den AkaNamen-Bot kannst Du Kontaktdaten von anderen AkaBlas abrufen, '
+        'Über den AkaNamen-Bot kannst Du Kontaktdaten von anderen AkaBlasen abrufen, '
         'sofern diese das erlauben. Das geht so:\n\n1. Drücke auf den Knopf unten. In deinem '
         'Textfeld erscheint dann »<code>@AkaNamenBot ...</code>«.\n2. Gib den '
         'Namen/Spitznamen des AkaBlasen ein, den Du suchst. Dir wird eine Liste von '

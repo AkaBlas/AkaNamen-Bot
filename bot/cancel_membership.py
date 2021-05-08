@@ -49,7 +49,7 @@ def ask_for_confirmation(update: Update, context: CallbackContext) -> str:
         'Bist Du Dir <i>ganz</i> sicher, dass Du das möchtest? 🥺 Wenn Du Dich abmeldest, '
         'kannst Du den AkaNamen-Bot nicht mehr nutzen und andere AkaBlasen können nicht mehr '
         'Deinen Namen lernen.\n\n<b>Bitte beachte:</b> Wenn Du Dich abmeldest, werden alle '
-        'Deine Daten vom AkaNamen-Bot gelöscht.Ob/wann sie von den Telegram-Servern gelöscht '
+        'Deine Daten vom AkaNamen-Bot gelöscht. Ob/wann sie von den Telegram-Servern gelöscht '
         'werden, kann der AkaNamen-Bot nicht beeinflussen.\n\nWenn Du Dich <i>wirklich</i> '
         'abmelden möchtest, sende mir eine Nachricht mit dem Text '
         f'\n\n<code>{CONFIRMATION_TEXT}</code>\n\n Wenn Du doch lieber bleiben möchtest, '

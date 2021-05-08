@@ -17,7 +17,7 @@ Setting things up
 
    .. code-block:: bash
 
-      $ git remote add upstream https://github.com/HirschHeissIch/AkaNamen-Bot
+      $ git remote add upstream https://github.com/Bibo-Joshi/AkaNamen-Bot
 
 4. Install dependencies:
 
@@ -71,7 +71,7 @@ Here's how to make a one-off code change.
 
         $ pip install -r docs/requirements-docs.txt
 
-     then run the following from the PTB root directory:
+     then run the following from the AkaNamen-Bot root directory:
    
      .. code-block:: bash
          
