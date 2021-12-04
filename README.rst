@@ -29,18 +29,21 @@ AkaNamen Bot
     :target: https://github.com/psf/black
     :alt: Code Style Black
 
-.. warning::
-    Currently not available for chat or Telegram!
-
 Deutsch
 -------
 Ein Telegram-Bot, der den Mitgliedern der »Akademische Bläservereinigung an der TU Braunschweig« helfen soll, sich gegenseitig besser kennenzulernen.
 Auf Telegram ist er als `@AkaNamenBot`_ zu finden.
 
+.. warning::
+    Aktuell nicht zum chatten auf Telegram verfügbar!
+
 English
 -------
 A Telegram bot designed to help the members of the »Akademische Bläservereinigung an der TU Braunschweig« get to know each other.
 You can find it at `@AkaNamenBot`_.
+
+.. warning::
+    Currently not available for chat or Telegram!
 
 Für AkaBlasen
 -------------
