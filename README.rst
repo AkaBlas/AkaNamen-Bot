@@ -28,6 +28,11 @@ AkaNamen Bot
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
     :alt: Code Style Black
+    
+Disclaimer
+----------
+
+This project is *not* officially associated with AkaBlas, but rather »fan made«.
 
 Deutsch
 -------
