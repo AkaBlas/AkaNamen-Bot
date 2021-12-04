@@ -64,7 +64,7 @@ TEXTS: Dict[str, str] = {
     'solltest Du nur wählen, wann Du schon ziemlich gut bist. Bedenke außerdem, '
     'dass der Freitext-Modus ein bisschen experimentell ist. Mehr Informationen '
     'dazu gibt es in den <a '
-    'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#meine-freitext'
+    'href="https://akablas.github.io/AkaNamen-Bot/faq.html#meine-freitext'
     '-antwort-wurde-als-falsch-gewertet-obwohl-da-nur-in-tippfehler-drin-war'
     '-was-ist-da-los">FAQ</a>.',
     HINT_ATTRIBUTES: '<b>2/4 - Hinweise</b>\n\n'

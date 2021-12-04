@@ -17,7 +17,7 @@ Setting things up
 
    .. code-block:: bash
 
-      $ git remote add upstream https://github.com/Bibo-Joshi/AkaNamen-Bot
+      $ git remote add upstream https://github.com/AkaBlas/AkaNamen-Bot
 
 4. Install dependencies:
 
@@ -218,7 +218,7 @@ break the API classes. For example:
        self.last_name = last_name
 
 
-.. _`issue tracker`: https://github.com/Bibo-Joshi/AkaNamen-Bot/issues
+.. _`issue tracker`: https://github.com/AkaBlas/AkaNamen-Bot/issues
 .. _`developer' mailing list`: akanamen-bot@mahlerhome.de
 .. _`PEP 8 Style Guide`: https://www.python.org/dev/peps/pep-0008/
 .. _`sphinx`: http://sphinx-doc.org

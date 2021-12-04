@@ -130,7 +130,7 @@ TEXTS: Dict[str, str] = {
     'war, versuch bitte, die Adresse genauer aufzuschreiben oder den '
     'Standort genauer zu wählen. Du kannst mir auch direkt die richtigen '
     'Koordinaten schicken. Mehr Infos dazu stehen in den <a '
-    'href="https://bibo-joshi.github.io/AkaNamen-Bot/faq.html#der-bot'
+    'href="https://akablas.github.io/AkaNamen-Bot/faq.html#der-bot'
     '-nimmt-meine-adresse-nicht-an-ist-der-blod">FAQ</a>. 🤓',
     PHOTO: {  # type: ignore
         True: 'Dies ist das Foto, das ich aktuell gespeichert habe. Um Dein Foto '
