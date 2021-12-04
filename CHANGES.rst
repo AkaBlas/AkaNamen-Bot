@@ -8,18 +8,18 @@ Version 1.2.1
 
 *Changes and bug fixes for the user experience:*
 
-- Remove ``Conductor`` from ``Instruments`` Keyboard (#102)
-- Fix Typos (#103, #104, #105)
+- Remove ``Conductor`` from ``Instruments`` Keyboard (`#102`_)
+- Fix Typos (`#103`_, `#104`_, `#105`_)
 
 *Changes and bug fixes for the admin experience:*
 
-- Update PTB to v13.3 (#106)
+- Update PTB to v13.3 (`#106`_)
 
-.. _`#102`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/102
-.. _`#103`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/103
-.. _`#104`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/104
-.. _`#105`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/105
-.. _`#106`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/106
+.. _`#102`: https://github.com/AkaBlas/AkaNamen-Bot/pull/102
+.. _`#103`: https://github.com/AkaBlas/AkaNamen-Bot/pull/103
+.. _`#104`: https://github.com/AkaBlas/AkaNamen-Bot/pull/104
+.. _`#105`: https://github.com/AkaBlas/AkaNamen-Bot/pull/105
+.. _`#106`: https://github.com/AkaBlas/AkaNamen-Bot/pull/106
 
 Version 1.2
 ===========
@@ -51,23 +51,23 @@ Version 1.2
 - Fix Tests for ``ChangingAttributeManager`` (`#92`_)
 - Compare ``Orchestras`` as False (`#100`_)
 
-.. _`#99`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/99
-.. _`#96`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/96
-.. _`#101`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/101
-.. _`#86`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/86
-.. _`#87`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/87
-.. _`#85`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/85
-.. _`#84`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/84
-.. _`#83`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/83
-.. _`#77`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/77
-.. _`#78`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/78
-.. _`#95`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/95
-.. _`#94`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/94
-.. _`#90`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/90
-.. _`#91`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/91
-.. _`#76`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/76
-.. _`#92`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/92
-.. _`#100`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/100
+.. _`#99`: https://github.com/AkaBlas/AkaNamen-Bot/pull/99
+.. _`#96`: https://github.com/AkaBlas/AkaNamen-Bot/pull/96
+.. _`#101`: https://github.com/AkaBlas/AkaNamen-Bot/pull/101
+.. _`#86`: https://github.com/AkaBlas/AkaNamen-Bot/pull/86
+.. _`#87`: https://github.com/AkaBlas/AkaNamen-Bot/pull/87
+.. _`#85`: https://github.com/AkaBlas/AkaNamen-Bot/pull/85
+.. _`#84`: https://github.com/AkaBlas/AkaNamen-Bot/pull/84
+.. _`#83`: https://github.com/AkaBlas/AkaNamen-Bot/pull/83
+.. _`#77`: https://github.com/AkaBlas/AkaNamen-Bot/pull/77
+.. _`#78`: https://github.com/AkaBlas/AkaNamen-Bot/pull/78
+.. _`#95`: https://github.com/AkaBlas/AkaNamen-Bot/pull/95
+.. _`#94`: https://github.com/AkaBlas/AkaNamen-Bot/pull/94
+.. _`#90`: https://github.com/AkaBlas/AkaNamen-Bot/pull/90
+.. _`#91`: https://github.com/AkaBlas/AkaNamen-Bot/pull/91
+.. _`#76`: https://github.com/AkaBlas/AkaNamen-Bot/pull/76
+.. _`#92`: https://github.com/AkaBlas/AkaNamen-Bot/pull/92
+.. _`#100`: https://github.com/AkaBlas/AkaNamen-Bot/pull/100
 
 Version 1.1.1
 =============
@@ -85,12 +85,12 @@ Version 1.1.1
 - Fix Gender Equality Check in ``AttributeManagers`` (`#70`_)
 - Fix Links in Changelog (`#69`_)
 
-.. _`#74`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/74
-.. _`#73`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/73
-.. _`#72`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/72
-.. _`#71`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/71
-.. _`#70`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/70
-.. _`#69`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/69
+.. _`#74`: https://github.com/AkaBlas/AkaNamen-Bot/pull/74
+.. _`#73`: https://github.com/AkaBlas/AkaNamen-Bot/pull/73
+.. _`#72`: https://github.com/AkaBlas/AkaNamen-Bot/pull/72
+.. _`#71`: https://github.com/AkaBlas/AkaNamen-Bot/pull/71
+.. _`#70`: https://github.com/AkaBlas/AkaNamen-Bot/pull/70
+.. _`#69`: https://github.com/AkaBlas/AkaNamen-Bot/pull/69
 
 Version 1.1
 ===========
@@ -115,15 +115,15 @@ Version 1.1
 - Gender Photo Questions (`#63`_)
 - Copy Members with ``deepcopy()`` (`#59`_)
 
-.. _`#62`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/62
-.. _`#61`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/61
-.. _`#56`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/56
-.. _`#55`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/55
-.. _`#54`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/54
-.. _`#52`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/52
-.. _`#63`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/63
-.. _`#60`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/60
-.. _`#59`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/59
+.. _`#62`: https://github.com/AkaBlas/AkaNamen-Bot/pull/62
+.. _`#61`: https://github.com/AkaBlas/AkaNamen-Bot/pull/61
+.. _`#56`: https://github.com/AkaBlas/AkaNamen-Bot/pull/56
+.. _`#55`: https://github.com/AkaBlas/AkaNamen-Bot/pull/55
+.. _`#54`: https://github.com/AkaBlas/AkaNamen-Bot/pull/54
+.. _`#52`: https://github.com/AkaBlas/AkaNamen-Bot/pull/52
+.. _`#63`: https://github.com/AkaBlas/AkaNamen-Bot/pull/63
+.. _`#60`: https://github.com/AkaBlas/AkaNamen-Bot/pull/60
+.. _`#59`: https://github.com/AkaBlas/AkaNamen-Bot/pull/59
 
 Version 1.0
 ===========
@@ -148,8 +148,8 @@ Version 1.0
 - Overhaul ``AttributeManager`` Logic and Game Setup (`#40`_)
 - Run Docs Workflow on ``Py3.8`` (`#36`_)
 
-.. _`#43`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/43
-.. _`#42`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/42
+.. _`#43`: https://github.com/AkaBlas/AkaNamen-Bot/pull/43
+.. _`#42`: https://github.com/AkaBlas/AkaNamen-Bot/pull/42
 .. _`#41`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/41
 .. _`#39`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/39
 .. _`#38`: https://github.com/Bibo-Joshi/AkaNamen-Bot/pull/38

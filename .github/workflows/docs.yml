@@ -7,33 +7,28 @@ on:
 
 jobs:
   gh-pages:
-    name: deploy docs
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        python-version: [3.8]
-        os: [ubuntu-latest]
-      fail-fast: False
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Initialize submodules
         run:
           git submodule update --init --recursive
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.8'
+
       - name: Install dependencies
         run: |
           python -W ignore -m pip install --upgrade pip
           python -W ignore -m pip install -r requirements.txt
-          python -W ignore -m pip install -r requirements-dev.txt
           python -W ignore -m pip install -r docs/requirements-docs.txt
-      - name: Deploy to GitHub Pages
-        run: |
-          docs/deploy-gh-pages.sh
-        env:
-          GH_NAME: ${{ secrets.GH_NAME }}
-          GH_EMAIL: ${{ secrets.GH_EMAIL }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        shell: bash
+      - name: Build Docs
+        run: sphinx-build docs/source docs/build/html
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: gh-pages
+          folder: docs/build/html

@@ -10,7 +10,7 @@ AkaNamen Bot
    :alt: Backend: python-telegram-bot
 
 .. image:: https://img.shields.io/badge/documentation-is%20here-orange
-   :target: https://bibo-joshi.github.io/AkaNamen-Bot/
+   :target: https://akablas.github.io/AkaNamen-Bot/
    :alt: Documentation
 
 .. image:: https://img.shields.io/badge/chat%20on-Telegram-blue
@@ -27,7 +27,10 @@ AkaNamen Bot
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
-    :alt: Code Style Balck
+    :alt: Code Style Black
+
+.. warning::
+    Currently not available for chat or Telegram!
 
 Deutsch
 -------
@@ -64,9 +67,9 @@ Neben dem vollständigen `Changelog`_ gibt es auch einen `Infokanal`_, der Dich 
     </iframe>
 
 .. _`@AkaNamenBot`: http://t.me/AkaNamenBot
-.. _`Benutzerhandbuch`: https://bibo-joshi.github.io/AkaNamen-Bot/
-.. _`Kurzanleitung`: https://bibo-joshi.github.io/AkaNamen-Bot/quickstart.html
-.. _`Changelog`: https://bibo-joshi.github.io/AkaNamen-Bot/changelog.html
+.. _`Benutzerhandbuch`: https://akablas.github.io/AkaNamen-Bot/
+.. _`Kurzanleitung`: https://akablas.github.io/AkaNamen-Bot/quickstart.html
+.. _`Changelog`: https://akablas.github.io/AkaNamen-Bot/changelog.html
 .. _`Infokanal`: https://t.me/AkaNamenInfo
 
 For Developers
@@ -76,4 +79,4 @@ Contributions are welcome! Please have a look at the `contribution guide`_ for t
 
 **Note:** The docs about documentation are in English, because coding happens in English.
 
-.. _`contribution guide`: https://bibo-joshi.github.io/AkaNamen-Bot/contributing.html
+.. _`contribution guide`: https://akablas.github.io/AkaNamen-Bot/contributing.html

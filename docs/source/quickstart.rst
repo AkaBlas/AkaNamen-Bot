@@ -13,9 +13,11 @@ Bot starten
 Bot nutzen
 ----------
 
-Du findest die verschiedenen Befehle des Bots, indem Du auf das »``/``«-Symbol rechts neben dem Textfeld klickst:
+Du findest die verschiedenen Befehle des Bots, indem Du auf das »Menü«-Symbol links neben dem Textfeld klickst:
 
 .. image:: /commands.png
+
+Statt des »Menüs« kann es bei manchen Telegram-Anwendungen auch ein »``/``«-Symbol rechts neben dem Textfeld geben.
 
 Jeder Befehl hat eine kurze Beschreibung. Tippe auf einen Befehl, um ihn auszuführen. Der Bot wird Dir erklären, was Du tun musst.
 

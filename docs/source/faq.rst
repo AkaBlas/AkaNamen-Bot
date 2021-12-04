@@ -18,7 +18,7 @@ Telegram ist plattformunabhängig, d.h. Du kannst den Bot auf Deinem
 * Apple-Smartphone/Tablet
 * anderem Smartphone/Tablet, für das es eine Telegram-App gibt
 * Deinem PC/Mac über den `Telegram Desktop-Client <https://desktop.telegram.org>`_
-* Lieblings-Browser über `Telegram-Web <https://web.telegram.org>`_
+* Lieblings-Browser über `Telegram-Web <https://web.telegram.org/k/>`_
 
 nutzen, ohne dass Hirsch Apps für drölf verschiedene Geräte programmieren muss. Dazu hat er weder Lust, Zeit noch genug Programmierkenntnisse.
 
@@ -49,7 +49,7 @@ Der Grund ist ganz einfach: Wenn der Bot ein Bild eines vollbärtigen Mannes zei
 * Ann-Sophie oder
 * Klaus
 
-heißt, ist auch in 2020 die Frage nicht sonderlich schwierig. Dein Geschlecht wird als nur dafür genutzt, Fragen sinnvoll zu stellen. Wenn Du Dein Geschlecht nicht angeben möchtest, ist das okay - dann wird Dein Vorname nur nicht für andere Bot-Nutzer in den Fragen zu Verfügung stehen.
+heißt, ist auch nach 2020 die Frage nicht sonderlich schwierig. Dein Geschlecht wird als nur dafür genutzt, Fragen sinnvoll zu stellen. Wenn Du Dein Geschlecht nicht angeben möchtest, ist das okay - dann wird Dein Vorname nur nicht für andere Bot-Nutzer in den Fragen zu Verfügung stehen.
 Wenn Du möchtest, dass andere AkaBlasen Deinen Vornamen lernen können, Du Dich aber nicht mit »männlich« oder »weiblich« identifizieren möchtest, kannst Du
 
 * das Geschlecht angeben, das andere *wahrscheinlich* mit Deinem Vornamen assoziieren oder

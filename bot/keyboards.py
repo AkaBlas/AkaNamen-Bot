@@ -40,16 +40,14 @@ REGISTRATION_KEYBOARD = InlineKeyboardMarkup.from_button(
 )
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard that triggers the registration process."""
 DOCS_KEYBOARD = InlineKeyboardMarkup.from_button(
-    InlineKeyboardButton(
-        text='Benutzerhandbuch 📖', url='https://bibo-joshi.github.io/AkaNamen-Bot/'
-    )
+    InlineKeyboardButton(text='Benutzerhandbuch 📖', url='https://akablas.github.io/AkaNamen-Bot/')
 )
 """:class:`telegram.InlineKeyboardMarkup`: Keyboard leading to the docs."""
 CHANNEL_KEYBOARD = InlineKeyboardMarkup.from_column(
     [
         InlineKeyboardButton(text='Info-Kanal 📣', url='https://t.me/AkaNamenInfo'),
         InlineKeyboardButton(
-            text='Benutzerhandbuch 📖', url='https://bibo-joshi.github.io/AkaNamen-Bot/'
+            text='Benutzerhandbuch 📖', url='https://akablas.github.io/AkaNamen-Bot/'
         ),
     ]
 )
