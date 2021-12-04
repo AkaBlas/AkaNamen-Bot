@@ -1,11 +1,12 @@
 
 
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>bot.yourls Module &mdash; AkaNamen Bot  documentation</title>
   
@@ -13,12 +14,17 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
   
+
   
+  
+
   
 
   
@@ -28,6 +34,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -52,7 +59,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+            <a href="index.html" class="icon icon-home"> AkaNamen Bot
           
 
           
@@ -86,13 +93,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Benutzerhandbuch</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="components.html">Backend: Components package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Frontend: Bot package</a><ul class="current">
@@ -156,6 +163,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -169,7 +178,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             
               <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/bot.yourls.rst" class="fa fa-github"> Edit on GitHub</a>
             
@@ -185,25 +194,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bot.yourls">
+  <section id="module-bot.yourls">
 <span id="bot-yourls-module"></span><h1>bot.yourls Module<a class="headerlink" href="#module-bot.yourls" title="Permalink to this headline">¶</a></h1>
 <p>This module contains a custom YOURLS client.</p>
 <dl class="py class">
-<dt id="bot.yourls.YOURLSClient">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bot.yourls.</span></code><code class="sig-name descname"><span class="pre">YOURLSClient</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">apiurl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce_life</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.yourls.YOURLSClient" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bot.yourls.YOURLSClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bot.yourls.</span></span><span class="sig-name descname"><span class="pre">YOURLSClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">apiurl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nonce_life</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.yourls.YOURLSClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">yourls.core.YOURLSClientBase</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">yourls.core.YOURLSAPIMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">yourls.extensions.YOURLSEditUrlMixin</span></code></p>
 <p>A custom YOURLS client with edit functionality.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bot.yourls.generate_mail_link">
-<code class="sig-prename descclassname"><span class="pre">bot.yourls.</span></code><code class="sig-name descname"><span class="pre">generate_mail_link</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.yourls.generate_mail_link" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bot.yourls.generate_mail_link">
+<span class="sig-prename descclassname"><span class="pre">bot.yourls.</span></span><span class="sig-name descname"><span class="pre">generate_mail_link</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.yourls.generate_mail_link" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a member, generates a short link that allows the member to send a pre filled mail to the
 board informing them that their details changed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>member</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code>) – The member.</p></li>
+<li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.member.Member"><code class="xref py py-class docutils literal notranslate"><span class="pre">Member</span></code></a>) – The member.</p></li>
 <li><p><strong>client</strong> (<a class="reference internal" href="#bot.yourls.YOURLSClient" title="bot.yourls.YOURLSClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">YOURLSClient</span></code></a>) – The YOURLS client.</p></li>
 </ul>
 </dd>
@@ -211,44 +220,41 @@ board informing them that their details changed.</p>
 <p>Returns: The link.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="contributing.html" class="btn btn-neutral float-right" title="How To Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="bot.setup.html" class="btn btn-neutral float-left" title="bot.setup Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="contributing.html" class="btn btn-neutral float-right" title="How To Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="bot.setup.html" class="btn btn-neutral float-left" title="bot.setup Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Hinrich Mahler
+        &#169; Copyright 2020, Hinrich Mahler.
 
     </p>
   </div>
     
     
-      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

@@ -1,11 +1,12 @@
 
 
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>components.types Module &mdash; AkaNamen Bot  documentation</title>
   
@@ -13,12 +14,17 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
   
+
   
+  
+
   
 
   
@@ -28,6 +34,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -52,7 +59,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+            <a href="index.html" class="icon icon-home"> AkaNamen Bot
           
 
           
@@ -86,13 +93,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Benutzerhandbuch</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="components.html">Backend: Components package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="components.attributemanager.html">components.attributemanager Module</a></li>
@@ -154,6 +161,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -167,7 +176,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             
               <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/components.types.rst" class="fa fa-github"> Edit on GitHub</a>
             
@@ -183,63 +192,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-components.types">
+  <section id="module-components.types">
 <span id="components-types-module"></span><h1>components.types Module<a class="headerlink" href="#module-components.types" title="Permalink to this headline">¶</a></h1>
 <p>This module contains the classes MessageType and UpdateType.</p>
 <dl class="py class">
-<dt id="components.types.MessageType">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">components.types.</span></code><code class="sig-name descname"><span class="pre">MessageType</span></code><a class="headerlink" href="#components.types.MessageType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dt class="sig sig-object py" id="components.types.MessageType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">components.types.</span></span><span class="sig-name descname"><span class="pre">MessageType</span></span><a class="headerlink" href="#components.types.MessageType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This object represents message types relevant for the AkaNamen Bot.</p>
 <dl class="py attribute">
-<dt id="components.types.MessageType.ALL_TYPES">
-<code class="sig-name descname"><span class="pre">ALL_TYPES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['text',</span> <span class="pre">'photo',</span> <span class="pre">'location']</span></em><a class="headerlink" href="#components.types.MessageType.ALL_TYPES" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.MessageType.ALL_TYPES">
+<span class="sig-name descname"><span class="pre">ALL_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['text',</span> <span class="pre">'photo',</span> <span class="pre">'location']</span></em><a class="headerlink" href="#components.types.MessageType.ALL_TYPES" title="Permalink to this definition">¶</a></dt>
 <dd><p>All relevant types</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.MessageType.LOCATION">
-<code class="sig-name descname"><span class="pre">LOCATION</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'location'</span></em><a class="headerlink" href="#components.types.MessageType.LOCATION" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.MessageType.LOCATION">
+<span class="sig-name descname"><span class="pre">LOCATION</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'location'</span></em><a class="headerlink" href="#components.types.MessageType.LOCATION" title="Permalink to this definition">¶</a></dt>
 <dd><p>Location messages</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.MessageType.PHOTO">
-<code class="sig-name descname"><span class="pre">PHOTO</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'photo'</span></em><a class="headerlink" href="#components.types.MessageType.PHOTO" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.MessageType.PHOTO">
+<span class="sig-name descname"><span class="pre">PHOTO</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'photo'</span></em><a class="headerlink" href="#components.types.MessageType.PHOTO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Foto messages</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.MessageType.TEXT">
-<code class="sig-name descname"><span class="pre">TEXT</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'text'</span></em><a class="headerlink" href="#components.types.MessageType.TEXT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.MessageType.TEXT">
+<span class="sig-name descname"><span class="pre">TEXT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'text'</span></em><a class="headerlink" href="#components.types.MessageType.TEXT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Text messages</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="components.types.MessageType.relevant_type">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">relevant_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.types.MessageType.relevant_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.MessageType.relevant_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">relevant_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.types.MessageType.relevant_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts the type of the message, if it is relevant for the AkaNamen Bot in terms of
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">All_TYPES</span></code>. If it’s not relevant, the output will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">All_TYPES</span></code>. If it’s not relevant, the output will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In contrast to <code class="xref py py-meth docutils literal notranslate"><span class="pre">telegram.utils.helpers.effective_message_type()</span></code> , only updates
@@ -247,10 +256,10 @@ with <code class="docutils literal notranslate"><span class="pre">update.message
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code>]) – A <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a> or <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a></p>
+<dd class="field-odd"><p><strong>entity</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code>]) – A <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a> or <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.message.html#telegram.Message" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Message</span></code></a></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -258,137 +267,134 @@ with <code class="docutils literal notranslate"><span class="pre">update.message
 </dd></dl>
 
 <dl class="py class">
-<dt id="components.types.UpdateType">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">components.types.</span></code><code class="sig-name descname"><span class="pre">UpdateType</span></code><a class="headerlink" href="#components.types.UpdateType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dt class="sig sig-object py" id="components.types.UpdateType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">components.types.</span></span><span class="sig-name descname"><span class="pre">UpdateType</span></span><a class="headerlink" href="#components.types.UpdateType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This object represents update types relevant for the AkaNamen Bot.</p>
 <dl class="py attribute">
-<dt id="components.types.UpdateType.ALL_TYPES">
-<code class="sig-name descname"><span class="pre">ALL_TYPES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['message',</span> <span class="pre">'inline_query',</span> <span class="pre">'chosen_inline_result',</span> <span class="pre">'callback_query',</span> <span class="pre">'poll',</span> <span class="pre">'poll_answer']</span></em><a class="headerlink" href="#components.types.UpdateType.ALL_TYPES" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.ALL_TYPES">
+<span class="sig-name descname"><span class="pre">ALL_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['message',</span> <span class="pre">'inline_query',</span> <span class="pre">'chosen_inline_result',</span> <span class="pre">'callback_query',</span> <span class="pre">'poll',</span> <span class="pre">'poll_answer']</span></em><a class="headerlink" href="#components.types.UpdateType.ALL_TYPES" title="Permalink to this definition">¶</a></dt>
 <dd><p>All relevant types</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.UpdateType.CALLBACK_QUERY">
-<code class="sig-name descname"><span class="pre">CALLBACK_QUERY</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'callback_query'</span></em><a class="headerlink" href="#components.types.UpdateType.CALLBACK_QUERY" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.CALLBACK_QUERY">
+<span class="sig-name descname"><span class="pre">CALLBACK_QUERY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'callback_query'</span></em><a class="headerlink" href="#components.types.UpdateType.CALLBACK_QUERY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Callback query updates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.UpdateType.CHOSEN_INLINE_RESULT">
-<code class="sig-name descname"><span class="pre">CHOSEN_INLINE_RESULT</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'chosen_inline_result'</span></em><a class="headerlink" href="#components.types.UpdateType.CHOSEN_INLINE_RESULT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.CHOSEN_INLINE_RESULT">
+<span class="sig-name descname"><span class="pre">CHOSEN_INLINE_RESULT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'chosen_inline_result'</span></em><a class="headerlink" href="#components.types.UpdateType.CHOSEN_INLINE_RESULT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chosen inline result updates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.UpdateType.INLINE_QUERY">
-<code class="sig-name descname"><span class="pre">INLINE_QUERY</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'inline_query'</span></em><a class="headerlink" href="#components.types.UpdateType.INLINE_QUERY" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.INLINE_QUERY">
+<span class="sig-name descname"><span class="pre">INLINE_QUERY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'inline_query'</span></em><a class="headerlink" href="#components.types.UpdateType.INLINE_QUERY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inline query updates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.UpdateType.MESSAGE">
-<code class="sig-name descname"><span class="pre">MESSAGE</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'message'</span></em><a class="headerlink" href="#components.types.UpdateType.MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.MESSAGE">
+<span class="sig-name descname"><span class="pre">MESSAGE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'message'</span></em><a class="headerlink" href="#components.types.UpdateType.MESSAGE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message updates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.UpdateType.POLL">
-<code class="sig-name descname"><span class="pre">POLL</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'poll'</span></em><a class="headerlink" href="#components.types.UpdateType.POLL" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.POLL">
+<span class="sig-name descname"><span class="pre">POLL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'poll'</span></em><a class="headerlink" href="#components.types.UpdateType.POLL" title="Permalink to this definition">¶</a></dt>
 <dd><p>Poll updates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.types.UpdateType.POLL_ANSWER">
-<code class="sig-name descname"><span class="pre">POLL_ANSWER</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'poll_answer'</span></em><a class="headerlink" href="#components.types.UpdateType.POLL_ANSWER" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.POLL_ANSWER">
+<span class="sig-name descname"><span class="pre">POLL_ANSWER</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'poll_answer'</span></em><a class="headerlink" href="#components.types.UpdateType.POLL_ANSWER" title="Permalink to this definition">¶</a></dt>
 <dd><p>Poll answer updates</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="components.types.UpdateType.relevant_type">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">relevant_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.types.UpdateType.relevant_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.types.UpdateType.relevant_type">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">relevant_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.types.UpdateType.relevant_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts the type of the update, if it is relevant for the AkaNamen Bot in terms of
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">All_TYPES</span></code>. If it’s not relevant, the output will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">All_TYPES</span></code>. If it’s not relevant, the output will be <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – A <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a></p>
+<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – A <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="components.userscore.html" class="btn btn-neutral float-right" title="components.UserScore" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="components.texts.html" class="btn btn-neutral float-left" title="components.texts Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="components.userscore.html" class="btn btn-neutral float-right" title="components.UserScore" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="components.texts.html" class="btn btn-neutral float-left" title="components.texts Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Hinrich Mahler
+        &#169; Copyright 2020, Hinrich Mahler.
 
     </p>
   </div>
     
     
-      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

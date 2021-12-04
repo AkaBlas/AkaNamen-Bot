@@ -1,11 +1,12 @@
 
 
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>components.Question &mdash; AkaNamen Bot  documentation</title>
   
@@ -13,12 +14,17 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
   
+
   
+  
+
   
 
   
@@ -28,6 +34,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -52,7 +59,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+            <a href="index.html" class="icon icon-home"> AkaNamen Bot
           
 
           
@@ -86,13 +93,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Benutzerhandbuch</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="components.html">Backend: Components package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="components.attributemanager.html">components.attributemanager Module</a></li>
@@ -154,6 +161,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -167,7 +176,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             
               <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/components.question.rst" class="fa fa-github"> Edit on GitHub</a>
             
@@ -183,16 +192,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="components-question">
+  <section id="components-question">
 <h1>components.Question<a class="headerlink" href="#components-question" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="components.Question">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">components.</span></code><code class="sig-name descname"><span class="pre">Question</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiple_choice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Question" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dt class="sig sig-object py" id="components.Question">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">components.</span></span><span class="sig-name descname"><span class="pre">Question</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">member</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiple_choice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Question" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Representation of a single question asked in an AkaNamen Bot components.</p>
 <dl class="py attribute">
-<dt id="components.Question.member">
-<code class="sig-name descname"><span class="pre">member</span></code><a class="headerlink" href="#components.Question.member" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.member">
+<span class="sig-name descname"><span class="pre">member</span></span><a class="headerlink" href="#components.Question.member" title="Permalink to this definition">¶</a></dt>
 <dd><p>The member, who’s attribute is the correct answer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -202,35 +211,35 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.attribute">
-<code class="sig-name descname"><span class="pre">attribute</span></code><a class="headerlink" href="#components.Question.attribute" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.attribute">
+<span class="sig-name descname"><span class="pre">attribute</span></span><a class="headerlink" href="#components.Question.attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>The attribute that is asked for.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.multiple_choice">
-<code class="sig-name descname"><span class="pre">multiple_choice</span></code><a class="headerlink" href="#components.Question.multiple_choice" title="Permalink to this definition">¶</a></dt>
-<dd><p>If <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>, the question is to be answered with
+<dt class="sig sig-object py" id="components.Question.multiple_choice">
+<span class="sig-name descname"><span class="pre">multiple_choice</span></span><a class="headerlink" href="#components.Question.multiple_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>, the question is to be answered with
 “free text” instead of choosing an option from a poll.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.poll">
-<code class="sig-name descname"><span class="pre">poll</span></code><a class="headerlink" href="#components.Question.poll" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.poll">
+<span class="sig-name descname"><span class="pre">poll</span></span><a class="headerlink" href="#components.Question.poll" title="Permalink to this definition">¶</a></dt>
 <dd><p>The poll sent to the user/chat.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.poll.html#telegram.Poll" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Poll</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.poll.html#telegram.Poll" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Poll</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -239,221 +248,218 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>member</strong> (<a class="reference internal" href="components.member.html#components.Member" title="components.Member"><em>Member</em></a>) – The member, whose attribute is the correct answer.</p></li>
-<li><p><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The attribute that is asked for. Must be one of <a class="reference internal" href="#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SUPPORTED_ATTRIBUTES</span></code></a>.</p></li>
-<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>, the question is to be answered with “free text” instead
-of choosing an option from a poll. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
+<li><p><strong>attribute</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The attribute that is asked for. Must be one of <a class="reference internal" href="#components.Question.SUPPORTED_ATTRIBUTES" title="components.Question.SUPPORTED_ATTRIBUTES"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SUPPORTED_ATTRIBUTES</span></code></a>.</p></li>
+<li><p><strong>multiple_choice</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <a class="reference external" href="https://docs.python.org/3/library/constants.html#False" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></a>, the question is to be answered with “free text” instead
+of choosing an option from a poll. Defaults to <a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a>.</p></li>
 <li><p><strong>poll</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Poll</span></code>) – The poll sent to the user/chat. Pass this if and only if <a class="reference internal" href="#components.Question.multiple_choice" title="components.Question.multiple_choice"><code class="xref py py-attr docutils literal notranslate"><span class="pre">multiple_choice</span></code></a> is
-<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> .</p></li>
+<a class="reference external" href="https://docs.python.org/3/library/constants.html#True" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></a> .</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="components.Question.ADDRESS">
-<code class="sig-name descname"><span class="pre">ADDRESS</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'address'</span></em><a class="headerlink" href="#components.Question.ADDRESS" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.ADDRESS">
+<span class="sig-name descname"><span class="pre">ADDRESS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'address'</span></em><a class="headerlink" href="#components.Question.ADDRESS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instrument of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.AGE">
-<code class="sig-name descname"><span class="pre">AGE</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'age'</span></em><a class="headerlink" href="#components.Question.AGE" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.AGE">
+<span class="sig-name descname"><span class="pre">AGE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'age'</span></em><a class="headerlink" href="#components.Question.AGE" title="Permalink to this definition">¶</a></dt>
 <dd><p>Age of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.BIRTHDAY">
-<code class="sig-name descname"><span class="pre">BIRTHDAY</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'birthday'</span></em><a class="headerlink" href="#components.Question.BIRTHDAY" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.BIRTHDAY">
+<span class="sig-name descname"><span class="pre">BIRTHDAY</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'birthday'</span></em><a class="headerlink" href="#components.Question.BIRTHDAY" title="Permalink to this definition">¶</a></dt>
 <dd><p>Birthday of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.FIRST_NAME">
-<code class="sig-name descname"><span class="pre">FIRST_NAME</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'first_name'</span></em><a class="headerlink" href="#components.Question.FIRST_NAME" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.FIRST_NAME">
+<span class="sig-name descname"><span class="pre">FIRST_NAME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'first_name'</span></em><a class="headerlink" href="#components.Question.FIRST_NAME" title="Permalink to this definition">¶</a></dt>
 <dd><p>First name of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.FULL_NAME">
-<code class="sig-name descname"><span class="pre">FULL_NAME</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'full_name'</span></em><a class="headerlink" href="#components.Question.FULL_NAME" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.FULL_NAME">
+<span class="sig-name descname"><span class="pre">FULL_NAME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'full_name'</span></em><a class="headerlink" href="#components.Question.FULL_NAME" title="Permalink to this definition">¶</a></dt>
 <dd><p>Full name of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.FUNCTIONS">
-<code class="sig-name descname"><span class="pre">FUNCTIONS</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'functions'</span></em><a class="headerlink" href="#components.Question.FUNCTIONS" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.FUNCTIONS">
+<span class="sig-name descname"><span class="pre">FUNCTIONS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'functions'</span></em><a class="headerlink" href="#components.Question.FUNCTIONS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Functions of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.INSTRUMENT">
-<code class="sig-name descname"><span class="pre">INSTRUMENT</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'instruments'</span></em><a class="headerlink" href="#components.Question.INSTRUMENT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.INSTRUMENT">
+<span class="sig-name descname"><span class="pre">INSTRUMENT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'instruments'</span></em><a class="headerlink" href="#components.Question.INSTRUMENT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instrument of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.JOINED">
-<code class="sig-name descname"><span class="pre">JOINED</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'joined'</span></em><a class="headerlink" href="#components.Question.JOINED" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.JOINED">
+<span class="sig-name descname"><span class="pre">JOINED</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'joined'</span></em><a class="headerlink" href="#components.Question.JOINED" title="Permalink to this definition">¶</a></dt>
 <dd><p>Year an AkaBlas member joined</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.LAST_NAME">
-<code class="sig-name descname"><span class="pre">LAST_NAME</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'last_name'</span></em><a class="headerlink" href="#components.Question.LAST_NAME" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.LAST_NAME">
+<span class="sig-name descname"><span class="pre">LAST_NAME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'last_name'</span></em><a class="headerlink" href="#components.Question.LAST_NAME" title="Permalink to this definition">¶</a></dt>
 <dd><p>Last name of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.NICKNAME">
-<code class="sig-name descname"><span class="pre">NICKNAME</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'nickname'</span></em><a class="headerlink" href="#components.Question.NICKNAME" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.NICKNAME">
+<span class="sig-name descname"><span class="pre">NICKNAME</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nickname'</span></em><a class="headerlink" href="#components.Question.NICKNAME" title="Permalink to this definition">¶</a></dt>
 <dd><p>Nickname of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.PHOTO">
-<code class="sig-name descname"><span class="pre">PHOTO</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'photo_file_id'</span></em><a class="headerlink" href="#components.Question.PHOTO" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.PHOTO">
+<span class="sig-name descname"><span class="pre">PHOTO</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'photo_file_id'</span></em><a class="headerlink" href="#components.Question.PHOTO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Foto of an AkaBlas member</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="components.Question.SUPPORTED_ATTRIBUTES">
-<code class="sig-name descname"><span class="pre">SUPPORTED_ATTRIBUTES</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'nickname',</span> <span class="pre">'birthday',</span> <span class="pre">'age',</span> <span class="pre">'instruments',</span> <span class="pre">'address',</span> <span class="pre">'full_name',</span> <span class="pre">'photo_file_id',</span> <span class="pre">'joined',</span> <span class="pre">'functions']</span></em><a class="headerlink" href="#components.Question.SUPPORTED_ATTRIBUTES" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.SUPPORTED_ATTRIBUTES">
+<span class="sig-name descname"><span class="pre">SUPPORTED_ATTRIBUTES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'nickname',</span> <span class="pre">'birthday',</span> <span class="pre">'age',</span> <span class="pre">'instruments',</span> <span class="pre">'address',</span> <span class="pre">'full_name',</span> <span class="pre">'photo_file_id',</span> <span class="pre">'joined',</span> <span class="pre">'functions']</span></em><a class="headerlink" href="#components.Question.SUPPORTED_ATTRIBUTES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attributes usable for questions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="components.Question.check_answer">
-<code class="sig-name descname"><span class="pre">check_answer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Question.check_answer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.check_answer">
+<span class="sig-name descname"><span class="pre">check_answer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Question.check_answer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks, if the given answer is correct.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a>.</p>
+<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="components.Question.check_update">
-<code class="sig-name descname"><span class="pre">check_update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Question.check_update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="components.Question.check_update">
+<span class="sig-name descname"><span class="pre">check_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">update</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#components.Question.check_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks, if th given update is a valid response to this question and can be handled by
 <a class="reference internal" href="#components.Question.check_answer" title="components.Question.check_answer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check_answer()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a> to be tested.</p>
+<dd class="field-odd"><p><strong>update</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Update</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.update.html#telegram.Update" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.Update</span></code></a> to be tested.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="components.Question.correct_answer">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">correct_answer</span></code><a class="headerlink" href="#components.Question.correct_answer" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="components.Question.correct_answer">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">correct_answer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#components.Question.correct_answer" title="Permalink to this definition">¶</a></dt>
 <dd><p>The correct answer for this question.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="components.questioner.html" class="btn btn-neutral float-right" title="components.Questioner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="components.picklablebase.html" class="btn btn-neutral float-left" title="components.PicklableBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="components.questioner.html" class="btn btn-neutral float-right" title="components.Questioner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="components.picklablebase.html" class="btn btn-neutral float-left" title="components.PicklableBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Hinrich Mahler
+        &#169; Copyright 2020, Hinrich Mahler.
 
     </p>
   </div>
     
     
-      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

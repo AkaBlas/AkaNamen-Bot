@@ -15,6 +15,8 @@ Gespeichert werden
 * Geschlecht
 * Photo
 * Handynummer
+* AkaBlas-Ämter
+* Beitrittsjahr
 
 Alle diese Angaben sind freiwillig.
 Außerdem werden vom AkaNamen-Bot ein paar Nutzungsstatistiken angelegt, die allerdings nur von Hirsch eingesehen werden können.
@@ -52,5 +54,4 @@ Dafür werden Dein Vorname, Nachname und ggf. Benutzername (``@Benutzername``), 
 Gibt es einen Treffer, kann Hirsch Deine Anmeldung direkt bestätigen und die Daten aus den AkaDressen werden für Dich übernommen. Falls Du in den AkaDressen nicht gefunden werden kannst, wird Hirsch dich ggf. persönlich kontaktieren, um sicherzustellen, dass Du auch wirklich ein AkaBlase bist.
 Es werden also nur Daten übernommen, die ohnehin für alle AkaBlasen zugänglich sind.
 
-Hast Du außerdem ein Profilbild bei Telegram eingestellt, wird dieses für Dich übernommen.
 Alle Daten kannst natürlich über den Befehl ``/daten_bearbeiten`` bearbeiten.

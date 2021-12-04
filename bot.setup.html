@@ -1,11 +1,12 @@
 
 
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>bot.setup Module &mdash; AkaNamen Bot  documentation</title>
   
@@ -13,12 +14,17 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
   
+
   
+  
+
   
 
   
@@ -28,6 +34,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -52,7 +59,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+            <a href="index.html" class="icon icon-home"> AkaNamen Bot
           
 
           
@@ -86,13 +93,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Benutzerhandbuch</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="components.html">Backend: Components package</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bot.html">Frontend: Bot package</a><ul class="current">
@@ -156,6 +163,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -169,7 +178,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             
               <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/bot.setup.rst" class="fa fa-github"> Edit on GitHub</a>
             
@@ -185,86 +194,83 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-bot.setup">
+  <section id="module-bot.setup">
 <span id="bot-setup-module"></span><h1>bot.setup Module<a class="headerlink" href="#module-bot.setup" title="Permalink to this headline">¶</a></h1>
 <p>This module contains functions for setting up to bot at start up.</p>
 <dl class="py data">
-<dt id="bot.setup.BOT_COMMANDS">
-<code class="sig-prename descclassname"><span class="pre">bot.setup.</span></code><code class="sig-name descname"><span class="pre">BOT_COMMANDS</span></code><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">telegram.botcommand.BotCommand</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">[&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;]</span></em><a class="headerlink" href="#bot.setup.BOT_COMMANDS" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bot.setup.BOT_COMMANDS">
+<span class="sig-prename descclassname"><span class="pre">bot.setup.</span></span><span class="sig-name descname"><span class="pre">BOT_COMMANDS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">telegram.botcommand.BotCommand</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;telegram.botcommand.BotCommand</span> <span class="pre">object&gt;]</span></em><a class="headerlink" href="#bot.setup.BOT_COMMANDS" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of commands of the bot.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List[<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.botcommand.html#telegram.BotCommand" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.BotCommand</span></code></a>]</p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.botcommand.html#telegram.BotCommand" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.BotCommand</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bot.setup.setup">
-<code class="sig-prename descclassname"><span class="pre">bot.setup.</span></code><code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dispatcher</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_url_active</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yourls_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yourls_signature</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.setup.setup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bot.setup.setup">
+<span class="sig-prename descclassname"><span class="pre">bot.setup.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dispatcher</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oc_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_url_active</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yourls_url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yourls_signature</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bot.setup.setup" title="Permalink to this definition">¶</a></dt>
 <dd><ul class="simple">
 <li><p>Adds handlers. Convenience method to avoid doing that all in the main script.</p></li>
 <li><p>Sets the bot commands and makes sure <code class="docutils literal notranslate"><span class="pre">dispatcher.bot_data</span></code> is set up correctly.</p></li>
-<li><p>Registers a <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.typehandler.html#telegram.ext.TypeHandler" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.TypeHandler</span></code></a> that makes sure that conversations are not
+<li><p>Registers a <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.typehandler.html#telegram.ext.TypeHandler" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.TypeHandler</span></code></a> that makes sure that conversations are not
 interrupted</p></li>
 <li><p>Sets up statistics</p></li>
 </ul>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dispatcher</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dispatcher</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in python-telegram-bot v13.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
-<li><p><strong>admin</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – The admins chat id.</p></li>
-<li><p><strong>oc_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the OwnCloud Instance.</p></li>
-<li><p><strong>oc_username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Username for the OwnCloud Instance.</p></li>
-<li><p><strong>oc_password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Password of the OwnCloud Instance.</p></li>
-<li><p><strong>oc_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Remote path on the OwnCloud Instance.</p></li>
-<li><p><strong>ad_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the AkaDressen file.</p></li>
-<li><p><strong>ad_url_active</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the AkaDressen file containing only the active members.</p></li>
-<li><p><strong>ad_username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Username for the AkaDressen.</p></li>
-<li><p><strong>ad_password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Password for the AkaDressen.</p></li>
-<li><p><strong>yourls_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the YOURLS instance.</p></li>
-<li><p><strong>yourls_signature</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Signature for the YOURLS instance.</p></li>
+<li><p><strong>dispatcher</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dispatcher</span></code>) – The <a class="reference external" href="https://python-telegram-bot.readthedocs.io/en/latest/telegram.ext.dispatcher.html#telegram.ext.Dispatcher" title="(in python-telegram-bot v13.8.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">telegram.ext.Dispatcher</span></code></a>.</p></li>
+<li><p><strong>admin</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – The admins chat id.</p></li>
+<li><p><strong>oc_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the OwnCloud Instance.</p></li>
+<li><p><strong>oc_username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Username for the OwnCloud Instance.</p></li>
+<li><p><strong>oc_password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Password of the OwnCloud Instance.</p></li>
+<li><p><strong>oc_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Remote path on the OwnCloud Instance.</p></li>
+<li><p><strong>ad_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the AkaDressen file.</p></li>
+<li><p><strong>ad_url_active</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the AkaDressen file containing only the active members.</p></li>
+<li><p><strong>ad_username</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Username for the AkaDressen.</p></li>
+<li><p><strong>ad_password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Password for the AkaDressen.</p></li>
+<li><p><strong>yourls_url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – URL of the YOURLS instance.</p></li>
+<li><p><strong>yourls_signature</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Signature for the YOURLS instance.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="bot.yourls.html" class="btn btn-neutral float-right" title="bot.yourls Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="bot.registration.html" class="btn btn-neutral float-left" title="bot.registration Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="bot.yourls.html" class="btn btn-neutral float-right" title="bot.yourls Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="bot.registration.html" class="btn btn-neutral float-left" title="bot.registration Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Hinrich Mahler
+        &#169; Copyright 2020, Hinrich Mahler.
 
     </p>
   </div>
     
     
-      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

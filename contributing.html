@@ -1,11 +1,12 @@
 
 
 <!DOCTYPE html>
-<html lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>How To Contribute &mdash; AkaNamen Bot  documentation</title>
   
@@ -13,12 +14,17 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
     <link rel="shortcut icon" href="_static/AkaNamen-icon-black.ico"/>
   
+
   
+  
+
   
 
   
@@ -28,6 +34,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -52,7 +59,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> AkaNamen Bot
+            <a href="index.html" class="icon icon-home"> AkaNamen Bot
           
 
           
@@ -86,13 +93,13 @@
               
             
             
-              <p class="caption"><span class="caption-text">Benutzerhandbuch</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Benutzerhandbuch</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Kurzanleitung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="privacy.html">Datenschutz-Kram</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Developer Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">Developer Reference</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="components.html">Backend: Components package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bot.html">Frontend: Bot package</a></li>
@@ -153,6 +160,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -164,7 +173,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             
               <a href="https://github.com/Bibo-Joshi/AkaNamen-Bot/blob/master/docs/source/contributing.rst" class="fa fa-github"> Edit on GitHub</a>
             
@@ -180,9 +189,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="how-to-contribute">
+  <section id="how-to-contribute">
 <h1>How To Contribute<a class="headerlink" href="#how-to-contribute" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="setting-things-up">
+<section id="setting-things-up">
 <h2>Setting things up<a class="headerlink" href="#setting-things-up" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Fork the <code class="docutils literal notranslate"><span class="pre">AkaNamen-Bot</span></code> repository to your GitHub account.</p></li>
@@ -193,7 +202,7 @@ $ <span class="nb">cd</span> AkaNamen-Bot
 </div>
 </li>
 <li><p>Add a track to the original repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/Bibo-Joshi/AkaNamen-Bot
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git remote add upstream https://github.com/AkaBlas/AkaNamen-Bot
 </pre></div>
 </div>
 </li>
@@ -208,12 +217,12 @@ $ <span class="nb">cd</span> AkaNamen-Bot
 </div>
 </li>
 </ol>
-<div class="section" id="finding-something-to-do">
+<section id="finding-something-to-do">
 <h3>Finding something to do<a class="headerlink" href="#finding-something-to-do" title="Permalink to this headline">¶</a></h3>
 <p>If you already know what you’d like to work on, you can skip this section.</p>
-<p>If you have an idea for something to do, first check if it’s already been filed on the <a class="reference external" href="https://github.com/Bibo-Joshi/AkaNamen-Bot/issues">issue tracker</a>. If so, add a comment to the issue saying you’d like to work on it, and we’ll help you get started! Otherwise, please file a new issue and assign yourself to it.</p>
-</div>
-<div class="section" id="instructions-for-making-a-code-change">
+<p>If you have an idea for something to do, first check if it’s already been filed on the <a class="reference external" href="https://github.com/AkaBlas/AkaNamen-Bot/issues">issue tracker</a>. If so, add a comment to the issue saying you’d like to work on it, and we’ll help you get started! Otherwise, please file a new issue and assign yourself to it.</p>
+</section>
+<section id="instructions-for-making-a-code-change">
 <h3>Instructions for making a code change<a class="headerlink" href="#instructions-for-making-a-code-change" title="Permalink to this headline">¶</a></h3>
 <p>The central development branch is <code class="docutils literal notranslate"><span class="pre">master</span></code>, which should be clean and ready for release at any time. In general, all changes should be done as feature branches based off of <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p>
 <p>Here’s how to make a one-off code change.</p>
@@ -316,17 +325,17 @@ $ git push origin --delete your-branch-name
 </li>
 <li><p><strong>Celebrate.</strong> Congratulations, you have contributed to <code class="docutils literal notranslate"><span class="pre">AkaNamen-Bot</span></code>!</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="style-commandments">
+</section>
+</section>
+<section id="style-commandments">
 <h2>Style commandments<a class="headerlink" href="#style-commandments" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="specific-commandments">
+<section id="specific-commandments">
 <h3>Specific commandments<a class="headerlink" href="#specific-commandments" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Avoid using “double quotes” where you can reasonably use ‘single quotes’.</p></li>
 </ul>
-</div>
-<div class="section" id="assert-comparison-order">
+</section>
+<section id="assert-comparison-order">
 <h3>Assert comparison order<a class="headerlink" href="#assert-comparison-order" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>assert statements should compare in <strong>actual</strong> == <strong>expected</strong> order.</p></li>
@@ -339,8 +348,8 @@ $ git push origin --delete your-branch-name
 <span class="k">assert</span> <span class="mi">5</span> <span class="o">==</span> <span class="n">test_call</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="properly-calling-callables">
+</section>
+<section id="properly-calling-callables">
 <h3>Properly calling callables<a class="headerlink" href="#properly-calling-callables" title="Permalink to this headline">¶</a></h3>
 <p>Methods, functions and classes can specify optional parameters (with default
 values) using Python’s keyword arg syntax. When providing a value to such a
@@ -354,8 +363,8 @@ callable we prefer that the call also uses keyword arg syntax. For example:</p>
 </div>
 <p>This gives us the flexibility to re-order arguments and more importantly
 to add new required arguments. It’s also more explicit and easier to read.</p>
-</div>
-<div class="section" id="properly-defining-optional-arguments">
+</section>
+<section id="properly-defining-optional-arguments">
 <h3>Properly defining optional arguments<a class="headerlink" href="#properly-defining-optional-arguments" title="Permalink to this headline">¶</a></h3>
 <p>It’s always good to not initialize optional arguments at class creation,
 instead use <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> to get them. It’s well known Telegram API can
@@ -370,41 +379,38 @@ break the API classes. For example:</p>
    <span class="bp">self</span><span class="o">.</span><span class="n">last_name</span> <span class="o">=</span> <span class="n">last_name</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="hosting.html" class="btn btn-neutral float-right" title="Hosting this bot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="bot.yourls.html" class="btn btn-neutral float-left" title="bot.yourls Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="hosting.html" class="btn btn-neutral float-right" title="Hosting this bot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="bot.yourls.html" class="btn btn-neutral float-left" title="bot.yourls Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Hinrich Mahler
+        &#169; Copyright 2020, Hinrich Mahler.
 
     </p>
   </div>
     
     
-      Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
